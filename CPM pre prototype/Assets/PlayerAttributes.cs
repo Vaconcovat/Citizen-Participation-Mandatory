@@ -10,19 +10,24 @@ public class PlayerAttributes : MonoBehaviour {
 	public GameObject bloodSplatter;
 	public GameObject damageNumbers;
 
-
+	RoundManager rm;
 
 	// Use this for initialization
 	void Start () 
 	{
+		//init round manager
+		rm = FindObjectOfType<RoundManager>();
 		//Sets all enemies to full health on startup
 		CurrentHealth = MaxHealth;
-		//InvokeRepeating ("decreaseHealth", 1f, 1f);
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (CurrentHealth <= 0){
+			//tell the round manager we've died
+			rm.Death();
 			Destroy(gameObject);
 		}
 	}
