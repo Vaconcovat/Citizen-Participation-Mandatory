@@ -17,7 +17,6 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll){
-		Debug.Log(coll.gameObject);
 		if(coll.gameObject.tag != "Item"){
 			coll.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);

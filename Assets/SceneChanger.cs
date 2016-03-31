@@ -15,6 +15,7 @@ public class SceneChanger : MonoBehaviour {
 	}
 
 	public void Arena(){
+		RoundManager.roundNumber = 1;
 		SceneManager.LoadScene("Test");
 	}
 
