@@ -11,8 +11,10 @@ public class InterfaceManager : MonoBehaviour {
 	public Text aliveText;
 	public Image healthBar;
 	public PlayerAttributes player;
+	public Text ammoText;
 
 	RoundManager rm;
+	GameObject playerWeapon;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +26,13 @@ public class InterfaceManager : MonoBehaviour {
 		//update the alive counter
 		aliveText.text = "CONTESTANTS ALIVE: " + rm.aliveContestants.ToString() + "/" + rm.totalContestants.ToString();
 		healthBar.fillAmount = (player.CurrentHealth * 1.0f / player.MaxHealth*1.0f);
+		playerWeapon = player.GetComponent<PlayerControls>().Equipped;
+		if (playerWeapon != null){
+			ammoText.text = playerWeapon.GetComponent<Weapon>().ammo.ToString();
+		}
+		else{
+			ammoText.text = "--";
+		}
 	}
 
 }
