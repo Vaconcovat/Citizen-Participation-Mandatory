@@ -12,6 +12,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Image healthBar;
 	public PlayerAttributes player;
 	public Text ammoText;
+	public Text roundTime;
 
 	RoundManager rm;
 	GameObject playerWeapon;
@@ -25,7 +26,9 @@ public class InterfaceManager : MonoBehaviour {
 	void Update () {
 		//update the alive counter
 		aliveText.text = "CONTESTANTS ALIVE: " + rm.aliveContestants.ToString() + "/" + rm.totalContestants.ToString();
+		//fill the hp bar
 		healthBar.fillAmount = (player.CurrentHealth * 1.0f / player.MaxHealth*1.0f);
+		//count the ammo
 		playerWeapon = player.GetComponent<PlayerControls>().Equipped;
 		if (playerWeapon != null){
 			ammoText.text = playerWeapon.GetComponent<Weapon>().ammo.ToString();
@@ -33,6 +36,11 @@ public class InterfaceManager : MonoBehaviour {
 		else{
 			ammoText.text = "--";
 		}
+		//show the time
+		int min = Mathf.FloorToInt(Time.timeSinceLevelLoad / 60f);
+		int sec = Mathf.FloorToInt(Time.timeSinceLevelLoad - min * 60);
+		 string niceTime = string.Format("{0:D2}:{1:D2}", min, sec);
+		 roundTime.text = niceTime;
 	}
 
 }

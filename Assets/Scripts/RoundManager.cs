@@ -28,7 +28,6 @@ public class RoundManager : MonoBehaviour {
 		else{
 			FindObjectOfType<InterfaceManager>().roundText.text = "FINAL ROUND";
 		}
-		Debug.Log(roundNumber.ToString());
 	}
 	
 	// Update is called once per frame
@@ -40,7 +39,17 @@ public class RoundManager : MonoBehaviour {
 			endRound();
 		}
 		if(!player.alive || aliveContestants == 1){
-			roundOver = true;
+			if(!roundOver){
+				roundOver = true;
+				if(Time.timeSinceLevelLoad < 5){
+					Debug.Log("+1% gov for quick round");
+					StaticGameStats.govRep += 1.0f;
+				}
+				else{
+					Debug.Log("-1% gov for slow round");
+					StaticGameStats.govRep -=1.0f;
+				}
+			}
 		}
 	}
 
