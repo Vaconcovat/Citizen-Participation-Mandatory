@@ -13,6 +13,7 @@ public class InterfaceManager : MonoBehaviour {
 	public PlayerAttributes player;
 	public Text ammoText;
 	public Text roundTime;
+	public Image gunLogoImage;
 
 	RoundManager rm;
 	GameObject playerWeapon;
@@ -32,8 +33,11 @@ public class InterfaceManager : MonoBehaviour {
 		playerWeapon = player.GetComponent<PlayerControls>().Equipped;
 		if (playerWeapon != null){
 			ammoText.text = playerWeapon.GetComponent<Weapon>().ammo.ToString();
+			gunLogoImage.enabled = true;
+			gunLogoImage.sprite = playerWeapon.GetComponent<Weapon>().gunLogo;
 		}
 		else{
+			gunLogoImage.enabled = false;
 			ammoText.text = "--";
 		}
 		//show the time

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
@@ -14,6 +15,8 @@ public class Weapon : MonoBehaviour {
 	public PlayerControls holder;
 	public Texture2D cursorSprite;
 	public GameObject bullet;
+	public Sprite gunLogo;
+	public bool isSponsor;
 
 	Rigidbody2D body;
 	BoxCollider2D col;
