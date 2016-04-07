@@ -21,9 +21,15 @@ public class Grid : MonoBehaviour {
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
         InvokeRepeating("CreateGrid", 0, 1.0f);
-
     }
 
+    public int MaxSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
+        }
+    }
 
     void CreateGrid()
     {
@@ -73,7 +79,7 @@ public class Grid : MonoBehaviour {
     }
 
 
-
+    
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));

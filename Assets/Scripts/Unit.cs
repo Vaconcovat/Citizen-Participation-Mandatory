@@ -7,13 +7,13 @@ public class Unit : MonoBehaviour {
     float speed = .1f;
     Vector3[] path;
     int targetIndex;
+    bool isAlive;
 
-    void Start()
+    void Update() //changed from Start for convienience
     {
         PathRequester.RequestPath(transform.position, target.position, OnPathFound);
     }
-
-
+    
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         if (pathSuccessful)
