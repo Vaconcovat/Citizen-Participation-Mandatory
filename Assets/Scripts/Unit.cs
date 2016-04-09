@@ -7,6 +7,7 @@ public class Unit : MonoBehaviour {
     float speed = .1f;
     Vector3[] path;
     int targetIndex;
+<<<<<<< HEAD
     bool isAlive;
 
     void Update() //changed from Start for convienience
@@ -14,6 +15,15 @@ public class Unit : MonoBehaviour {
         PathRequester.RequestPath(transform.position, target.position, OnPathFound);
     }
     
+=======
+
+    void Start()
+    {
+        PathRequester.RequestPath(transform.position, target.position, OnPathFound);
+    }
+
+
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         if (pathSuccessful)

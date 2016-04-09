@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Diagnostics;
 using System;
 
 
+=======
+using System;
+
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
 public class Pathfinding : MonoBehaviour {
 
 
@@ -34,13 +39,30 @@ public class Pathfinding : MonoBehaviour {
         if (startNode.walkable && targetNode.walkable)
         {
 
+<<<<<<< HEAD
             Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+=======
+            List<Node> openSet = new List<Node>();
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
             HashSet<Node> closedSet = new HashSet<Node>();
             openSet.Add(startNode);
 
             while (openSet.Count > 0)
             {
+<<<<<<< HEAD
                 Node currentNode = openSet.RemoveFirst();
+=======
+                Node currentNode = openSet[0];
+                for (int i = 1; i < openSet.Count; i++)
+                {
+                    if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
+                    {
+                        currentNode = openSet[i];
+                    }
+                }
+
+                openSet.Remove(currentNode);
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
                 closedSet.Add(currentNode);
 
                 if (currentNode == targetNode)
@@ -66,8 +88,11 @@ public class Pathfinding : MonoBehaviour {
 
                         if (!openSet.Contains(neighbour))
                             openSet.Add(neighbour);
+<<<<<<< HEAD
                         else
                             openSet.UpdateItem(neighbour);
+=======
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
 
                     }
                 }

@@ -21,6 +21,7 @@ public class Grid : MonoBehaviour {
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
         InvokeRepeating("CreateGrid", 0, 1.0f);
+<<<<<<< HEAD
     }
 
     public int MaxSize
@@ -31,6 +32,12 @@ public class Grid : MonoBehaviour {
         }
     }
 
+=======
+
+    }
+
+
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
     void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
@@ -79,7 +86,11 @@ public class Grid : MonoBehaviour {
     }
 
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));

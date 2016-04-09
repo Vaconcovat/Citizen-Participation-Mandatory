@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+<<<<<<< HEAD
 public class Node : IHeapItem<Node> {
+=======
+public class Node {
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
 
     public bool walkable;
     public Vector2 worldPosition;
@@ -11,7 +15,11 @@ public class Node : IHeapItem<Node> {
     public int gCost;
     public int hCost;
     public Node parent;
+<<<<<<< HEAD
     int heapIndex;
+=======
+    
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
 
     public Node(bool _walkable, Vector2 _worldPos, int _gridX, int _gridY)
     {
@@ -28,6 +36,7 @@ public class Node : IHeapItem<Node> {
             return gCost + hCost;
         }
     }
+<<<<<<< HEAD
 
     public int HeapIndex
     {
@@ -49,4 +58,6 @@ public class Node : IHeapItem<Node> {
         }
         return -compare;
     }
+=======
+>>>>>>> parent of fecc7dc... PROTOTYPE DEVELOPMENT START
 }
