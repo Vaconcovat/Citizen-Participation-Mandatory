@@ -30,7 +30,7 @@ public class InterfaceManager : MonoBehaviour {
 		//fill the hp bar
 		healthBar.fillAmount = (player.CurrentHealth * 1.0f / player.MaxHealth*1.0f);
 		//count the ammo
-		playerWeapon = player.GetComponent<PlayerControls>().Equipped;
+		playerWeapon = player.GetComponent<PlayerAttributes>().Equipped;
 		if (playerWeapon != null){
 			ammoText.text = playerWeapon.GetComponent<Weapon>().ammo.ToString();
 			gunLogoImage.enabled = true;

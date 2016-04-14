@@ -11,6 +11,10 @@ public class PlayerAttributes : MonoBehaviour {
 	public GameObject damageNumbers;
 	public bool alive;
 
+	public GameObject gunAnchor;
+	public GameObject Equipped;
+	public float pickupCooldown;
+
 	RoundManager rm;
 
 	// Use this for initialization
@@ -57,6 +61,13 @@ public class PlayerAttributes : MonoBehaviour {
 	{
 		//myHealth needs to be a value between 0 and 1
 		HealthBar.transform.localScale = new Vector3(HealthBar.transform.localScale.x, myHealth, HealthBar.transform.localScale.z);	
+	}
+
+	void OnCollisionEnter2D(Collision2D coll){
+		if (coll.gameObject.tag == "Item" && Equipped == null){
+			coll.gameObject.SendMessage("Equip", this);
+			Equipped = coll.gameObject;
+		}
 	}
 
 	//void decreaseHealth() Testing an Auto Decreasing Health Bar

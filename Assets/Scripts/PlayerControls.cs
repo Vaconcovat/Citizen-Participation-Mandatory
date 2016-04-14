@@ -3,9 +3,7 @@ using System.Collections;
 
 public class PlayerControls : MonoBehaviour {
 
-	public GameObject gunAnchor;
-	public GameObject Equipped;
-	public float pickupCooldown;
+	
 
 	float pickupCooldownCount = 0;
 	Rigidbody2D body;
@@ -27,8 +25,8 @@ public class PlayerControls : MonoBehaviour {
 		//keep the camera on the player
 		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
 		//Shoot on leftclick
-		if (Input.GetMouseButton(0) && Equipped != null){
-			Equipped.SendMessage("Fire");
+		if (Input.GetMouseButton(0) && attributes.Equipped != null){
+			attributes.Equipped.SendMessage("Fire");
 		}
 		//Throw on rightclick
 		if (Input.GetMouseButtonDown(1)){
@@ -39,7 +37,7 @@ public class PlayerControls : MonoBehaviour {
 			pickupCooldownCount -= Time.deltaTime;
 		}
 		if (pickupCooldownCount < 0){
-			Equipped = null;
+			attributes.Equipped = null;
 			pickupCooldownCount = 0;
 		}
 	}
@@ -87,19 +85,12 @@ public class PlayerControls : MonoBehaviour {
 		}
 	}
 	public void ThrowEquipped(){
-		if (Equipped != null){
-			Weapon wep = Equipped.GetComponent<Weapon>();
+		if (attributes.Equipped != null){
+			Weapon wep = attributes.Equipped.GetComponent<Weapon>();
 			if (wep != null){
 				wep.Throw();
 			}
-			pickupCooldownCount = pickupCooldown;
-		}
-	}
-
-	void OnCollisionEnter2D(Collision2D coll){
-		if (coll.gameObject.tag == "Item" && Equipped == null){
-			coll.gameObject.SendMessage("Equip", this);
-			Equipped = coll.gameObject;
+			pickupCooldownCount = attributes.pickupCooldown;
 		}
 	}
 }

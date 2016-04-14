@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour {
 	public float bulletVelocity;
 	public GameObject muzzle;
 	public bool isEquipped;
-	public PlayerControls holder;
+	public PlayerAttributes holder;
 	public Texture2D cursorSprite;
 	public GameObject bullet;
 	public Sprite gunLogo;
@@ -67,7 +67,7 @@ public class Weapon : MonoBehaviour {
 		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 	}
 
-	public void Equip(PlayerControls player){
+	public void Equip(PlayerAttributes player){
 		body.isKinematic = true;
 		col.enabled = false;
 		isEquipped = true;
