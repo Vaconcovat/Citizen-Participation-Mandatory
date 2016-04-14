@@ -40,31 +40,36 @@ public class Weapon : MonoBehaviour {
 	}
 
 	public void Fire(){
-		if (ammo == 0){
-			SpriteRenderer render = GetComponent<SpriteRenderer>();
-			render.color = new Color(1,1,1,0.8f);
+		if(isEquipped){
+			if (ammo == 0){
+				SpriteRenderer render = GetComponent<SpriteRenderer>();
+				render.color = new Color(1,1,1,0.8f);
+			}
+			if (ammo > 0 && cooldownCounter <= 0){
+				for(int i = 0; i <= bulletsPerShot; i++){
+					GameObject fired = (GameObject)Instantiate(bullet, muzzle.transform.position, Quaternion.identity * Quaternion.Euler(0f, 0f, -10f));
+					//generate a random angle according to spread
+					Vector2 angle = new Vector2(transform.right.x + (Random.Range(-spread, spread)), transform.right.y + Random.Range(-spread,+spread)).normalized;
+					fired.GetComponent<Bullet>().damage = damagePerBullet;
+					fired.GetComponent<Bullet>().Fire(angle * bulletVelocity);
+				} 
+				ammo--;
+				cooldownCounter = cooldown;
+			}
 		}
-		if (ammo > 0 && cooldownCounter <= 0){
-			for(int i = 0; i <= bulletsPerShot; i++){
-				GameObject fired = (GameObject)Instantiate(bullet, muzzle.transform.position, Quaternion.identity * Quaternion.Euler(0f, 0f, -10f));
-				//generate a random angle according to spread
-				Vector2 angle = new Vector2(transform.right.x + (Random.Range(-spread, spread)), transform.right.y + Random.Range(-spread,+spread)).normalized;
-				fired.GetComponent<Bullet>().damage = damagePerBullet;
-				fired.GetComponent<Bullet>().Fire(angle * bulletVelocity);
-			} 
-			ammo--;
-			cooldownCounter = cooldown;
-		}
+
 	}
 
 	public void Throw(){
-		isEquipped = false;
-		body.isKinematic = false;
-		col.enabled = true;
-		holder = null;
-		body.AddForce(transform.right.normalized * 10, ForceMode2D.Impulse);
-		body.AddTorque(10);
-		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+		if(isEquipped){
+			isEquipped = false;
+			body.isKinematic = false;
+			col.enabled = true;
+			holder = null;
+			body.AddForce(transform.right.normalized * 10, ForceMode2D.Impulse);
+			body.AddTorque(10);
+			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+		}
 	}
 
 	public void Equip(PlayerAttributes player){

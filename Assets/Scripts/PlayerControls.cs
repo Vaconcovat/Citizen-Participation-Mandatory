@@ -5,7 +5,7 @@ public class PlayerControls : MonoBehaviour {
 
 	
 
-	float pickupCooldownCount = 0;
+
 	Rigidbody2D body;
 	PlayerAttributes attributes;
 
@@ -32,14 +32,7 @@ public class PlayerControls : MonoBehaviour {
 		if (Input.GetMouseButtonDown(1)){
 			ThrowEquipped();
 		}
-		//run down our pickup timer
-		if (pickupCooldownCount > 0){
-			pickupCooldownCount -= Time.deltaTime;
-		}
-		if (pickupCooldownCount < 0){
-			attributes.Equipped = null;
-			pickupCooldownCount = 0;
-		}
+
 	}
 
 	// Use FixedUpdate for all physics calculations, like the player's movement
@@ -87,10 +80,11 @@ public class PlayerControls : MonoBehaviour {
 	public void ThrowEquipped(){
 		if (attributes.Equipped != null){
 			Weapon wep = attributes.Equipped.GetComponent<Weapon>();
+			Debug.Log(wep);
 			if (wep != null){
 				wep.Throw();
 			}
-			pickupCooldownCount = attributes.pickupCooldown;
+			attributes.pickupCooldownCount = attributes.pickupCooldown;
 		}
 	}
 }

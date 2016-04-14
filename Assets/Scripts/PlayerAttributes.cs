@@ -14,6 +14,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public GameObject gunAnchor;
 	public GameObject Equipped;
 	public float pickupCooldown;
+	public float pickupCooldownCount = 0;
 
 	RoundManager rm;
 
@@ -36,6 +37,14 @@ public class PlayerAttributes : MonoBehaviour {
 			rm.Death();
 			alive = false;
 			GetComponent<SpriteRenderer>().color = new Color(0.5f,0.5f,0.5f,0.5f);
+		}
+		//run down our pickup timer
+		if (pickupCooldownCount > 0){
+			pickupCooldownCount -= Time.deltaTime;
+		}
+		if (pickupCooldownCount < 0){
+			Equipped = null;
+			pickupCooldownCount = 0;
 		}
 	}
 
