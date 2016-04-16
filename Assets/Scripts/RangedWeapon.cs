@@ -56,4 +56,8 @@ public class RangedWeapon : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public void Fire(){
+
+	}
 }

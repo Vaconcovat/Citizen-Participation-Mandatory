@@ -19,6 +19,16 @@ public class Contestant : MonoBehaviour {
 	/// True if the contestant is the player, false if they're the AI.
 	/// </summary>
 	public bool isPlayer;
+	[Tooltip("Where the anchor point for an item is")]
+	/// <summary>
+	/// The anchor.
+	/// </summary>
+	public Transform anchor;
+	[Tooltip("How much time in seconds after unequipping a weapon must the contestant wait")]
+	/// <summary>
+	/// How much time in seconds after unequipping a weapon must the contestant wait
+	/// </summary>
+	public float pickupCooldown;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -37,6 +47,10 @@ public class Contestant : MonoBehaviour {
 	/// Who killed this contestant.
 	/// </summary>
 	public Contestant killer;
+	/// <summary>
+	/// Internal counter for equip cooldown
+	/// </summary>
+	public float cooldownCounter;
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +59,18 @@ public class Contestant : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
+
+	/// <summary>
+	/// Call this to take damage, from a source. The parameters are wrapped in an object array, so make sure you get it right!!!!!
+	/// </summary>
+	/// <param name="damageDetails">IMPORTANT: This object array MUST contain int: damage and Contestant: owner!!!</param>
+	public void TakeDamage(Object[] damageDetails){
+		int damage = damageDetails[0];
+		Contestant owner = damageDetails[1];
+		//THIS DOESNT WORK
+		//todo
+	}
+
 }

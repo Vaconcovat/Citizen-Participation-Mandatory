@@ -47,4 +47,12 @@ public class Bullet : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public void Fire(Vector2 vector){
+		//todo
+	}
+
+	void OnCollisionEnter2D(Collision2D coll){
+		//todo
+	}
 }
