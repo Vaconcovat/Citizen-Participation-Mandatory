@@ -13,7 +13,7 @@ public class MeleeWeapon : MonoBehaviour {
 	
 	}
 
-	public void Attack(){
+	public void Attack(bool held){
 
 	}
 }

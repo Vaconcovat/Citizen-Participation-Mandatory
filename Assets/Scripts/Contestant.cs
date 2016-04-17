@@ -29,6 +29,11 @@ public class Contestant : MonoBehaviour {
 	/// How much time in seconds after unequipping a weapon must the contestant wait
 	/// </summary>
 	public float pickupCooldown;
+	[Tooltip("The movement speed of this contestant")]
+	/// <summary>
+	/// The movespeed of this contestant.
+	/// </summary>
+	public float movespeed;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -52,25 +57,76 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public float cooldownCounter;
 
+	Rigidbody2D body;
+	Collider2D coll;
+
 	// Use this for initialization
 	void Start () {
-	
+		body = GetComponent<Rigidbody2D>();
+		coll = GetComponent<Collider2D>();
+		health = maxHealth;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//TODO: do we need something here?
 	}
 
 	/// <summary>
-	/// Call this to take damage, from a source. The parameters are wrapped in an object array, so make sure you get it right!!!!!
+	/// Call this to take damage, from a source. You must use a DAMAGEPARAMS class in order to parse the informaiton properly!!
 	/// </summary>
-	/// <param name="damageDetails">IMPORTANT: This object array MUST contain int: damage and Contestant: owner!!!</param>
-	public void TakeDamage(Object[] damageDetails){
-		int damage = damageDetails[0];
-		Contestant owner = damageDetails[1];
-		//THIS DOESNT WORK
-		//todo
+	/// <param name="damage"></param>
+	public void TakeDamage(DamageParams damage){
+		health -= damage.damage;
+		if (health <= 0){
+			killer = damage.owner;
+			Die();
+		}
+	}
+
+	/// <summary>
+	/// Turns this contestant into a corpse.
+	/// </summary>
+	public void Die(){
+		//TODO: disable the associated controller here
+		body.isKinematic = true;
+		coll.enabled = false;
+		isAlive = false;
+		//TODO: other corpse related things here
+	}
+
+	public bool UseEquipped(bool held){
+		if (equipped != null){
+			equipped.Use(held);
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public bool ThrowEquipped(){
+		if (equipped != null){
+			equipped.Throw();
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// This class stores information about incoming damage, including who is dealing the damage.
+	/// </summary>
+	public class DamageParams{
+		public int damage;
+		public Contestant owner;
+
+		//Constructor
+		public DamageParams(int damage, Contestant owner){
+			this.damage = damage;
+			this.owner = owner;
+		}
 	}
 
 }

@@ -30,7 +30,7 @@ public class Item : MonoBehaviour {
 	/// <summary>
 	/// The sprite that the cursor changes to while this item is equipped
 	/// </summary>
-	public Sprite cursor;	
+	public Texture2D cursor;	
 	[Header("Runtime Only")]
 	/// <summary>
 	/// The contestant that is equipping this item.
@@ -38,11 +38,13 @@ public class Item : MonoBehaviour {
 	public Contestant equipper;
 
 	Rigidbody2D body;
+	Collider2D coll;
 	float impactVelocityMin = 10;
 
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody2D>();
+		coll = GetComponent<Collider2D>();
 	}
 	
 	// Update is called once per frame
@@ -57,50 +59,57 @@ public class Item : MonoBehaviour {
 	/// <summary>
 	/// To use this item, call this.
 	/// </summary>
-	public void Use(){
+	public void Use(bool held){
 		//Check what item type i am, then find my associated item script and call the correct function.
 		switch (type){
 			case ItemType.Ranged:
-				GetComponent<RangedWeapon>().Fire();
+				GetComponent<RangedWeapon>().Fire(held);
 				break;
 			case ItemType.Melee:
-				GetComponent<MeleeWeapon>().Attack();
+				GetComponent<MeleeWeapon>().Attack(held);
 				break;
 			case ItemType.Other:
-				GetComponent<OtherItem>().Use();
+				GetComponent<OtherItem>().Use(held);
 				break;
 		}
 	}
 
 	public void Throw(){
 		Unequip();
-		body.AddForce(transform.rotation.eulerAngles.normalized * 10, ForceMode2D.Impulse); //look into this, the rotation might not be correct.
-		body.AddTorque(10, ForceMode2D.Impulse);
+		body.AddForce(transform.right.normalized * 10, ForceMode2D.Impulse);
+		body.AddTorque(1, ForceMode2D.Impulse);
 	}
 
-	public void Equip(){
-		//todo
+	public void Equip(Contestant contestant){
+		equipper = contestant;
+		contestant.equipped = this;
+		coll.enabled = false;
+		body.isKinematic = true;
+		//TODO: Cursor should only change if the contestant is a player!!
+		Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
 	}
 
 	public void Unequip(){
-		//todo
+		equipper.equipped = null;
+		equipper = null;
+		coll.enabled = true;
+		body.isKinematic = false;
+		//TODO: Cursor should only change if the contestant is a player!!
+		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 	}
 
-	void OnCollisionEnter2D(Collision2D coll){
-		//todo
+	void OnCollisionEnter2D(Collision2D c){
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
-				object[] info;
-				int damage = 10;
-				info[0] = damage;
-				info[1] = equipper;
-				coll.gameObject.SendMessage("TakeDamage", info, SendMessageOptions.DontRequireReceiver);
+				//TODO need some way to preserve who has thrown the item, so damage can be dealt correctly.
+				//At the moment, you technically unequip the item when you throw it, so if it deals damage it has no owner.
+				c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, null), SendMessageOptions.DontRequireReceiver);
 			}
 			else{
-				if (coll.gameObject.tag == "Contestant"){
-					Contestant grabber = coll.gameObject.GetComponent<Contestant>();
+				if (c.gameObject.tag == "Contestant"){
+					Contestant grabber = c.gameObject.GetComponent<Contestant>();
 					if (grabber.equipped == null && grabber.cooldownCounter <= 0){
-						Equip();
+						Equip(grabber);
 					}
 				}
 			}

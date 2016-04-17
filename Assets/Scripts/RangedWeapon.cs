@@ -54,10 +54,38 @@ public class RangedWeapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (fireRate != 0){
+			if (cooldownCounter > 0){
+				cooldownCounter -= Time.deltaTime;
+			}
+		}
 	}
 
-	public void Fire(){
+	public void Fire(bool held){
+		//if we're holding the trigger and we're not a fan the hammer gun
+		if (held && fireRate != 0){
+			if (ammo > 0 && cooldownCounter <= 0){
+				Shoot();
+				ammo -= 1;
+				cooldownCounter = fireRate;
+			}
+		}
+		//if we tapped the trigger and we are a fan the hammer gun
+		else if (!held && fireRate == 0){
+			if (ammo > 0){
+				Shoot();
+				ammo-=1;
+			}
+		}
+	}
 
+	void Shoot(){
+		for (int i = 0; i < bulletsPerShot; i++){
+			GameObject firedBullet = (GameObject)Instantiate(bullet, muzzle.position, muzzle.rotation);
+			//TODO: Make sure these rotations are correct!
+			Vector2 angle = new Vector2(transform.right.x + (Random.Range(-spread, spread)), transform.right.y + (Random.Range(-spread, spread))).normalized;
+			firedBullet.GetComponent<Bullet>().Fire(angle * muzzleVelocity);
+			firedBullet.GetComponent<Bullet>().owner = GetComponent<Item>().equipper;
+		}
 	}
 }

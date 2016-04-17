@@ -13,7 +13,7 @@ public class OtherItem : MonoBehaviour {
 	
 	}
 
-	public void Use(){
+	public void Use(bool held){
 
 	}
 }

@@ -37,22 +37,37 @@ public class Bullet : MonoBehaviour {
 	/// </summary>
 	public Contestant owner;
 
+	Rigidbody2D body;
 
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+		body = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		lifetime -= Time.deltaTime;
+		if (lifetime <= 0){
+			Destroy(gameObject);
+		}
 	}
 
 	public void Fire(Vector2 vector){
-		//todo
+		Vector2 v = vector * velocityModifier;
+		body.AddForce(v, ForceMode2D.Impulse);
 	}
 
 	void OnCollisionEnter2D(Collision2D coll){
-		//todo
+		if (areaOfEffect > 0){
+			Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(this.transform.position.x, this.transform.position.y), areaOfEffect);
+			foreach (Collider2D a in colliders){
+				a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner), SendMessageOptions.DontRequireReceiver);
+			}
+			Destroy(gameObject);
+		}
+		else{
+			coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner), SendMessageOptions.DontRequireReceiver);
+			Destroy(gameObject);
+		}
 	}
 }
