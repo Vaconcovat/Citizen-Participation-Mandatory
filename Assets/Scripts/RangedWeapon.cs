@@ -42,6 +42,8 @@ public class RangedWeapon : MonoBehaviour {
 	/// </summary>
 	public GameObject bullet;
 
+	public GameObject muzzleFlash;
+
 	/// <summary>
 	/// Internal counter for the gun's fire rate.
 	/// </summary>
@@ -86,6 +88,8 @@ public class RangedWeapon : MonoBehaviour {
 			Vector2 angle = new Vector2(transform.right.x + (Random.Range(-spread, spread)), transform.right.y + (Random.Range(-spread, spread))).normalized;
 			firedBullet.GetComponent<Bullet>().Fire(angle * muzzleVelocity);
 			firedBullet.GetComponent<Bullet>().owner = GetComponent<Item>().equipper;
+
+			Instantiate(muzzleFlash, new Vector3(muzzle.position.x, muzzle.position.y, -3), muzzle.rotation);
 		}
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
-	public enum MovementType{Standard};
+	public enum MovementType{Standard, Zany};
 
 	[Header("Bullet Settings")]
 	[Tooltip("How much damage this bullet does.")]
@@ -46,6 +46,13 @@ public class Bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		switch (moveType){
+			case MovementType.Standard:
+				break;
+			case MovementType.Zany:
+				Zany();
+				break;
+		}
 		lifetime -= Time.deltaTime;
 		if (lifetime <= 0){
 			Destroy(gameObject);
@@ -69,5 +76,10 @@ public class Bullet : MonoBehaviour {
 			coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner), SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);
 		}
+	}
+
+	void Zany(){
+		body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.3f, ForceMode2D.Impulse);
+		transform.localScale = new Vector3(Mathf.Cos(Time.frameCount/10), Mathf.Cos(Time.frameCount/10), 1) * 0.5f;
 	}
 }
