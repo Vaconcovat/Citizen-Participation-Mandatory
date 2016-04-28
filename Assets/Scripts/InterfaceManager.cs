@@ -9,6 +9,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Text ammo;
 	public Image equippedIcon;
 	public Text timer;
+	public Image gunLogo;
 
 	[Header("Player")]
 	public Contestant player;
@@ -20,12 +21,15 @@ public class InterfaceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		healthbar.fillAmount = player.health / player.maxHealth;
+		healthbar.fillAmount = (player.health * 1.0f) / (player.maxHealth * 1.0f);
 		if (player.equipped != null){
-			ammo.text = player.equipped.GetComponent<RangedWeapon>().ammo.ToString();	
+			ammo.text = player.equipped.GetComponent<RangedWeapon>().ammo.ToString();
+			gunLogo.enabled = true;
+			gunLogo.sprite = player.equipped.logo;	
 		}
 		else{
 			ammo.text = "--";
+			gunLogo.enabled = false;
 		}
 		timer.text = Time.frameCount.ToString();
 	}

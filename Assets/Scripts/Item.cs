@@ -30,12 +30,15 @@ public class Item : MonoBehaviour {
 	/// <summary>
 	/// The sprite that the cursor changes to while this item is equipped
 	/// </summary>
-	public Texture2D cursor;	
+	public Texture2D cursor;
+	public SpriteRenderer selectBox;	
 	[Header("Runtime Only")]
 	/// <summary>
 	/// The contestant that is equipping this item.
 	/// </summary>
 	public Contestant equipper;
+
+
 
 	Rigidbody2D body;
 	Collider2D coll;
@@ -53,6 +56,10 @@ public class Item : MonoBehaviour {
 		if (equipper != null){
 			transform.position = equipper.anchor.position;
 			transform.rotation = equipper.anchor.rotation;
+			selectBox.enabled = false;
+		}
+		else if (GetComponent<RangedWeapon>().ammo > 0){
+			selectBox.enabled = true;
 		}
 	}
 
@@ -103,7 +110,7 @@ public class Item : MonoBehaviour {
 			if (body.velocity.magnitude > impactVelocityMin){
 				//TODO need some way to preserve who has thrown the item, so damage can be dealt correctly.
 				//At the moment, you technically unequip the item when you throw it, so if it deals damage it has no owner.
-				c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, null), SendMessageOptions.DontRequireReceiver);
+				c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, null, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 			}
 			else{
 				if (c.gameObject.tag == "Contestant"){

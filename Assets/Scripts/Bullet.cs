@@ -30,6 +30,7 @@ public class Bullet : MonoBehaviour {
 	/// How long this bullet lives for.
 	/// </summary>
 	public float lifetime;
+	public GameObject trail;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -68,18 +69,18 @@ public class Bullet : MonoBehaviour {
 		if (areaOfEffect > 0){
 			Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(this.transform.position.x, this.transform.position.y), areaOfEffect);
 			foreach (Collider2D a in colliders){
-				a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner), SendMessageOptions.DontRequireReceiver);
+				a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, body.velocity.normalized, Vector2.zero), SendMessageOptions.DontRequireReceiver);
 			}
 			Destroy(gameObject);
 		}
 		else{
-			coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner), SendMessageOptions.DontRequireReceiver);
+			coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, body.velocity.normalized, coll.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);
 		}
 	}
 
 	void Zany(){
-		body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.3f, ForceMode2D.Impulse);
+		body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.2f, ForceMode2D.Impulse);
 		transform.localScale = new Vector3(Mathf.Cos(Time.frameCount/10), Mathf.Cos(Time.frameCount/10), 1) * 0.5f;
 	}
 }
