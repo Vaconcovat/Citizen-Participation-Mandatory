@@ -8,9 +8,10 @@ public class InterfaceManager : MonoBehaviour {
 	[Header("UI GameObjects")]
 	public Image healthbar;
 	public Text ammo;
-	public Image equippedIcon;
 	public Text timer;
 	public Image gunLogo;
+	public Text roundText;
+	public Text aliveText;
 
 	[Header("Player")]
 	public Contestant player;
@@ -18,9 +19,10 @@ public class InterfaceManager : MonoBehaviour {
 	[Header("Camera")]
 	public NoiseAndScratches noise;
 
+	RoundManager rm;
 	// Use this for initialization
 	void Start () {
-	
+		rm = FindObjectOfType<RoundManager>();
 	}
 	
 	// Update is called once per frame
@@ -37,5 +39,7 @@ public class InterfaceManager : MonoBehaviour {
 		}
 		timer.text = Time.frameCount.ToString();
 		noise.grainIntensityMax = (1 - healthbar.fillAmount) + 0.1f;
+		roundText.text = "ROUND: " + RoundManager.roundNumber.ToString();
+		aliveText.text = rm.aliveContestants.ToString() + " / " + rm.totalContestants.ToString() + " REMAIN.";
 	}
 }

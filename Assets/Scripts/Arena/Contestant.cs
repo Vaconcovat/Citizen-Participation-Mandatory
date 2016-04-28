@@ -95,6 +95,7 @@ public class Contestant : MonoBehaviour {
 	public void Die(){
 		if (!isPlayer){
 			GetComponent<AIController>().enabled = false;
+			FindObjectOfType<RoundManager>().Death();
 		}
 		else{
 			FindObjectOfType<SceneChange>().Menu();
