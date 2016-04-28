@@ -96,6 +96,9 @@ public class Contestant : MonoBehaviour {
 		if (!isPlayer){
 			GetComponent<AIController>().enabled = false;
 		}
+		else{
+			FindObjectOfType<SceneChange>().Menu();
+		}
 		body.isKinematic = true;
 		coll.enabled = false;
 		isAlive = false;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 public class InterfaceManager : MonoBehaviour {
 
@@ -13,6 +14,9 @@ public class InterfaceManager : MonoBehaviour {
 
 	[Header("Player")]
 	public Contestant player;
+
+	[Header("Camera")]
+	public NoiseAndScratches noise;
 
 	// Use this for initialization
 	void Start () {
@@ -32,5 +36,6 @@ public class InterfaceManager : MonoBehaviour {
 			gunLogo.enabled = false;
 		}
 		timer.text = Time.frameCount.ToString();
+		noise.grainIntensityMax = (1 - healthbar.fillAmount) + 0.1f;
 	}
 }
