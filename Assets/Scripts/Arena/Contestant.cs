@@ -100,7 +100,7 @@ public class Contestant : MonoBehaviour {
 		else{
 			FindObjectOfType<SceneChange>().Menu();
 		}
-		body.isKinematic = true;
+		//body.isKinematic = true;
 		coll.enabled = false;
 		isAlive = false;
 		if (equipped != null){

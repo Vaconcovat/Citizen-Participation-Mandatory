@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour {
 	/// </summary>
 	public float lifetime;
 	public GameObject trail;
+	public float explosiveForce;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -69,7 +70,7 @@ public class Bullet : MonoBehaviour {
 		if (areaOfEffect > 0){
 			Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(this.transform.position.x, this.transform.position.y), areaOfEffect);
 			foreach (Collider2D a in colliders){
-				a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, body.velocity.normalized, Vector2.zero), SendMessageOptions.DontRequireReceiver);
+				a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
 			}
 			Destroy(gameObject);
 		}
