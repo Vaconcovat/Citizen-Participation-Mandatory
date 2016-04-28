@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
 	Contestant contestant;
 	Rigidbody2D body;
 
+	public bool smoothed;
+
 	// Use this for initialization
 	void Start () {
 		contestant = GetComponent<Contestant>();
@@ -37,7 +39,14 @@ public class PlayerController : MonoBehaviour {
 
 	void KeyboardControls(){
 		//Assuming the axis are set up properly
-		body.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * contestant.movespeed;
+		if(smoothed){
+			//float mag = Mathf.Min(Mathf.Abs(Input.GetAxis("Horizontal") + Mathf.Abs(Input.GetAxis("Vertical"))), 1.0f);
+			//Debug.Log(mag);
+			body.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * contestant.movespeed;
+		}
+		else{
+			body.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * contestant.movespeed;
+		}
 	}
 
 	void FaceMouse(){
