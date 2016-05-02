@@ -22,7 +22,10 @@ public class Pathfinding : MonoBehaviour {
 
 	IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
-
+		Debug.Log (startPos + " to " + targetPos);
+		targetPos.x = targetPos.x - 2.3f;
+		targetPos.y = targetPos.y + 1.8f;
+		Debug.Log (startPos + " to " + targetPos);
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
 

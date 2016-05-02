@@ -10,7 +10,8 @@ public class Unit : MonoBehaviour {
 
     void Start()
     {
-        PathRequester.RequestPath(transform.position, target.position, OnPathFound);
+		Debug.Log ("Path Requested!");
+		PathRequester.RequestPath(transform.position, target.position, OnPathFound);
     }
 
 
@@ -18,6 +19,7 @@ public class Unit : MonoBehaviour {
     {
         if (pathSuccessful)
         {
+			Debug.Log("Path Successfully Found!");
             path = newPath;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
