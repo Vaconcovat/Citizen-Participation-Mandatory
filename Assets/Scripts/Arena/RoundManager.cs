@@ -35,9 +35,14 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	void endRound(){
+		if (Time.timeSinceLevelLoad < 30){
+			FindObjectOfType<StaticGameStats>().Influence(0, 10.0f);
+		}else{
+			FindObjectOfType<StaticGameStats>().Influence(0, -10.0f);
+		}
 		if (roundNumber < 5){
 			roundNumber++;
-			GetComponent<SceneChange>().Arena();
+			GetComponent<SceneChange>().RoundRestart();
 		}
 		else{
 			GetComponent<SceneChange>().Menu();

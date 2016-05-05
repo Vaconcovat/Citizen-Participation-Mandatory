@@ -37,7 +37,7 @@ public class InterfaceManager : MonoBehaviour {
 			ammo.text = "--";
 			gunLogo.enabled = false;
 		}
-		timer.text = Time.frameCount.ToString();
+		timer.text = Time.timeSinceLevelLoad.ToString();
 		noise.grainIntensityMax = (1 - healthbar.fillAmount) + 0.1f;
 		roundText.text = "ROUND: " + RoundManager.roundNumber.ToString();
 		aliveText.text = rm.aliveContestants.ToString() + " / " + rm.totalContestants.ToString() + " REMAIN.";
