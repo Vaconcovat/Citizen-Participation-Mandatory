@@ -35,6 +35,10 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public float movespeed;
 	public GameObject bloodSplatter;
+	[Header("SPRITES")]
+	public Sprite unarmedSprite;
+	public Sprite rifleSprite;
+	public Sprite pistolSprite;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -60,17 +64,31 @@ public class Contestant : MonoBehaviour {
 
 	Rigidbody2D body;
 	Collider2D coll;
+	SpriteRenderer spr;
 
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody2D>();
 		coll = GetComponent<Collider2D>();
+		spr = GetComponent<SpriteRenderer>();
 		health = maxHealth;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//TODO: do we need something here?
+		if (equipped != null){
+			switch(equipped.stance){
+				case Item.Stance.Pistol:
+					spr.sprite = pistolSprite;
+					break;
+				case Item.Stance.Rifle:
+					spr.sprite = rifleSprite;
+					break;
+			}
+		}
+		else{
+			spr.sprite = unarmedSprite;
+		}
 	}
 
 	/// <summary>

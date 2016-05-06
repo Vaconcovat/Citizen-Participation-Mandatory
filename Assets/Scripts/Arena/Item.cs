@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 	public enum ItemType{Ranged, Melee, Other};
+	public enum Stance{Rifle, Pistol, Unarmed};
 
 	[Header("Item Settings")]
 	[Tooltip("The name of the Item.")]
@@ -15,6 +16,7 @@ public class Item : MonoBehaviour {
 	/// What itm type this is.
 	/// </summary>
 	public ItemType type;
+	public Stance stance;
 	[Tooltip("Was this item brought to us by a sponsor?")]
 	/// <summary>
 	/// True if the item is sponsored.
