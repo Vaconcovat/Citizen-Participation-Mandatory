@@ -32,7 +32,7 @@ public class Unit : MonoBehaviour {
         
         while (true)
         {
-            if (transform.position == currentWaypoint)
+            if (Vector3.Distance(transform.position,currentWaypoint) < 0.1f)
             {
                 targetIndex++;
                 if (targetIndex >= path.Length)
@@ -54,7 +54,7 @@ public class Unit : MonoBehaviour {
             for (int i = targetIndex; i < path.Length; i++)
             {
                 Gizmos.color = Color.black;
-                Gizmos.DrawCube(path[i], Vector3.one);
+                Gizmos.DrawCube(path[i], Vector3.one * 0.5f);
 
                 if (i == targetIndex)
                 {

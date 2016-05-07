@@ -5,6 +5,7 @@ using System;
 
 public class Pathfinding : MonoBehaviour {
 
+	public bool simplified;
 
     PathRequester requestManager;
     Grid grid;
@@ -23,8 +24,8 @@ public class Pathfinding : MonoBehaviour {
 	IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
 		Debug.Log (startPos + " to " + targetPos);
-		targetPos.x = targetPos.x - 2.3f;
-		targetPos.y = targetPos.y + 1.8f;
+		//targetPos.x = targetPos.x - 2.3f;
+		//targetPos.y = targetPos.y + 1.8f;
 		Debug.Log (startPos + " to " + targetPos);
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
@@ -99,9 +100,27 @@ public class Pathfinding : MonoBehaviour {
             path.Add(currentNode);
             currentNode = currentNode.parent;
         }
-        Vector3[] waypoints = SimplifyPath(path);
-        Array.Reverse(waypoints);
-        return waypoints;
+
+        if (simplified){
+			//---------These lines enable path simplification
+        	Vector3[] waypoints = SimplifyPath(path);
+       	 	Array.Reverse(waypoints);
+        	return waypoints;
+        }
+        else{
+			//----------- These lines disable path simplification
+        	path.Reverse();
+        	Vector3[] waypoints = new Vector3[path.Count];
+        	int i = 0;
+        	foreach(Node n in path){
+        		waypoints[i] = n.worldPosition;
+        		i++;
+        	}
+        	return waypoints;
+        }
+
+
+
     }
 
     Vector3[] SimplifyPath(List<Node> path)
