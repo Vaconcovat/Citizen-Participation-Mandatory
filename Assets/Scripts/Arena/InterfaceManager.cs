@@ -29,7 +29,12 @@ public class InterfaceManager : MonoBehaviour {
 	void Update () {
 		healthbar.fillAmount = (player.health * 1.0f) / (player.maxHealth * 1.0f);
 		if (player.equipped != null){
-			ammo.text = player.equipped.GetComponent<RangedWeapon>().ammo.ToString();
+			if (player.equipped.type == Item.ItemType.Ranged){
+				ammo.text = player.equipped.GetComponent<RangedWeapon>().ammo.ToString();
+			}
+			else{
+				ammo.text = "--";
+			}
 			gunLogo.enabled = true;
 			gunLogo.sprite = player.equipped.logo;	
 		}
