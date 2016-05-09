@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RoundManager : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class RoundManager : MonoBehaviour {
 	public int aliveContestants;
 	public Contestant player;
 	public float roundEndWait;
+	public List<Transform> contestantSpawns;
 
 	Contestant[] contestants;
 	bool roundOver = false;
@@ -16,6 +18,18 @@ public class RoundManager : MonoBehaviour {
 		contestants = FindObjectsOfType<Contestant>();
 		totalContestants = contestants.Length;
 		aliveContestants = totalContestants;
+		//shuffle the spawnpoints
+		for (int i = 0; i < contestantSpawns.Count; i++){
+			Transform temp = contestantSpawns[i];
+			int index = Random.Range(i, contestantSpawns.Count);
+			contestantSpawns[i] = contestantSpawns[index];
+			contestantSpawns[index] = temp;
+		}
+		int j = 0;
+		foreach(Contestant c in contestants){
+			c.transform.position = contestantSpawns[j].position;
+			j++;
+		}
 	}
 	
 	// Update is called once per frame
