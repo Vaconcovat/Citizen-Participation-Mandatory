@@ -29,17 +29,21 @@ public class OtherItem : MonoBehaviour {
 					break;
 			}
 		}
+	}
+
+	void Heal(float amount){
+		GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 		if (consume){
 			GetComponent<Item>().Unequip();
 			Destroy(gameObject);
 		}
 	}
 
-	void Heal(float amount){
-		GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
-	}
-
 	void Speed(float amount){
 		GetComponent<Item>().equipper.movespeed += amount;
+		if (consume){
+			GetComponent<Item>().Unequip();
+			Destroy(gameObject);
+		}
 	}
 }
