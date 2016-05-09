@@ -41,7 +41,7 @@ public class Item : MonoBehaviour {
 	public Contestant equipper;
 
 
-
+	Contestant thrower;
 	Rigidbody2D body;
 	Collider2D coll;
 	float impactVelocityMin = 10;
@@ -89,13 +89,16 @@ public class Item : MonoBehaviour {
 	}
 
 	public void Throw(){
+		thrower = equipper;
 		Unequip();
 		body.AddForce(transform.right.normalized * 10, ForceMode2D.Impulse);
 		body.AddTorque(1, ForceMode2D.Impulse);
 	}
 
 	public void Equip(Contestant contestant){
+		thrower = null;
 		equipper = contestant;
+		contestant.cooldownCounter = contestant.pickupCooldown;
 		contestant.equipped = this;
 		coll.enabled = false;
 		body.isKinematic = true;
@@ -115,9 +118,11 @@ public class Item : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D c){
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
-				//TODO need some way to preserve who has thrown the item, so damage can be dealt correctly.
-				//At the moment, you technically unequip the item when you throw it, so if it deals damage it has no owner.
-				c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, null, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+				if(c.gameObject.tag == "Contestant"){
+					if(c.gameObject.GetComponent<Contestant>() != thrower){
+						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, null, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+					}
+				}
 			}
 			else{
 				if (c.gameObject.tag == "Contestant"){

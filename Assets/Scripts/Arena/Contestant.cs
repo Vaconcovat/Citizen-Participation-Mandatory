@@ -88,6 +88,9 @@ public class Contestant : MonoBehaviour {
 		}
 		else{
 			spr.sprite = unarmedSprite;
+			if(cooldownCounter > 0){
+				cooldownCounter -= Time.deltaTime;
+			}
 		}
 	}
 
