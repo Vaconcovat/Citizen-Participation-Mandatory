@@ -60,8 +60,13 @@ public class Item : MonoBehaviour {
 			transform.rotation = equipper.anchor.rotation;
 			selectBox.enabled = false;
 		}
-		else if (GetComponent<RangedWeapon>().ammo > 0){
-			selectBox.enabled = true;
+		else if (type == ItemType.Ranged){
+			if (GetComponent<RangedWeapon>().ammo > 0){
+				selectBox.enabled = true;
+			}
+			else{
+				selectBox.enabled = false;
+			}
 		}
 	}
 

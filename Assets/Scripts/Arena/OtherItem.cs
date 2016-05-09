@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class OtherItem : MonoBehaviour {
+	public enum ItemEffect{Heal};
+
+	public ItemEffect effect;
+	public float effectAmount;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +18,14 @@ public class OtherItem : MonoBehaviour {
 	}
 
 	public void Use(bool held){
+		switch(effect){
+			case ItemEffect.Heal:
+				Heal(effectAmount);
+				break;
+		}
+	}
 
+	void Heal(float amount){
+		GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 	}
 }
