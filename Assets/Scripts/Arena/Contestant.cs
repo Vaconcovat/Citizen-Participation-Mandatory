@@ -105,9 +105,11 @@ public class Contestant : MonoBehaviour {
 			killer = damage.owner;
 			Die();
 		}
-		GameObject blood = (GameObject)Instantiate(bloodSplatter,damage.location,Quaternion.AngleAxis(Random.Range(0f,360f),Vector3.forward));
-		float scale = Random.Range(0.08f,0.2f);
-		blood.transform.localScale = new Vector3(scale,scale,1);
+		if (damage.damage > 0){
+			GameObject blood = (GameObject)Instantiate(bloodSplatter,damage.location,Quaternion.AngleAxis(Random.Range(0f,360f),Vector3.forward));
+			float scale = Random.Range(0.08f,0.2f);
+			blood.transform.localScale = new Vector3(scale,scale,1);
+		}
 	}
 
 	/// <summary>
@@ -121,15 +123,20 @@ public class Contestant : MonoBehaviour {
 		else{
 			FindObjectOfType<SceneChange>().Menu();
 		}
-		//body.isKinematic = true;
+		body.isKinematic = true;
 		coll.enabled = false;
 		isAlive = false;
 		if (equipped != null){
 			equipped.Unequip();
 		}
 		equipped = null;
-		GetComponent<SpriteRenderer>().color = Color.white;
-		//TODO: other corpse related things here
+		if (killer != FindObjectOfType<PlayerController>().GetComponent<Contestant>()){
+			GetComponent<SpriteRenderer>().color = Color.white;
+		}
+		else{
+			GetComponent<SpriteRenderer>().color = Color.yellow;
+		}
+		
 	}
 
 	public bool UseEquipped(bool held){

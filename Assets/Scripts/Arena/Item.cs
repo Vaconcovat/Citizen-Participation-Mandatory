@@ -120,7 +120,7 @@ public class Item : MonoBehaviour {
 			if (body.velocity.magnitude > impactVelocityMin){
 				if(c.gameObject.tag == "Contestant"){
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
-						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, null, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 					}
 				}
 			}
