@@ -18,11 +18,14 @@ public class OtherItem : MonoBehaviour {
 	}
 
 	public void Use(bool held){
-		switch(effect){
-			case ItemEffect.Heal:
-				Heal(effectAmount);
-				break;
+		if (!held){
+			switch(effect){
+				case ItemEffect.Heal:
+					Heal(effectAmount);
+					break;
+			}
 		}
+
 	}
 
 	void Heal(float amount){

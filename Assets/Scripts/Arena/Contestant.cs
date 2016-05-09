@@ -92,6 +92,9 @@ public class Contestant : MonoBehaviour {
 				cooldownCounter -= Time.deltaTime;
 			}
 		}
+		if (health > maxHealth){
+			health = maxHealth;
+		}
 	}
 
 	/// <summary>

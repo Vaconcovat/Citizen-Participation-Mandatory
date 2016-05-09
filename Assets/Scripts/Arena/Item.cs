@@ -123,6 +123,9 @@ public class Item : MonoBehaviour {
 						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 					}
 				}
+				else{
+					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+				}
 			}
 			else{
 				if (c.gameObject.tag == "Contestant"){
