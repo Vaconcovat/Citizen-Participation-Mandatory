@@ -2,10 +2,11 @@
 using System.Collections;
 
 public class OtherItem : MonoBehaviour {
-	public enum ItemEffect{Heal};
+	public enum ItemEffect{Heal, Speed};
 
 	public ItemEffect effect;
 	public float effectAmount;
+	public bool consume;
 
 	// Use this for initialization
 	void Start () {
@@ -23,12 +24,22 @@ public class OtherItem : MonoBehaviour {
 				case ItemEffect.Heal:
 					Heal(effectAmount);
 					break;
+				case ItemEffect.Speed:
+					Speed(effectAmount);
+					break;
 			}
 		}
-
+		if (consume){
+			GetComponent<Item>().Unequip();
+			Destroy(gameObject);
+		}
 	}
 
 	void Heal(float amount){
 		GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+	}
+
+	void Speed(float amount){
+		GetComponent<Item>().equipper.movespeed += amount;
 	}
 }
