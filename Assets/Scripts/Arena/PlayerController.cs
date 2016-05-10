@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour {
 		else{
 			body.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * contestant.movespeed;
 		}
+		if(Input.GetKeyUp(KeyCode.LeftControl)){
+			contestant.swap();
+		}
 	}
 
 	void FaceMouse(){

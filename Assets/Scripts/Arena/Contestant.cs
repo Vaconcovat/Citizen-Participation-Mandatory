@@ -35,10 +35,13 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public float movespeed;
 	public GameObject bloodSplatter;
+	public Transform backpack;
+
 	[Header("SPRITES")]
 	public Sprite unarmedSprite;
 	public Sprite rifleSprite;
 	public Sprite pistolSprite;
+	public Sprite corpse;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -48,7 +51,7 @@ public class Contestant : MonoBehaviour {
 	/// <summary>
 	/// True if the contestant is alive, false if they are a corpse.
 	/// </summary>
-	public bool isAlive;
+	public bool isAlive = true;
 	/// <summary>
 	/// The item currently equipped by this contestant.
 	/// </summary>
@@ -61,6 +64,7 @@ public class Contestant : MonoBehaviour {
 	/// Internal counter for equip cooldown
 	/// </summary>
 	public float cooldownCounter;
+	public Item inventory;
 
 	Rigidbody2D body;
 	Collider2D coll;
@@ -76,21 +80,26 @@ public class Contestant : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (equipped != null){
-			switch(equipped.stance){
-				case Item.Stance.Pistol:
-					spr.sprite = pistolSprite;
-					break;
-				case Item.Stance.Rifle:
-					spr.sprite = rifleSprite;
-					break;
+		if(isAlive){
+			if (equipped != null){
+				switch(equipped.stance){
+					case Item.Stance.Pistol:
+						spr.sprite = pistolSprite;
+						break;
+					case Item.Stance.Rifle:
+						spr.sprite = rifleSprite;
+						break;
+				}
+			}
+			else{
+				spr.sprite = unarmedSprite;
+				if(cooldownCounter > 0){
+					cooldownCounter -= Time.deltaTime;
+				}
 			}
 		}
 		else{
-			spr.sprite = unarmedSprite;
-			if(cooldownCounter > 0){
-				cooldownCounter -= Time.deltaTime;
-			}
+			spr.sprite = corpse;
 		}
 		if (health > maxHealth){
 			health = maxHealth;
@@ -170,6 +179,12 @@ public class Contestant : MonoBehaviour {
 			return -1;
 		}
 		return -1;
+	}
+
+	public void swap(){
+		Item temp = equipped;
+		equipped = inventory;
+		inventory = temp;
 	}
 
 	/// <summary>

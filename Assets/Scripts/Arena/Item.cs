@@ -56,9 +56,17 @@ public class Item : MonoBehaviour {
 	void Update () {
 		//If i'm equipped, make sure i stick to my equipper's anchor point.
 		if (equipper != null){
-			transform.position = equipper.anchor.position;
-			transform.rotation = equipper.anchor.rotation;
-			selectBox.enabled = false;
+			if (equipper.inventory == this){
+				transform.position = equipper.backpack.position;
+				transform.rotation = equipper.backpack.rotation;
+				selectBox.enabled = false;
+			}
+			else{
+				transform.position = equipper.anchor.position;
+				transform.rotation = equipper.anchor.rotation;
+				selectBox.enabled = false;
+			}
+
 		}
 		else if (type == ItemType.Ranged){
 			if (GetComponent<RangedWeapon>().ammo > 0){
@@ -102,8 +110,9 @@ public class Item : MonoBehaviour {
 		contestant.equipped = this;
 		coll.enabled = false;
 		body.isKinematic = true;
-		//TODO: Cursor should only change if the contestant is a player!!
-		Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+		if(equipper.isPlayer){
+			Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+		}
 	}
 
 	public void Unequip(){
