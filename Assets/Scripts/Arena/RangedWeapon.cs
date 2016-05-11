@@ -84,11 +84,9 @@ public class RangedWeapon : MonoBehaviour {
 	void Shoot(){
 		for (int i = 0; i < bulletsPerShot; i++){
 			GameObject firedBullet = (GameObject)Instantiate(bullet, muzzle.position, muzzle.rotation);
-			//TODO: Make sure these rotations are correct!
 			Vector2 angle = new Vector2(transform.right.x + (Random.Range(-spread, spread)), transform.right.y + (Random.Range(-spread, spread))).normalized;
 			firedBullet.GetComponent<Bullet>().Fire(angle * muzzleVelocity);
 			firedBullet.GetComponent<Bullet>().owner = GetComponent<Item>().equipper;
-
 			Instantiate(muzzleFlash, new Vector3(muzzle.position.x, muzzle.position.y, -3), muzzle.rotation);
 		}
 	}

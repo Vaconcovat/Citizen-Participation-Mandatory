@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MenuCamera : MonoBehaviour {
 	/// <summary>
-	/// 0 = main menu, 1 = zoomed out
+	/// 0 = main menu, 1 = zoomed out, 2 = post
 	/// </summary>
 	public int state;
 	public Transform[] waypoints;
@@ -12,14 +12,7 @@ public class MenuCamera : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		switch(state){
-			case 0:
-				transform.position = Vector3.MoveTowards(transform.position, new Vector3(waypoints[0].position.x,waypoints[0].position.y,-10),speed);
-				break;
-			case 1:
-				transform.position = Vector3.MoveTowards(transform.position, new Vector3(waypoints[1].position.x,waypoints[1].position.y,-10),speed);
-				break;
-		}
+		transform.position = Vector3.MoveTowards(transform.position, new Vector3(waypoints[state].position.x,waypoints[state].position.y,-10),speed);
 	}
 
 	public void MainMenu(){
@@ -30,5 +23,9 @@ public class MenuCamera : MonoBehaviour {
 	public void ZoomedOut(){
 		state = 1;
 		audioP.Play();
+	}
+
+	public void Post(){
+		state = 2;
 	}
 }

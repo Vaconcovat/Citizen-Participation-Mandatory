@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class StaticGameStats : MonoBehaviour {
-
-
+	//Reputation variables
 	public static float govRep = 50.0f;
 	public static float corRep = 50.0f;
 	public static float rebRep = 50.0f;
@@ -11,10 +10,25 @@ public class StaticGameStats : MonoBehaviour {
 	public static float oldcorRep = 50.0f;
 	public static float oldrebRep = 50.0f;
 
-	public static int money;
+	//money variables
+	public static int avaliableMoney;
+	public static int embezzledMoney;
+
+	//Arena variables
+	/// <summary>
+	/// [General Upgrade 0], [nothing]
+	/// </summary>
+	public static bool[] generalUpgrades;
+	public static bool[] govUpgrades;
+	public static bool[] corUpgrades;
+	public static bool[] rebUpgrades; 
 	public static int arenasPlayed = 0;
 
+	//Economy Settings
+	//put shit here
+
 	// Use this for initialization
+	//Probably shouldn't ever have anything here, if you do you're bad.
 	void Start () {
 	
 	}
