@@ -34,6 +34,7 @@ public class Contestant : MonoBehaviour {
 	/// The movespeed of this contestant.
 	/// </summary>
 	public float movespeed;
+    
 	public GameObject bloodSplatter;
 	public Transform backpack;
 
@@ -65,8 +66,9 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public float cooldownCounter;
 	public Item inventory;
+    float baseSpeed;
 
-	Rigidbody2D body;
+    Rigidbody2D body;
 	Collider2D coll;
 	SpriteRenderer spr;
 
@@ -76,6 +78,7 @@ public class Contestant : MonoBehaviour {
 		coll = GetComponent<Collider2D>();
 		spr = GetComponent<SpriteRenderer>();
 		health = maxHealth;
+        baseSpeed = movespeed;
 	}
 	
 	// Update is called once per frame
@@ -97,6 +100,10 @@ public class Contestant : MonoBehaviour {
 					cooldownCounter -= Time.deltaTime;
 				}
 			}
+            //degrade our movespeed
+            if (movespeed > baseSpeed) {
+                movespeed -= Time.deltaTime * 0.3f;
+            }
 		}
 		else{
 			spr.sprite = corpse;
