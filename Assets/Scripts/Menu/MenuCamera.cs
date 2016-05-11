@@ -7,12 +7,18 @@ public class MenuCamera : MonoBehaviour {
 	/// </summary>
 	public int state;
 	public Transform[] waypoints;
+	public bool teleport;
 	public float speed;
 	public AudioSource audioP;
 
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.MoveTowards(transform.position, new Vector3(waypoints[state].position.x,waypoints[state].position.y,-10),speed);
+		if(teleport){
+			transform.position = waypoints[state].position;
+		}
+		else{
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(waypoints[state].position.x,waypoints[state].position.y,-10),speed);
+		}
 	}
 
 	public void MainMenu(){
@@ -22,10 +28,22 @@ public class MenuCamera : MonoBehaviour {
 
 	public void ZoomedOut(){
 		state = 1;
-		audioP.Play();
+		if (!audioP.isPlaying){
+			audioP.Play();
+		}
 	}
 
 	public void Post(){
 		state = 2;
+		if (!audioP.isPlaying){
+			audioP.Play();
+		}
+	}
+
+	public void Pre(){
+		state = 3;
+		if (!audioP.isPlaying){
+			audioP.Play();
+		}
 	}
 }
