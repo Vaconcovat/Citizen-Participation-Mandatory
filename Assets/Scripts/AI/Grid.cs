@@ -24,6 +24,11 @@ public class Grid : MonoBehaviour {
 
     }
 
+	public int MaxSize {
+		get {
+			return gridSizeX * gridSizeY;
+		}
+	}
 
     void CreateGrid()
     {
