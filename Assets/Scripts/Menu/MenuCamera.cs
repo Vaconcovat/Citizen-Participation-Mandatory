@@ -11,6 +11,13 @@ public class MenuCamera : MonoBehaviour {
 	public float speed;
 	public AudioSource audioP;
 
+	void Start(){
+		if(StaticGameStats.toPost){
+			state = 2;
+			StaticGameStats.toPost = false;
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if(teleport){

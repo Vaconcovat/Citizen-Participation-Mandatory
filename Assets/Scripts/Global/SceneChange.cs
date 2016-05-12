@@ -17,6 +17,12 @@ public class SceneChange : MonoBehaviour {
 		SceneManager.LoadScene(0);
 	}
 
+	public void ToPostArena(){
+		StaticGameStats.committed = false;
+		StaticGameStats.toPost = true;
+		SceneManager.LoadScene(0);
+	}
+
 	public void RoundRestart(){
 		SceneManager.LoadScene(1);
 	}

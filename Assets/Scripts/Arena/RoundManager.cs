@@ -65,7 +65,7 @@ public class RoundManager : MonoBehaviour {
 			GetComponent<SceneChange>().RoundRestart();
 		}
 		else{
-			GetComponent<SceneChange>().Menu();
+			GetComponent<SceneChange>().ToPostArena();
 		}
 	}
 

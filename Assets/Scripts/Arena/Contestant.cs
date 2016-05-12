@@ -140,7 +140,7 @@ public class Contestant : MonoBehaviour {
 			FindObjectOfType<RoundManager>().Death();
 		}
 		else{
-			FindObjectOfType<SceneChange>().Menu();
+			FindObjectOfType<SceneChange>().ToPostArena();
 		}
 		body.isKinematic = true;
 		coll.enabled = false;

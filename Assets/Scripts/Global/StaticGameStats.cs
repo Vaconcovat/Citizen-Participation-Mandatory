@@ -14,6 +14,10 @@ public class StaticGameStats : MonoBehaviour {
 	public static int avaliableMoney;
 	public static int embezzledMoney;
 
+	//Commit
+	public static bool committed = false;
+	public static bool toPost = false;
+
 	//Arena variables
 	/// <summary>
 	/// [General Upgrade 0], [nothing]
@@ -22,6 +26,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static bool[] govUpgrades;
 	public static bool[] corUpgrades;
 	public static bool[] rebUpgrades; 
+	public static int sponsor;
 	public static int arenasPlayed = 0;
 
 	//Economy Settings
