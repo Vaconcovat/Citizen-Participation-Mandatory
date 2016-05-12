@@ -12,13 +12,12 @@ public class ItemPools : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		example = new Pool(Example_Pool);
-		sponsor = new Pool(Sponsor_Pool);
 		item = new Pool(Item_Pool);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Start(){
+		GameObject[] tempPool = {Sponsor_Pool[StaticGameStats.sponsor]};
+		sponsor = new Pool(tempPool);
 	}
 
 	public class Pool{
