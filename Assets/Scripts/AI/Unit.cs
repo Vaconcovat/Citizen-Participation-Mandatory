@@ -5,47 +5,58 @@ public class Unit : MonoBehaviour {
 
     public Transform firstTarget;
 	public Transform secondTarget;
-    float speed = .1f;
+    public float speed = .08f; //defines speed of the enemy chasing
+	int followingTarget; //holds information about which target to follow.
     Vector3[] path;
     int targetIndex;
-	float timer = 1f;
-	public bool pathReached = false;
-	public Vector3 targetPos;
+	float timer = 1.0f;
+	//public bool pathReached = false;
+	Vector3 targetPos;
 
     void Start()
     {
 		Debug.Log ("Path Requested!");
-		targetPos = firstTarget.position;
-		//Updates path when called
+		followingTarget = 0; //sets target to be following
+		targetPos = secondTarget.position;
+		Debug.Log ("Start: Target is located at " + firstTarget.position);
 		PathRequester.RequestPath (transform.position, firstTarget.position, OnPathFound);
-
-
-		Debug.Log ("Start: Target is located at " + targetPos);
-		StartCoroutine("updatePath");
     }
+
+	void Update()
+	{
+		
+		if (followingTarget == 1) {
+			StartCoroutine ("updatePath");
+		} else if (followingTarget == 3) {
+			StopCoroutine ("updatePath");
+			StartCoroutine ("updatePath");
+		}
+
+
+	}
 
 	IEnumerator updatePath()
 	{
-		Debug.Log ("\tUpdating Path: Target is located at " + targetPos);
-		Debug.Log (pathReached);
-		while(pathReached == false)
-		{
+		//Debug.Log ("\tUpdating Path: Target is located at " + targetPos);
+		//Debug.Log (pathReached);
+		//while(pathReached == false)
+		//{
 			//Debug.Log ("\tPath hasn't been reached: Target is located at " + targetPos);
-			if (targetPos != firstTarget.position) {
-				targetPos = firstTarget.position;
-				//Debug.Log ("\tNew Path Requested: Target is located at " + targetPos);
-				//Debug.Log ("\tNew Path Requested: Target is located at " + firstTarget.position);
-				PathRequester.RequestPath (transform.position, firstTarget.position, OnPathFound);
-				yield return new WaitForSeconds (timer);
-			} if (Vector3.Distance(transform.position,firstTarget.position) < 0.1f) {
+		if (targetPos != secondTarget.position) {
+			targetPos = secondTarget.position;
+			followingTarget = 3;
+		}
+		PathRequester.RequestPath (transform.position, secondTarget.position, OnPathFound);
+		yield return new WaitForSeconds (timer);
+	}/* if (Vector3.Distance(transform.position,secondTarget.position) < 0.1f) {
 				//If at final position then do something next // Debug.Log ("\tTarget Position Reached");
 				pathReached = true;
-				yield return null;
+				yield break;
 			}
-
-			yield return null;
+				
+			yield break;
 		}
-		/*while(pathReached == true)
+		while(pathReached == true)
 		{
 			Debug.Log ("\tPath hasn't been reached: Target is located at " + targetPos);
 			if (targetPos != secondTarget.position) {
@@ -60,10 +71,10 @@ public class Unit : MonoBehaviour {
 			}
 
 			yield return null;
-		}*/
+		}
 		//update to check for pathing requirements
 		yield return null;
-	}
+	}*/
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
@@ -89,13 +100,19 @@ public class Unit : MonoBehaviour {
                 targetIndex++; //increment targetIndex
                 if (targetIndex >= path.Length)//if the targetIndex exceeds the length of the path array
                 {
+					if (followingTarget == 0) {
+						followingTarget = 1;
+					} else if (followingTarget == 1) {
+						followingTarget = 2;
+					} else if (followingTarget == 2) {
+						StopCoroutine ("FollowPath");
+					}
                     yield break;
                 }
                 currentWaypoint = path[targetIndex];
 
             }
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
-			Debug.Log ("Path Completed!");
             yield return null;
         }
 
