@@ -11,6 +11,8 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public Image govBar, corBar, rebBar;
 	public Text totalMoney;
 
+	public Image govBarOverlay, corBarOverlay, rebBarOverlay;
+
 	[Header("Settings")]
 	public float lerpTime;
 	public float[] thresholds;
@@ -42,6 +44,11 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 
 		StaticGameStats.avaliableMoney = govMoney + corMoney + rebMoney;
 		totalMoney.text = StaticGameStats.avaliableMoney.ToString();
+
+		//set the overlay bars
+		govBarOverlay.fillAmount = gov_P / 100.0f;
+		corBarOverlay.fillAmount = cor_P / 100.0f;
+		rebBarOverlay.fillAmount = reb_P / 100.0f;
 	}
 	
 	// Update is called once per frame
@@ -62,15 +69,15 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		}
 
 		//Update the UI objects
-		govRepText.text = "GOV: \n" + StaticGameStats.oldgovRep.ToString() + "\n" + gov_change.ToString();
+		govRepText.text = "GOV: \n" + Mathf.Floor(StaticGameStats.oldgovRep).ToString() + " %\n" + gov_change.ToString();
 		govBar.fillAmount = StaticGameStats.oldgovRep / 100.0f;
 		govMoneyText.text = govMoney.ToString();
 
-		corRepText.text = "COR: \n" + StaticGameStats.oldcorRep.ToString() + "\n" + cor_change.ToString();
+		corRepText.text = "COR: \n" + Mathf.Floor(StaticGameStats.oldcorRep).ToString() + " %\n" + cor_change.ToString();
 		corBar.fillAmount = StaticGameStats.oldcorRep / 100.0f;
 		corMoneyText.text = corMoney.ToString();
 
-		rebRepText.text = "REB: \n" + StaticGameStats.oldrebRep.ToString() + "\n" + reb_change.ToString();
+		rebRepText.text = "REB: \n" + Mathf.Floor(StaticGameStats.oldrebRep).ToString() + " %\n" + reb_change.ToString();
 		rebBar.fillAmount = StaticGameStats.oldrebRep / 100.0f;
 		rebMoneyText.text = rebMoney.ToString();
 	}

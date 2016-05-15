@@ -12,6 +12,14 @@ public class InterfaceManager : MonoBehaviour {
 	public Image gunLogo;
 	public Text roundText;
 	public Text aliveText;
+	public Text deadText;
+	public Text hpText;
+	public Image[] corners;
+	public Text recText;
+	public Button abortButton;
+	public Text abortText;
+	public Image abortImage;
+
 
 	[Header("Player")]
 	public Contestant player;
@@ -19,10 +27,16 @@ public class InterfaceManager : MonoBehaviour {
 	[Header("Camera")]
 	public NoiseAndScratches noise;
 
+	[Header("Music")]
+	public AudioSource music;
+
 	RoundManager rm;
 	// Use this for initialization
 	void Start () {
 		rm = FindObjectOfType<RoundManager>();
+		abortButton.enabled = false;
+		abortText.enabled = false;
+		abortImage.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -43,8 +57,46 @@ public class InterfaceManager : MonoBehaviour {
 			gunLogo.enabled = false;
 		}
 		timer.text = Time.timeSinceLevelLoad.ToString();
-		noise.grainIntensityMax = (1 - healthbar.fillAmount) + 0.1f;
+		noise.grainIntensityMax = Mathf.Lerp(0,2.5f,(1-healthbar.fillAmount));
+		noise.grainIntensityMin = noise.grainIntensityMax - 0.2f;
 		roundText.text = "ROUND: " + RoundManager.roundNumber.ToString();
 		aliveText.text = rm.aliveContestants.ToString() + " / " + rm.totalContestants.ToString() + " REMAIN.";
+
+		if(!player.isAlive){
+			hpText.text = "VITALS OFFLINE";
+			deadText.text = "!! PLANT VITALS CRITICAL !!\n!!PLANT VITALS OFFLINE !!\nCONNECTION TO PLANT LOST.";
+			Camera.main.orthographicSize += Time.deltaTime * 0.3f;
+			foreach(Image g in corners){
+				g.enabled = false;
+			}
+			roundText.enabled = false;
+			aliveText.enabled = false;
+			recText.text = "OFFLINE";
+			ammo.enabled = false;
+			music.Stop();
+			abortButton.enabled = true;
+			abortText.enabled = true;
+			abortImage.enabled = true;
+		}
+		else if (healthbar.fillAmount < 0.15f){
+			hpText.text = "!! VITALS CRITICAL !!";
+			deadText.text = "!! PLANT VITALS CRITICAL !!";
+		}
+		else if(healthbar.fillAmount < 0.25f){
+			hpText.text = "VITALS < 25%";
+			deadText.text = "";
+		}
+		else if(healthbar.fillAmount < 0.5f){
+			hpText.text = "VITALS < 50%";
+			deadText.text = "";
+		}
+		else if(healthbar.fillAmount < 0.75f){
+			hpText.text = "VITALS < 75%";
+			deadText.text = "";
+		}
+		else{
+			hpText.text = "";
+			deadText.text = "";
+		}
 	}
 }
