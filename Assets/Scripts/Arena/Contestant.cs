@@ -23,7 +23,7 @@ public class Contestant : MonoBehaviour {
 	/// <summary>
 	/// The anchor.
 	/// </summary>
-	public Transform anchor;
+	public Transform anchor_rifle, anchor_pistol;
 	[Tooltip("How much time in seconds after unequipping a weapon must the contestant wait")]
 	/// <summary>
 	/// How much time in seconds after unequipping a weapon must the contestant wait
@@ -71,6 +71,7 @@ public class Contestant : MonoBehaviour {
     Rigidbody2D body;
 	Collider2D coll;
 	SpriteRenderer spr;
+	public Transform anchor;
 
 	// Use this for initialization
 	void Start () {
@@ -88,9 +89,11 @@ public class Contestant : MonoBehaviour {
 				switch(equipped.stance){
 					case Item.Stance.Pistol:
 						spr.sprite = pistolSprite;
+						anchor = anchor_pistol;
 						break;
 					case Item.Stance.Rifle:
 						spr.sprite = rifleSprite;
+						anchor = anchor_rifle;
 						break;
 				}
 			}
@@ -137,6 +140,7 @@ public class Contestant : MonoBehaviour {
 	public void Die(){
 		if (!isPlayer){
 			GetComponent<AIController>().enabled = false;
+			GetComponent<Unit>().enabled = false;
 			FindObjectOfType<RoundManager>().Death();
 		}
 		else{

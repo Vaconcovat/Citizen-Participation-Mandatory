@@ -9,7 +9,13 @@ public class SelfDestruct : MonoBehaviour {
 	public float fadeRate;
 	public bool expand;
 	public float expandRate;
+	public bool dontDestroyOnLoad;
 
+	void Start(){
+		if(dontDestroyOnLoad){
+			DontDestroyOnLoad(gameObject);
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {

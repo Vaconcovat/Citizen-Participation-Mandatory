@@ -13,13 +13,21 @@ public class ItemSpawner : MonoBehaviour {
 				pool = FindObjectOfType<ItemPools>().example;
 				break;
 			case poolselection.Sponsor:
-				pool = FindObjectOfType<ItemPools>().sponsor;
+				switch(StaticGameStats.sponsor){
+					case 0:
+						pool = FindObjectOfType<ItemPools>().sponsor0;
+						break;
+					case 1:
+						pool = FindObjectOfType<ItemPools>().sponsor1;
+						break;
+				}
 				break;
 			case poolselection.Item:
 				pool = FindObjectOfType<ItemPools>().item;
 				break;
 		}
 		Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
+		GetComponent<SpriteRenderer>().enabled = false;
 	}
 	
 	// Update is called once per frame
