@@ -14,7 +14,7 @@ public class CameraMan : MonoBehaviour {
 	void Start () {
 		body = GetComponent<Rigidbody2D>();
 		coll = GetComponent<Collider2D>();
-
+		player = FindObjectOfType<PlayerController>().gameObject;
 	}
 	
 	// Update is called once per frame
