@@ -15,7 +15,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static int embezzledMoney;
 
 	//Commit
-	public static bool committed = true;
+	public static bool committed = false;
 	public static bool toPost = false;
 
 	//Arena variables

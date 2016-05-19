@@ -4,8 +4,8 @@ using System.Collections;
 
 public class PreMenuInterfaceManager : MonoBehaviour {
 
-	public Text moneyText, embezText;
-	public Image gunIcon;
+	public Text moneyText, embezText, sponsorText;
+	public Image gunIcon, gunIcon2;
 	public Button sponsor1Button, sponsor2Button, signedButton, commitButton;
 
 	public Sprite[] sponsorGunLogos;
@@ -21,9 +21,10 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		moneyText.text = StaticGameStats.avaliableMoney.ToString();
+		moneyText.text = "Funding:\n" + StaticGameStats.avaliableMoney.ToString();
 		embezText.text = StaticGameStats.embezzledMoney.ToString();
 		gunIcon.sprite = sponsorGunLogos[activeSponsor];
+		gunIcon2.sprite = sponsorGunLogos[activeSponsor+2];
 		if(StaticGameStats.avaliableMoney == 0 && chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
@@ -49,12 +50,14 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	public void SetSponsor1(){
 		if (chosenSponsor == -1){
 			activeSponsor = 0;
+			sponsorText.text = "MEGA CITY 1";
 		}
 	}
 
 	public void SetSponsor2(){
 		if (chosenSponsor == -1){
 			activeSponsor = 1;
+			sponsorText.text = "EXPLODENA";
 		}
 	}
 
