@@ -145,6 +145,11 @@ public class Contestant : MonoBehaviour {
 		}
 		else{
 			GetComponent<PlayerController>().enabled = false;
+			if (Time.timeSinceLevelLoad < FindObjectOfType<RoundManager>().govtime){
+				FindObjectOfType<StaticGameStats>().Influence(0, 10.0f);
+			}else{
+				FindObjectOfType<StaticGameStats>().Influence(0, -10.0f);
+			}
 		}
 		body.isKinematic = true;
 		coll.enabled = false;

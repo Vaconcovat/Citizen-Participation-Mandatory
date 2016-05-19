@@ -26,7 +26,14 @@ public class ItemSpawner : MonoBehaviour {
 				pool = FindObjectOfType<ItemPools>().item;
 				break;
 		}
-		Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
+
+		if(StaticGameStats.corUpgrades[0] && selection == poolselection.Sponsor){
+			Instantiate(pool.items[Random.Range(0,pool.items.Length)],new Vector2(transform.position.x, transform.position.y + 0.5f),Quaternion.identity);
+			Instantiate(pool.items[Random.Range(0,pool.items.Length)],new Vector2(transform.position.x, transform.position.y - 0.5f),Quaternion.identity);
+		}
+		else{
+			Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
+		}
 		GetComponent<SpriteRenderer>().enabled = false;
 	}
 	

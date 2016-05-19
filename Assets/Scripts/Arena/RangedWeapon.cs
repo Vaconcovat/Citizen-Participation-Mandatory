@@ -51,7 +51,9 @@ public class RangedWeapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		if(StaticGameStats.generalUpgrades[0]){
+			ammo = Mathf.FloorToInt(ammo * 1.5f);
+		}
 	}
 	
 	// Update is called once per frame

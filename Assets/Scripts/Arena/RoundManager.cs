@@ -15,6 +15,7 @@ public class RoundManager : MonoBehaviour {
 
 	Contestant[] contestants;
 	bool roundOver = false;
+	public float govtime;
 	// Use this for initialization
 	void Awake () {
 		contestants = FindObjectsOfType<Contestant>();
@@ -36,6 +37,12 @@ public class RoundManager : MonoBehaviour {
                 j++;
             }
         }
+        if (StaticGameStats.govUpgrades[0]){
+        	govtime = 45.0f;
+        }
+        else{
+        	govtime = 30.0f;
+        }
 	}
 	
 	// Update is called once per frame
@@ -55,7 +62,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	void endRound(){
-		if (Time.timeSinceLevelLoad < 30){
+		if (Time.timeSinceLevelLoad < govtime){
 			FindObjectOfType<StaticGameStats>().Influence(0, 10.0f);
 		}else{
 			FindObjectOfType<StaticGameStats>().Influence(0, -10.0f);

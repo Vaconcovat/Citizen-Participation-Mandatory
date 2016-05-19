@@ -41,16 +41,16 @@ public class InterfaceManager : MonoBehaviour {
 		//Upgrades Text
 		upgradesText.text = "";
 		if(StaticGameStats.generalUpgrades[0]){
-			upgradesText.text = upgradesText.text + "General Upgrade Enabled!\n";
+			upgradesText.text = upgradesText.text + "General Upgrade Enabled! - 50% more ammo!\n";
 		}
 		if(StaticGameStats.govUpgrades[0]){
-			upgradesText.text = upgradesText.text + "Government Upgrade Enabled!\n";
+			upgradesText.text = upgradesText.text + "Government Upgrade Enabled! - 15second bonus!\n";
 		}
 		if(StaticGameStats.corUpgrades[0]){
-			upgradesText.text = upgradesText.text + "Corporate Upgrade Enabled!\n";
+			upgradesText.text = upgradesText.text + "Corporate Upgrade Enabled! - Additional sponsor weapon!\n";
 		}
 		if(StaticGameStats.rebUpgrades[0]){
-			upgradesText.text = upgradesText.text + "Rebel Upgrade Enabled!\n";
+			upgradesText.text = upgradesText.text + "Rebel Upgrade Enabled! - More cameramen!\n";
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class InterfaceManager : MonoBehaviour {
 			ammo.text = "--";
 			gunLogo.enabled = false;
 		}
-		timer.text = Time.timeSinceLevelLoad.ToString();
+		timer.text = Time.timeSinceLevelLoad.ToString() + " (" + rm.govtime.ToString() + ")";
 		noise.grainIntensityMax = Mathf.Lerp(0,2.5f,(1-healthbar.fillAmount));
 		noise.grainIntensityMin = noise.grainIntensityMax - 0.2f;
 		roundText.text = "ROUND: " + RoundManager.roundNumber.ToString();
