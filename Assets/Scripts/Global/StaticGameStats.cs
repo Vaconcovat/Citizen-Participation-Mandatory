@@ -22,10 +22,10 @@ public class StaticGameStats : MonoBehaviour {
 	/// <summary>
 	/// [General Upgrade 0], [nothing]
 	/// </summary>
-	public static bool[] generalUpgrades;
-	public static bool[] govUpgrades;
-	public static bool[] corUpgrades;
-	public static bool[] rebUpgrades; 
+	public static bool[] generalUpgrades = {false};
+	public static bool[] govUpgrades = {false};
+	public static bool[] corUpgrades = {false};
+	public static bool[] rebUpgrades = {false}; 
 	public static int sponsor;
 	public static int arenasPlayed = 0;
 

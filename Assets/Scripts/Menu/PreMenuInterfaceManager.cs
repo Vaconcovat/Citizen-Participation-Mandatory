@@ -7,7 +7,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	public Text moneyText, embezText, sponsorText;
 	public Image gunIcon, gunIcon2;
 	public Button sponsor1Button, sponsor2Button, signedButton, commitButton;
-
+	public Button[] upgradebuttons;
 	public Sprite[] sponsorGunLogos;
 	public int activeSponsor;
 	public int chosenSponsor;
@@ -17,6 +17,10 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	void Start () {
 		chosenSponsor = -1;
 		activeSponsor = 0;
+		StaticGameStats.generalUpgrades[0] = false;
+		StaticGameStats.govUpgrades[0] = false;
+		StaticGameStats.corUpgrades[0] = false;
+		StaticGameStats.rebUpgrades[0] = false;
 	}
 	
 	// Update is called once per frame
@@ -73,5 +77,37 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 		StaticGameStats.sponsor = chosenSponsor;
 		//do upgrades here
 		FindObjectOfType<MenuCamera>().ZoomedOut();
+	}
+
+	public void BuyGenericUpgrade1(){
+		if (StaticGameStats.avaliableMoney > 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.generalUpgrades[0] = true;
+			upgradebuttons[0].interactable = false;
+		}
+	}
+
+	public void BuyGovUpgrade1(){
+		if (StaticGameStats.avaliableMoney > 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.govUpgrades[0] = true;
+			upgradebuttons[1].interactable = false;
+		}
+	}
+
+	public void BuySponsorUpgrade1(){
+		if (StaticGameStats.avaliableMoney > 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.corUpgrades[0] = true;
+			upgradebuttons[2].interactable = false;
+		}
+	}
+
+	public void BuyRebelUpgrade1(){
+		if (StaticGameStats.avaliableMoney > 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.rebUpgrades[0] = true;
+			upgradebuttons[3].interactable = false;
+		}
 	}
 }

@@ -19,6 +19,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Button abortButton;
 	public Text abortText;
 	public Image abortImage;
+	public Text upgradesText;
 
 
 	[Header("Player")]
@@ -37,6 +38,20 @@ public class InterfaceManager : MonoBehaviour {
 		abortButton.enabled = false;
 		abortText.enabled = false;
 		abortImage.enabled = false;
+		//Upgrades Text
+		upgradesText.text = "";
+		if(StaticGameStats.generalUpgrades[0]){
+			upgradesText.text = upgradesText.text + "General Upgrade Enabled!\n";
+		}
+		if(StaticGameStats.govUpgrades[0]){
+			upgradesText.text = upgradesText.text + "Government Upgrade Enabled!\n";
+		}
+		if(StaticGameStats.corUpgrades[0]){
+			upgradesText.text = upgradesText.text + "Corporate Upgrade Enabled!\n";
+		}
+		if(StaticGameStats.rebUpgrades[0]){
+			upgradesText.text = upgradesText.text + "Rebel Upgrade Enabled!\n";
+		}
 	}
 	
 	// Update is called once per frame
