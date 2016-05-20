@@ -69,15 +69,15 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		}
 
 		//Update the UI objects
-		govRepText.text = "GOV: \n" + Mathf.Floor(StaticGameStats.oldgovRep).ToString() + " %\n" + gov_change.ToString();
+		govRepText.text = "GOVERNMENT: \n" + Mathf.Floor(StaticGameStats.oldgovRep).ToString() + " %\n" + gov_change.ToString();
 		govBar.fillAmount = StaticGameStats.oldgovRep / 100.0f;
 		govMoneyText.text = govMoney.ToString();
 
-		corRepText.text = "COR: \n" + Mathf.Floor(StaticGameStats.oldcorRep).ToString() + " %\n" + cor_change.ToString();
+		corRepText.text = "CORPORATE: \n" + Mathf.Floor(StaticGameStats.oldcorRep).ToString() + " %\n" + cor_change.ToString();
 		corBar.fillAmount = StaticGameStats.oldcorRep / 100.0f;
 		corMoneyText.text = corMoney.ToString();
 
-		rebRepText.text = "REB: \n" + Mathf.Floor(StaticGameStats.oldrebRep).ToString() + " %\n" + reb_change.ToString();
+		rebRepText.text = "REBEL: \n" + Mathf.Floor(StaticGameStats.oldrebRep).ToString() + " %\n" + reb_change.ToString();
 		rebBar.fillAmount = StaticGameStats.oldrebRep / 100.0f;
 		rebMoneyText.text = rebMoney.ToString();
 	}
