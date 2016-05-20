@@ -18,6 +18,7 @@ public class BootInterfaceManager : MonoBehaviour {
 			FindObjectOfType<MenuCamera>().MainMenu();
 			displayed = false;
 			skipped = true;
+			logoWaitTime = 3;
 		}
 	}
 
