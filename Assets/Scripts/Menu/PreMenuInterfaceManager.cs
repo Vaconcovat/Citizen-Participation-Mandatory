@@ -11,21 +11,28 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	public Sprite[] sponsorGunLogos;
 	public int activeSponsor;
 	public int chosenSponsor;
+	public int moneyHolder;
+	public int embezzledHolder;
+	public Scrollbar TandC;
+
 
 
 	// Use this for initialization
 	void Start () {
+		TandC.interactable = false;
 		chosenSponsor = -1;
 		activeSponsor = 0;
 		StaticGameStats.generalUpgrades[0] = false;
 		StaticGameStats.govUpgrades[0] = false;
 		StaticGameStats.corUpgrades[0] = false;
 		StaticGameStats.rebUpgrades[0] = false;
+		moneyHolder = StaticGameStats.avaliableMoney;
+		embezzledHolder = StaticGameStats.embezzledMoney;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		moneyText.text = "Funding:\n" + StaticGameStats.avaliableMoney.ToString();
+		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
 		embezText.text = StaticGameStats.embezzledMoney.ToString();
 		gunIcon.sprite = sponsorGunLogos[activeSponsor];
 		gunIcon2.sprite = sponsorGunLogos[activeSponsor+2];
@@ -88,6 +95,25 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 		signedButton.interactable = false;
 		sponsor1Button.interactable = false;
 		sponsor2Button.interactable = false;
+	}
+
+
+	public void Revert(){
+		StaticGameStats.committed = false;
+		chosenSponsor = -1;
+		activeSponsor = 0;
+		StaticGameStats.generalUpgrades[0] = false;
+		StaticGameStats.govUpgrades[0] = false;
+		StaticGameStats.corUpgrades[0] = false;
+		StaticGameStats.rebUpgrades[0] = false;
+		upgradebuttons[1].interactable = true;
+		upgradebuttons[2].interactable = true;
+		upgradebuttons[3].interactable = true;
+		StaticGameStats.avaliableMoney = moneyHolder;
+		StaticGameStats.embezzledMoney = embezzledHolder;
+		signedButton.interactable = true;
+		sponsor1Button.interactable = true;
+		sponsor2Button.interactable = true;
 	}
 
 	public void Commit(){
