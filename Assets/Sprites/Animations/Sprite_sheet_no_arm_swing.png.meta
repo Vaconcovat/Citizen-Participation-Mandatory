@@ -1,0 +1,292 @@
+fileFormatVersion: 2
+guid: a57a3753bfeaaa149b2858ac7179a97a
+timeCreated: 1463825612
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Sprite_sheet_no_arm_swing_0
+    21300002: Sprite_sheet_no_arm_swing_1
+    21300004: Sprite_sheet_no_arm_swing_2
+    21300006: Sprite_sheet_no_arm_swing_3
+    21300008: Sprite_sheet_no_arm_swing_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Sprite_sheet_no_arm_swing_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 164, y: -87}
+        - {x: 110, y: -85}
+        - {x: 181, y: -85}
+        - {x: 183, y: -83}
+        - {x: 183, y: -41}
+        - {x: 181, y: -39}
+        - {x: 137, y: -39}
+        - {x: 157, y: -5}
+        - {x: 156, y: 8}
+        - {x: 129, y: 55}
+        - {x: 109, y: 87}
+        - {x: 164, y: 87}
+        - {x: 167, y: 88}
+        - {x: 165, y: 96}
+        - {x: 150, y: 119}
+        - {x: 122, y: 169}
+        - {x: 115, y: 180}
+        - {x: -51, y: 180}
+        - {x: -53, y: 178}
+        - {x: -103, y: 92}
+        - {x: -109, y: 79}
+        - {x: -181, y: 79}
+        - {x: -183, y: 77}
+        - {x: -183, y: 35}
+        - {x: -181, y: 33}
+        - {x: -138, y: 31}
+        - {x: -154, y: 5}
+        - {x: -153, y: -4}
+        - {x: -112, y: -76}
+        - {x: -104, y: -92}
+        - {x: -53, y: -178}
+        - {x: -50, y: -180}
+        - {x: 114, y: -180}
+        - {x: 117, y: -179}
+        - {x: 166, y: -91}
+        - {x: 166, y: -89}
+    - name: Sprite_sheet_no_arm_swing_1
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 157.09998, y: -89}
+        - {x: 155.09998, y: -87}
+        - {x: 129.09998, y: -84}
+        - {x: 148.09998, y: -5}
+        - {x: 147.09998, y: 4}
+        - {x: 104.099976, y: 81}
+        - {x: 99.099976, y: 87}
+        - {x: 155.09998, y: 87}
+        - {x: 157.09998, y: 88}
+        - {x: 157.09998, y: 92}
+        - {x: 155.09998, y: 97}
+        - {x: 126.099976, y: 146}
+        - {x: 113.099976, y: 168}
+        - {x: 108.099976, y: 176}
+        - {x: 105.099976, y: 180}
+        - {x: -59.900024, y: 180}
+        - {x: -61.900024, y: 179}
+        - {x: -81.900024, y: 146}
+        - {x: -117.900024, y: 81}
+        - {x: -117.900024, y: 79}
+        - {x: -160.90002, y: 79}
+        - {x: -162.90002, y: 77}
+        - {x: -162.90002, y: 35}
+        - {x: -160.90002, y: 33}
+        - {x: -148.90002, y: 27}
+        - {x: -162.90002, y: 3}
+        - {x: -162.90002, y: -3}
+        - {x: -98.900024, y: -115}
+        - {x: -62.900024, y: -176}
+        - {x: -59.900024, y: -180}
+        - {x: 105.099976, y: -180}
+        - {x: 107.099976, y: -178}
+        - {x: 113.099976, y: -169}
+        - {x: 157.09998, y: -91}
+    - name: Sprite_sheet_no_arm_swing_2
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 156.19995, y: -94}
+        - {x: 156.19995, y: -91}
+        - {x: 154.19995, y: -89}
+        - {x: 99.19995, y: -89}
+        - {x: 102.19995, y: -87}
+        - {x: 114.19995, y: -64}
+        - {x: 129.19995, y: -40}
+        - {x: 146.19995, y: -10}
+        - {x: 148.19995, y: 3}
+        - {x: 137.19995, y: 21}
+        - {x: 107.19995, y: 73}
+        - {x: 99.19995, y: 85}
+        - {x: 156.19995, y: 85}
+        - {x: 156.19995, y: 92}
+        - {x: 154.19995, y: 97}
+        - {x: 147.19995, y: 107}
+        - {x: 119.19995, y: 156}
+        - {x: 106.19995, y: 177}
+        - {x: 104.19995, y: 179}
+        - {x: -58.80005, y: 179}
+        - {x: -61.80005, y: 177}
+        - {x: -83.80005, y: 140}
+        - {x: -114.80005, y: 86}
+        - {x: -138.80005, y: 46}
+        - {x: -162.80005, y: 1}
+        - {x: -162.80005, y: -6}
+        - {x: -129.80005, y: -65}
+        - {x: -97.80005, y: -120}
+        - {x: -62.80005, y: -179}
+        - {x: -58.80005, y: -182}
+        - {x: 104.19995, y: -182}
+        - {x: 106.19995, y: -181}
+        - {x: 111.19995, y: -172}
+        - {x: 129.19995, y: -141}
+    - name: Sprite_sheet_no_arm_swing_3
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 157.29993, y: -88}
+        - {x: 115.29993, y: -63}
+        - {x: 148.29993, y: -5}
+        - {x: 147.29993, y: 8}
+        - {x: 128.29993, y: 41}
+        - {x: 128.29993, y: 83}
+        - {x: 126.29993, y: 85}
+        - {x: 100.29993, y: 87}
+        - {x: 155.29993, y: 87}
+        - {x: 157.29993, y: 88}
+        - {x: 157.29993, y: 92}
+        - {x: 156.29993, y: 96}
+        - {x: 150.29993, y: 104}
+        - {x: 113.29993, y: 169}
+        - {x: 106.29993, y: 180}
+        - {x: -59.700073, y: 180}
+        - {x: -61.700073, y: 178}
+        - {x: -79.70007, y: 147}
+        - {x: -132.70007, y: 55}
+        - {x: -161.70007, y: 4}
+        - {x: -161.70007, y: -4}
+        - {x: -145.70007, y: -32}
+        - {x: -159.70007, y: -33}
+        - {x: -161.70007, y: -35}
+        - {x: -161.70007, y: -77}
+        - {x: -159.70007, y: -79}
+        - {x: -117.70007, y: -79}
+        - {x: -111.70007, y: -92}
+        - {x: -82.70007, y: -142}
+        - {x: -61.700073, y: -179}
+        - {x: -59.700073, y: -180}
+        - {x: 105.29993, y: -180}
+        - {x: 107.29993, y: -179}
+        - {x: 132.29993, y: -136}
+        - {x: 157.29993, y: -92}
+    - name: Sprite_sheet_no_arm_swing_4
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 100.3999, y: -87}
+        - {x: 122.3999, y: -51}
+        - {x: 137.3999, y: -23}
+        - {x: 139.3999, y: -18}
+        - {x: 147.3999, y: -4}
+        - {x: 148.3999, y: 5}
+        - {x: 128.3999, y: 38}
+        - {x: 172.3999, y: 39}
+        - {x: 174.3999, y: 41}
+        - {x: 174.3999, y: 83}
+        - {x: 172.3999, y: 85}
+        - {x: 100.3999, y: 87}
+        - {x: 155.3999, y: 87}
+        - {x: 157.3999, y: 89}
+        - {x: 157.3999, y: 91}
+        - {x: 107.3999, y: 178}
+        - {x: 105.3999, y: 180}
+        - {x: -59.600098, y: 180}
+        - {x: -61.600098, y: 179}
+        - {x: -86.6001, y: 136}
+        - {x: -162.6001, y: 5}
+        - {x: -163.6001, y: -2}
+        - {x: -148.6001, y: -28}
+        - {x: -145.6001, y: -33}
+        - {x: -189.6001, y: -33}
+        - {x: -191.6001, y: -35}
+        - {x: -191.6001, y: -77}
+        - {x: -189.6001, y: -79}
+        - {x: -118.6001, y: -79}
+        - {x: -95.6001, y: -119}
+        - {x: -67.6001, y: -169}
+        - {x: -60.600098, y: -180}
+        - {x: 105.3999, y: -180}
+        - {x: 107.3999, y: -179}
+        - {x: 159.3999, y: -92}
+        - {x: 156.3999, y: -86}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
