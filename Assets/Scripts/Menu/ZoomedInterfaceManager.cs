@@ -8,6 +8,7 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 	public Text commit;
 	public Text activeSponsor;  
 	public PreMenuInterfaceManager PreMenuScript;
+	public Text StatusBarText;
 
 	// Use this for initialization
 	void Start () {
@@ -17,9 +18,9 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (PreMenuScript.chosenSponsor == 0) {
-			activeSponsor.text = "CHOSEN SPONSOR: MEGA CITY 1";
+			StatusBarText.text = "CHOSEN SPONSOR: MEGA CITY 1";
 		} else if (PreMenuScript.chosenSponsor == 1) {
-			activeSponsor.text = "CHOSEN SPONSOR: EXPLODENA DYNAMITE SOLUTIONS";
+			StatusBarText.text = "CHOSEN SPONSOR: EXPLODENA DYNAMITE SOLUTIONS";
 		}
 		if(StaticGameStats.committed){
 			preButton.interactable = false;
