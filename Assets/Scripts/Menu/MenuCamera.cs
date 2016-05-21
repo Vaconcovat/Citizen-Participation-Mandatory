@@ -53,4 +53,8 @@ public class MenuCamera : MonoBehaviour {
 			audioP.Play();
 		}
 	}
+
+	public void Login(){
+		state = 5;
+	}
 }
