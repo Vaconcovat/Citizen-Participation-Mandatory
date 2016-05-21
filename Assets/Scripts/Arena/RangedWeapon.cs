@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class RangedWeapon : MonoBehaviour {
 	public enum RangeHint{Long,Med,Short};
 
@@ -84,6 +85,8 @@ public class RangedWeapon : MonoBehaviour {
 	}
 
 	void Shoot(){
+		AudioSource audio = GetComponent<AudioSource> ();
+		audio.Play ();
 		for (int i = 0; i < bulletsPerShot; i++){
 			GameObject firedBullet = (GameObject)Instantiate(bullet, muzzle.position, muzzle.rotation);
 			Vector2 angle = new Vector2(transform.right.x + (Random.Range(-spread, spread)), transform.right.y + (Random.Range(-spread, spread))).normalized;
