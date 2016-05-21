@@ -98,7 +98,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	}
 
 	public void BuyGenericUpgrade1(){
-		if (StaticGameStats.avaliableMoney > 4){
+		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
 			StaticGameStats.generalUpgrades[0] = true;
 			upgradebuttons[0].interactable = false;
@@ -106,7 +106,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	}
 
 	public void BuyGovUpgrade1(){
-		if (StaticGameStats.avaliableMoney > 4){
+		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
 			StaticGameStats.govUpgrades[0] = true;
 			upgradebuttons[1].interactable = false;
@@ -114,7 +114,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	}
 
 	public void BuySponsorUpgrade1(){
-		if (StaticGameStats.avaliableMoney > 4){
+		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
 			StaticGameStats.corUpgrades[0] = true;
 			upgradebuttons[2].interactable = false;
@@ -122,7 +122,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	}
 
 	public void BuyRebelUpgrade1(){
-		if (StaticGameStats.avaliableMoney > 4){
+		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
 			StaticGameStats.rebUpgrades[0] = true;
 			upgradebuttons[3].interactable = false;
