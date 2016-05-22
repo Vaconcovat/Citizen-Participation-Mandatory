@@ -7,6 +7,10 @@ public class InterfaceManager : MonoBehaviour {
 
 	[Header("UI GameObjects")]
 	public Image healthbar;
+	public Image HBSeg1;
+	public Image HBSeg2;
+	public Image HBSeg3;
+	public Image HBSeg4;
 	public Text ammo;
 	public Text timer;
 	public Image gunLogo;
@@ -21,6 +25,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Text abortText;
 	public Image abortImage;
 	public Text upgradesText;
+
 
 
 	[Header("Player")]
@@ -102,14 +107,23 @@ public class InterfaceManager : MonoBehaviour {
 			deadText.text = "!! PLANT VITALS CRITICAL !!";
 		}
 		else if(healthbar.fillAmount < 0.25f){
+			HBSeg2.enabled = false;
+			HBSeg3.enabled = false;
+			HBSeg4.enabled = false;
 			hpText.text = "VITALS < 25%";
 			deadText.text = "";
 		}
 		else if(healthbar.fillAmount < 0.5f){
+			HBSeg2.enabled = true;
+			HBSeg3.enabled = false;
+			HBSeg4.enabled = false;
 			hpText.text = "VITALS < 50%";
 			deadText.text = "";
 		}
 		else if(healthbar.fillAmount < 0.75f){
+			HBSeg2.enabled = true;
+			HBSeg3.enabled = true;
+			HBSeg4.enabled = false;
 			hpText.text = "VITALS < 75%";
 			deadText.text = "";
 		}
