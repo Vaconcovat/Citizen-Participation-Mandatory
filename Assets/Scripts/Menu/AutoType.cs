@@ -18,11 +18,13 @@ public class AutoType : MonoBehaviour {
 		textObj = GetComponent<Text>();
 		textObj.text = "";
 		if(typeOnAwake){
-			StartCoroutine(TypeText(0));
+			StartCoroutine("TypeText", 0);
 		}
+
 	}
 	
 	IEnumerator TypeText(int index){
+		Debug.Log("Coroutine Running");
 		foreach (char letter in displayedText[index].ToCharArray()){
 			textObj.text += letter;
 			if(textObj.text.Split('\n').Length > maxLines){
@@ -31,8 +33,9 @@ public class AutoType : MonoBehaviour {
 			yield return new WaitForSeconds(textDelays[index]);
 		}
 		if (index < displayedText.Length - 1){
-			StartCoroutine(TypeText(index + 1));
-		}else{
+			StartCoroutine("TypeText", (index + 1));
+		}
+		else{
 			if(finishedCall != null){
 				finishedCall.SendMessage(finishedCallString,SendMessageOptions.DontRequireReceiver);
 			}
@@ -41,6 +44,8 @@ public class AutoType : MonoBehaviour {
 	}
 
 	public void StartType(){
-		StartCoroutine(TypeText(0));
+		textObj.text = "";
+		StopCoroutine("TypeText");
+		StartCoroutine("TypeText", 0);
 	}
 }

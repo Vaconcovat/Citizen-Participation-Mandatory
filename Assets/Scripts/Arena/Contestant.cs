@@ -201,6 +201,12 @@ public class Contestant : MonoBehaviour {
 		Item temp = equipped;
 		equipped = inventory;
 		inventory = temp;
+		if(inventory != null){
+			inventory.GetComponent<SpriteRenderer>().enabled = false;
+		}
+		if(equipped != null){
+			equipped.GetComponent<SpriteRenderer>().enabled = true;
+		}
 	}
 
 	/// <summary>

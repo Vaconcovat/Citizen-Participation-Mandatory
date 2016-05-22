@@ -71,13 +71,17 @@ public class InterfaceManager : MonoBehaviour {
 				ammo.text = "--";
 			}
 			gunLogo.enabled = true;
-			backpackDisplay.enabled = true;
 			gunLogo.sprite = player.equipped.logo;
-			backpackDisplay.sprite = player.equipped.logo;
 		}
 		else{
 			ammo.text = "--";
 			gunLogo.enabled = false;
+		}
+		if(player.inventory != null){
+			backpackDisplay.enabled = true;
+			backpackDisplay.sprite = player.inventory.logo;
+		}
+		else{
 			backpackDisplay.enabled = false;
 		}
 		timer.text = Time.timeSinceLevelLoad.ToString() + " (" + rm.govtime.ToString() + ")";
@@ -128,6 +132,9 @@ public class InterfaceManager : MonoBehaviour {
 			deadText.text = "";
 		}
 		else{
+			HBSeg2.enabled = true;
+			HBSeg3.enabled = true;
+			HBSeg4.enabled = true;
 			hpText.text = "";
 			deadText.text = "";
 		}
