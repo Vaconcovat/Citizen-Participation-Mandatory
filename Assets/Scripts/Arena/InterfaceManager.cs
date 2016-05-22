@@ -10,6 +10,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Text ammo;
 	public Text timer;
 	public Image gunLogo;
+	public Image backpackDisplay;
 	public Text roundText;
 	public Text aliveText;
 	public Text deadText;
@@ -65,11 +66,14 @@ public class InterfaceManager : MonoBehaviour {
 				ammo.text = "--";
 			}
 			gunLogo.enabled = true;
-			gunLogo.sprite = player.equipped.logo;	
+			backpackDisplay.enabled = true;
+			gunLogo.sprite = player.equipped.logo;
+			backpackDisplay.sprite = player.equipped.logo;
 		}
 		else{
 			ammo.text = "--";
 			gunLogo.enabled = false;
+			backpackDisplay.enabled = false;
 		}
 		timer.text = Time.timeSinceLevelLoad.ToString() + " (" + rm.govtime.ToString() + ")";
 		noise.grainIntensityMax = Mathf.Lerp(0,2.5f,(1-healthbar.fillAmount));
