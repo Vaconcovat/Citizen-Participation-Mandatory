@@ -6,7 +6,7 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 
 	public Button preButton, postButton, arenaButton;
 	public Text commit;
-	public Text activeSponsor;  
+	//public Text activeSponsor;  
 	public PreMenuInterfaceManager PreMenuScript;
 	public Text StatusBarText;
 

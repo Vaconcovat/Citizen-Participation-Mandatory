@@ -6,7 +6,7 @@ public class BootInterfaceManager : MonoBehaviour {
 	public Image logo;
 	public float logoWaitTime;
 	bool displayed = false;
-	bool skipped = false;
+	public bool skipped = false;
 
 	
 	// Update is called once per frame
@@ -14,7 +14,13 @@ public class BootInterfaceManager : MonoBehaviour {
 		if(displayed){
 			logoWaitTime -= Time.deltaTime;
 		}
-		if (logoWaitTime <= 0 || Input.GetKeyDown("space")){
+		if (logoWaitTime <= 0){
+			FindObjectOfType<MenuCamera>().MainMenu();
+			displayed = false;
+			skipped = true;
+			logoWaitTime = 3;
+		}
+		if (Input.GetKeyDown("space") && !skipped){
 			FindObjectOfType<MenuCamera>().MainMenu();
 			displayed = false;
 			skipped = true;

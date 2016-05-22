@@ -19,7 +19,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		TandC.interactable = false;
+		//TandC.interactable = false;
 		chosenSponsor = -1;
 		activeSponsor = 0;
 		StaticGameStats.generalUpgrades[0] = false;
