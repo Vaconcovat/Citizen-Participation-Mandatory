@@ -10,8 +10,9 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public Text govMoneyText, corMoneyText, rebMoneyText;
 	public Image govBar, corBar, rebBar;
 	public Text totalMoney;
-
+	public AutoType infoText;
 	public Image govBarOverlay, corBarOverlay, rebBarOverlay;
+	public Image govBackground, corBackground, rebBackground;
 
 	[Header("Settings")]
 	public float lerpTime;
@@ -43,12 +44,17 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		rebMoney = CheckThresholds(reb_change);
 
 		StaticGameStats.avaliableMoney = govMoney + corMoney + rebMoney;
-		totalMoney.text = StaticGameStats.avaliableMoney.ToString();
+		totalMoney.text = "Total Funding Recieved: " + StaticGameStats.avaliableMoney.ToString();
 
 		//set the overlay bars
 		govBarOverlay.fillAmount = gov_P / 100.0f;
 		corBarOverlay.fillAmount = cor_P / 100.0f;
 		rebBarOverlay.fillAmount = reb_P / 100.0f;
+
+		if (StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100){
+			infoText.displayedText[0] = "One or more RELOCATION OFFERS recieved!\n\n\nYou will be able to accept a relocation offer once you have committed this arena.";
+			infoText.StartType();
+		}
 	}
 	
 	// Update is called once per frame
@@ -80,6 +86,25 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		rebRepText.text = "REBEL: \n" + Mathf.Floor(StaticGameStats.oldrebRep).ToString() + " %\n" + reb_change.ToString();
 		rebBar.fillAmount = StaticGameStats.oldrebRep / 100.0f;
 		rebMoneyText.text = rebMoney.ToString();
+
+		if (StaticGameStats.govRep >= 100){
+			govBackground.color = new Color(0,0,Mathf.Abs(Mathf.Sin(t*10)),1);
+		}
+		if (StaticGameStats.corRep >= 100){
+			corBackground.color = new Color(0,0,Mathf.Abs(Mathf.Sin(t*10)),1);
+		}
+		if (StaticGameStats.rebRep >= 100){
+			rebBackground.color = new Color(0,0,Mathf.Abs(Mathf.Sin(t*10)),1);
+		}
+		if (StaticGameStats.govRep <= 0){
+			govBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
+		}
+		if (StaticGameStats.corRep <= 0){
+			corBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
+		}
+		if (StaticGameStats.rebRep <= 100){
+			rebBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
+		}
 	}
 
 	int CheckThresholds(float change){

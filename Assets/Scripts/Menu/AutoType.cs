@@ -10,6 +10,7 @@ public class AutoType : MonoBehaviour {
 	public float[] textDelays;
 	public GameObject finishedCall;
 	public string finishedCallString;
+	public AudioSource blip;
 	Text textObj;
 	int numlines;
 
@@ -27,6 +28,9 @@ public class AutoType : MonoBehaviour {
 		Debug.Log("Coroutine Running");
 		foreach (char letter in displayedText[index].ToCharArray()){
 			textObj.text += letter;
+			if (blip != null){
+				blip.Play();
+			}
 			if(textObj.text.Split('\n').Length > maxLines){
 				textObj.text = textObj.text.Substring(textObj.text.IndexOf('\n')+1);
 			}
