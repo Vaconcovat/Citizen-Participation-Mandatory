@@ -106,6 +106,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 		StaticGameStats.govUpgrades[0] = false;
 		StaticGameStats.corUpgrades[0] = false;
 		StaticGameStats.rebUpgrades[0] = false;
+		upgradebuttons[0].interactable = true;
 		upgradebuttons[1].interactable = true;
 		upgradebuttons[2].interactable = true;
 		upgradebuttons[3].interactable = true;
