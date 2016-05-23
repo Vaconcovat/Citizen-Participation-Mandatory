@@ -17,13 +17,15 @@ public class Pathfinding : MonoBehaviour {
 	
 
 	public void StartFindPath(Vector3 startPos, Vector3 targetPos) {
+		//UnityEngine.Debug.Log ("Start = " + startPos + "; Finish = " + targetPos);
+		UnityEngine.Debug.Log (targetPos + "; and I'm " + this.name);
 		StartCoroutine(FindPath(startPos,targetPos));
 	}
 
 	IEnumerator FindPath(Vector3 startPos, Vector3 targetPos) {
 
-		Stopwatch sw = new Stopwatch();
-		sw.Start();
+		/*Stopwatch sw = new Stopwatch();
+		sw.Start();*/
 
 		Vector3[] waypoints = new Vector3[0];
 		bool pathSuccess = false;
@@ -41,8 +43,8 @@ public class Pathfinding : MonoBehaviour {
 				closedSet.Add(currentNode);
 
 				if (currentNode == targetNode) {
-					sw.Stop();
-					print ("Path found: " + sw.ElapsedMilliseconds + " ms");
+					//sw.Stop();
+					//print ("Path found: " + sw.ElapsedMilliseconds + " ms");
 					pathSuccess = true;
 					break;
 				}

@@ -3,32 +3,28 @@ using System.Collections;
 
 public class Unit : MonoBehaviour {
 
-    public Transform firstTarget;
+    //public Transform firstTarget;
 	//public Transform secondTarget;
     public float speed = .08f; //defines speed of the enemy chasing
 	int followingTarget; //holds information about which target to follow.
     Vector3[] path;
     int targetIndex;
-	float timer = 1.0f;
+	public float timer = 1.0f;
 	//public bool pathReached = false;
-	Vector3 targetPos;
+	private GameObject targetPos;
 	float distance;
 	float closestDistance;
 	int closestEnemy;
 	int closestWeapon;
 	//int closestHealth;
 	//int closestSpeed;
-	GameObject[] enemies;
-	GameObject[] weapons;
+	private GameObject[] enemies;
+	private GameObject[] weapons;
 
     void Start()
     {
-		
-		//healthPickup = GameObject.FindGameObjectsWithTag("HealthPickup");
-		//speedPickup = GameObject.FindGameObjectsWithTag("SpeedPickup");
-		//health = GameObject.FindGameObjectsWithTag("Health");
-		closestDistance = 1000.0f;
-		
+		targetPos = FindObjectOfType<PlayerController> ().gameObject;
+		closestDistance = 100.0f;
 		followingTarget = 0; //sets target to be following
 		/*
 		/ Following target
@@ -39,17 +35,31 @@ public class Unit : MonoBehaviour {
 		/	4. Target moves towards a health pickup
 		/	5. Target moves towards a speed pickup
 		*/
-		
-		//Debug.Log ("Path Requested!");
-		//Debug.Log ("Start: Target is located at " + firstTarget.position);
-		//PathRequester.RequestPath (transform.position, firstTarget.position, OnPathFound);
-		enemies = GameObject.FindGameObjectsWithTag("Contestant"); //find all enemies
-		weapons = GameObject.FindGameObjectsWithTag("Weapon");
-    }
 
-	void Update()
-	{
-		if (this.gameObject.GetComponent<Contestant>().equipped == null){
+		//healthPickup = GameObject.FindGameObjectsWithTag("HealthPickup");
+		//speedPickup = GameObject.FindGameObjectsWithTag("SpeedPickup");
+		//health = GameObject.FindGameObjectsWithTag("Health");
+		
+
+		enemies = new GameObject[7];
+		//weapons = new GameObject[9];
+		enemies[0] = GameObject.Find("Enemy"); //find all enemies
+		Debug.Log (enemies[0].name);
+		enemies[1] = GameObject.Find("Enemy (1)"); //find all enemies
+		Debug.Log (enemies[1].name);
+		enemies[2] = GameObject.Find("Enemy (2)"); //find all enemies
+		Debug.Log (enemies[2].name);
+		enemies[3] = GameObject.Find("Enemy (3)"); //find all enemies
+		Debug.Log (enemies[3].name);
+		enemies[4] = GameObject.Find("Enemy (4)"); //find all enemies
+		Debug.Log (enemies[4].name);
+		enemies[5] = GameObject.Find("Enemy (5)"); //find all enemies
+		Debug.Log (enemies[5].name);
+		enemies[6] = GameObject.Find("Enemy (6)"); //find all enemies
+		Debug.Log (enemies[6].name);
+		weapons = GameObject.FindGameObjectsWithTag("Weapon");
+
+		/*if (this.gameObject.GetComponent<Contestant>().equipped == null){
 			//Debug.Log ("No Weapon Equipped");
 			followingTarget = 0;
 			for(int i = 0; i < weapons.Length; i++)
@@ -72,20 +82,17 @@ public class Unit : MonoBehaviour {
 			targetPos = weapons[closestWeapon].transform.position;
 			
 		} else if (this.gameObject.GetComponent<Contestant>().equipped != null){
-			//Debug.Log ("Weapon Equipped");
-			followingTarget = 0;
-			for(int i = 0; i < enemies.Length; i++)
-			{
-				distance = Vector3.Distance(enemies[i].transform.position, transform.position);//find distance between enemy and self
-				if (distance > closestDistance) {
-					closestDistance = distance;
-					closestEnemy = i; //for referencing the chosen enemy
-				}	
-			}
-			Debug.Log (enemies[closestEnemy].name);
-			targetPos = enemies[closestEnemy].transform.position;
-		}
+			*///Debug.Log ("Weapon Equipped");
 
+		//}
+	}
+
+	void Update()
+	{
+		findClosestEnemy ();
+		Debug.Log (targetPos.transform.position + "; and I'm " + this.name);
+		StartCoroutine ("updateEnemyPath");
+		/*
 		if(followingTarget == 0){
 			StartCoroutine("updateWeaponPath");
 		} else if (followingTarget == 2) {
@@ -93,7 +100,7 @@ public class Unit : MonoBehaviour {
 		} else if (followingTarget == 3) {
 			StopCoroutine ("updateEnemyPath");
 			StartCoroutine ("updateEnemyPath");
-		}
+		}*/
 	}
 /*
  * 	PROCESS FOR DETERMINING MOVEMENT:
@@ -128,15 +135,15 @@ public class Unit : MonoBehaviour {
 
 	IEnumerator updateEnemyPath()
 	{
-		if (targetPos != enemies[closestEnemy].transform.position) {
+		/*if (targetPos != enemies[closestEnemy].transform.position) {
 			targetPos = enemies[closestEnemy].transform.position;
 			followingTarget = 3;
-		}
-		PathRequester.RequestPath (transform.position, targetPos, OnPathFound);
+		}*/
+		PathRequester.RequestPath (this.transform.position, targetPos.transform.position, OnPathFound);
 		yield return new WaitForSeconds (timer);
 	}
 	
-	IEnumerator updateWeaponPath()
+	/*IEnumerator updateWeaponPath()
 	{
 		if (targetPos != weapons[closestWeapon].transform.position) {
 			targetPos = weapons[closestWeapon].transform.position;
@@ -144,7 +151,7 @@ public class Unit : MonoBehaviour {
 		}
 		PathRequester.RequestPath (transform.position, targetPos, OnPathFound);
 		yield return new WaitForSeconds (timer);
-	}
+	}*/
 
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -155,6 +162,7 @@ public class Unit : MonoBehaviour {
             path = newPath;
 			//Debug.Log ("Coroutine 'FollowPath' stopped!");
 			StopCoroutine("FollowPath");
+
 			//Debug.Log ("Coroutine 'FollowPath' started");
             StartCoroutine("FollowPath");
 		}
@@ -166,32 +174,72 @@ public class Unit : MonoBehaviour {
         
 		while (true)
         {
-			if (targetIndex == path.Length-1){
-				currentWaypoint = path[targetIndex];
-			} else if (Vector3.Distance(transform.position,currentWaypoint) < 0.1f) // if distance from next waypoint from this objects position is less than 0.1f
+			if (Vector3.Distance(transform.position,currentWaypoint) < 0.1f) // if distance from next waypoint from this objects position is less than 0.1f
             {
                 targetIndex++; //increment targetIndex
                 if (targetIndex >= path.Length)//if the targetIndex exceeds the length of the path array
                 {
-					if (followingTarget == 0) {
-						followingTarget = 1;
-					} else if (followingTarget == 1) {
-						followingTarget = 2;
-					} else if (followingTarget == 2) {
-						StopCoroutine ("FollowPath");
-					}
+					targetIndex = 0;
+					path = new Vector3[0];
                     yield break;
                 }
+					
                 currentWaypoint = path[targetIndex];
 
             }
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
             yield return null;
-        }
-
+        } 
+		//targetIndex = 0;
     }
 
-    /*public void OnDrawGizmos()
+	public void findClosestEnemy() {
+		closestDistance = 100.0f;
+
+		for (int i = 0; i < enemies.Length; i++) {
+			if (enemies [i].name == this.gameObject.name) {
+				//Debug.Log(enemies [i].name + " == " + this.gameObject.name);
+				continue;
+			}
+			distance = Vector3.Distance (enemies [i].transform.position, transform.position);//find distance between enemy and self
+			//Debug.Log ("The closest enemy is " + distance + " away; and I'm " + this.name);
+			if (distance <= closestDistance) {
+				//Debug.Log (closestDistance + " is less than " + distance);
+				closestDistance = distance;
+				closestEnemy = i; //for referencing the chosen enemy
+				//Debug.Log(closestEnemy);
+			}
+		}
+		//distance = Vector3.Distance (enemies [closestEnemy].transform.position, transform.position);
+		//Debug.Log ("My closest enemy is: " + enemies [closestEnemy].name + "; They're "+ distance + " away from me; and I'm " + this.name);
+
+		targetPos = enemies[closestEnemy];
+	}
+
+	public void findClosestWeapon() {
+		closestDistance = 100.0f;
+
+		for (int i = 0; i < weapons.Length; i++) {
+			if (weapons [i].GetComponent <RangedWeapon>().ammo == 0) {
+				//Debug.Log(enemies [i].name + " == " + this.gameObject.name);
+				continue;
+			}
+			distance = Vector3.Distance (enemies [i].transform.position, transform.position);//find distance between enemy and self
+			//Debug.Log ("The closest enemy is " + distance + " away; and I'm " + this.name);
+			if (distance <= closestDistance) {
+				//Debug.Log (closestDistance + " is less than " + distance);
+				closestDistance = distance;
+				closestWeapon = i; //for referencing the chosen enemy
+				//Debug.Log(closestEnemy);
+			}
+		}
+		//distance = Vector3.Distance (enemies [closestEnemy].transform.position, transform.position);
+		//Debug.Log ("My closest enemy is: " + enemies [closestEnemy].name + "; They're "+ distance + " away from me; and I'm " + this.name);
+
+		targetPos = weapons[closestWeapon];
+	}
+
+    public void OnDrawGizmos()
     {
         if (path != null)
         {
@@ -209,6 +257,6 @@ public class Unit : MonoBehaviour {
                 }
             }
         }
-    }*/
+    }
 
 }
