@@ -102,7 +102,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		if (StaticGameStats.corRep <= 0){
 			corBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
 		}
-		if (StaticGameStats.rebRep <= 100){
+		if (StaticGameStats.rebRep <= 0){
 			rebBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
 		}
 	}
