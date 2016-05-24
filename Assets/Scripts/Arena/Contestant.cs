@@ -139,7 +139,7 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public void Die(){
 		if (!isPlayer){
-			GetComponent<AIController>().enabled = false;
+			GetComponent<Unit>().StopAllCoroutines();
 			GetComponent<Unit>().enabled = false;
 			FindObjectOfType<RoundManager>().Death();
 		}

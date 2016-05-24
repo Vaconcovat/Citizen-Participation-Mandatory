@@ -5,6 +5,8 @@ public class ItemSpawner : MonoBehaviour {
 	public enum poolselection{Example, Sponsor, Item};
 	public poolselection selection;
 	public ItemPools.Pool pool;
+	public bool respawning;
+	public float timer;
 
 	// Use this for initialization
 	void Start () {
@@ -35,10 +37,22 @@ public class ItemSpawner : MonoBehaviour {
 			Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
 		}
 		GetComponent<SpriteRenderer>().enabled = false;
+		if(respawning){
+			StartCoroutine("respawn");
+		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	IEnumerator respawn(){
+		while(true){
+			yield return new WaitForSeconds(timer);
+			GameObject spawned = (GameObject)Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
+			spawned.GetComponent<Rigidbody2D>().AddTorque(3);
+		}
 	}
 }

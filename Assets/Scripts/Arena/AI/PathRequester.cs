@@ -39,7 +39,7 @@ public class PathRequester : MonoBehaviour {
     public void FinishedProcessingPath(Vector3[] path, bool success) {
         currentPathRequest.callback(path, success);
         isProcessingPath = false;
-        TryProcessNext();
+        instance.TryProcessNext();
     }
 
     struct PathRequest

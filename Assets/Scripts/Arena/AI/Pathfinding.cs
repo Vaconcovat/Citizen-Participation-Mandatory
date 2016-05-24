@@ -6,9 +6,11 @@ using System;
 
 public class Pathfinding : MonoBehaviour {
 	
-
+	public bool simplify;
 	PathRequester requestManager;
 	Grid grid;
+	Heap<Node> openSet;
+	HashSet<Node> closedSet;
 
 	void Awake() {
 		requestManager = GetComponent<PathRequester>();
@@ -17,8 +19,6 @@ public class Pathfinding : MonoBehaviour {
 	
 
 	public void StartFindPath(Vector3 startPos, Vector3 targetPos) {
-		//UnityEngine.Debug.Log ("Start = " + startPos + "; Finish = " + targetPos);
-		UnityEngine.Debug.Log (targetPos + "; and I'm " + this.name);
 		StartCoroutine(FindPath(startPos,targetPos));
 	}
 
@@ -34,8 +34,9 @@ public class Pathfinding : MonoBehaviour {
 		Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
 		if (startNode.walkable && targetNode.walkable) {
-			Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
-			HashSet<Node> closedSet = new HashSet<Node>();
+			
+			openSet = new Heap<Node>(grid.MaxSize);
+			closedSet = new HashSet<Node>();
 			openSet.Add(startNode);
 
 			while (openSet.Count > 0) {
@@ -77,12 +78,21 @@ public class Pathfinding : MonoBehaviour {
 	Vector3[] RetracePath(Node startNode, Node endNode) {
 		List<Node> path = new List<Node>();
 		Node currentNode = endNode;
+		Vector3[] waypoints;
 
 		while (currentNode != startNode) {
 			path.Add(currentNode);
 			currentNode = currentNode.parent;
 		}
-		Vector3[] waypoints = SimplifyPath(path);
+		if (simplify){
+			waypoints = SimplifyPath(path);
+		}
+		else{
+			waypoints = new Vector3[path.Count];
+			for (int i = 0; i< path.Count; i++){
+				waypoints[i] = path[i].worldPosition;
+			}
+		}
 		Array.Reverse(waypoints);
 		return waypoints;
 
@@ -92,7 +102,7 @@ public class Pathfinding : MonoBehaviour {
 		List<Vector3> waypoints = new List<Vector3>();
 		Vector2 directionOld = Vector2.zero;
 
-		for (int i = 1; i < path.Count; i ++) {
+		for (int i = 1; i < path.Count - 1; i ++) {
 			Vector2 directionNew = new Vector2(path[i-1].gridX - path[i].gridX,path[i-1].gridY - path[i].gridY);
 			if (directionNew != directionOld) {
 				waypoints.Add(path[i].worldPosition);
@@ -111,5 +121,10 @@ public class Pathfinding : MonoBehaviour {
 		return 14*dstX + 10 * (dstY-dstX);
 	}
 
-
+//	void OnDrawGizmos()
+//    {
+//        foreach(Node n in openSet){
+//        	Gizmos.DrawCube(n.worldPosition, Vector3.one);
+//        }
+//    }
 }
