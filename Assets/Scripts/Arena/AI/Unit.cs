@@ -127,7 +127,7 @@ public class Unit : MonoBehaviour {
     }
 
     IEnumerator FollowPath(){
-		try{
+		//try{
 	    	Vector3 currentWaypoint = path[0];
 	    	while(true){
 	    		if(Vector3.Distance(transform.position, currentWaypoint) < 0.01f){
@@ -140,12 +140,12 @@ public class Unit : MonoBehaviour {
 	    			currentWaypoint = path[targetIndex];
 	    		}
 	    		transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
-	    		
+				yield return null;
 	    	}
-		} catch {
-			Debug.LogError ("Something went wrong with following pathfinding");
-		}
-		yield return null;
+		//} catch {
+		//	Debug.LogError ("Something went wrong with following pathfinding");
+		//}
+
     }
 
 	public void findClosestEnemy() {
