@@ -20,6 +20,7 @@ public class Unit : MonoBehaviour {
 	private Contestant[] contestants;
 	private RangedWeapon[] weapons;
 	Grid grid;
+	public LayerMask unwalkableMask;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class Unit : MonoBehaviour {
 		//followingTarget = 0; //sets target to be following
 		contestants = FindObjectsOfType<Contestant>();
 		targetPos = transform;
+
 		StartCoroutine ("updatePath");
 		/*
 		/ Following target
@@ -127,25 +129,27 @@ public class Unit : MonoBehaviour {
     }
 
     IEnumerator FollowPath(){
-		//try{
-	    	Vector3 currentWaypoint = path[0];
-	    	while(true){
-	    		if(Vector3.Distance(transform.position, currentWaypoint) < 0.01f){
-	    			targetIndex++;
-	    			if(targetIndex >= path.Length){
-	    				targetIndex = 0;
-	    				path = new Vector3[0];
-	    				yield break;
-	    			}
-	    			currentWaypoint = path[targetIndex];
-	    		}
-	    		transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
-				yield return null;
-	    	}
-		//} catch {
-		//	Debug.LogError ("Something went wrong with following pathfinding");
-		//}
+	   	Vector3 currentWaypoint = path[0];
+    	while(true){
+    		if(Vector3.Distance(transform.position, currentWaypoint) < 0.01f){
+    			targetIndex++;
+    			if(targetIndex >= path.Length){
+    				targetIndex = 0;
+    				path = new Vector3[0];
+    				yield break;
+    			}
+    			currentWaypoint = path[targetIndex];
+    		}
+			if (Physics2D.OverlapCircle(transform.position, 0.5f, unwalkableMask)){
+				Debug.Log("Path is unwalkable");
+				Vector3 _backwards = transform.position - (transform.forward*2);
+				transform.position = Vector3.MoveTowards(transform.position, _backwards, speed);
 
+			}
+
+    		transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
+			yield return null;
+    	}
     }
 
 	public void findClosestEnemy() {
