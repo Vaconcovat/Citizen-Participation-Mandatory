@@ -121,7 +121,13 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 		StaticGameStats.committed = true;
 		StaticGameStats.sponsor = chosenSponsor;
 		//do upgrades here
-		FindObjectOfType<MenuCamera>().ZoomedOut();
+		if((StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100)&&StaticGameStats.embezzledMoney >= 100){
+			FindObjectOfType<MenuCamera>().Win();
+		}
+		else{
+			FindObjectOfType<MenuCamera>().ZoomedOut();
+		}
+
 	}
 
 	public void BuyGenericUpgrade1(){

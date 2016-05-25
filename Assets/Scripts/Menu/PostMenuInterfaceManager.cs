@@ -13,6 +13,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public AutoType infoText;
 	public Image govBarOverlay, corBarOverlay, rebBarOverlay;
 	public Image govBackground, corBackground, rebBackground;
+	public GameObject discpline, back, spend, moneyobject;
 
 	[Header("Settings")]
 	public float lerpTime;
@@ -51,10 +52,24 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		corBarOverlay.fillAmount = cor_P / 100.0f;
 		rebBarOverlay.fillAmount = reb_P / 100.0f;
 
-		if (StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100){
-			infoText.displayedText[0] = "One or more RELOCATION OFFERS recieved!\n\n\nYou will be able to accept a relocation offer once you have committed this arena.";
+
+		if (StaticGameStats.govRep <= 0 || StaticGameStats.corRep <= 0 || StaticGameStats.rebRep <= 0){
+			infoText.displayedText[0] = "You have recieved a 0% satisfaction report.\nDisciplinary actions will be administered.\n\nGovorNet Systems takes this matter very\nseriously. We do not issue warnings. You cannot\nmake an appeal to these consequences.\n\nPlease connect to the GovorNet Department of Re-Education\nfor decommision. Do not disconnect from GovorNet systems. \nDo not power off this machine.\n\nFailure to follow these instructions will be considered treason.";
 			infoText.StartType();
+			discpline.SetActive(true);
+			back.SetActive(false);
+			spend.SetActive(false);
+			moneyobject.SetActive(false);
 		}
+		else{
+			if (StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100){
+				infoText.displayedText[0] = "One or more RELOCATION OFFERS recieved!\n\n\n\n\n\nYou will be able to accept a relocation offer once you have committed this arena.";
+				infoText.StartType();
+			}
+			discpline.SetActive(false);
+		}
+
+
 	}
 	
 	// Update is called once per frame

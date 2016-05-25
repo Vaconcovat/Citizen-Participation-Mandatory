@@ -58,4 +58,13 @@ public class MenuCamera : MonoBehaviour {
 	public void Login(){
 		state = 5;
 	}
+
+	public void Lose(){
+		state = 6;
+		FindObjectOfType<LoseInterfaceManager>().Lose();
+	}
+
+	public void Win(){
+		state = 7;
+	}
 }
