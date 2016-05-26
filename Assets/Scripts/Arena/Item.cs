@@ -117,12 +117,13 @@ public class Item : MonoBehaviour {
 	}
 
 	public void Unequip(){
+		if(equipper.isPlayer){
+			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+		}
 		equipper.equipped = null;
 		equipper = null;
 		coll.enabled = true;
 		body.isKinematic = false;
-		//TODO: Cursor should only change if the contestant is a player!!
-		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 	}
 
 	void OnCollisionEnter2D(Collision2D c){
