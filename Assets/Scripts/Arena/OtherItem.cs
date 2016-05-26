@@ -9,11 +9,19 @@ public class OtherItem : MonoBehaviour {
 	public float effectAmount;
 	public bool consume;
 	public AudioSource audio;
+	[Tooltip("How many Uses this Item has.")]
+	/// <summary>
+	/// The ammo.
+	/// </summary>
+	public int ammo;
+	public SpriteRenderer sr;
+	public Sprite ThrownSprite;
 
 
 	// Use this for initialization
 	void Start () {
 		audio = GetComponent<AudioSource> ();
+		sr = GetComponent<SpriteRenderer> ();
 	
 	}
 	
@@ -23,39 +31,37 @@ public class OtherItem : MonoBehaviour {
 
 	public void Use(bool held){
 		if (!held){
-			AudioSource audio = GetComponent<AudioSource> ();
-			audio.Play ();
-			Debug.Log ("Audio Trigger");
-			switch(effect){
+			if (ammo != 0)
+			{
+				switch (effect) {
 				case ItemEffect.Heal:
-					Heal(effectAmount);
+					Heal (effectAmount);
+					ammo -= 1;
 					break;
 				case ItemEffect.Speed:
-					Speed(effectAmount);
+					Speed (effectAmount);
+					ammo -= 1;
 					break;
+				}
 			}
 		}
 	}
 
 	void Heal(float amount){
-		AudioSource audio = GetComponent<AudioSource> ();
-		audio.Play ();
 		GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
-		if (consume){
+		if ((consume) && (ammo > 0)){
 			audio.Play ();
+			sr.sprite = ThrownSprite;
 			GetComponent<Item>().Unequip();
-			Destroy(gameObject);
 		}
 	}
 
 	void Speed(float amount){
-		AudioSource audio = GetComponent<AudioSource> ();
-		audio.Play ();
 		GetComponent<Item>().equipper.movespeed += amount;
-		if (consume){
+		if ((consume) && (ammo > 0)){
 			audio.Play ();
+			sr.sprite = ThrownSprite;
 			GetComponent<Item>().Unequip();
-			Destroy(gameObject);
 		}
 	}
 }

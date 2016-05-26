@@ -33,7 +33,8 @@ public class Item : MonoBehaviour {
 	/// The sprite that the cursor changes to while this item is equipped
 	/// </summary>
 	public Texture2D cursor;
-	public SpriteRenderer selectBox;	
+	public SpriteRenderer selectBox;
+
 	[Header("Runtime Only")]
 	/// <summary>
 	/// The contestant that is equipping this item.
