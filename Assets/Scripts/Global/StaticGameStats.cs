@@ -4,7 +4,7 @@ using System.Collections;
 public class StaticGameStats : MonoBehaviour {
 	//Reputation variables
 	public static float govRep = 50.0f;
-	public static float corRep = 100.0f;
+	public static float corRep = 50.0f;
 	public static float rebRep = 50.0f;
 	public static float oldgovRep = 50.0f;
 	public static float oldcorRep = 50.0f;
