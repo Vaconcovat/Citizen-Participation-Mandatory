@@ -36,7 +36,8 @@ public class CameraMan : MonoBehaviour {
 		//body.isKinematic = true;
 		coll.enabled = false;
 		GetComponent<SpriteRenderer>().color = Color.white;
-		FindObjectOfType<StaticGameStats>().Influence(2,5.0f);
+		FindObjectOfType<StaticGameStats>().Influence(2, 2.0f);
+		FindObjectOfType<StaticGameStats>().Influence(0, -2.0f);
 		//TODO: other corpse related things here
 	}
 

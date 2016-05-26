@@ -80,10 +80,10 @@ public class Bullet : MonoBehaviour {
 		}
 		else{
 			if (coll.gameObject.tag == "Contestant" && isSponsored){
-					FindObjectOfType<StaticGameStats>().Influence(1,2.0f);
+					FindObjectOfType<StaticGameStats>().Influence(1,0.5f);
 			}
 			if (coll.gameObject.tag != "Contestant" && isSponsored){
-				FindObjectOfType<StaticGameStats>().Influence(1,-1.0f);
+				FindObjectOfType<StaticGameStats>().Influence(1,-0.5f);
 			}
 
 			coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, body.velocity.normalized, coll.contacts[0].point), SendMessageOptions.DontRequireReceiver);

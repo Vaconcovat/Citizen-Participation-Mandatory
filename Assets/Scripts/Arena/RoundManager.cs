@@ -63,9 +63,10 @@ public class RoundManager : MonoBehaviour {
 
 	void endRound(){
 		if (Time.timeSinceLevelLoad < govtime){
-			FindObjectOfType<StaticGameStats>().Influence(0, 10.0f);
+			FindObjectOfType<StaticGameStats>().Influence(0, 5.0f);
+			FindObjectOfType<StaticGameStats>().Influence(2, -2.0f);
 		}else{
-			FindObjectOfType<StaticGameStats>().Influence(0, -10.0f);
+			FindObjectOfType<StaticGameStats>().Influence(0, -5.0f);
 		}
 		if (roundNumber < 5){
 			roundNumber++;
