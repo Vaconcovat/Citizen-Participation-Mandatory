@@ -131,6 +131,9 @@ public class Contestant : MonoBehaviour {
 			GameObject blood = (GameObject)Instantiate(bloodSplatter,damage.location,Quaternion.AngleAxis(Random.Range(0f,360f),Vector3.forward));
 			float scale = Random.Range(0.08f,0.2f);
 			blood.transform.localScale = new Vector3(scale,scale,1);
+			if(isPlayer){
+				FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 4.0f;
+			}
 		}
 	}
 

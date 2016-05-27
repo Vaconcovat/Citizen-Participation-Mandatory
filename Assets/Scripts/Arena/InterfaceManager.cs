@@ -25,6 +25,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Text abortText;
 	public Image abortImage;
 	public Text upgradesText;
+	float grainFloor;
 
 
 
@@ -85,7 +86,10 @@ public class InterfaceManager : MonoBehaviour {
 			backpackDisplay.enabled = false;
 		}
 		timer.text = Time.timeSinceLevelLoad.ToString() + " (" + rm.govtime.ToString() + ")";
-		noise.grainIntensityMax = Mathf.Lerp(0,2.5f,(1-healthbar.fillAmount));
+		grainFloor = Mathf.Lerp(0,1.0f,(1-healthbar.fillAmount));
+		if(noise.grainIntensityMax > grainFloor){
+			noise.grainIntensityMax -= Time.deltaTime * 1.0f;
+		}
 		noise.grainIntensityMin = noise.grainIntensityMax - 0.2f;
 		roundText.text = "ROUND: " + RoundManager.roundNumber.ToString();
 		aliveText.text = rm.aliveContestants.ToString() + " / " + rm.totalContestants.ToString() + " REMAIN.";
