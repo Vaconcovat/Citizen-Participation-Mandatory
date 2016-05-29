@@ -11,11 +11,16 @@ public class AutoType : MonoBehaviour {
 	public GameObject finishedCall;
 	public string finishedCallString;
 	public AudioSource blip;
+	public int charactersPerTick = 1;
+	int characterCounter;
 	Text textObj;
 	int numlines;
 
 	// Use this for initialization
 	void Start () {
+		if(charactersPerTick < 1){
+			charactersPerTick = 1;
+		}
 		textObj = GetComponent<Text>();
 		textObj.text = "";
 		if(typeOnAwake){
@@ -34,7 +39,11 @@ public class AutoType : MonoBehaviour {
 			if(textObj.text.Split('\n').Length > maxLines){
 				textObj.text = textObj.text.Substring(textObj.text.IndexOf('\n')+1);
 			}
-			yield return new WaitForSeconds(textDelays[index]);
+			characterCounter++;
+			if(characterCounter == charactersPerTick){
+				characterCounter = 0;
+				yield return new WaitForSeconds(textDelays[index]);
+			}
 		}
 		if (index < displayedText.Length - 1){
 			StartCoroutine("TypeText", (index + 1));
