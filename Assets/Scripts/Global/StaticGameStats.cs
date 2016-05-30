@@ -12,7 +12,7 @@ public class StaticGameStats : MonoBehaviour {
 
 	//money variables
 	public static int avaliableMoney;
-	public static int embezzledMoney = 95;
+	public static int embezzledMoney = 0;
 
 	//Commit
 	public static bool committed = false;
