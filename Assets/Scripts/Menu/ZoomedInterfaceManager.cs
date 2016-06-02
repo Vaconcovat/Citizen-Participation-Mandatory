@@ -8,7 +8,7 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 	public Text commit;
 	//public Text activeSponsor;  
 	public PreMenuInterfaceManager PreMenuScript;
-	public Text StatusBarText;
+	public Text StatusBarText, ArenaPlanningText, CommsText, ArenaText;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +27,9 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 			postButton.interactable = false;
 			arenaButton.interactable = true;
 			commit.text = "COMMITTED";
+			ArenaPlanningText.text = "LOCKED";
+			ArenaText.text = "OPEN";
+			CommsText.text = "LOCKED";
 		}
 		else{
 			preButton.interactable = true;
