@@ -71,7 +71,7 @@ public class RangedWeapon : MonoBehaviour {
 		if (held && fireRate != 0){
 			if (ammo > 0 && cooldownCounter <= 0){
 				Shoot();
-				ammo -= 1;
+				SubtractAmmo (1);
 				cooldownCounter = fireRate;
 			}
 		}
@@ -79,7 +79,7 @@ public class RangedWeapon : MonoBehaviour {
 		else if (!held && fireRate == 0){
 			if (ammo > 0){
 				Shoot();
-				ammo-=1;
+				SubtractAmmo (1);
 			}
 		}
 	}
@@ -94,5 +94,13 @@ public class RangedWeapon : MonoBehaviour {
 			firedBullet.GetComponent<Bullet>().owner = GetComponent<Item>().equipper;
 			Instantiate(muzzleFlash, new Vector3(muzzle.position.x, muzzle.position.y, -3), muzzle.rotation);
 		}
+	}
+
+	public void AddAmmo(int addedAmmo){
+		ammo = ammo + addedAmmo;
+	}
+
+	public void SubtractAmmo(int lostAmmo){
+		ammo = ammo - lostAmmo;
 	}
 }

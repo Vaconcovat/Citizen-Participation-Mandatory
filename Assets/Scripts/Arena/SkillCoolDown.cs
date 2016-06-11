@@ -12,19 +12,22 @@ public class SkillCoolDown : MonoBehaviour {
 	public KeyCode Ability4;
 	public KeyCode Ability5;
 
+
 	void FixedUpdate()
 	{
 		if (Input.GetKey (Ability1)) 
 		{
+			//If the ability is not currently cooling down
 			if (skills [0].currentCooldown >= skills [0].cooldown) 
 			{
-				//Whatever Skill 1 Does
+				//Contestant.equipped.GetComponent<RangedWeapon> ().AddAmmo (2);
 				skills [0].currentCooldown = 0;
 			}
 		}
 
 		else if (Input.GetKey (Ability2)) 
 		{
+			//If the ability is not currently cooling down
 			if (skills [1].currentCooldown >= skills [1].cooldown) 
 			{
 				//Whatever Skill 1 Does
@@ -34,6 +37,7 @@ public class SkillCoolDown : MonoBehaviour {
 
 		else if (Input.GetKey (Ability3)) 
 		{
+			//If the ability is not currently cooling down
 			if (skills [2].currentCooldown >= skills [2].cooldown) 
 			{
 				//Whatever Skill 1 Does
@@ -43,6 +47,7 @@ public class SkillCoolDown : MonoBehaviour {
 
 		else if (Input.GetKey (Ability4)) 
 		{
+			//If the ability is not currently cooling down
 			if (skills [3].currentCooldown >= skills [3].cooldown) 
 			{
 				//Whatever Skill 1 Does
@@ -52,12 +57,23 @@ public class SkillCoolDown : MonoBehaviour {
 
 		else if (Input.GetKey (Ability5)) 
 		{
+			//If the ability is not currently cooling down
 			if (skills [4].currentCooldown >= skills [4].cooldown) 
 			{
 				//Whatever Skill 1 Does
+				//Start the Cooldown
 				skills [4].currentCooldown = 0;
 			}
 		}
+	}
+
+	void Start()
+	{
+		skills [0].currentCooldown = skills [0].cooldown;
+		skills [1].currentCooldown = skills [1].cooldown;
+		skills [2].currentCooldown = skills [2].cooldown;
+		skills [3].currentCooldown = skills [3].cooldown;
+		skills [4].currentCooldown = skills [4].cooldown;
 	}
 
 	void Update()
