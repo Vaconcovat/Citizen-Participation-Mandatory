@@ -22,7 +22,12 @@ public class RangedWeapon : MonoBehaviour {
 	/// The mutation on the vector that this gun feeds to its bullets.
 	/// </summary>
 	public float spread;
-	[Tooltip("How many shots this gun has.")]
+	[Tooltip("How many shots this gun can hold")]
+	/// <summary>
+	/// The ammo.
+	/// </summary>
+	public int Maxammo;
+	[Tooltip("How many shots this gun currently has.")]
 	/// <summary>
 	/// The ammo.
 	/// </summary>

@@ -11,6 +11,7 @@ public class SkillCoolDown : MonoBehaviour {
 	public KeyCode Ability3;
 	public KeyCode Ability4;
 	public KeyCode Ability5;
+	public Contestant player;
 
 
 	void FixedUpdate()
@@ -20,7 +21,10 @@ public class SkillCoolDown : MonoBehaviour {
 			//If the ability is not currently cooling down
 			if (skills [0].currentCooldown >= skills [0].cooldown) 
 			{
-				//Contestant.equipped.GetComponent<RangedWeapon> ().AddAmmo (2);
+				if (player.equipped.GetComponent<RangedWeapon> ().ammo < player.equipped.GetComponent<RangedWeapon> ().Maxammo) 
+				{
+					player.equipped.GetComponent<RangedWeapon> ().AddAmmo (player.equipped.GetComponent<RangedWeapon> ().Maxammo - player.equipped.GetComponent<RangedWeapon> ().ammo);
+				}
 				skills [0].currentCooldown = 0;
 			}
 		}
