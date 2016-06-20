@@ -38,11 +38,11 @@ public class Contestant : MonoBehaviour {
 	public GameObject bloodSplatter;
 	public Transform backpack;
 
-	[Header("SPRITES")]
-	public Sprite unarmedSprite;
-	public Sprite rifleSprite;
-	public Sprite pistolSprite;
-	public Sprite corpse;
+	//[Header("SPRITES")]
+	//public Sprite unarmedSprite;
+	//public Sprite rifleSprite;
+	//public Sprite pistolSprite;
+	//public Sprite corpse;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -68,16 +68,16 @@ public class Contestant : MonoBehaviour {
 	public Item inventory;
     float baseSpeed;
 
-    Rigidbody2D body;
-	Collider2D coll;
-	SpriteRenderer spr;
+    Rigidbody body;
+	Collider coll;
+	//SpriteRenderer spr;
 	public Transform anchor;
 
 	// Use this for initialization
 	void Start () {
-		body = GetComponent<Rigidbody2D>();
-		coll = GetComponent<Collider2D>();
-		spr = GetComponent<SpriteRenderer>();
+		body = GetComponent<Rigidbody>();
+		coll = GetComponent<Collider>();
+		//spr = GetComponent<SpriteRenderer>();
 		health = maxHealth;
         baseSpeed = movespeed;
 	}
@@ -88,17 +88,17 @@ public class Contestant : MonoBehaviour {
 			if (equipped != null){
 				switch(equipped.stance){
 					case Item.Stance.Pistol:
-						spr.sprite = pistolSprite;
+						//spr.sprite = pistolSprite;
 						anchor = anchor_pistol;
 						break;
 					case Item.Stance.Rifle:
-						spr.sprite = rifleSprite;
+						//spr.sprite = rifleSprite;
 						anchor = anchor_rifle;
 						break;
 				}
 			}
 			else{
-				spr.sprite = unarmedSprite;
+				//spr.sprite = unarmedSprite;
 				if(cooldownCounter > 0){
 					cooldownCounter -= Time.deltaTime;
 				}
@@ -109,7 +109,7 @@ public class Contestant : MonoBehaviour {
             }
 		}
 		else{
-			spr.sprite = corpse;
+			//spr.sprite = corpse;
 		}
 		if (health > maxHealth){
 			health = maxHealth;
@@ -122,7 +122,7 @@ public class Contestant : MonoBehaviour {
 	/// <param name="damage"></param>
 	public void TakeDamage(DamageParams damage){
 		health -= damage.damage;
-		body.AddForce(damage.knockback, ForceMode2D.Impulse);
+		body.AddForce(damage.knockback, ForceMode.Impulse);
 		if (health <= 0){
 			killer = damage.owner;
 			Die();
@@ -162,10 +162,10 @@ public class Contestant : MonoBehaviour {
 		}
 		equipped = null;
 		if (killer != FindObjectOfType<PlayerController>().GetComponent<Contestant>()){
-			GetComponent<SpriteRenderer>().color = Color.white;
+			//GetComponent<SpriteRenderer>().color = Color.white;
 		}
 		else{
-			GetComponent<SpriteRenderer>().color = Color.yellow;
+			//GetComponent<SpriteRenderer>().color = Color.yellow;
 		}
 		
 	}
@@ -218,11 +218,11 @@ public class Contestant : MonoBehaviour {
 	public class DamageParams{
 		public int damage;
 		public Contestant owner;
-		public Vector2 knockback;
-		public Vector2 location;
+		public Vector3 knockback;
+		public Vector3 location;
 
 		//Constructor
-		public DamageParams(int damage, Contestant owner, Vector2 knockback, Vector2 location){
+		public DamageParams(int damage, Contestant owner, Vector3 knockback, Vector3 location){
 			this.damage = damage;
 			this.owner = owner;
 			this.location = location;

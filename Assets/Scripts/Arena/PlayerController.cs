@@ -4,22 +4,22 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	Contestant contestant;
-	Rigidbody2D body;
+	Rigidbody body;
 
 	public bool smoothed;
 
 	// Use this for initialization
 	void Start () {
 		contestant = GetComponent<Contestant>();
-		body = GetComponent<Rigidbody2D>();
+		body = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		MouseControls();
 		KeyboardControls();
-		FaceMouse();
-		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+		//FaceMouse();
+		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y+10, transform.position.z);
 	}
 
 	void MouseControls(){
@@ -42,10 +42,10 @@ public class PlayerController : MonoBehaviour {
 		if(smoothed){
 			//float mag = Mathf.Min(Mathf.Abs(Input.GetAxis("Horizontal") + Mathf.Abs(Input.GetAxis("Vertical"))), 1.0f);
 			//Debug.Log(mag);
-			body.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * contestant.movespeed;
+			body.velocity = new Vector3(Input.GetAxis("Horizontal"),0, Input.GetAxis("Vertical")) * contestant.movespeed;
 		}
 		else{
-			body.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * contestant.movespeed;
+			body.velocity = new Vector3(Input.GetAxisRaw("Horizontal"),0, Input.GetAxisRaw("Vertical")).normalized * contestant.movespeed;
 		}
 		if(Input.GetKeyUp(KeyCode.LeftControl)){
 			contestant.swap();
