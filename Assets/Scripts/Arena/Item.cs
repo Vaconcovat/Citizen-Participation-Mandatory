@@ -43,14 +43,14 @@ public class Item : MonoBehaviour {
 
 
 	Contestant thrower;
-	Rigidbody2D body;
-	Collider2D coll;
-	float impactVelocityMin = 10;
+	Rigidbody body;
+	Collider coll;
+	float impactVelocityMin = 1000;
 
 	// Use this for initialization
 	void Start () {
-		body = GetComponent<Rigidbody2D>();
-		coll = GetComponent<Collider2D>();
+		body = GetComponent<Rigidbody>();
+		coll = GetComponent<Collider>();
 	}
 	
 	// Update is called once per frame
@@ -98,10 +98,11 @@ public class Item : MonoBehaviour {
 	}
 
 	public void Throw(){
+		Debug.Log("throwing");
 		thrower = equipper;
 		Unequip();
-		body.AddForce(transform.right.normalized * 10, ForceMode2D.Impulse);
-		body.AddTorque(1, ForceMode2D.Impulse);
+		body.AddForce(transform.forward.normalized * 10, ForceMode.Impulse);
+		body.AddTorque(Random.insideUnitSphere, ForceMode.Impulse);
 	}
 
 	public void Equip(Contestant contestant){
@@ -110,6 +111,7 @@ public class Item : MonoBehaviour {
 		contestant.cooldownCounter = contestant.pickupCooldown;
 		contestant.equipped = this;
 		coll.enabled = false;
+		body.useGravity = false;
 		body.isKinematic = true;
 		if(equipper.isPlayer){
 			Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
@@ -123,10 +125,12 @@ public class Item : MonoBehaviour {
 		equipper.equipped = null;
 		equipper = null;
 		coll.enabled = true;
+		body.useGravity = true;
 		body.isKinematic = false;
 	}
 
-	void OnCollisionEnter2D(Collision2D c){
+	void OnCollisionEnter(Collision c){
+		Debug.Log(c.gameObject);
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
 				if(c.gameObject.tag == "Contestant"){

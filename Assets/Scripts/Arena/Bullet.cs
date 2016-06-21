@@ -40,11 +40,11 @@ public class Bullet : MonoBehaviour {
 	/// </summary>
 	public Contestant owner;
 
-	Rigidbody2D body;
+	Rigidbody body;
 
 	// Use this for initialization
 	void Awake () {
-		body = GetComponent<Rigidbody2D>();
+		body = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour {
 			case MovementType.Standard:
 				break;
 			case MovementType.Zany:
-				Zany();
+				//Zany();
 				break;
 		}
 		lifetime -= Time.deltaTime;
@@ -62,15 +62,15 @@ public class Bullet : MonoBehaviour {
 		}
 	}
 
-	public void Fire(Vector2 vector){
-		Vector2 v = vector * velocityModifier;
-		body.AddForce(v, ForceMode2D.Impulse);
+	public void Fire(Vector3 vector){
+		Vector3 v = vector * velocityModifier;
+		body.AddForce(v, ForceMode.Impulse);
 	}
 
-	void OnCollisionEnter2D(Collision2D coll){
+	void OnCollisionEnter(Collision coll){
 		if (areaOfEffect > 0){
-			Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(this.transform.position.x, this.transform.position.y), areaOfEffect);
-			foreach (Collider2D a in colliders){
+			Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
+			foreach (Collider a in colliders){
 				if (a.gameObject.tag == "Contestant" && isSponsored){
 					FindObjectOfType<StaticGameStats>().Influence(1,2.0f);
 				}
@@ -92,7 +92,7 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void Zany(){
-		body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.2f, ForceMode2D.Impulse);
-		transform.localScale = new Vector3(Mathf.Cos(Time.frameCount/10), Mathf.Cos(Time.frameCount/10), 1) * 0.5f;
+		//body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.2f, ForceMode2D.Impulse);
+		//transform.localScale = new Vector3(Mathf.Cos(Time.frameCount/10), Mathf.Cos(Time.frameCount/10), 1) * 0.5f;
 	}
 }
