@@ -51,6 +51,7 @@ public class Item : MonoBehaviour {
 	void Start () {
 		body = GetComponent<Rigidbody>();
 		coll = GetComponent<Collider>();
+		selectBox.transform.parent = null;
 	}
 	
 	// Update is called once per frame
@@ -77,6 +78,11 @@ public class Item : MonoBehaviour {
 				selectBox.enabled = false;
 			}
 		}
+	}
+
+	void FixedUpdate(){
+		selectBox.transform.eulerAngles = new Vector3(90,0,0);
+		selectBox.transform.position = transform.position;
 	}
 
 	/// <summary>

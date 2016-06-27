@@ -80,6 +80,10 @@ public class Contestant : MonoBehaviour {
 		//spr = GetComponent<SpriteRenderer>();
 		health = maxHealth;
         baseSpeed = movespeed;
+        //temp change color for enemies
+        if(!isPlayer){
+        	GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
 	}
 	
 	// Update is called once per frame
@@ -128,7 +132,7 @@ public class Contestant : MonoBehaviour {
 			Die();
 		}
 		if (damage.damage > 0){
-			GameObject blood = (GameObject)Instantiate(bloodSplatter,damage.location,Quaternion.AngleAxis(Random.Range(0f,360f),Vector3.forward));
+			GameObject blood = (GameObject)Instantiate(bloodSplatter,new Vector3(damage.location.x,0.1f,damage.location.z),Quaternion.Euler(90,Random.Range(0f,360f),0));
 			float scale = Random.Range(0.08f,0.2f);
 			blood.transform.localScale = new Vector3(scale,scale,1);
 			if(isPlayer){
@@ -142,8 +146,8 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public void Die(){
 		if (!isPlayer){
-			GetComponent<Unit>().StopAllCoroutines();
-			GetComponent<Unit>().enabled = false;
+			GetComponent<AIController>().enabled = false;
+			GetComponent<NavMeshAgent>().enabled = false;
 			FindObjectOfType<RoundManager>().Death();
 		}
 		else{
@@ -162,10 +166,10 @@ public class Contestant : MonoBehaviour {
 		}
 		equipped = null;
 		if (killer != FindObjectOfType<PlayerController>().GetComponent<Contestant>()){
-			//GetComponent<SpriteRenderer>().color = Color.white;
+			GetComponent<MeshRenderer>().material.color = Color.white;
 		}
 		else{
-			//GetComponent<SpriteRenderer>().color = Color.yellow;
+			GetComponent<MeshRenderer>().material.color = Color.yellow;
 		}
 		
 	}
@@ -204,12 +208,6 @@ public class Contestant : MonoBehaviour {
 		Item temp = equipped;
 		equipped = inventory;
 		inventory = temp;
-		if(inventory != null){
-			inventory.GetComponent<SpriteRenderer>().enabled = false;
-		}
-		if(equipped != null){
-			equipped.GetComponent<SpriteRenderer>().enabled = true;
-		}
 	}
 
 	/// <summary>
