@@ -125,20 +125,24 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	/// <param name="damage"></param>
 	public void TakeDamage(DamageParams damage){
-		health -= damage.damage;
-		body.AddForce(damage.knockback, ForceMode.Impulse);
-		if (health <= 0){
-			killer = damage.owner;
-			Die();
-		}
-		if (damage.damage > 0){
-			GameObject blood = (GameObject)Instantiate(bloodSplatter,new Vector3(damage.location.x,0.1f,damage.location.z),Quaternion.Euler(90,Random.Range(0f,360f),0));
-			float scale = Random.Range(0.08f,0.2f);
-			blood.transform.localScale = new Vector3(scale,scale,1);
-			if(isPlayer){
-				FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 4.0f;
+		if(isAlive){
+			health -= damage.damage;
+			body.AddForce(damage.knockback, ForceMode.Impulse);
+				
+			if (health <= 0){
+				killer = damage.owner;
+				Die();
+			}	
+			if (damage.damage > 0){
+				GameObject blood = (GameObject)Instantiate(bloodSplatter,new Vector3(damage.location.x,0.1f,damage.location.z),Quaternion.Euler(90,Random.Range(0f,360f),0));
+				float scale = Random.Range(0.08f,0.2f);
+				blood.transform.localScale = new Vector3(scale,scale,1);
+				if(isPlayer){
+					FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 4.0f;
+				}
 			}
 		}
+	
 	}
 
 	/// <summary>

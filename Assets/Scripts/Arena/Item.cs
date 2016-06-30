@@ -33,7 +33,6 @@ public class Item : MonoBehaviour {
 	/// The sprite that the cursor changes to while this item is equipped
 	/// </summary>
 	public Texture2D cursor;
-	public SpriteRenderer selectBox;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -51,7 +50,6 @@ public class Item : MonoBehaviour {
 	void Start () {
 		body = GetComponent<Rigidbody>();
 		coll = GetComponent<Collider>();
-		selectBox.transform.parent = null;
 	}
 	
 	// Update is called once per frame
@@ -61,29 +59,15 @@ public class Item : MonoBehaviour {
 			if (equipper.inventory == this){
 				transform.position = equipper.backpack.position;
 				transform.rotation = equipper.backpack.rotation;
-				selectBox.enabled = false;
 			}
 			else{
 				transform.position = equipper.anchor.position;
 				transform.rotation = equipper.anchor.rotation;
-				selectBox.enabled = false;
 			}
 
 		}
-		else if (type == ItemType.Ranged){
-			if (GetComponent<RangedWeapon>().ammo > 0){
-				selectBox.enabled = true;
-			}
-			else{
-				selectBox.enabled = false;
-			}
-		}
 	}
 
-	void FixedUpdate(){
-		selectBox.transform.eulerAngles = new Vector3(90,0,0);
-		selectBox.transform.position = transform.position;
-	}
 
 	/// <summary>
 	/// To use this item, call this.

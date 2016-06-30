@@ -97,7 +97,7 @@ public class RangedWeapon : MonoBehaviour {
 			Vector3 angle = new Vector3(transform.forward.x + (Random.Range(-spread, spread)),0, transform.forward.z + (Random.Range(-spread, spread))).normalized;
 			firedBullet.GetComponent<Bullet>().Fire(angle * muzzleVelocity);
 			firedBullet.GetComponent<Bullet>().owner = GetComponent<Item>().equipper;
-			//Instantiate(muzzleFlash, new Vector3(muzzle.position.x, muzzle.position.y, -3), muzzle.rotation);
+			Instantiate(muzzleFlash, muzzle.position, muzzle.rotation);
 		}
 	}
 

@@ -6,7 +6,13 @@ public class PlayerController : MonoBehaviour {
 	Contestant contestant;
 	Vector3 pos, moveDir;
 	Rigidbody body;
+
+	[Header("Settings")]
 	public bool smoothed;
+	public float cameraDistance;
+
+	[Header("something else")]
+
 	float gravity = 20.0f;
 
 	// Use this for initialization
@@ -20,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 		MouseControls();
 		KeyboardControls();
 		FaceMouse();
-		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y+10, transform.position.z);
+		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y+cameraDistance, transform.position.z);
 	}
 
 	void MouseControls(){
