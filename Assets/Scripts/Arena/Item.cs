@@ -120,7 +120,6 @@ public class Item : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision c){
-		Debug.Log(c.gameObject);
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
 				if(c.gameObject.tag == "Contestant"){

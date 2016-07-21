@@ -46,7 +46,7 @@ public class AIController : MonoBehaviour {
 		else{
 			findClosestEnemy ();
 			FaceTarget();
-			if(!RaycastForward(50)){
+			if(RaycastForward(50)){
 				c.UseEquipped(true);
 				c.UseEquipped(false);
 			}
@@ -94,30 +94,40 @@ public class AIController : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Retruns true if the raycast hits a wall
+	/// Retruns true if the raycast hits a contestant
 	/// </summary>
 	/// <returns><c>true</c>, if forward was raycasted, <c>false</c> otherwise.</returns>
 	/// <param name="distance">Distance.</param>
 	bool RaycastForward(float distance){
 		Debug.DrawRay(transform.position, transform.forward * distance);
-		RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, distance);
-		//For all the colliders we hit
-		for(int i = 0; i < hits.Length; i++){
-			RaycastHit hit = hits[i];
-			//If we hit ourselves, throw a debug message and skip
-			if(hit.collider == this.gameObject.GetComponent<Collider>()){
-				continue; //skips
-			}
-			//If we hit something else, stop looking through the hits.
-			else{
-				//If the something else we hit was a contestant, let's try to shoot.
-				if (hit.collider.tag == "Wall") { //THOMAS: Tried changing this to if hit contestant then false but that didn't work either.
-					return true;
-				}
-				
-			}
-			return false; //ends the for loop
+		RaycastHit hit;
+		Ray r = new Ray(transform.position, transform.forward);
+		Physics.Raycast(r, out hit, distance);
+		Debug.Log("Hit " + hit.collider.name);
+		if(hit.collider.tag == "Contestant"){
+			return true;
 		}
-		return false;
+		else{
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// Check if we are facing our target directly.
+	/// </summary>
+	/// <returns><c>true</c>, if we are looking directly at our target, <c>false</c> otherwise.</returns>
+	/// <param name="losTarget">Los target.</param>
+	bool LineOfSight(Collider losTarget){
+		Debug.DrawRay(transform.position, transform.forward * distance);
+		RaycastHit hit;
+		Ray r = new Ray(transform.position, transform.forward);
+		Physics.Raycast(r, out hit, distance);
+		Debug.Log("Hit " + hit.collider.name);
+		if(hit.collider == losTarget){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }
