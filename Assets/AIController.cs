@@ -30,7 +30,7 @@ public class AIController : MonoBehaviour {
 		//followingTarget = 0; //sets target to be following
 		contestants = FindObjectsOfType<Contestant>();
 		weapons = FindObjectsOfType<RangedWeapon> ();
-		findClosestWeapon ();
+		//findClosestWeapon ();
 
 		agent = GetComponent<NavMeshAgent>();
 		destination = targetPos;
@@ -74,18 +74,19 @@ public class AIController : MonoBehaviour {
 	}
 
 	public void findClosestWeapon() {
+		weapons = FindObjectsOfType<RangedWeapon>();
 		closestDistance = 100.0f;
-		for (int i = 0; i < contestants.Length; i++) {
-			if (contestants[i] == GetComponent<Contestant>() || !contestants[i].isAlive) {
+		for (int i = 0; i < weapons.Length; i++) {
+			if (weapons[i].GetComponent<RangedWeapon>().ammo == 0) {
 				continue;
 			}
-			distance = Vector3.Distance (contestants[i].transform.position, transform.position);//find distance between enemy and self
+			distance = Vector3.Distance (weapons[i].transform.position, transform.position);
 			if (distance <= closestDistance) {
 				closestDistance = distance;
-				closestWeapon = i; //for referencing the chosen enemy
+				closestWeapon = i;
 			}
 		}
-		targetPos = contestants[closestWeapon].transform;
+		targetPos = weapons[closestWeapon].transform;
 	}
 
 	void FaceTarget(){
@@ -103,16 +104,17 @@ public class AIController : MonoBehaviour {
 		//For all the colliders we hit
 		for(int i = 0; i < hits.Length; i++){
 			RaycastHit hit = hits[i];
-			//If we hit ourselves, thor a debug message and skip
+			//If we hit ourselves, throw a debug message and skip
 			if(hit.collider == this.gameObject.GetComponent<Collider>()){
 				continue; //skips
 			}
 			//If we hit something else, stop looking through the hits.
 			else{
 				//If the something else we hit was a contestant, let's try to shoot.
-				if (hit.collider.tag == "Wall") {
+				if (hit.collider.tag == "Wall") { //THOMAS: Tried changing this to if hit contestant then false but that didn't work either.
 					return true;
 				}
+				
 			}
 			return false; //ends the for loop
 		}
