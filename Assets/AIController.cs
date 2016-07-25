@@ -6,21 +6,29 @@ using System.Collections.Generic;
 /// This is a very basic use of navmesh agents to pathfind towards the player constantly
 /// </summary>
 public class AIController : MonoBehaviour {
+	public enum AIState{Searching, Hunting, Fighting, Fleeing};
 
 	NavMeshAgent agent;
-	Transform destination;
 
-	private Transform targetPos;
+	private Vector3 destination;
 	float distance;
 	float closestDistance;
 	int closestEnemy;
 	int closestWeapon;
 	Contestant c;
 
+	//just for testing
+	public Vector3 project,rand,center,towardsCenter;
+
 	private Contestant[] contestants;
 	private RangedWeapon[] weapons;
 
+	[Range(-1,1)]
+	public float confidence;
+	public AIState state;
+
 	//These are the FOV variables
+	[Header("FOV Varibales")]
 	public float viewRadius;
 	[Range(0,360)]
 	public float viewAngle;
@@ -28,39 +36,64 @@ public class AIController : MonoBehaviour {
 	public LayerMask obstacleMask;
 	[HideInInspector]
 	public List<Transform> visibleTargets = new List<Transform>();
-	
+
+	void StartHunt(){
+		project = transform.position + transform.forward.normalized * 3.0f;
+		Vector2 randomCircle = Random.insideUnitCircle;
+		rand = project + new Vector3(randomCircle.x,0,randomCircle.y)*3.0f;
+		center = new Vector3(-5f,1.63f,-35.2f);
+		towardsCenter = rand + (center - rand).normalized;
+		//towardsCenter = towardsCenter * confidence;
+		NavMeshPath path = new NavMeshPath();
+		if(NavMesh.CalculatePath(transform.position, towardsCenter, NavMesh.AllAreas, path)){
+			destination = towardsCenter;
+		}
+		else{
+			StartHunt();
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
-
+		StartHunt();
 		c = GetComponent<Contestant>();
 		closestDistance = 1000.0f;
 		//followingTarget = 0; //sets target to be following
 		contestants = FindObjectsOfType<Contestant>();
 		weapons = FindObjectsOfType<RangedWeapon> ();
 		//findClosestWeapon ();
-
 		agent = GetComponent<NavMeshAgent>();
-		destination = targetPos;
 		//Vector3 fwd = transform.TransformDirection (Vector3.forward);
 		//Runs FOV processes on a delay
-		StartCoroutine ("FindTargetsWithDelay", .5f);
+		//StartCoroutine ("FindTargetsWithDelay", .5f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(c.equipped == null){
-			findClosestWeapon();
+			//findClosestWeapon();
 			//FaceTarget();
 		}
 		else{
-			findClosestEnemy ();
+			//findClosestEnemy ();
 			//FaceTarget();
 			if(c.GetAmmo() == 0){
 				c.ThrowEquipped();
 			}
 		}
-		destination = targetPos;
-		agent.destination = destination.position;
+
+		switch (state){
+			case AIState.Searching:
+				break;
+			case AIState.Hunting:
+				Hunting();
+				break;
+			case AIState.Fighting:
+				break;
+			case AIState.Fleeing:
+				break;
+		}
+		agent.destination = destination;
 	}
 
 	public void findClosestEnemy() {
@@ -75,7 +108,7 @@ public class AIController : MonoBehaviour {
 				closestEnemy = i; //for referencing the chosen enemy
 			}
 		}
-		targetPos = contestants[closestEnemy].transform;
+		destination = contestants[closestEnemy].transform.position;
 	}
 
 	public void findClosestWeapon() {
@@ -91,7 +124,7 @@ public class AIController : MonoBehaviour {
 				closestWeapon = i;
 			}
 		}
-		targetPos = weapons[closestWeapon].transform;
+		destination = weapons[closestWeapon].transform.position;
 	}
 		
 	//FOV METHODS - THOMAS F
@@ -176,5 +209,23 @@ public class AIController : MonoBehaviour {
 		else{
 			return false;
 		}
+	}
+
+	void OnDrawGizmos(){
+		Gizmos.DrawCube(project, Vector3.one * 0.1f);
+		Gizmos.DrawCube(rand, Vector3.one * 0.1f);
+		Gizmos.DrawLine(project,rand);
+		Gizmos.DrawLine(transform.position, project);
+		Gizmos.DrawCube(towardsCenter, Vector3.one * 0.1f);
+		Gizmos.DrawLine(rand,towardsCenter);
+		Gizmos.color = Color.red;
+		Gizmos.DrawLine(transform.position, towardsCenter);
+	}
+
+	void Hunting(){
+		if(agent.remainingDistance < 1.0f){
+			StartHunt();
+		}
+
 	}
 }
