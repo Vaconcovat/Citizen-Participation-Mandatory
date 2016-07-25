@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// This is a very basic use of navmesh agents to pathfind towards the player constantly
@@ -19,8 +20,14 @@ public class AIController : MonoBehaviour {
 	private Contestant[] contestants;
 	private RangedWeapon[] weapons;
 
-	//StartCoroutine ("updatePath");
-
+	//These are the FOV variables
+	public float viewRadius;
+	[Range(0,360)]
+	public float viewAngle;
+	public LayerMask targetMask;
+	public LayerMask obstacleMask;
+	[HideInInspector]
+	public List<Transform> visibleTargets = new List<Transform>();
 	
 	// Use this for initialization
 	void Start () {
@@ -35,21 +42,19 @@ public class AIController : MonoBehaviour {
 		agent = GetComponent<NavMeshAgent>();
 		destination = targetPos;
 		//Vector3 fwd = transform.TransformDirection (Vector3.forward);
+		//Runs FOV processes on a delay
+		StartCoroutine ("FindTargetsWithDelay", .5f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(c.equipped == null){
 			findClosestWeapon();
-			FaceTarget();
+			//FaceTarget();
 		}
 		else{
 			findClosestEnemy ();
-			FaceTarget();
-			if(RaycastForward(50)){
-				c.UseEquipped(true);
-				c.UseEquipped(false);
-			}
+			//FaceTarget();
 			if(c.GetAmmo() == 0){
 				c.ThrowEquipped();
 			}
@@ -88,10 +93,52 @@ public class AIController : MonoBehaviour {
 		}
 		targetPos = weapons[closestWeapon].transform;
 	}
-
-	void FaceTarget(){
-		transform.LookAt (targetPos);
+		
+	//FOV METHODS - THOMAS F
+	IEnumerator FindTargetsWithDelay(float delay){
+		while (true) {
+			yield return new WaitForSeconds (delay);
+			FindVisibleTargets ();
+		}
 	}
+
+	void FindVisibleTargets() {
+		visibleTargets.Clear ();
+		//Defines a list of targets within a certain radius of the individual
+		Collider[] targetsInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
+		//Go through that list
+		for(int i = 0; i < targetsInViewRadius.Length; i++){
+			Transform target = targetsInViewRadius [i].transform;
+			Vector3 dirToTarget = (target.position - transform.position).normalized;
+			//Check if the target is within our view angle
+			if (Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2) {
+				float dstToTarget = Vector3.Distance (transform.position, target.position);
+				//Check if there is an obstacle between ourselves and our target
+				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
+					//Do something when enemy is in view
+					visibleTargets.Add(target);
+					transform.LookAt (target);
+					if(RaycastForward(50)) {
+						c.UseEquipped (true);
+						c.UseEquipped (false);
+					}
+				}
+			}
+		}
+	}
+
+	public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal) {
+		if (!angleIsGlobal) {
+			angleInDegrees += transform.eulerAngles.y;
+		}
+		return new Vector3(Mathf.Sin (angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos (angleInDegrees * Mathf.Deg2Rad));
+	}
+
+//	void FaceTarget(){
+//		transform.LookAt (targetPos);
+//	}
+
+	
 
 	/// <summary>
 	/// Retruns true if the raycast hits a contestant
