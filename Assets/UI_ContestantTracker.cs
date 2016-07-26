@@ -10,6 +10,7 @@ public class UI_ContestantTracker : MonoBehaviour {
 	Canvas c;
 	Vector2 size;
 	Text healthText;
+	AIController ai;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class UI_ContestantTracker : MonoBehaviour {
 		c = FindObjectOfType<Canvas>();
 		size = c.GetComponent<RectTransform>().sizeDelta;
 		healthText = GetComponentInChildren<Text>();
+		ai = contest.GetComponent<AIController>();
 	}
 
 	// Update is called once per frame
@@ -26,7 +28,7 @@ public class UI_ContestantTracker : MonoBehaviour {
 		float y = (pos.y / Screen.height) * size.y * c.transform.localScale.y;
 		rTrans.position = new Vector3(x,y);
 
-		healthText.text = "Health: " + contest.health.ToString() + "%";
+		healthText.text = "Health: " + contest.health.ToString() + "%\nStatus: " + ai.state.ToString() + "\nConfidence: " + ai.confidence.ToString("F2") + "\nThreat: " + contest.equipped.threat.ToString();
 
 		if(!contest.isAlive){
 			Destroy(gameObject);

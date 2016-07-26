@@ -40,6 +40,8 @@ public class Item : MonoBehaviour {
 	/// </summary>
 	public Contestant equipper;
 
+	[Range(0,1)]
+	public float threat;
 
 	Contestant thrower;
 	Rigidbody body;
@@ -66,6 +68,7 @@ public class Item : MonoBehaviour {
 			}
 
 		}
+
 	}
 
 
