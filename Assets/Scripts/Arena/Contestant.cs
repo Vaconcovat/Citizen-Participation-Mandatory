@@ -138,7 +138,10 @@ public class Contestant : MonoBehaviour {
 				float scale = Random.Range(0.08f,0.2f);
 				blood.transform.localScale = new Vector3(scale,scale,1);
 				if(isPlayer){
-					FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 4.0f;
+					FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 2.0f;
+				}
+				else{
+					GetComponent<AIController>().confidence -= (0.01f * damage.damage);
 				}
 			}
 		}

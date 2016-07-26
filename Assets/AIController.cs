@@ -266,8 +266,10 @@ public class AIController : MonoBehaviour {
 				float dstToTarget = Vector3.Distance (transform.position, target.position);
 				//Check if there is an obstacle between ourselves and our target
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
-					//Do something when enemy is in view
-					visibleTargets.Add(target);
+					//if it is an alive contestant
+					if(target.gameObject.GetComponent<Contestant>().isAlive){
+						visibleTargets.Add(target);
+					}
 				}
 			}
 		}

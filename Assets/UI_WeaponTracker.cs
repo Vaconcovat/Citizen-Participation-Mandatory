@@ -34,7 +34,7 @@ public class UI_WeaponTracker : MonoBehaviour {
 
 		if(displayAmmo){
 			if(wep != null){
-				ammoText.text = wep.ammo.ToString() + " / " + wep.Maxammo.ToString();
+				ammoText.text = item.itemName + "\n" + wep.ammo.ToString() + " / " + wep.Maxammo.ToString() + "\nThreat :" + item.threat.ToString();
 			}else{
 				ammoText.text = "--";
 			}

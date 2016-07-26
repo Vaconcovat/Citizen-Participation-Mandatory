@@ -28,7 +28,7 @@ public class UI_ContestantTracker : MonoBehaviour {
 		float y = (pos.y / Screen.height) * size.y * c.transform.localScale.y;
 		rTrans.position = new Vector3(x,y);
 
-		healthText.text = "Health: " + contest.health.ToString() + "%\nStatus: " + ai.state.ToString() + "\nConfidence: " + ai.confidence.ToString("F2") + "\nThreat: " + contest.equipped.threat.ToString();
+		healthText.text = "Health: " + contest.health.ToString() + "%\nStatus: " + ai.state.ToString() + "\nConfidence: " + ai.confidence.ToString("F2");
 
 		if(!contest.isAlive){
 			Destroy(gameObject);
