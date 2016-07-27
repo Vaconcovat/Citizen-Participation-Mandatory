@@ -125,7 +125,6 @@ public class Item : MonoBehaviour {
 	void OnCollisionEnter(Collision c){
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
-				Debug.Log (body.velocity.magnitude);
 				if(c.gameObject.tag == "Contestant"){
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
 						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(Mathf.FloorToInt(body.velocity.magnitude), thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
