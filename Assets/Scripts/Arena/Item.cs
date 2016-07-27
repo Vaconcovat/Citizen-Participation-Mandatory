@@ -46,7 +46,7 @@ public class Item : MonoBehaviour {
 	Contestant thrower;
 	Rigidbody body;
 	Collider coll;
-	float impactVelocityMin = 1000;
+	float impactVelocityMin = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -94,7 +94,7 @@ public class Item : MonoBehaviour {
 		Debug.Log("throwing");
 		thrower = equipper;
 		Unequip();
-		body.AddForce(transform.forward.normalized * 10, ForceMode.Impulse);
+		body.AddForce(transform.forward.normalized * 30, ForceMode.Impulse);
 		body.AddTorque(Random.insideUnitSphere, ForceMode.Impulse);
 	}
 
@@ -125,13 +125,14 @@ public class Item : MonoBehaviour {
 	void OnCollisionEnter(Collision c){
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
+				Debug.Log (body.velocity.magnitude);
 				if(c.gameObject.tag == "Contestant"){
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
-						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(Mathf.FloorToInt(body.velocity.magnitude), thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 					}
 				}
 				else{
-					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(Mathf.FloorToInt(body.velocity.magnitude), thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 				}
 			}
 			else{
