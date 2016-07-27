@@ -33,6 +33,7 @@ public class AIController : MonoBehaviour {
 	public float viewRadius;
 	[Range(0,360)]
 	public float viewAngle;
+	public float detectRaduis;
 	public LayerMask targetMask;
 	public LayerMask obstacleMask;
 	[HideInInspector]
@@ -81,7 +82,7 @@ public class AIController : MonoBehaviour {
 		Vector2 randomCircle = Random.insideUnitCircle;
 		rand = project + new Vector3(randomCircle.x,0,randomCircle.y)*3.0f;
 		center = new Vector3(-5f,1.63f,-35.2f);
-		towardsCenter = rand + ((center - rand).normalized) * confidence;
+		towardsCenter = rand + ((center - rand).normalized) * (confidence*2);
 		NavMeshPath path = new NavMeshPath();
 		if(NavMesh.CalculatePath(transform.position, towardsCenter, NavMesh.AllAreas, path)){
 			destination = towardsCenter;
@@ -127,7 +128,7 @@ public class AIController : MonoBehaviour {
 		Vector2 randomCircle = Random.insideUnitCircle;
 		rand = project + new Vector3(randomCircle.x,0,randomCircle.y)*5.0f;
 		center = new Vector3(-5f,1.63f,-35.2f);
-		towardsCenter = rand + ((center - rand).normalized) * confidence;
+		towardsCenter = rand + ((center - rand).normalized) * (confidence*2);
 		NavMeshPath path = new NavMeshPath();
 		if(NavMesh.CalculatePath(transform.position, towardsCenter, NavMesh.AllAreas, path)){
 			destination = towardsCenter;
@@ -267,18 +268,35 @@ public class AIController : MonoBehaviour {
 		visibleTargets.Clear ();
 		//Defines a list of targets within a certain radius of the individual
 		Collider[] targetsInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
-		//Go through that list
+
 		for(int i = 0; i < targetsInViewRadius.Length; i++){
+			//make sure we are not detecing ourselves
 			Transform target = targetsInViewRadius [i].transform;
 			Vector3 dirToTarget = (target.position - transform.position).normalized;
-			//Check if the target is within our view angle
-			if (Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2) {
-				float dstToTarget = Vector3.Distance (transform.position, target.position);
+			float dstToTarget = Vector3.Distance (transform.position, target.position);
+			//are they close enough?
+			if (dstToTarget < detectRaduis){
 				//Check if there is an obstacle between ourselves and our target
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
 					//if it is an alive contestant
 					if(target.gameObject.GetComponent<Contestant>().isAlive){
-						visibleTargets.Add(target);
+						//make sure we don't detect ourselves
+						if(target != transform){
+							visibleTargets.Add(target);
+						}
+					}
+				}
+			}
+			//Check if the target is within our view angle
+			else if (Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2) {
+				//Check if there is an obstacle between ourselves and our target
+				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
+					//if it is an alive contestant
+					if(target.gameObject.GetComponent<Contestant>().isAlive){
+						//make sure we don't detect ourselves
+						if(target != transform){
+							visibleTargets.Add(target);
+						}
 					}
 				}
 			}
