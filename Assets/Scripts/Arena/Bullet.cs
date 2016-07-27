@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour {
 			case MovementType.Standard:
 				break;
 			case MovementType.Zany:
-				//Zany();
+				Zany();
 				break;
 		}
 		lifetime -= Time.deltaTime;
@@ -92,7 +92,7 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void Zany(){
-		//body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.2f, ForceMode2D.Impulse);
+		body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.5f, ForceMode.Impulse);
 		//transform.localScale = new Vector3(Mathf.Cos(Time.frameCount/10), Mathf.Cos(Time.frameCount/10), 1) * 0.5f;
 	}
 }

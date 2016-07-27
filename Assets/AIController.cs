@@ -146,6 +146,11 @@ public class AIController : MonoBehaviour {
 			StartFlee();
 			Debug.Log("I see somebody while fleeing, fleeing even more");
 		}
+
+		//if our gun runs out of ammo, throw it away
+		if(c.GetAmmo() == 0){
+			c.ThrowEquipped();
+		}
 	}
 
 	void StartSearch(){
@@ -217,6 +222,11 @@ public class AIController : MonoBehaviour {
 		//if our gun runs out of ammo, throw it away
 		if(c.GetAmmo() == 0){
 			c.ThrowEquipped();
+		}
+
+		//if our target dies, gain confidence and move on
+		if(!engagedTarget.isAlive){
+			StartHunt ();
 		}
 	}
 
