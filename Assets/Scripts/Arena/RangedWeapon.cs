@@ -94,10 +94,10 @@ public class RangedWeapon : MonoBehaviour {
 		audio.Play ();
 		for (int i = 0; i < bulletsPerShot; i++){
 			GameObject firedBullet = (GameObject)Instantiate(bullet, muzzle.position, muzzle.rotation);
-			Vector2 angle = new Vector2(transform.right.x + (Random.Range(-spread, spread)), transform.right.y + (Random.Range(-spread, spread))).normalized;
+			Vector3 angle = new Vector3(transform.forward.x + (Random.Range(-spread, spread)),0, transform.forward.z + (Random.Range(-spread, spread))).normalized;
 			firedBullet.GetComponent<Bullet>().Fire(angle * muzzleVelocity);
 			firedBullet.GetComponent<Bullet>().owner = GetComponent<Item>().equipper;
-			Instantiate(muzzleFlash, new Vector3(muzzle.position.x, muzzle.position.y, -3), muzzle.rotation);
+			Instantiate(muzzleFlash, muzzle.position, muzzle.rotation);
 		}
 	}
 

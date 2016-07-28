@@ -12,7 +12,7 @@ public class SkillCoolDown : MonoBehaviour {
 	public KeyCode Ability4;
 	public KeyCode Ability5;
 	public Contestant player;
-
+	public GameObject weaponTrackerUI, contestantTrackerUI;
 
 	void FixedUpdate()
 	{
@@ -21,6 +21,10 @@ public class SkillCoolDown : MonoBehaviour {
 			//If the ability is not currently cooling down
 			if (skills [0].currentCooldown >= skills [0].cooldown) 
 			{
+				//Fill up the player's weapon
+				if(player.equipped == null){
+					return;
+				}
 				if (player.equipped.GetComponent<RangedWeapon> ().ammo < player.equipped.GetComponent<RangedWeapon> ().Maxammo) 
 				{
 					player.equipped.GetComponent<RangedWeapon> ().AddAmmo (player.equipped.GetComponent<RangedWeapon> ().Maxammo - player.equipped.GetComponent<RangedWeapon> ().ammo);
@@ -34,7 +38,14 @@ public class SkillCoolDown : MonoBehaviour {
 			//If the ability is not currently cooling down
 			if (skills [1].currentCooldown >= skills [1].cooldown) 
 			{
-				//Whatever Skill 1 Does
+				//Display info about all weapons
+				Item[] items = FindObjectsOfType<Item>();
+				foreach (Item i in items){
+					GameObject spawned = (GameObject)Instantiate(weaponTrackerUI);
+					spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+					UI_WeaponTracker tracker = spawned.GetComponent<UI_WeaponTracker>();
+					tracker.item = i;
+				}
 				skills [1].currentCooldown = 0;
 			}
 		}
@@ -44,7 +55,15 @@ public class SkillCoolDown : MonoBehaviour {
 			//If the ability is not currently cooling down
 			if (skills [2].currentCooldown >= skills [2].cooldown) 
 			{
-				//Whatever Skill 1 Does
+				Contestant[] contestants = FindObjectsOfType<Contestant>();
+				foreach (Contestant c in contestants){
+					if(!c.isPlayer){
+						GameObject spawned = (GameObject)Instantiate(contestantTrackerUI);
+						spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+						UI_ContestantTracker tracker = spawned.GetComponent<UI_ContestantTracker>();
+						tracker.contest = c;
+					}
+				}
 				skills [2].currentCooldown = 0;
 			}
 		}

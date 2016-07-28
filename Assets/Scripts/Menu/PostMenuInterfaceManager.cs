@@ -10,10 +10,10 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public Text govMoneyText, corMoneyText, rebMoneyText;
 	public Image govBar, corBar, rebBar;
 	public Text totalMoney;
-	public AutoType infoText;
+	public AutoType infoText, infoText2;
 	public Image govBarOverlay, corBarOverlay, rebBarOverlay;
 	public Image govBackground, corBackground, rebBackground;
-	public GameObject discpline, back, spend, moneyobject;
+	public GameObject discpline, discpline2, back, spend, moneyobject;
 
 	[Header("Settings")]
 	public float lerpTime;
@@ -63,11 +63,18 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		}
 		else{
 			if (StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100){
-				infoText.displayedText[0] = "One or more RELOCATION OFFERS recieved!\n\n\n\n\n\nYou will be able to accept a relocation offer once you have committed this arena.";
-				infoText.StartType();
-			}
+				//infoText.displayedText[0] = "One or more RELOCATION OFFERS recieved!\n\n\n\n\n\nYou will be able to accept a relocation offer once you have committed this arena.";
+				//infoText.StartType();
+                infoText2.displayedText[0] = "You have recieved a 100% arena satisfaction report.\nOne or more RELOCATION OFFERS received for your efforts.\n\nGovorNet Systems takes this matter very\nseriously. We do not issue warnings. You cannot\nmake an appeal to these awards.\n\nPlease connect to the GovorNet Department of Ceremonies\nfor awarding. Do not disconnect from GovorNet systems. \nDo not power off this machine.\n\nFailure to follow these instructions will result in no awards.";
+                infoText2.StartType();
+                discpline2.SetActive(true);
+                back.SetActive(false);
+                spend.SetActive(false);
+                moneyobject.SetActive(false);
+            }
 			discpline.SetActive(false);
-		}
+            discpline2.SetActive(false);
+        }
 
 
 	}

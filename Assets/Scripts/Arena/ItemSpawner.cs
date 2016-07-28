@@ -36,7 +36,6 @@ public class ItemSpawner : MonoBehaviour {
 		else{
 			Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
 		}
-		GetComponent<SpriteRenderer>().enabled = false;
 		if(respawning){
 			StartCoroutine("respawn");
 		}
@@ -52,7 +51,7 @@ public class ItemSpawner : MonoBehaviour {
 		while(true){
 			yield return new WaitForSeconds(timer);
 			GameObject spawned = (GameObject)Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
-			spawned.GetComponent<Rigidbody2D>().AddTorque(3);
+			spawned.GetComponent<Rigidbody>().AddTorque(Random.onUnitSphere*10);
 		}
 	}
 }

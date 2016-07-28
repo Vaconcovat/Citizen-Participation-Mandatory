@@ -33,7 +33,6 @@ public class Item : MonoBehaviour {
 	/// The sprite that the cursor changes to while this item is equipped
 	/// </summary>
 	public Texture2D cursor;
-	public SpriteRenderer selectBox;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -41,16 +40,18 @@ public class Item : MonoBehaviour {
 	/// </summary>
 	public Contestant equipper;
 
+	[Range(0,1)]
+	public float threat;
 
 	Contestant thrower;
-	Rigidbody2D body;
-	Collider2D coll;
+	Rigidbody body;
+	Collider coll;
 	float impactVelocityMin = 10;
 
 	// Use this for initialization
 	void Start () {
-		body = GetComponent<Rigidbody2D>();
-		coll = GetComponent<Collider2D>();
+		body = GetComponent<Rigidbody>();
+		coll = GetComponent<Collider>();
 	}
 	
 	// Update is called once per frame
@@ -60,24 +61,16 @@ public class Item : MonoBehaviour {
 			if (equipper.inventory == this){
 				transform.position = equipper.backpack.position;
 				transform.rotation = equipper.backpack.rotation;
-				selectBox.enabled = false;
 			}
 			else{
 				transform.position = equipper.anchor.position;
 				transform.rotation = equipper.anchor.rotation;
-				selectBox.enabled = false;
 			}
 
 		}
-		else if (type == ItemType.Ranged){
-			if (GetComponent<RangedWeapon>().ammo > 0){
-				selectBox.enabled = true;
-			}
-			else{
-				selectBox.enabled = false;
-			}
-		}
+
 	}
+
 
 	/// <summary>
 	/// To use this item, call this.
@@ -98,10 +91,11 @@ public class Item : MonoBehaviour {
 	}
 
 	public void Throw(){
+		Debug.Log("throwing");
 		thrower = equipper;
 		Unequip();
-		body.AddForce(transform.right.normalized * 10, ForceMode2D.Impulse);
-		body.AddTorque(1, ForceMode2D.Impulse);
+		body.AddForce(transform.forward.normalized * 30, ForceMode.Impulse);
+		body.AddTorque(Random.insideUnitSphere, ForceMode.Impulse);
 	}
 
 	public void Equip(Contestant contestant){
@@ -110,6 +104,7 @@ public class Item : MonoBehaviour {
 		contestant.cooldownCounter = contestant.pickupCooldown;
 		contestant.equipped = this;
 		coll.enabled = false;
+		body.useGravity = false;
 		body.isKinematic = true;
 		if(equipper.isPlayer){
 			Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
@@ -123,19 +118,20 @@ public class Item : MonoBehaviour {
 		equipper.equipped = null;
 		equipper = null;
 		coll.enabled = true;
+		body.useGravity = true;
 		body.isKinematic = false;
 	}
 
-	void OnCollisionEnter2D(Collision2D c){
+	void OnCollisionEnter(Collision c){
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
 				if(c.gameObject.tag == "Contestant"){
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
-						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(Mathf.FloorToInt(body.velocity.magnitude), thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 					}
 				}
 				else{
-					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(10, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(Mathf.FloorToInt(body.velocity.magnitude), thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 				}
 			}
 			else{

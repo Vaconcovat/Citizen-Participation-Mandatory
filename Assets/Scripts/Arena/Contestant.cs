@@ -38,11 +38,11 @@ public class Contestant : MonoBehaviour {
 	public GameObject bloodSplatter;
 	public Transform backpack;
 
-	[Header("SPRITES")]
-	public Sprite unarmedSprite;
-	public Sprite rifleSprite;
-	public Sprite pistolSprite;
-	public Sprite corpse;
+	//[Header("SPRITES")]
+	//public Sprite unarmedSprite;
+	//public Sprite rifleSprite;
+	//public Sprite pistolSprite;
+	//public Sprite corpse;
 
 	[Header("Runtime Only")]
 	/// <summary>
@@ -68,18 +68,22 @@ public class Contestant : MonoBehaviour {
 	public Item inventory;
     float baseSpeed;
 
-    Rigidbody2D body;
-	Collider2D coll;
-	SpriteRenderer spr;
+    Rigidbody body;
+	Collider coll;
+	//SpriteRenderer spr;
 	public Transform anchor;
 
 	// Use this for initialization
 	void Start () {
-		body = GetComponent<Rigidbody2D>();
-		coll = GetComponent<Collider2D>();
-		spr = GetComponent<SpriteRenderer>();
+		body = GetComponent<Rigidbody>();
+		coll = GetComponent<Collider>();
+		//spr = GetComponent<SpriteRenderer>();
 		health = maxHealth;
         baseSpeed = movespeed;
+        //temp change color for enemies
+        if(!isPlayer){
+        	GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
 	}
 	
 	// Update is called once per frame
@@ -88,17 +92,17 @@ public class Contestant : MonoBehaviour {
 			if (equipped != null){
 				switch(equipped.stance){
 					case Item.Stance.Pistol:
-						spr.sprite = pistolSprite;
+						//spr.sprite = pistolSprite;
 						anchor = anchor_pistol;
 						break;
 					case Item.Stance.Rifle:
-						spr.sprite = rifleSprite;
+						//spr.sprite = rifleSprite;
 						anchor = anchor_rifle;
 						break;
 				}
 			}
 			else{
-				spr.sprite = unarmedSprite;
+				//spr.sprite = unarmedSprite;
 				if(cooldownCounter > 0){
 					cooldownCounter -= Time.deltaTime;
 				}
@@ -109,7 +113,7 @@ public class Contestant : MonoBehaviour {
             }
 		}
 		else{
-			spr.sprite = corpse;
+			//spr.sprite = corpse;
 		}
 		if (health > maxHealth){
 			health = maxHealth;
@@ -121,20 +125,27 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	/// <param name="damage"></param>
 	public void TakeDamage(DamageParams damage){
-		health -= damage.damage;
-		body.AddForce(damage.knockback, ForceMode2D.Impulse);
-		if (health <= 0){
-			killer = damage.owner;
-			Die();
-		}
-		if (damage.damage > 0){
-			GameObject blood = (GameObject)Instantiate(bloodSplatter,damage.location,Quaternion.AngleAxis(Random.Range(0f,360f),Vector3.forward));
-			float scale = Random.Range(0.08f,0.2f);
-			blood.transform.localScale = new Vector3(scale,scale,1);
-			if(isPlayer){
-				FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 4.0f;
+		if(isAlive){
+			health -= damage.damage;
+			body.AddForce(damage.knockback, ForceMode.Impulse);
+				
+			if (health <= 0){
+				killer = damage.owner;
+				Die();
+			}	
+			if (damage.damage > 0){
+				GameObject blood = (GameObject)Instantiate(bloodSplatter,new Vector3(damage.location.x,0.1f,damage.location.z),Quaternion.Euler(90,Random.Range(0f,360f),0));
+				float scale = Random.Range(0.08f,0.2f);
+				blood.transform.localScale = new Vector3(scale,scale,1);
+				if(isPlayer){
+					FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 2.0f;
+				}
+				else{
+					GetComponent<AIController>().confidence -= (0.01f * damage.damage);
+				}
 			}
 		}
+	
 	}
 
 	/// <summary>
@@ -142,8 +153,8 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public void Die(){
 		if (!isPlayer){
-			GetComponent<Unit>().StopAllCoroutines();
-			GetComponent<Unit>().enabled = false;
+			GetComponent<AIController>().enabled = false;
+			GetComponent<NavMeshAgent>().enabled = false;
 			FindObjectOfType<RoundManager>().Death();
 		}
 		else{
@@ -162,10 +173,10 @@ public class Contestant : MonoBehaviour {
 		}
 		equipped = null;
 		if (killer != FindObjectOfType<PlayerController>().GetComponent<Contestant>()){
-			GetComponent<SpriteRenderer>().color = Color.white;
+			GetComponent<MeshRenderer>().material.color = Color.white;
 		}
 		else{
-			GetComponent<SpriteRenderer>().color = Color.yellow;
+			GetComponent<MeshRenderer>().material.color = Color.yellow;
 		}
 		
 	}
@@ -204,12 +215,6 @@ public class Contestant : MonoBehaviour {
 		Item temp = equipped;
 		equipped = inventory;
 		inventory = temp;
-		if(inventory != null){
-			inventory.GetComponent<SpriteRenderer>().enabled = false;
-		}
-		if(equipped != null){
-			equipped.GetComponent<SpriteRenderer>().enabled = true;
-		}
 	}
 
 	/// <summary>
@@ -218,11 +223,11 @@ public class Contestant : MonoBehaviour {
 	public class DamageParams{
 		public int damage;
 		public Contestant owner;
-		public Vector2 knockback;
-		public Vector2 location;
+		public Vector3 knockback;
+		public Vector3 location;
 
 		//Constructor
-		public DamageParams(int damage, Contestant owner, Vector2 knockback, Vector2 location){
+		public DamageParams(int damage, Contestant owner, Vector3 knockback, Vector3 location){
 			this.damage = damage;
 			this.owner = owner;
 			this.location = location;
