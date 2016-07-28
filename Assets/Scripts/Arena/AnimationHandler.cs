@@ -4,31 +4,31 @@ using System.Collections.Generic;
 
 public class AnimationHandler : MonoBehaviour {
 
-	public List<Animation> animations = new List<Animation>();
-	int sizeofList;
+	public KeyCode Button1;
+	public KeyCode Button2;
+	public KeyCode Button3;
+	public KeyCode Button4;
+	public KeyCode Button5;
 
-	// Use this for initialization
-	void Start () {
-		sizeofList = animations.Count;
-
-	}
+	public AnimationClip Animation1;
+	//in addition to attaching this script make sure to attach an animation component with multiple elements
 
 	// Update is called once per frame
-	void Update () {
-		for (int i = 0; i <= sizeofList; i++) 
-		{
-			if (Input.GetKey (animations [i].Button)) {
-				Debug.Log (animations [i].Button); //Testing Purposes right now. but here is where you would tell unity to play the animation
-			}
+	void Update ()
+	{
+		if (Input.GetKey (Button1)) {
+			GetComponent<Animation> ().Play ("run"); //Enter into these brackets the name of the first animation.. eg: "run"
+		} else if (Input.GetKey (Button2)) {
+			GetComponent<Animation> ().Play ("jump"); //Enter into these brackets the name of the second animation.. eg: "jump"
+		} else if (Input.GetKey (Button3)) {
+			GetComponent<Animation> ().Play ("sprint"); //Enter into these brackets the name of the third animation.. eg: "sprint"
+		} else if (Input.GetKey (Button4)) {
+			GetComponent<Animation> ().Play ("walk"); //Enter into these brackets the name of the fourth animation.. eg: "walk"
+		} else if (Input.GetKey (Button5)) {
+			GetComponent<Animation> ().Play ("crouch"); //Enter into these brackets the name of the fifth animation.. eg: "crouch"
+		} else {
+			GetComponent<Animation> ().Play ("idle");
 		}
-	}
-}
 
-[System.Serializable]
-public class Animation
-{
-	[Tooltip("The Key that will need to be pressed to run the animation")]
-	public KeyCode Button; 
-	[Tooltip("The Animation that will be played")]
-	public AnimationClip AnimationToBeRun; 
+	}
 }
