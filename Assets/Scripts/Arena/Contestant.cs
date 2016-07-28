@@ -9,6 +9,11 @@ public class Contestant : MonoBehaviour {
 	/// The name of the contestant.
 	/// </summary>
 	public string contestantName;
+	[Tooltip("This contestant's tidbit")]
+	/// <summary>
+	/// The name of the contestant.
+	/// </summary>
+	public string contestantTidBit;
 	[Tooltip("Their maximum health value")]
 	/// <summary>
 	/// The maximum health of the contestant.
@@ -35,7 +40,7 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public float movespeed;
     
-	public GameObject bloodSplatter;
+	public GameObject bloodSplatter, deathCard;
 	public Transform backpack;
 
 	//[Header("SPRITES")]
@@ -77,12 +82,19 @@ public class Contestant : MonoBehaviour {
 	void Start () {
 		body = GetComponent<Rigidbody>();
 		coll = GetComponent<Collider>();
-		//spr = GetComponent<SpriteRenderer>();
 		health = maxHealth;
         baseSpeed = movespeed;
         //temp change color for enemies
         if(!isPlayer){
         	GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+        ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
+        if(contestantName == ""){
+        	Debug.Log("Test");
+        	contestantName = gen.GetFirstName() + " " + gen.GetLastName();
+        }
+        if(contestantTidBit == ""){
+        	contestantTidBit = gen.GetTidBit();
         }
 	}
 	
@@ -178,6 +190,10 @@ public class Contestant : MonoBehaviour {
 		else{
 			GetComponent<MeshRenderer>().material.color = Color.yellow;
 		}
+		GameObject spawned = (GameObject)Instantiate(deathCard);
+		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		UI_DeathCard tracker = spawned.GetComponent<UI_DeathCard>();
+		tracker.contest = this;
 		
 	}
 

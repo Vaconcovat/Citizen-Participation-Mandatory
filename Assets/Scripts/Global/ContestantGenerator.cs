@@ -32,4 +32,12 @@ public class ContestantGenerator : MonoBehaviour {
 	public string GetFirstName(){
 		return FnameList[Random.Range(0,FnameList.Count)];
 	}
+
+	public string GetLastName(){
+		return LnameList[Random.Range(0,LnameList.Count)];
+	}
+
+	public string GetTidBit(){
+		return TidBitList[Random.Range(0,TidBitList.Count)];
+	}
 }
