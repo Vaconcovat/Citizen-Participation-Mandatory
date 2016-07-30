@@ -21,8 +21,8 @@ public class SponsorsInterface : MonoBehaviour {
 		//TandC.interactable = false;
 		chosenSponsor = -1;
 		activeSponsor = 0;
-		moneyHolder = StaticGameStats.avaliableMoney;
-		embezzledHolder = StaticGameStats.embezzledMoney;
+		moneyHolder = StaticGameStats.moneyHolder;
+		embezzledHolder = StaticGameStats.embezzleHolder;
 	}
 
 	// Update is called once per frame
@@ -74,6 +74,7 @@ public class SponsorsInterface : MonoBehaviour {
 	public void SetSponsor1(){
 		if (chosenSponsor == -1){
 			activeSponsor = 0;
+			StaticGameStats.chosenSponsor = 0;
 			sponsorText.text = "MEGA CITY 1";
 		}
 	}
@@ -81,6 +82,7 @@ public class SponsorsInterface : MonoBehaviour {
 	public void SetSponsor2(){
 		if (chosenSponsor == -1){
 			activeSponsor = 1;
+			StaticGameStats.chosenSponsor = 1;
 			sponsorText.text = "EXPLODENA";
 		}
 	}
@@ -97,6 +99,7 @@ public class SponsorsInterface : MonoBehaviour {
 		StaticGameStats.committed = false;
 		chosenSponsor = -1;
 		activeSponsor = 0;
+		StaticGameStats.chosenSponsor = -1;
 		StaticGameStats.generalUpgrades[0] = false;
 		StaticGameStats.govUpgrades[0] = false;
 		StaticGameStats.corUpgrades[0] = false;
@@ -105,8 +108,8 @@ public class SponsorsInterface : MonoBehaviour {
 		upgradebuttons[1].interactable = true;
 		upgradebuttons[2].interactable = true;
 		upgradebuttons[3].interactable = true;
-		StaticGameStats.avaliableMoney = moneyHolder;
-		StaticGameStats.embezzledMoney = embezzledHolder;
+		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
+		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
 		signedButton.interactable = true;
 		sponsor1Button.interactable = true;
 		sponsor2Button.interactable = true;
@@ -114,7 +117,7 @@ public class SponsorsInterface : MonoBehaviour {
 
 	public void Commit(){
 		StaticGameStats.committed = true;
-		StaticGameStats.sponsor = chosenSponsor;
+		StaticGameStats.sponsor = StaticGameStats.chosenSponsor;
 		//do upgrades here
 		if((StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100)&&StaticGameStats.embezzledMoney >= 100){
 			FindObjectOfType<MenuCamera>().Win();

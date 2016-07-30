@@ -16,6 +16,9 @@ public class StaticGameStats : MonoBehaviour {
 	public static int moneyHolder;
 	public static int embezzleHolder;
 
+	//sponsor variables
+	public static int chosenSponsor = -1;
+
 	//Commit
 	public static bool committed = false;
 	public static bool toPost = false;

@@ -4,12 +4,35 @@ using UnityEngine.UI;
 
 public class UpgradeSponsorInterface : MonoBehaviour {
 
-	public Text moneyText, embezText;
+	public Text moneyText, embezText, sponsorText;
+	public Image gunIcon, gunIcon2;
+	public Button sponsor1Button, sponsor2Button, signedButton, commitButton;
+	public Button[] upgradebuttons;
+	public Sprite[] sponsorGunLogos;
+	public int activeSponsor;
+	public int chosenSponsor;
+
+	// Use this for initialization
+	void Start () {
+		//TandC.interactable = false;
+		chosenSponsor = -1;
+		activeSponsor = 0;
+		StaticGameStats.generalUpgrades[0] = false;
+		StaticGameStats.govUpgrades[0] = false;
+		StaticGameStats.corUpgrades[0] = false;
+		StaticGameStats.rebUpgrades[0] = false;
+	}
 
 	// Update is called once per frame
 	void Update () {
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
 		embezText.text = StaticGameStats.embezzledMoney.ToString();
+		if(StaticGameStats.avaliableMoney == 0 && StaticGameStats.chosenSponsor != -1){
+			commitButton.interactable = true;
+		}
+		else{
+			commitButton.interactable = false;
+		}
 	}
 
 	public void AddMoney(){
@@ -35,5 +58,38 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 				StaticGameStats.embezzledMoney++;
 			}	
 		}
+	}
+
+	public void Revert(){
+		StaticGameStats.committed = false;
+		chosenSponsor = -1;
+		activeSponsor = 0;
+		StaticGameStats.chosenSponsor = -1;
+		StaticGameStats.generalUpgrades[0] = false;
+		StaticGameStats.govUpgrades[0] = false;
+		StaticGameStats.corUpgrades[0] = false;
+		StaticGameStats.rebUpgrades[0] = false;
+		upgradebuttons[0].interactable = true;
+		upgradebuttons[1].interactable = true;
+		upgradebuttons[2].interactable = true;
+		upgradebuttons[3].interactable = true;
+		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
+		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
+		signedButton.interactable = true;
+		sponsor1Button.interactable = true;
+		sponsor2Button.interactable = true;
+	}
+
+	public void Commit(){
+		StaticGameStats.committed = true;
+		StaticGameStats.sponsor = StaticGameStats.chosenSponsor;
+		//do upgrades here
+		if((StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100)&&StaticGameStats.embezzledMoney >= 100){
+			FindObjectOfType<MenuCamera>().Win();
+		}
+		else{
+			FindObjectOfType<MenuCamera>().ZoomedOut();
+		}
+
 	}
 }

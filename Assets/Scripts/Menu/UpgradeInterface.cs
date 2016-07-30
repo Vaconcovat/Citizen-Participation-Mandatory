@@ -109,8 +109,8 @@ public class UpgradeInterface : MonoBehaviour {
 		upgradebuttons[1].interactable = true;
 		upgradebuttons[2].interactable = true;
 		upgradebuttons[3].interactable = true;
-		StaticGameStats.avaliableMoney = moneyHolder;
-		StaticGameStats.embezzledMoney = embezzledHolder;
+		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
+		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
 		signedButton.interactable = true;
 		sponsor1Button.interactable = true;
 		sponsor2Button.interactable = true;
