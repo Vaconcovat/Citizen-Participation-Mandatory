@@ -7,10 +7,10 @@ public class RoundManager : MonoBehaviour {
 	static public int roundNumber = 1;
 	public int totalContestants;
 	public int aliveContestants;
-	public Contestant player;
 	public float roundEndWait;
-	public List<Transform> contestantSpawns;
-
+	public List<Transform> contestantSpawns, outerSpawns;
+	public GameObject guardPrefab;
+	public GameObject guardWeapon;
     public bool autoSpawn;
 
 	Contestant[] contestants;
@@ -47,21 +47,16 @@ public class RoundManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(roundOver){
-			roundEndWait -= Time.deltaTime;
-		}
-		if (roundEndWait <= 0){
-			endRound();
-		}
 		if (aliveContestants == 1){
 			if (!roundOver){
 				roundOver = true;
+				SpawnGuards();
 				Debug.Log(aliveContestants);
 			}
 		}
 	}
 
-	void endRound(){
+	public void endRound(){
 		if (Time.timeSinceLevelLoad < govtime){
 			FindObjectOfType<StaticGameStats>().Influence(0, 5.0f);
 			FindObjectOfType<StaticGameStats>().Influence(2, -2.0f);
@@ -79,5 +74,17 @@ public class RoundManager : MonoBehaviour {
 
 	public void Death(){
 		aliveContestants--;
+	}
+
+	void SpawnGuards(){
+		foreach(Transform t in outerSpawns){
+			GameObject spawnedGuard = (GameObject)Instantiate(guardPrefab, t.position, Quaternion.identity);
+			GameObject spawnedGun = (GameObject)Instantiate(guardWeapon, t.position,Quaternion.identity);
+			spawnedGuard.GetComponent<Contestant>().equipped = spawnedGun.GetComponent<Item>();
+			spawnedGun.GetComponent<Item>().equipper = spawnedGuard.GetComponent<Contestant>();
+			spawnedGuard.GetComponent<AI_GuardController>().job = AI_GuardController.Job.EndRound;
+			spawnedGuard.GetComponent<AI_GuardController>().target = FindObjectOfType<PlayerController>().GetComponent<Contestant>();
+			spawnedGuard.GetComponent<AI_GuardController>().endStatus = AI_GuardController.endRoundStatus.Chase;
+		}
 	}
 }

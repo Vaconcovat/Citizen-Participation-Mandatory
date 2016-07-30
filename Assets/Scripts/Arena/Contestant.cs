@@ -3,7 +3,11 @@ using System.Collections;
 
 public class Contestant : MonoBehaviour {
 
+	public enum ContestantType{Player, AI, Guard, Medic};
+
+
 	[Header("Contestant Settings")]
+	public ContestantType type;
 	[Tooltip("The name of this contestant")]
 	/// <summary>
 	/// The name of the contestant.
@@ -85,7 +89,7 @@ public class Contestant : MonoBehaviour {
 		health = maxHealth;
         baseSpeed = movespeed;
         //temp change color for enemies
-        if(!isPlayer){
+        if(type == ContestantType.AI){
         	GetComponent<MeshRenderer>().material.color = Color.blue;
         }
         ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
@@ -149,11 +153,17 @@ public class Contestant : MonoBehaviour {
 				GameObject blood = (GameObject)Instantiate(bloodSplatter,new Vector3(damage.location.x,0.1f,damage.location.z),Quaternion.Euler(90,Random.Range(0f,360f),0));
 				float scale = Random.Range(0.08f,0.2f);
 				blood.transform.localScale = new Vector3(scale,scale,1);
-				if(isPlayer){
+				if(type == ContestantType.Player){
 					FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 2.0f;
 				}
-				else{
+				else if(type == ContestantType.AI){
 					GetComponent<AIController>().confidence -= (0.01f * damage.damage);
+				}
+				else if(type == ContestantType.Guard){
+					AI_GuardController[] guards = FindObjectsOfType<AI_GuardController>();
+					foreach(AI_GuardController guard in guards){
+						guard.endStatus  = AI_GuardController.endRoundStatus.Fight;
+					}
 				}
 			}
 		}
@@ -164,10 +174,14 @@ public class Contestant : MonoBehaviour {
 	/// Turns this contestant into a corpse.
 	/// </summary>
 	public void Die(){
-		if (!isPlayer){
+		if (type == ContestantType.AI){
 			GetComponent<AIController>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
 			FindObjectOfType<RoundManager>().Death();
+		}
+		else if(type == ContestantType.Guard){
+			GetComponent<AI_GuardController>().enabled = false;
+			GetComponent<NavMeshAgent>().enabled = false;
 		}
 		else{
 			GetComponent<PlayerController>().enabled = false;

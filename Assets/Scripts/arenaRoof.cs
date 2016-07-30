@@ -23,7 +23,7 @@ public bool inArena = true;
 
 	void OnTriggerExit(Collider col){
 		if (col.gameObject.tag == "Contestant"){
-			if(col.gameObject.GetComponent<Contestant>().isPlayer){
+			if(col.gameObject.GetComponent<Contestant>().type == Contestant.ContestantType.Player){
 				if(inArena){
 					roof.SetActive(true);
 					outerRoof.SetActive(false);

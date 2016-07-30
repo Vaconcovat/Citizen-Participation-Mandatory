@@ -57,7 +57,7 @@ public class SkillCoolDown : MonoBehaviour {
 			{
 				Contestant[] contestants = FindObjectsOfType<Contestant>();
 				foreach (Contestant c in contestants){
-					if(!c.isPlayer){
+					if(c.type == Contestant.ContestantType.AI){
 						GameObject spawned = (GameObject)Instantiate(contestantTrackerUI);
 						spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 						UI_ContestantTracker tracker = spawned.GetComponent<UI_ContestantTracker>();

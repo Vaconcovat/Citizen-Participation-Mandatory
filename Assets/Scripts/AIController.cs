@@ -175,9 +175,13 @@ public class AIController : MonoBehaviour {
 
 	public void findClosestWeapon() {
 		weapons = FindObjectsOfType<RangedWeapon>();
+		if(weapons.Length == 0){
+			destination = center;
+			return;
+		}
 		closestDistance = 100.0f;
 		for (int i = 0; i < weapons.Length; i++) {
-			if (weapons[i].GetComponent<RangedWeapon>().ammo == 0) {
+			if (weapons[i].ammo == 0 || weapons[i].GetComponent<Item>().equipper != null) {
 				continue;
 			}
 			distance = Vector3.Distance (weapons[i].transform.position, transform.position);
@@ -227,7 +231,13 @@ public class AIController : MonoBehaviour {
 
 		//if our target dies, gain confidence and move on
 		if(!engagedTarget.isAlive){
+			confidence += 0.2f;
 			StartHunt ();
+		}
+
+		//if we don't have a gun, we can't fight
+		if(c.equipped == null){
+			StartSearch();
 		}
 	}
 
@@ -237,15 +247,23 @@ public class AIController : MonoBehaviour {
 	/// <returns><c>true</c>, if you should engage the target, <c>false</c> otherwise.</returns>
 	/// <param name="target">Target.</param>
 	bool compareTarget(Contestant target){
-		if(c.equipped == null){
-			Debug.Log("I got scared of my target because i have no weapon");
-			return false;
+	float myThreat, theirThreat;
+		if(c.equipped != null){
+			myThreat = c.equipped.threat;
 		}
-		else if(target.equipped == null){
-			Debug.Log("I'm not scared of my target because they have no weapon");
-			return true;
+		else{
+			myThreat = 0;
 		}
-		else if(confidence > -(c.equipped.threat - target.equipped.threat)){
+
+		if(target.equipped != null){
+			theirThreat = target.equipped.threat;
+		}
+		else{
+			theirThreat = 0;
+		}
+
+
+		if(confidence > -(myThreat - theirThreat)){
 			Debug.Log("I'm not scared of my target because my confidence says i'm more threatening");
 			return true;
 		}

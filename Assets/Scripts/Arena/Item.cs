@@ -106,13 +106,13 @@ public class Item : MonoBehaviour {
 		coll.enabled = false;
 		body.useGravity = false;
 		body.isKinematic = true;
-		if(equipper.isPlayer){
+		if(equipper.type == Contestant.ContestantType.Player){
 			Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
 		}
 	}
 
 	public void Unequip(){
-		if(equipper.isPlayer){
+		if(equipper.type == Contestant.ContestantType.Player){
 			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 		}
 		equipper.equipped = null;
