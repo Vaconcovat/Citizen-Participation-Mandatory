@@ -67,4 +67,8 @@ public class MenuCamera : MonoBehaviour {
 	public void Win(){
 		state = 7;
 	}
+
+	public void UpgradeSponsor(){
+		state = 8;
+	}
 }
