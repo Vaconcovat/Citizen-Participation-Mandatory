@@ -6,7 +6,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 
 	public Text moneyText, embezText, sponsorText;
 	public Image gunIcon, gunIcon2;
-	public Button sponsor1Button, sponsor2Button, signedButton, commitButton;
+	public Button signMegaCity1, signExplodena, commitButton;
 	public Button[] upgradebuttons;
 	public Sprite[] sponsorGunLogos;
 	public int activeSponsor;
@@ -80,9 +80,9 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
 		embezText.text = StaticGameStats.embezzledMoney.ToString();
-		signedButton.interactable = true;
-		sponsor1Button.interactable = true;
-		sponsor2Button.interactable = true;
+		signExplodena.interactable = true;
+		signMegaCity1.interactable = true;
+		//need to reset the signed graphics here as well
 	}
 
 	public void Commit(){

@@ -5,8 +5,7 @@ using UnityEngine.UI;
 public class SponsorsInterface : MonoBehaviour {
 
 	public Text moneyText, embezText, sponsorText;
-	public Image gunIcon, gunIcon2;
-	public Button sponsor1Button, sponsor2Button, signedButton, commitButton;
+	public Button signMegaCity, signExplodena, commitButton;
 	public Sprite[] sponsorGunLogos;
 	public int activeSponsor;
 	public int chosenSponsor;
@@ -27,8 +26,6 @@ public class SponsorsInterface : MonoBehaviour {
 	void Update () {
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
 		embezText.text = StaticGameStats.embezzledMoney.ToString();
-		gunIcon.sprite = sponsorGunLogos[StaticGameStats.activeSponsor];
-		gunIcon2.sprite = sponsorGunLogos[StaticGameStats.activeSponsor+2];
 		if(StaticGameStats.avaliableMoney == 0 && StaticGameStats.chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
@@ -62,22 +59,15 @@ public class SponsorsInterface : MonoBehaviour {
 		}
 	}
 
-	public void SetSponsor1(){
-			StaticGameStats.activeSponsor = 0;
-			StaticGameStats.chosenSponsor = 0;
-			sponsorText.text = "MEGA CITY 1";
+	public void SignMegaCity(){
+		StaticGameStats.activeSponsor = 0;
+		StaticGameStats.chosenSponsor = 0;
+		signMegaCity.interactable = false;
 	}
 
-	public void SetSponsor2(){
-			StaticGameStats.activeSponsor = 1;
-			StaticGameStats.chosenSponsor = 1;
-			sponsorText.text = "EXPLODENA";
-	}
-
-	public void Sign(){
-		StaticGameStats.chosenSponsor = StaticGameStats.activeSponsor;
-		signedButton.interactable = false;
-		sponsor1Button.interactable = false;
-		sponsor2Button.interactable = false;
+	public void SignExplodena(){
+		StaticGameStats.activeSponsor = 1;
+		StaticGameStats.chosenSponsor = 1;
+		signExplodena.interactable = false;
 	}
 }
