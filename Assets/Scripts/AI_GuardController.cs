@@ -12,8 +12,11 @@ public class AI_GuardController : MonoBehaviour {
 	public float closingDistance, closingSpeed, speed;
 
 
+	public float minTalkTime;
+
 	NavMeshAgent agent;
 	Contestant c;
+	float talktimer = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +41,7 @@ public class AI_GuardController : MonoBehaviour {
 					Retreat();
 					break;
 			}
+
 		}
 	}
 
@@ -55,6 +59,17 @@ public class AI_GuardController : MonoBehaviour {
 			agent.speed = closingSpeed;
 			if(target.equipped == null){
 				endStatus = endRoundStatus.Capture;
+			}
+			else{
+				if(talktimer <= 0){
+					talktimer = minTalkTime;
+					if(Random.value < 0.5f){
+						c.Say("[Drop the weapon!]");
+					}
+				}
+				else{
+					talktimer -= Time.deltaTime;
+				}
 			}
 		}
 		else{
@@ -105,4 +120,6 @@ public class AI_GuardController : MonoBehaviour {
 			return false;
 		}
 	}
+
+
 }

@@ -20,7 +20,6 @@ public class AIController : MonoBehaviour {
 	//just for testing
 	public Vector3 project,rand,center,towardsCenter;
 
-	private Contestant[] contestants;
 	private RangedWeapon[] weapons;
 
 	[Range(-1,1)]
@@ -43,7 +42,6 @@ public class AIController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		c = GetComponent<Contestant>();
-		contestants = FindObjectsOfType<Contestant>();
 		weapons = FindObjectsOfType<RangedWeapon> ();
 		agent = GetComponent<NavMeshAgent>();
 		agent.speed = c.movespeed;

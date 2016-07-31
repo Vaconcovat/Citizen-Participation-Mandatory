@@ -46,6 +46,8 @@ public class Contestant : MonoBehaviour {
     
 	public GameObject bloodSplatter, deathCard;
 	public Transform backpack;
+	public GameObject UI_Card;
+
 
 	//[Header("SPRITES")]
 	//public Sprite unarmedSprite;
@@ -265,4 +267,12 @@ public class Contestant : MonoBehaviour {
 		}
 	}
 
+	public void Say(string words){
+		GameObject spawned = (GameObject)Instantiate(UI_Card);
+		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		UI_GenericCard card = spawned.GetComponent<UI_GenericCard>();
+		card.text = words;
+		card.lifetime = 3.0f;
+		card.target = transform;
+	}
 }

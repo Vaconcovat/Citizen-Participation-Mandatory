@@ -8,7 +8,7 @@ public class OtherItem : MonoBehaviour {
 	public ItemEffect effect;
 	public float effectAmount;
 	public bool consume;
-	public AudioSource audio;
+	public AudioSource _audio;
 	[Tooltip("How many Uses this Item has.")]
 	/// <summary>
 	/// The ammo.
@@ -20,9 +20,8 @@ public class OtherItem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		audio = GetComponent<AudioSource> ();
+		_audio = GetComponent<AudioSource> ();
 		sr = GetComponent<SpriteRenderer> ();
-	
 	}
 	
 	// Update is called once per frame
@@ -50,7 +49,7 @@ public class OtherItem : MonoBehaviour {
 	void Heal(float amount){
 		GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 		if ((consume) && (ammo > 0)){
-			audio.Play ();
+			_audio.Play ();
 			sr.sprite = ThrownSprite;
 			GetComponent<Item>().Unequip();
 		}
@@ -59,7 +58,7 @@ public class OtherItem : MonoBehaviour {
 	void Speed(float amount){
 		GetComponent<Item>().equipper.movespeed += amount;
 		if ((consume) && (ammo > 0)){
-			audio.Play ();
+			_audio.Play ();
 			sr.sprite = ThrownSprite;
 			GetComponent<Item>().Unequip();
 		}
