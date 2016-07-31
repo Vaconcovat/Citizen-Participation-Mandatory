@@ -18,6 +18,7 @@ public class StaticGameStats : MonoBehaviour {
 
 	//sponsor variables
 	public static int chosenSponsor = -1;
+	public static int activeSponsor;
 
 	//Commit
 	public static bool committed = false;

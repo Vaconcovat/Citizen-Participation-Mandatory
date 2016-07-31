@@ -11,12 +11,14 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	public Sprite[] sponsorGunLogos;
 	public int activeSponsor;
 	public int chosenSponsor;
+	public int availableMoney;
 
 	// Use this for initialization
 	void Start () {
 		//TandC.interactable = false;
-		chosenSponsor = -1;
+		chosenSponsor = StaticGameStats.chosenSponsor;
 		activeSponsor = 0;
+		availableMoney = StaticGameStats.avaliableMoney;
 		StaticGameStats.generalUpgrades[0] = false;
 		StaticGameStats.govUpgrades[0] = false;
 		StaticGameStats.corUpgrades[0] = false;
@@ -25,9 +27,11 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		availableMoney = StaticGameStats.avaliableMoney;
+		chosenSponsor = StaticGameStats.chosenSponsor;
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
 		embezText.text = StaticGameStats.embezzledMoney.ToString();
-		if(StaticGameStats.avaliableMoney == 0 && StaticGameStats.chosenSponsor != -1){
+		if(availableMoney == 0 && chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
 		else{
@@ -62,9 +66,8 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 
 	public void Revert(){
 		StaticGameStats.committed = false;
-		chosenSponsor = -1;
-		activeSponsor = 0;
 		StaticGameStats.chosenSponsor = -1;
+		StaticGameStats.activeSponsor = 0;
 		StaticGameStats.generalUpgrades[0] = false;
 		StaticGameStats.govUpgrades[0] = false;
 		StaticGameStats.corUpgrades[0] = false;
@@ -75,6 +78,8 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		upgradebuttons[3].interactable = true;
 		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
 		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
+		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
+		embezText.text = StaticGameStats.embezzledMoney.ToString();
 		signedButton.interactable = true;
 		sponsor1Button.interactable = true;
 		sponsor2Button.interactable = true;
