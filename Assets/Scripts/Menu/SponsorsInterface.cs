@@ -63,11 +63,13 @@ public class SponsorsInterface : MonoBehaviour {
 		StaticGameStats.activeSponsor = 0;
 		StaticGameStats.chosenSponsor = 0;
 		signMegaCity.interactable = false;
+		signExplodena.interactable = true;
 	}
 
 	public void SignExplodena(){
 		StaticGameStats.activeSponsor = 1;
 		StaticGameStats.chosenSponsor = 1;
 		signExplodena.interactable = false;
+		signMegaCity.interactable = true;
 	}
 }
