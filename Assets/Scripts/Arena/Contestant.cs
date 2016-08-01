@@ -84,6 +84,8 @@ public class Contestant : MonoBehaviour {
 	//SpriteRenderer spr;
 	public Transform anchor;
 
+	GameObject currentTalkCard;
+
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody>();
@@ -268,9 +270,12 @@ public class Contestant : MonoBehaviour {
 	}
 
 	public void Say(string words){
-		GameObject spawned = (GameObject)Instantiate(UI_Card);
-		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
-		UI_GenericCard card = spawned.GetComponent<UI_GenericCard>();
+		if(currentTalkCard != null){
+			Destroy(currentTalkCard);
+		}
+		currentTalkCard = (GameObject)Instantiate(UI_Card);
+		currentTalkCard.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		UI_GenericCard card = currentTalkCard.GetComponent<UI_GenericCard>();
 		card.text = words;
 		card.lifetime = 3.0f;
 		card.target = transform;

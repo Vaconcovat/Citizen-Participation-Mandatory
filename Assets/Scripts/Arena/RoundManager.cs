@@ -86,5 +86,6 @@ public class RoundManager : MonoBehaviour {
 			spawnedGuard.GetComponent<AI_GuardController>().target = FindObjectOfType<PlayerController>().GetComponent<Contestant>();
 			spawnedGuard.GetComponent<AI_GuardController>().endStatus = AI_GuardController.endRoundStatus.Chase;
 		}
+		GetComponent<AudioSource>().Stop();
 	}
 }

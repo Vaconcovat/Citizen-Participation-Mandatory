@@ -21,6 +21,8 @@ public class AIController : MonoBehaviour {
 	public Vector3 project,rand,center,towardsCenter;
 
 	private RangedWeapon[] weapons;
+	[Range(0,1)]
+	public float talkFrequency;
 
 	[Range(-1,1)]
 	public float confidence;
@@ -38,6 +40,7 @@ public class AIController : MonoBehaviour {
 	[HideInInspector]
 	public List<Transform> visibleTargets = new List<Transform>();
 
+	ContestantGenerator cGen;
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +48,7 @@ public class AIController : MonoBehaviour {
 		weapons = FindObjectsOfType<RangedWeapon> ();
 		agent = GetComponent<NavMeshAgent>();
 		agent.speed = c.movespeed;
+		cGen = FindObjectOfType<ContestantGenerator>();
 		StartSearch();
 		StartCoroutine ("FindTargetsWithDelay", .5f);
 	}
@@ -119,6 +123,9 @@ public class AIController : MonoBehaviour {
 		state = AIState.Fleeing;
 		agent.speed = c.movespeed;
 		Flee(engagedTarget.transform.position);
+		if(Random.value < talkFrequency){
+			c.Say(cGen.GetLine(ContestantGenerator.LineType.Retreat));
+		}
 	}
 
 	void Flee(Vector3 scare){
@@ -139,11 +146,6 @@ public class AIController : MonoBehaviour {
 	void Fleeing(){
 		if(agent.remainingDistance < 0.5f){
 			StartHunt();
-		}
-		if(visibleTargets.Count > 0){
-			engagedTarget = visibleTargets[0].gameObject.GetComponent<Contestant>();
-			StartFlee();
-			Debug.Log("I see somebody while fleeing, fleeing even more");
 		}
 
 		//if our gun runs out of ammo, throw it away
@@ -194,6 +196,9 @@ public class AIController : MonoBehaviour {
 	void StartFight(){
 		state = AIState.Fighting;
 		agent.speed = c.movespeed * 0.8f;
+		if(Random.value < talkFrequency){
+			c.Say(cGen.GetLine(ContestantGenerator.LineType.Fight));
+		}
 	}
 
 	void Fighting(){
