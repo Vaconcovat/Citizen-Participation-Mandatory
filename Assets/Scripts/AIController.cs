@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// This is a very basic use of navmesh agents to pathfind towards the player constantly
 /// </summary>
 public class AIController : MonoBehaviour {
-	public enum AIState{Searching, Hunting, Fighting, Fleeing};
+	public enum AIState{Searching, Hunting, Fighting, Fleeing, Beacon};
 
 	NavMeshAgent agent;
 
@@ -68,9 +68,27 @@ public class AIController : MonoBehaviour {
 			case AIState.Fleeing:
 				Fleeing();
 				break;
+			case AIState.Beacon:
+				break;
 		}
 		agent.destination = destination;
 		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
+			StartBeacon();
+		}
+	}
+
+	void StartBeacon(){
+		state = AIState.Beacon;
+		agent.Stop();
+		c.Say("Help me");
+	}
+
+	void Beacon(){
+		if (c.equipped != null){
+			c.equipped.Unequip();
+			c.equipped = null;
+		}
 	}
 
 	void StartHunt(){

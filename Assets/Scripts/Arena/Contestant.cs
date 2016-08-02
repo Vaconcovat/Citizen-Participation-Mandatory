@@ -77,6 +77,7 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	public float cooldownCounter;
 	public Item inventory;
+	public bool beaconActive = false;
     float baseSpeed;
 
     Rigidbody body;

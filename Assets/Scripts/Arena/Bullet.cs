@@ -41,10 +41,14 @@ public class Bullet : MonoBehaviour {
 	public Contestant owner;
 
 	Rigidbody body;
+	Vector3 startPos;
+	float startTime;
 
 	// Use this for initialization
 	void Awake () {
 		body = GetComponent<Rigidbody>();
+		startPos = transform.position;
+		startTime = Time.time;
 	}
 	
 	// Update is called once per frame
@@ -92,7 +96,12 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void Zany(){
-		body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.5f, ForceMode.Impulse);
+		body.velocity = Vector3.zero;
+		startPos += transform.forward * Time.deltaTime * 10;
+		transform.position = startPos + transform.right * Mathf.Sin(15 * (Time.time-startTime)) * 1;
+
+
+		//body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.5f, ForceMode.Impulse);
 		//transform.localScale = new Vector3(Mathf.Cos(Time.frameCount/10), Mathf.Cos(Time.frameCount/10), 1) * 0.5f;
 	}
 }
