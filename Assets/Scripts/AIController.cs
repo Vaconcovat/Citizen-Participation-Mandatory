@@ -162,6 +162,7 @@ public class AIController : MonoBehaviour {
 	}
 
 	void Fleeing(){
+		agent.speed = c.movespeed;
 		if(agent.remainingDistance < 0.5f){
 			StartHunt();
 		}

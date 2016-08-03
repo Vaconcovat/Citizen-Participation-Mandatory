@@ -51,6 +51,9 @@ public class AI_GuardController : MonoBehaviour {
 		if(Vector3.Distance(transform.position, target.transform.position)< 1f){
 			FindObjectOfType<RoundManager>().endRound();
 		}
+		if(target.equipped != null){
+			endStatus = endRoundStatus.Chase;
+		}
 	}
 
 	void Chase(){
