@@ -213,7 +213,9 @@ public class Contestant : MonoBehaviour {
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		UI_DeathCard tracker = spawned.GetComponent<UI_DeathCard>();
 		tracker.contest = this;
-		
+		if(currentTalkCard != null){
+			Destroy(currentTalkCard);
+		}
 	}
 
 	public bool UseEquipped(bool held){

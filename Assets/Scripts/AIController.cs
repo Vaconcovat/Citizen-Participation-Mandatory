@@ -209,7 +209,12 @@ public class AIController : MonoBehaviour {
 				closestWeapon = i;
 			}
 		}
-		destination = weapons[closestWeapon].transform.position;
+		if(closestDistance == 100.0f){
+			destination = center;
+		}
+		else{
+			destination = weapons[closestWeapon].transform.position;
+		}
 	}
 
 	void StartFight(){
