@@ -82,6 +82,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		embezText.text = StaticGameStats.embezzledMoney.ToString();
 		signExplodena.interactable = true;
 		signMegaCity1.interactable = true;
+        commitButton.interactable = false;
 		//need to reset the signed graphics here as well
 	}
 
