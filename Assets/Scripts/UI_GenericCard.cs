@@ -10,6 +10,7 @@ public class UI_GenericCard : MonoBehaviour {
 	/// Set to non-zero to make the card have a limited lifetime
 	/// </summary>
 	public float lifetime;
+	public bool trackOffscreen;
 
 	bool limited;
 	RectTransform rTrans;
@@ -46,6 +47,10 @@ public class UI_GenericCard : MonoBehaviour {
 		Vector3 pos = Camera.main.WorldToScreenPoint(target.position);
 		float x = (pos.x / Screen.width) * size.x * c.transform.localScale.x;
 		float y = (pos.y / Screen.height) * size.y * c.transform.localScale.y;
+		if(trackOffscreen){
+			x = Mathf.Clamp(x,0,c.GetComponent<RectTransform>().rect.width * c.scaleFactor);
+			y = Mathf.Clamp(y,0,c.GetComponent<RectTransform>().rect.height * c.scaleFactor);
+		}
 		rTrans.position = new Vector3(x,y);
 	}
 }

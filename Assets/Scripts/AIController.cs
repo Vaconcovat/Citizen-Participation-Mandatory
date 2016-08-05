@@ -19,6 +19,7 @@ public class AIController : MonoBehaviour {
 
 	//just for testing
 	public Vector3 project,rand,center,towardsCenter;
+	public GameObject beaconCard;
 
 	private RangedWeapon[] weapons;
 	[Range(0,1)]
@@ -41,6 +42,7 @@ public class AIController : MonoBehaviour {
 	public List<Transform> visibleTargets = new List<Transform>();
 
 	ContestantGenerator cGen;
+	UI_GenericCard beacon;
 
 	// Use this for initialization
 	void Start () {
@@ -69,6 +71,7 @@ public class AIController : MonoBehaviour {
 				Fleeing();
 				break;
 			case AIState.Beacon:
+				Beacon();
 				break;
 		}
 		agent.destination = destination;
@@ -81,13 +84,25 @@ public class AIController : MonoBehaviour {
 	void StartBeacon(){
 		state = AIState.Beacon;
 		agent.Stop();
-		c.Say("Help me");
+		GameObject spawned = (GameObject)Instantiate(beaconCard);
+		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		beacon = spawned.GetComponent<UI_GenericCard>();
+		beacon.target = transform;
 	}
 
 	void Beacon(){
 		if (c.equipped != null){
 			c.equipped.Unequip();
 			c.equipped = null;
+		}
+		if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 2){
+			beacon.text = "Press E to show mercy";
+			if(Input.GetKeyDown(KeyCode.E)){
+				c.Die();
+			}
+		}
+		else{
+			beacon.text = "[ REQUESTING MEDIC ]";
 		}
 	}
 
