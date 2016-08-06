@@ -37,7 +37,7 @@ public class RoundManager : MonoBehaviour {
                 j++;
             }
         }
-        if (StaticGameStats.govUpgrades[0]){
+        if (StaticGameStats.TierTwoUpgrades[0]){
         	govtime = 45.0f;
         }
         else{

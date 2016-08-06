@@ -8,7 +8,7 @@ public class CameramanSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(StaticGameStats.rebUpgrades[0]){
+		if(StaticGameStats.Abilites[0]){
 			spawnchance = 0.75f;
 		}
 		else{

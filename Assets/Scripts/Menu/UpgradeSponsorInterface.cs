@@ -19,10 +19,25 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		chosenSponsor = StaticGameStats.chosenSponsor;
 		activeSponsor = 0;
 		availableMoney = StaticGameStats.avaliableMoney;
-		StaticGameStats.generalUpgrades[0] = false;
-		StaticGameStats.govUpgrades[0] = false;
-		StaticGameStats.corUpgrades[0] = false;
-		StaticGameStats.rebUpgrades[0] = false;
+		StaticGameStats.TierOneUpgrades[0] = false;
+		StaticGameStats.TierOneUpgrades[1] = false;
+		StaticGameStats.TierOneUpgrades[2] = false;
+		StaticGameStats.TierOneUpgrades[3] = false;
+
+		StaticGameStats.TierTwoUpgrades[0] = false;
+		StaticGameStats.TierTwoUpgrades[1] = false;
+		StaticGameStats.TierTwoUpgrades[2] = false;
+		StaticGameStats.TierTwoUpgrades[3] = false;
+
+		StaticGameStats.TierThreeUpgrades[0] = false;
+		StaticGameStats.TierThreeUpgrades[1] = false;
+		StaticGameStats.TierThreeUpgrades[2] = false;
+		StaticGameStats.TierThreeUpgrades[3] = false;
+
+		StaticGameStats.Abilites[0] = false;
+		StaticGameStats.Abilites[1] = false;
+		StaticGameStats.Abilites[2] = false;
+		StaticGameStats.Abilites[3] = false;
 	}
 
 	// Update is called once per frame
@@ -68,14 +83,42 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.committed = false;
 		StaticGameStats.chosenSponsor = -1;
 		StaticGameStats.activeSponsor = 0;
-		StaticGameStats.generalUpgrades[0] = false;
-		StaticGameStats.govUpgrades[0] = false;
-		StaticGameStats.corUpgrades[0] = false;
-		StaticGameStats.rebUpgrades[0] = false;
+
+		StaticGameStats.TierOneUpgrades[0] = false;
+		StaticGameStats.TierOneUpgrades[1] = false;
+		StaticGameStats.TierOneUpgrades[2] = false;
+		StaticGameStats.TierOneUpgrades[3] = false;
+
+		StaticGameStats.TierTwoUpgrades[0] = false;
+		StaticGameStats.TierTwoUpgrades[1] = false;
+		StaticGameStats.TierTwoUpgrades[2] = false;
+		StaticGameStats.TierTwoUpgrades[3] = false;
+
+		StaticGameStats.TierThreeUpgrades[0] = false;
+		StaticGameStats.TierThreeUpgrades[1] = false;
+		StaticGameStats.TierThreeUpgrades[2] = false;
+		StaticGameStats.TierThreeUpgrades[3] = false;
+
+		StaticGameStats.Abilites[0] = false;
+		StaticGameStats.Abilites[1] = false;
+		StaticGameStats.Abilites[2] = false;
+		StaticGameStats.Abilites[3] = false;
 		upgradebuttons[0].interactable = true;
 		upgradebuttons[1].interactable = true;
 		upgradebuttons[2].interactable = true;
 		upgradebuttons[3].interactable = true;
+		upgradebuttons[4].interactable = true;
+		upgradebuttons[5].interactable = true;
+		upgradebuttons[6].interactable = true;
+		upgradebuttons[7].interactable = true;
+		upgradebuttons[8].interactable = true;
+		upgradebuttons[9].interactable = true;
+		upgradebuttons[10].interactable = true;
+		upgradebuttons[11].interactable = true;
+		upgradebuttons[12].interactable = true;
+		upgradebuttons[13].interactable = true;
+		upgradebuttons[14].interactable = true;
+		upgradebuttons[15].interactable = true;
 		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
 		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();

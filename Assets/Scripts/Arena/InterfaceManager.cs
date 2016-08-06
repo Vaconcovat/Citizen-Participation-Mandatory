@@ -47,16 +47,16 @@ public class InterfaceManager : MonoBehaviour {
 		abortImage.enabled = false;
 		//Upgrades Text
 		upgradesText.text = "";
-		if(StaticGameStats.generalUpgrades[0]){
+		if(StaticGameStats.TierOneUpgrades[0]){
 			upgradesText.text = upgradesText.text + "General Upgrade Enabled! - 50% more ammo!\n";
 		}
-		if(StaticGameStats.govUpgrades[0]){
+		if(StaticGameStats.TierTwoUpgrades[0]){
 			upgradesText.text = upgradesText.text + "Government Upgrade Enabled! - 15second bonus!\n";
 		}
-		if(StaticGameStats.corUpgrades[0]){
+		if(StaticGameStats.TierThreeUpgrades[0]){
 			upgradesText.text = upgradesText.text + "Corporate Upgrade Enabled! - Additional sponsor weapon!\n";
 		}
-		if(StaticGameStats.rebUpgrades[0]){
+		if(StaticGameStats.Abilites[0]){
 			upgradesText.text = upgradesText.text + "Rebel Upgrade Enabled! - More cameramen!\n";
 		}
 	}

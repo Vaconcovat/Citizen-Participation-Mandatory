@@ -14,10 +14,25 @@ public class UpgradeInterface : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StaticGameStats.generalUpgrades[0] = false;
-		StaticGameStats.govUpgrades[0] = false;
-		StaticGameStats.corUpgrades[0] = false;
-		StaticGameStats.rebUpgrades[0] = false;
+		StaticGameStats.TierOneUpgrades[0] = false;
+		StaticGameStats.TierOneUpgrades[1] = false;
+		StaticGameStats.TierOneUpgrades[2] = false;
+		StaticGameStats.TierOneUpgrades[3] = false;
+
+		StaticGameStats.TierTwoUpgrades[0] = false;
+		StaticGameStats.TierTwoUpgrades[1] = false;
+		StaticGameStats.TierTwoUpgrades[2] = false;
+		StaticGameStats.TierTwoUpgrades[3] = false;
+
+		StaticGameStats.TierThreeUpgrades[0] = false;
+		StaticGameStats.TierThreeUpgrades[1] = false;
+		StaticGameStats.TierThreeUpgrades[2] = false;
+		StaticGameStats.TierThreeUpgrades[3] = false;
+
+		StaticGameStats.Abilites[0] = false;
+		StaticGameStats.Abilites[1] = false;
+		StaticGameStats.Abilites[2] = false;
+		StaticGameStats.Abilites[3] = false;
 		moneyHolder = StaticGameStats.moneyHolder;
 		embezzledHolder = StaticGameStats.embezzleHolder;
 	}
@@ -59,35 +74,153 @@ public class UpgradeInterface : MonoBehaviour {
 		}
 	}
 
-	public void BuyGenericUpgrade1(){
+	//TIER ONE UPGRADES
+
+	public void BuyTierOneUpgradeOne(){
 		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
-			StaticGameStats.generalUpgrades[0] = true;
+			StaticGameStats.TierOneUpgrades[0] = true;
 			upgradebuttons[0].interactable = false;
 		}
 	}
 
-	public void BuyGovUpgrade1(){
+	public void BuyTierOneUpgradeTwo(){
 		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
-			StaticGameStats.govUpgrades[0] = true;
+			StaticGameStats.TierOneUpgrades[1] = true;
 			upgradebuttons[1].interactable = false;
 		}
 	}
 
-	public void BuySponsorUpgrade1(){
+	public void BuyTierOneUpgradeThree(){
 		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
-			StaticGameStats.corUpgrades[0] = true;
+			StaticGameStats.TierOneUpgrades[2] = true;
 			upgradebuttons[2].interactable = false;
 		}
 	}
 
-	public void BuyRebelUpgrade1(){
+	public void BuyTierOneUpgradeFour(){
 		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
-			StaticGameStats.rebUpgrades[0] = true;
+			StaticGameStats.TierOneUpgrades[3] = true;
 			upgradebuttons[3].interactable = false;
 		}
 	}
+
+
+
+
+	//TIER TWO UPGRADES
+
+	public void BuyTierTwoUpgradeOne(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.TierTwoUpgrades[0] = true;
+			upgradebuttons[4].interactable = false;
+		}
+	}
+
+	public void BuyTierTwoUpgradeTwo(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.TierTwoUpgrades[1] = true;
+			upgradebuttons[5].interactable = false;
+		}
+	}
+
+	public void BuyTierTwoUpgradeThree(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.TierTwoUpgrades[2] = true;
+			upgradebuttons[6].interactable = false;
+		}
+	}
+
+	public void BuyTierTwoUpgradeFour(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.TierTwoUpgrades[3] = true;
+			upgradebuttons[7].interactable = false;
+		}
+	}
+
+
+
+
+	//TIER THREE UPGRADES
+
+	public void BuyTierThreeUpgradeOne(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.TierThreeUpgrades[0] = true;
+			upgradebuttons[8].interactable = false;
+		}
+	}
+
+	public void BuyTierThreeUpgradeTwo(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.TierThreeUpgrades[1] = true;
+			upgradebuttons[9].interactable = false;
+		}
+	}
+
+	public void BuyTierThreeUpgradeThree(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.TierThreeUpgrades[2] = true;
+			upgradebuttons[10].interactable = false;
+		}
+	}
+
+	public void BuyTierThreeUpgradeFour(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.TierThreeUpgrades[3] = true;
+			upgradebuttons[11].interactable = false;
+		}
+	}
+
+
+
+
+	//ABILITIES
+
+	public void BuyAbilityOne(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.Abilites[0] = true;
+			upgradebuttons[12].interactable = false;
+		}
+	}
+
+	public void BuyAbilityTwo(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.Abilites[1] = true;
+			upgradebuttons[13].interactable = false;
+		}
+	}
+
+	public void BuyAbilityThree(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.Abilites[2] = true;
+			upgradebuttons[14].interactable = false;
+		}
+	}
+
+	public void BuyAbilityFour(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.Abilites[3] = true;
+			upgradebuttons[15].interactable = false;
+		}
+	}
+
+
+
+
+	//SPONSOR UPGRADES
 }

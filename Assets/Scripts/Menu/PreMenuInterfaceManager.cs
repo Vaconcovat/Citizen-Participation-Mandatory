@@ -22,10 +22,10 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 		//TandC.interactable = false;
 		chosenSponsor = -1;
 		activeSponsor = 0;
-		StaticGameStats.generalUpgrades[0] = false;
-		StaticGameStats.govUpgrades[0] = false;
-		StaticGameStats.corUpgrades[0] = false;
-		StaticGameStats.rebUpgrades[0] = false;
+		StaticGameStats.TierOneUpgrades[0] = false;
+		StaticGameStats.TierTwoUpgrades[0] = false;
+		StaticGameStats.TierThreeUpgrades[0] = false;
+		StaticGameStats.Abilites[0] = false;
 		moneyHolder = StaticGameStats.avaliableMoney;
 		embezzledHolder = StaticGameStats.embezzledMoney;
 	}
@@ -102,10 +102,10 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 		StaticGameStats.committed = false;
 		chosenSponsor = -1;
 		activeSponsor = 0;
-		StaticGameStats.generalUpgrades[0] = false;
-		StaticGameStats.govUpgrades[0] = false;
-		StaticGameStats.corUpgrades[0] = false;
-		StaticGameStats.rebUpgrades[0] = false;
+		StaticGameStats.TierOneUpgrades[0] = false;
+		StaticGameStats.TierTwoUpgrades[0] = false;
+		StaticGameStats.TierThreeUpgrades[0] = false;
+		StaticGameStats.Abilites[0] = false;
 		upgradebuttons[0].interactable = true;
 		upgradebuttons[1].interactable = true;
 		upgradebuttons[2].interactable = true;
@@ -133,7 +133,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	public void BuyGenericUpgrade1(){
 		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
-			StaticGameStats.generalUpgrades[0] = true;
+			StaticGameStats.TierOneUpgrades[0] = true;
 			upgradebuttons[0].interactable = false;
 		}
 	}
@@ -141,7 +141,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	public void BuyGovUpgrade1(){
 		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
-			StaticGameStats.govUpgrades[0] = true;
+			StaticGameStats.TierTwoUpgrades[0] = true;
 			upgradebuttons[1].interactable = false;
 		}
 	}
@@ -149,7 +149,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	public void BuySponsorUpgrade1(){
 		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
-			StaticGameStats.corUpgrades[0] = true;
+			StaticGameStats.TierThreeUpgrades[0] = true;
 			upgradebuttons[2].interactable = false;
 		}
 	}
@@ -157,7 +157,7 @@ public class PreMenuInterfaceManager : MonoBehaviour {
 	public void BuyRebelUpgrade1(){
 		if (StaticGameStats.avaliableMoney >= 4){
 			StaticGameStats.avaliableMoney -= 4;
-			StaticGameStats.rebUpgrades[0] = true;
+			StaticGameStats.Abilites[0] = true;
 			upgradebuttons[3].interactable = false;
 		}
 	}
