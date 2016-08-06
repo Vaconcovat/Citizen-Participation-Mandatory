@@ -23,7 +23,7 @@ public class OtherItem : MonoBehaviour {
 		_audio = GetComponent<AudioSource> ();
 		sr = GetComponent<SpriteRenderer> ();
 		if (StaticGameStats.TierOneUpgrades [0]) {
-			ammo = ammo * StaticGameStats.Upgrade1Modification;
+			ammo = ammo * StaticGameStats.Upgrade1ItemUsageBuff;
 		}
 	}
 	

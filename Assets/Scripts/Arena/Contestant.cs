@@ -47,6 +47,7 @@ public class Contestant : MonoBehaviour {
 	public GameObject bloodSplatter, deathCard;
 	public Transform backpack;
 	public GameObject UI_Card;
+	public Contestant player;
 
 
 	//[Header("SPRITES")]
@@ -105,6 +106,8 @@ public class Contestant : MonoBehaviour {
         if(contestantTidBit == ""){
         	contestantTidBit = gen.GetTidBit();
         }
+
+			
 	}
 	
 	// Update is called once per frame
@@ -139,7 +142,14 @@ public class Contestant : MonoBehaviour {
 		if (health > maxHealth){
 			health = maxHealth;
 		}
-	}
+
+
+		if (StaticGameStats.TierTwoUpgrades [3]) {
+			while (player.equipped.GetComponent<RangedWeapon> ().ammo == 0) {
+				//player.movespeed = player.movespeed * StaticGameStats.Upgrade8MovementSpeedBuff; CURRENTLY CRASHES THE PROGRAM
+			}
+		}
+		}
 
 	/// <summary>
 	/// Call this to take damage, from a source. You must use a DAMAGEPARAMS class in order to parse the informaiton properly!!
@@ -148,8 +158,11 @@ public class Contestant : MonoBehaviour {
 	public void TakeDamage(DamageParams damage){
 		if(isAlive){
 			if (StaticGameStats.TierOneUpgrades [1]) {
-				damage.damage = damage.damage * StaticGameStats.Upgrade2Modification;
+				damage.damage = damage.damage * StaticGameStats.Upgrade2ThrownBuff;
 				Debug.Log ("Damage has changed");
+			}
+			if (StaticGameStats.TierTwoUpgrades [1]) {
+				damage.damage = damage.damage * StaticGameStats.Upgrade6DamageBuff;
 			}
 			health -= damage.damage;
 			body.AddForce(damage.knockback, ForceMode.Impulse);

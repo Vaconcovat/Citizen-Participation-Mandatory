@@ -36,10 +36,15 @@ public class StaticGameStats : MonoBehaviour {
 	public static int arenasPlayed = 0;
 
 	//Global Value Editing
-	public static int Upgrade1Modification = 2; //Ability 1 Doubles the number of item uses
-	public static int Upgrade2Modification = 2; //Ability 2 Doubles the damage of thrown weapons
-	public static float Upgrade3Modification = 1.05f; //Ability 3 increases all rep gain by 5%
-	public static float Upgrade4Modification = 1.2f; //Ability 4 increases the ammo of all weapons by 20%
+	public static int Upgrade1ItemUsageBuff = 2; //Ability 1 Doubles the number of item uses
+	public static int Upgrade2ThrownBuff = 2; //Ability 2 Doubles the damage of thrown weapons
+	public static float Upgrade3ReputationGainBuff = 1.05f; //Ability 3 increases all rep gain by 5%
+	public static float Upgrade4MaxAmmoBuff = 1.2f; //Ability 4 increases the ammo of all weapons by 20%
+
+	public static float Upgrade6FireRateNerf = 0.8f;
+	public static int Upgrade6DamageBuff = 2; //wanted to be 1.2 but this can only accept whole numbers
+
+	public static float Upgrade8MovementSpeedBuff = 1.1f;
 
 	// Use this for initialization
 	//Probably shouldn't ever have anything here, if you do you're bad.
@@ -61,7 +66,7 @@ public class StaticGameStats : MonoBehaviour {
 		switch (faction){
 		case 0:
 			if (TierOneUpgrades [2]) {
-				govRep += (amount * StaticGameStats.Upgrade3Modification);
+				govRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
 				Debug.Log ("GOV: MOD " + govRep.ToString ());
 				break;
 			} else {
@@ -72,7 +77,7 @@ public class StaticGameStats : MonoBehaviour {
 				
 		case 1:
 			if (TierOneUpgrades [2]) {
-				corRep += (amount * StaticGameStats.Upgrade3Modification);
+				corRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
 				Debug.Log ("COR: MOD " + corRep.ToString ());
 				break;
 			} else {
@@ -82,7 +87,7 @@ public class StaticGameStats : MonoBehaviour {
 			}
 		case 2:
 			if (TierOneUpgrades [2]) {
-				rebRep += (amount * StaticGameStats.Upgrade3Modification);
+				rebRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
 				Debug.Log ("REB: MOD" + rebRep.ToString ());
 				break;
 			} else {
