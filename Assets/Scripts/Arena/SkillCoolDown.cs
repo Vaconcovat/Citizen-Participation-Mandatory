@@ -10,7 +10,6 @@ public class SkillCoolDown : MonoBehaviour {
 	public KeyCode Ability2;
 	public KeyCode Ability3;
 	public KeyCode Ability4;
-	public KeyCode Ability5;
 	public Contestant player;
 	public GameObject weaponTrackerUI, contestantTrackerUI;
 
@@ -77,17 +76,7 @@ public class SkillCoolDown : MonoBehaviour {
 				skills [3].currentCooldown = 0;
 			}
 		}
-
-		else if (Input.GetKey (Ability5)) 
-		{
-			//If the ability is not currently cooling down
-			if (skills [4].currentCooldown >= skills [4].cooldown) 
-			{
-				//Whatever Skill 1 Does
-				//Start the Cooldown
-				skills [4].currentCooldown = 0;
-			}
-		}
+			
 	}
 
 	void Start()
@@ -96,7 +85,6 @@ public class SkillCoolDown : MonoBehaviour {
 		skills [1].currentCooldown = skills [1].cooldown;
 		skills [2].currentCooldown = skills [2].cooldown;
 		skills [3].currentCooldown = skills [3].cooldown;
-		skills [4].currentCooldown = skills [4].cooldown;
 	}
 
 	void Update()

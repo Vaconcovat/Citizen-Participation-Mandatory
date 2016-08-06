@@ -29,12 +29,8 @@ public class ItemSpawner : MonoBehaviour {
 				break;
 		}
 
-		if(StaticGameStats.TierThreeUpgrades[0] && selection == poolselection.Sponsor){
-			Instantiate(pool.items[Random.Range(0,pool.items.Length)],new Vector2(transform.position.x, transform.position.y + 0.5f),Quaternion.identity);
+		if(selection == poolselection.Sponsor){
 			Instantiate(pool.items[Random.Range(0,pool.items.Length)],new Vector2(transform.position.x, transform.position.y - 0.5f),Quaternion.identity);
-		}
-		else{
-			Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
 		}
 		if(respawning){
 			StartCoroutine("respawn");

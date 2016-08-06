@@ -35,8 +35,11 @@ public class StaticGameStats : MonoBehaviour {
 	public static int sponsor;
 	public static int arenasPlayed = 0;
 
-	//Economy Settings
-	//put shit here
+	//Global Value Editing
+	public static int Upgrade1Modification = 2; //Ability 1 Doubles the number of item uses
+	public static int Upgrade2Modification = 2; //Ability 2 Doubles the damage of thrown weapons
+	public static float Upgrade3Modification = 1.05f; //Ability 3 increases all rep gain by 5%
+	public static float Upgrade4Modification = 1.2f; //Ability 4 increases the ammo of all weapons by 20%
 
 	// Use this for initialization
 	//Probably shouldn't ever have anything here, if you do you're bad.
@@ -56,18 +59,37 @@ public class StaticGameStats : MonoBehaviour {
 	/// <param name="amount">Amount.</param>
 	public void Influence(int faction, float amount){
 		switch (faction){
-			case 0:
+		case 0:
+			if (TierOneUpgrades [2]) {
+				govRep += (amount * StaticGameStats.Upgrade3Modification);
+				Debug.Log ("GOV: MOD " + govRep.ToString ());
+				break;
+			} else {
 				govRep += amount;
 				Debug.Log("GOV: " + govRep.ToString());
 				break;
-			case 1:
+			}
+				
+		case 1:
+			if (TierOneUpgrades [2]) {
+				corRep += (amount * StaticGameStats.Upgrade3Modification);
+				Debug.Log ("COR: MOD " + corRep.ToString ());
+				break;
+			} else {
 				corRep += amount;
 				Debug.Log("COR: " + corRep.ToString());
 				break;
-			case 2:
+			}
+		case 2:
+			if (TierOneUpgrades [2]) {
+				rebRep += (amount * StaticGameStats.Upgrade3Modification);
+				Debug.Log ("REB: MOD" + rebRep.ToString ());
+				break;
+			} else {
 				rebRep += amount;
 				Debug.Log("REB: " + rebRep.ToString());
 				break;
+			}
 		}
 	}
 }

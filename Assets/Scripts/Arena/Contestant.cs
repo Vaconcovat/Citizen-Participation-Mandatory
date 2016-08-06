@@ -147,9 +147,12 @@ public class Contestant : MonoBehaviour {
 	/// <param name="damage"></param>
 	public void TakeDamage(DamageParams damage){
 		if(isAlive){
+			if (StaticGameStats.TierOneUpgrades [1]) {
+				damage.damage = damage.damage * StaticGameStats.Upgrade2Modification;
+				Debug.Log ("Damage has changed");
+			}
 			health -= damage.damage;
 			body.AddForce(damage.knockback, ForceMode.Impulse);
-				
 			if (health <= 0){
 				killer = damage.owner;
 				Die();

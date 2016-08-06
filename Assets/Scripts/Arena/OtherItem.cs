@@ -22,6 +22,9 @@ public class OtherItem : MonoBehaviour {
 	void Start () {
 		_audio = GetComponent<AudioSource> ();
 		sr = GetComponent<SpriteRenderer> ();
+		if (StaticGameStats.TierOneUpgrades [0]) {
+			ammo = ammo * StaticGameStats.Upgrade1Modification;
+		}
 	}
 	
 	// Update is called once per frame
@@ -47,9 +50,9 @@ public class OtherItem : MonoBehaviour {
 	}
 
 	void Heal(float amount){
+		_audio.Play ();
 		GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
-		if ((consume) && (ammo > 0)){
-			_audio.Play ();
+		if ((consume) && (ammo <= 0)){
 			sr.sprite = ThrownSprite;
 			GetComponent<Item>().Unequip();
 		}
