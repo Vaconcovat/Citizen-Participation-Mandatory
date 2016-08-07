@@ -126,13 +126,17 @@ public class Item : MonoBehaviour {
 	void OnCollisionEnter(Collision c){
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
+				int throwDamage = Mathf.RoundToInt(body.velocity.magnitude);
+				if(StaticGameStats.TierOneUpgrades[1]){
+					throwDamage = Mathf.RoundToInt(throwDamage * StaticGameStats.Upgrade2ThrownBuff);
+				}
 				if(c.gameObject.tag == "Contestant"){
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
-						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(Mathf.FloorToInt(body.velocity.magnitude), thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(throwDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 					}
 				}
 				else{
-					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(Mathf.FloorToInt(body.velocity.magnitude), thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(throwDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 				}
 			}
 			else{

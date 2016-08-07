@@ -49,6 +49,9 @@ public class Bullet : MonoBehaviour {
 		body = GetComponent<Rigidbody>();
 		startPos = transform.position;
 		startTime = Time.time;
+		if(StaticGameStats.TierTwoUpgrades[1]){
+			damage = Mathf.RoundToInt(damage * StaticGameStats.Upgrade6DamageBuff);
+		}
 	}
 	
 	// Update is called once per frame
