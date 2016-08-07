@@ -42,7 +42,8 @@ public class AIController : MonoBehaviour {
 	public List<Transform> visibleTargets = new List<Transform>();
 
 	ContestantGenerator cGen;
-	UI_GenericCard beacon;
+	[HideInInspector]
+	public UI_GenericCard beacon;
 
 	// Use this for initialization
 	void Start () {

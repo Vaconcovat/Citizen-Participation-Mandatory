@@ -49,6 +49,8 @@ public class Contestant : MonoBehaviour {
 	public GameObject UI_Card;
 	public Contestant player;
 
+	public Material hologram;
+
 
 	//[Header("SPRITES")]
 	//public Sprite unarmedSprite;
@@ -198,6 +200,9 @@ public class Contestant : MonoBehaviour {
 		if (type == ContestantType.AI){
 			GetComponent<AIController>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
+			if(GetComponent<AIController>().state == AIController.AIState.Beacon){
+				GetComponent<AIController>().beacon.gameObject.SetActive(false);
+			}
 			FindObjectOfType<RoundManager>().Death();
 		}
 		else if(type == ContestantType.Guard){
@@ -219,6 +224,7 @@ public class Contestant : MonoBehaviour {
 			equipped.Unequip();
 		}
 		equipped = null;
+		GetComponent<MeshRenderer>().material = hologram;
 		if (killer != FindObjectOfType<PlayerController>().GetComponent<Contestant>()){
 			GetComponent<MeshRenderer>().material.color = Color.white;
 		}
