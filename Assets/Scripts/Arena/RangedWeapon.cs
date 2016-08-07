@@ -47,7 +47,7 @@ public class RangedWeapon : MonoBehaviour {
 	/// The bullet prefab used by this gun.
 	/// </summary>
 	public GameObject bullet;
-
+	public LayerMask obstacleMask;
 	public GameObject muzzleFlash;
 
 	/// <summary>
@@ -73,9 +73,18 @@ public class RangedWeapon : MonoBehaviour {
 				cooldownCounter -= Time.deltaTime;
 			}
 		}
+		if(GetComponent<Item>().equipper != null){
+			Debug.DrawRay(muzzle.position, GetComponent<Item>().equipper.transform.position - muzzle.position);
+		}
 	}
 
 	public void Fire(bool held){
+		//first check that our gun's location is legal (not through a wall)
+		Ray r = new Ray(muzzle.position, GetComponent<Item>().equipper.transform.position - muzzle.position);
+		Debug.DrawRay(muzzle.position, GetComponent<Item>().equipper.transform.position - muzzle.position);
+		if(Physics.Raycast(r,Vector3.Distance(muzzle.position, GetComponent<Item>().equipper.transform.position),obstacleMask)){
+			return;
+		}
 		//if we're holding the trigger and we're not a fan the hammer gun
 		if (held && fireRate != 0){
 			if (ammo > 0 && cooldownCounter <= 0){

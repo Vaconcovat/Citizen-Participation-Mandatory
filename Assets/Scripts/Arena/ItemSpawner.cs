@@ -45,9 +45,9 @@ public class ItemSpawner : MonoBehaviour {
 
 	IEnumerator respawn(){
 		while(true){
-			yield return new WaitForSeconds(timer);
 			GameObject spawned = (GameObject)Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
 			spawned.GetComponent<Rigidbody>().AddTorque(Random.onUnitSphere*10);
+			yield return new WaitForSeconds(timer);
 		}
 	}
 }
