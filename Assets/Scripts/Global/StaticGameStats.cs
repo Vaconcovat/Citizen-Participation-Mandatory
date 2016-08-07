@@ -44,7 +44,8 @@ public class StaticGameStats : MonoBehaviour {
 	public static float Upgrade6FireRateNerf = 0.8f;
 	public static int Upgrade6DamageBuff = 2; //wanted to be 1.2 but this can only accept whole numbers
 
-	public static float Upgrade8MovementSpeedBuff = 1.1f;
+	public static int Upgrade8NormalSpeed = 10;
+	public static int Upgrade8MovementSpeedBuff = 15;
 
 	// Use this for initialization
 	//Probably shouldn't ever have anything here, if you do you're bad.

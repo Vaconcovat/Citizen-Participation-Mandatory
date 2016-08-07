@@ -39,6 +39,7 @@ public class Item : MonoBehaviour {
 	/// The contestant that is equipping this item.
 	/// </summary>
 	public Contestant equipper;
+	public Contestant player;
 
 	[Range(0,1)]
 	public float threat;

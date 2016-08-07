@@ -145,11 +145,18 @@ public class Contestant : MonoBehaviour {
 
 
 		if (StaticGameStats.TierTwoUpgrades [3]) {
-			while (player.equipped.GetComponent<RangedWeapon> ().ammo == 0) {
-				//player.movespeed = player.movespeed * StaticGameStats.Upgrade8MovementSpeedBuff; CURRENTLY CRASHES THE PROGRAM
+			if(equipped != null){
+				if (equipped.type == Item.ItemType.Ranged) {
+					if (player.equipped.GetComponent<RangedWeapon> ().ammo == 0) {
+						player.movespeed = StaticGameStats.Upgrade8MovementSpeedBuff;
+					}
+				}
+			} 
+			else {
+				player.movespeed = StaticGameStats.Upgrade8NormalSpeed;
 			}
-		}
-		}
+			}
+		} 
 
 	/// <summary>
 	/// Call this to take damage, from a source. You must use a DAMAGEPARAMS class in order to parse the informaiton properly!!
