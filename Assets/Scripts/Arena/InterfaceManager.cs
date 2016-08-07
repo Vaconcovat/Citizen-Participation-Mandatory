@@ -47,17 +47,44 @@ public class InterfaceManager : MonoBehaviour {
 		abortImage.enabled = false;
 		//Upgrades Text
 		upgradesText.text = "";
+
 		if(StaticGameStats.TierOneUpgrades[0]){
-			upgradesText.text = upgradesText.text + "General Upgrade Enabled! - 50% more ammo!\n";
+			upgradesText.text = upgradesText.text + "Items have +1 Available Charges!\n";
 		}
+		if(StaticGameStats.TierOneUpgrades[1]){
+			upgradesText.text = upgradesText.text + "Thrown weapons deal double damage!\n";
+		}
+		if(StaticGameStats.TierOneUpgrades[2]){
+			upgradesText.text = upgradesText.text + "All Reputation gain is increased by 5%!\n";
+		}
+		if(StaticGameStats.TierOneUpgrades[3]){
+			upgradesText.text = upgradesText.text + "ALL weapons have +20% ammo!\n";
+		}
+
 		if(StaticGameStats.TierTwoUpgrades[0]){
-			upgradesText.text = upgradesText.text + "Government Upgrade Enabled! - 15second bonus!\n";
+			upgradesText.text = upgradesText.text + "Spacebar now uses items in the backpack slot!\n";
 		}
+		if(StaticGameStats.TierTwoUpgrades[1]){
+			upgradesText.text = upgradesText.text + "Fire rate -20%, Bullet Damage +20%!\n";
+		}
+		if(StaticGameStats.TierTwoUpgrades[2]){
+			upgradesText.text = upgradesText.text + "Gain +20% Max Health back upon emptying a weapon!\n";
+		}
+		if(StaticGameStats.TierTwoUpgrades[3]){
+			upgradesText.text = upgradesText.text + "Gain +50% movement speed while holding an empty weapon!\n";
+		}
+
 		if(StaticGameStats.TierThreeUpgrades[0]){
-			upgradesText.text = upgradesText.text + "Corporate Upgrade Enabled! - Additional sponsor weapon!\n";
+			upgradesText.text = upgradesText.text + "Bloodlust Enabled!\n";
 		}
-		if(StaticGameStats.Abilites[0]){
-			upgradesText.text = upgradesText.text + "Rebel Upgrade Enabled! - More cameramen!\n";
+		if(StaticGameStats.TierThreeUpgrades[1]){
+			upgradesText.text = upgradesText.text + "Health kits are different!\n";
+		}
+		if(StaticGameStats.TierThreeUpgrades[2]){
+			upgradesText.text = upgradesText.text + "Weapons are thrown automatically and deal 1.2x damage when thrown!\n";
+		}
+		if(StaticGameStats.TierThreeUpgrades[3]){
+			upgradesText.text = upgradesText.text + "Guards always spawn with rifles!\n";
 		}
 	}
 	
