@@ -16,6 +16,7 @@ public class AIController : MonoBehaviour {
 	int closestEnemy;
 	int closestWeapon;
 	Contestant c;
+	public Contestant player;
 
 	//just for testing
 	public Vector3 project,rand,center,towardsCenter;
@@ -100,6 +101,11 @@ public class AIController : MonoBehaviour {
 			beacon.text = "Press E to show mercy";
 			if(Input.GetKeyDown(KeyCode.E)){
 				c.Die();
+				if (StaticGameStats.TierThreeUpgrades [0]) {
+					player.movespeed = StaticGameStats.Upgrade9MovementSpeedBuff;
+					player.health = player.health + StaticGameStats.Upgrade9HealAmount;
+					Invoke ("RevertMoveSpeed", 5);
+				}
 			}
 		}
 		else{
@@ -398,6 +404,10 @@ public class AIController : MonoBehaviour {
 		Gizmos.DrawLine(rand,towardsCenter);
 		Gizmos.color = Color.red;
 		Gizmos.DrawLine(transform.position, towardsCenter);
+	}
+
+	void RevertMoveSpeed(){
+		player.movespeed = StaticGameStats.Upgrade9NormalSpeed;
 	}
 
 

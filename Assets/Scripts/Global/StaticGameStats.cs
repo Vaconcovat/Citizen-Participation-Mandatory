@@ -53,10 +53,16 @@ public class StaticGameStats : MonoBehaviour {
 	public static int Upgrade8NormalSpeed = 10;
 	public static int Upgrade8MovementSpeedBuff = 15;
 
+	public static int Upgrade9NormalSpeed = 10;
+	public static int Upgrade9MovementSpeedBuff = 15;
+	public static int Upgrade9HealAmount = 20;
+
 	public static float Upgrade10HealAmount = 3.0f;
 
 	public static int Upgrade11ThrownBuff = 2;
 	public static bool Upgrade11AlreadyTriggered = false;
+
+
 
 
 
