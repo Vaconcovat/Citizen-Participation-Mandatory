@@ -5,6 +5,7 @@ public class CameraMan : MonoBehaviour {
 
 	public GameObject bloodSplatter;
 	public GameObject player;
+	public Contestant player1;
 	Rigidbody2D body;
 	Collider2D coll;
 	public LayerMask layers;
@@ -38,6 +39,10 @@ public class CameraMan : MonoBehaviour {
 		GetComponent<SpriteRenderer>().color = Color.white;
 		FindObjectOfType<StaticGameStats>().Influence(2, 2.0f);
 		FindObjectOfType<StaticGameStats>().Influence(0, -2.0f);
+		if(StaticGameStats.TierTwoUpgrades[0]){
+			player1.movespeed = StaticGameStats.Upgrade5PlayerNewSpeed;
+			Invoke ("RevertMoveSpeed", 3); //changes movespeed back to normal after 3 seconds		
+		}
 		//TODO: other corpse related things here
 	}
 
@@ -45,5 +50,9 @@ public class CameraMan : MonoBehaviour {
 		Vector3 dir = player.transform.position - transform.position;
 		float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+	}
+
+	void RevertMoveSpeed(){
+		player1.movespeed = StaticGameStats.Upgrade5PlayerMoveSpeed;
 	}
 }

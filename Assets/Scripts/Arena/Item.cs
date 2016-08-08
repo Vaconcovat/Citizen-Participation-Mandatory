@@ -130,6 +130,9 @@ public class Item : MonoBehaviour {
 				if(StaticGameStats.TierOneUpgrades[1]){
 					throwDamage = Mathf.RoundToInt(throwDamage * StaticGameStats.Upgrade2ThrownBuff);
 				}
+				if(StaticGameStats.TierThreeUpgrades [2]) {
+					throwDamage = Mathf.RoundToInt(throwDamage * StaticGameStats.Upgrade11ThrownBuff);
+				}
 				if(c.gameObject.tag == "Contestant"){
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
 						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(throwDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);

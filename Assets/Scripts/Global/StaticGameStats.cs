@@ -41,6 +41,9 @@ public class StaticGameStats : MonoBehaviour {
 	public static float Upgrade3ReputationGainBuff = 1.05f; //Ability 3 increases all rep gain by 5%
 	public static float Upgrade4MaxAmmoBuff = 1.2f; //Ability 4 increases the ammo of all weapons by 20%
 
+	public static int Upgrade5PlayerMoveSpeed = 10;
+	public static int Upgrade5PlayerNewSpeed = 15;
+
 	public static float Upgrade6FireRateNerf = 0.8f;
 	public static int Upgrade6DamageBuff = 2; //wanted to be 1.2 but this can only accept whole numbers
 
@@ -49,6 +52,11 @@ public class StaticGameStats : MonoBehaviour {
 
 	public static int Upgrade8NormalSpeed = 10;
 	public static int Upgrade8MovementSpeedBuff = 15;
+
+	public static float Upgrade10HealAmount = 3.0f;
+
+	public static int Upgrade11ThrownBuff = 2;
+	public static bool Upgrade11AlreadyTriggered = false;
 
 
 

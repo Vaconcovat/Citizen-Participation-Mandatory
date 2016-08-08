@@ -6,6 +6,7 @@ public class ItemPools : MonoBehaviour {
 	public GameObject[] Sponsor0_Pool;
 	public GameObject[] Sponsor1_Pool;
 	public GameObject[] Item_Pool;
+	public GameObject[] NoHealthKitItem_Pool;
 	public Pool example;
 	public Pool sponsor0;
 	public Pool sponsor1;
@@ -14,9 +15,14 @@ public class ItemPools : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		example = new Pool(Example_Pool);
-		item = new Pool(Item_Pool);
 		sponsor0 = new Pool(Sponsor0_Pool);
 		sponsor1 = new Pool(Sponsor1_Pool);
+		if (StaticGameStats.TierTwoUpgrades [2]) {
+			item = new Pool (NoHealthKitItem_Pool);
+		} else {
+			item = new Pool(Item_Pool);
+		}
+
 	}
 
 
