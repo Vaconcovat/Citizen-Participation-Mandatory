@@ -12,11 +12,13 @@ public class RoundManager : MonoBehaviour {
 	public GameObject guardPrefab;
 	public GameObject guardWeapon;
     public bool autoSpawn;
+    public GameObject outerBayDoors;
 
 	Contestant[] contestants;
 	bool roundOver = false;
 	public float govtime;
 	// Use this for initialization
+
 	void Awake () {
 		contestants = FindObjectsOfType<Contestant>();
 		totalContestants = contestants.Length;
@@ -77,6 +79,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	void SpawnGuards(){
+		outerBayDoors.SetActive(false);
 		foreach(Transform t in outerSpawns){
 			GameObject spawnedGuard = (GameObject)Instantiate(guardPrefab, t.position, Quaternion.identity);
 			GameObject spawnedGun = (GameObject)Instantiate(guardWeapon, t.position,Quaternion.identity);
