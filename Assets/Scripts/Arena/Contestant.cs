@@ -231,7 +231,7 @@ public class Contestant : MonoBehaviour {
 		if (type == ContestantType.AI){
 			GetComponent<AIController>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
-			if(GetComponent<AIController>().state == AIController.AIState.Beacon){
+			if(GetComponent<AIController>().state == AIController.AIState.Beacon || GetComponent<AIController>().state == AIController.AIState.Evacuating){
 				GetComponent<AIController>().beacon.gameObject.SetActive(false);
 			}
 			FindObjectOfType<RoundManager>().Death();
@@ -240,13 +240,17 @@ public class Contestant : MonoBehaviour {
 			GetComponent<AI_GuardController>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
 		}
-		else{
+		else if(type == ContestantType.Player){
 			GetComponent<PlayerController>().enabled = false;
 			if (Time.timeSinceLevelLoad < FindObjectOfType<RoundManager>().govtime){
 				FindObjectOfType<StaticGameStats>().Influence(0, 10.0f);
 			}else{
 				FindObjectOfType<StaticGameStats>().Influence(0, -10.0f);
 			}
+		}
+		else{
+			GetComponent<AI_MedicController>().enabled = false;
+			GetComponent<NavMeshAgent>().enabled = false;
 		}
 		body.isKinematic = true;
 		coll.enabled = false;

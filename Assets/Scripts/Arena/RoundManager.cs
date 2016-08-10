@@ -13,6 +13,7 @@ public class RoundManager : MonoBehaviour {
 	public GameObject guardWeapon;
     public bool autoSpawn;
     public GameObject outerBayDoors;
+    public GameObject medicPrefab;
 
 	Contestant[] contestants;
 	bool roundOver = false;

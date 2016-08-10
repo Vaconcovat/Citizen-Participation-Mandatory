@@ -32,6 +32,7 @@ public class UI_WeaponTracker : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
+
 		if(displayAmmo){
 			if(wep != null){
 				ammoText.text = item.itemName + "\n" + wep.ammo.ToString() + " / " + wep.Maxammo.ToString() + "\nThreat :" + item.threat.ToString();

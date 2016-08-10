@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// This is a very basic use of navmesh agents to pathfind towards the player constantly
 /// </summary>
 public class AIController : MonoBehaviour {
-	public enum AIState{Searching, Hunting, Fighting, Fleeing, Beacon};
+	public enum AIState{Searching, Hunting, Fighting, Fleeing, Beacon, Evacuating};
 
 	NavMeshAgent agent;
 
@@ -45,6 +45,9 @@ public class AIController : MonoBehaviour {
 	ContestantGenerator cGen;
 	[HideInInspector]
 	public UI_GenericCard beacon;
+	public AI_MedicController medic;
+
+	bool medicVisited = false;
 
 	// Use this for initialization
 	void Start () {
@@ -75,11 +78,42 @@ public class AIController : MonoBehaviour {
 			case AIState.Beacon:
 				Beacon();
 				break;
+			case AIState.Evacuating:
+				Evacuating();
+				break;
 		}
-		agent.destination = destination;
-		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
-		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
-			StartBeacon();
+		if(agent.isOnNavMesh){
+			agent.destination = destination;
+		}
+	}
+
+	void StartEvac(){
+		state = AIState.Evacuating;
+		beacon.text = "[ MEDICAL EVAC INBOUND ]";
+		RoundManager rm = FindObjectOfType<RoundManager>();
+		Vector3 medicSpawn = rm.outerSpawns[Random.Range(0,rm.outerSpawns.Count)].position;
+		GameObject spawned = (GameObject)Instantiate(rm.medicPrefab, medicSpawn, Quaternion.identity);
+		medic = spawned.GetComponent<AI_MedicController>();
+		medic.target = this.c;
+		medic.spawn = medicSpawn;
+		rm.outerBayDoors.SetActive(false);
+	}
+
+	void Evacuating(){
+		agent.speed = 5;
+		if (c.equipped != null){
+			c.equipped.Unequip();
+			c.equipped = null;
+		}
+		if(Vector3.Distance(medic.transform.position, transform.position) < 4 && !medicVisited){
+			medicVisited = true;
+			agent.destination = medic.transform.position;
+			agent.Resume();
+			beacon.text = "[ EVAC ]";
+		}
+
+		if(medicVisited){
+			destination = medic.transform.position;
 		}
 	}
 
@@ -98,14 +132,17 @@ public class AIController : MonoBehaviour {
 			c.equipped = null;
 		}
 		if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 2){
-			beacon.text = "Press E to show mercy";
+			beacon.text = "[ E ] Mercy | [ Q ] Execute";
 			if(Input.GetKeyDown(KeyCode.E)){
-				c.Die();
+				StartEvac();
 				if (StaticGameStats.TierThreeUpgrades [0]) {
 					player.movespeed = StaticGameStats.Upgrade9MovementSpeedBuff;
 					player.health = player.health + StaticGameStats.Upgrade9HealAmount;
 					Invoke ("RevertMoveSpeed", 5);
 				}
+			}
+			if(Input.GetKeyDown(KeyCode.Q)){
+				c.Die();
 			}
 		}
 		else{
@@ -157,6 +194,11 @@ public class AIController : MonoBehaviour {
 		if(c.GetAmmo() == 0){
 			c.ThrowEquipped();
 		}
+
+		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
+			StartBeacon();
+		}
 	}
 
 	void StartFlee(){
@@ -193,6 +235,10 @@ public class AIController : MonoBehaviour {
 		if(c.GetAmmo() == 0){
 			c.ThrowEquipped();
 		}
+		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
+			StartBeacon();
+		}
 	}
 
 	void StartSearch(){
@@ -211,6 +257,10 @@ public class AIController : MonoBehaviour {
 			if(!compareTarget(engagedTarget)){
 				StartFlee();
 			}
+		}
+		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
+			StartBeacon();
 		}
 	}
 
@@ -288,6 +338,10 @@ public class AIController : MonoBehaviour {
 		if(c.equipped == null){
 			StartSearch();
 		}
+		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
+			StartBeacon();
+		}
 	}
 
 	/// <summary>
@@ -347,6 +401,9 @@ public class AIController : MonoBehaviour {
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
 					//if it is an alive contestant
 					if(target.gameObject.GetComponent<Contestant>().isAlive){
+						if(target.gameObject.GetComponent<Contestant>().type == Contestant.ContestantType.Medic){
+							continue;
+						}
 						//make sure we don't detect ourselves
 						if(target != transform){
 							visibleTargets.Add(target);
@@ -360,6 +417,9 @@ public class AIController : MonoBehaviour {
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
 					//if it is an alive contestant
 					if(target.gameObject.GetComponent<Contestant>().isAlive){
+						if(target.gameObject.GetComponent<Contestant>().type == Contestant.ContestantType.Medic){
+							continue;
+						}
 						//make sure we don't detect ourselves
 						if(target != transform){
 							visibleTargets.Add(target);

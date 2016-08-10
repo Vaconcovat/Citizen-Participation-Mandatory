@@ -102,6 +102,7 @@ public class AI_GuardController : MonoBehaviour {
 		RoundManager rm = FindObjectOfType<RoundManager>();
 		agent.destination = rm.outerSpawns[Random.Range(0,rm.outerSpawns.Count)].position;
 		endStatus = endRoundStatus.Retreat;
+		agent.speed = speed;
 	}
 
 	void Retreat(){

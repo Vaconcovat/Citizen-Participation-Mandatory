@@ -40,6 +40,9 @@ public class SkillCoolDown : MonoBehaviour {
 				//Display info about all weapons
 				Item[] items = FindObjectsOfType<Item>();
 				foreach (Item i in items){
+					if(i.type != Item.ItemType.Ranged){
+						continue;
+					}
 					GameObject spawned = (GameObject)Instantiate(weaponTrackerUI);
 					spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 					UI_WeaponTracker tracker = spawned.GetComponent<UI_WeaponTracker>();
