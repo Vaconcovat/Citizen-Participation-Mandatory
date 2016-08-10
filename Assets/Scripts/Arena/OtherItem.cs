@@ -34,7 +34,7 @@ public class OtherItem : MonoBehaviour {
 			{
 				switch (effect) {
 				case ItemEffect.Heal:
-					Heal (effectAmount);
+					StartCoroutine("Heal",effectAmount);
 					break;
 				case ItemEffect.Speed:
 					Speed (effectAmount);
