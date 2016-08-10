@@ -38,11 +38,9 @@ public class OtherItem : MonoBehaviour {
 				switch (effect) {
 				case ItemEffect.Heal:
 					Heal (effectAmount);
-					ammo -= 1;
 					break;
 				case ItemEffect.Speed:
 					Speed (effectAmount);
-					ammo -= 1;
 					break;
 				}
 			}
@@ -51,6 +49,7 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator Heal(float amount){
 		_audio.Play ();
+		ammo -= 1;
 		if (StaticGameStats.TierThreeUpgrades [1]) { //Heals 3% of max health 12 times over 12 seconds, total health restored 36
 			GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.Upgrade10HealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 			yield return new WaitForSeconds (1.0f);
@@ -85,9 +84,10 @@ public class OtherItem : MonoBehaviour {
 	}
 
 	void Speed(float amount){
+		_audio.Play ();
+		ammo -= 1;
 		GetComponent<Item>().equipper.movespeed += amount;
-		if ((consume) && (ammo > 0)){
-			_audio.Play ();
+		if ((consume) && (ammo <= 0)){
 			sr.sprite = ThrownSprite;
 			GetComponent<Item>().Unequip();
 		}
