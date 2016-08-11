@@ -33,6 +33,11 @@ public class UpgradeInterface : MonoBehaviour {
 		StaticGameStats.Abilites[1] = false;
 		StaticGameStats.Abilites[2] = false;
 		StaticGameStats.Abilites[3] = false;
+
+		StaticGameStats.SponsorUpgrade [0] = false;
+		StaticGameStats.SponsorUpgrade [1] = false;
+		StaticGameStats.SponsorUpgrade [2] = false;
+
 		moneyHolder = StaticGameStats.moneyHolder;
 		embezzledHolder = StaticGameStats.embezzleHolder;
 	}
@@ -219,8 +224,29 @@ public class UpgradeInterface : MonoBehaviour {
 		}
 	}
 
-
-
-
 	//SPONSOR UPGRADES
+
+	public void BuySponsorOne(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.SponsorUpgrade[0] = true;
+			upgradebuttons[16].interactable = false;
+		}
+	}
+
+	public void BuySponsorTwo(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.SponsorUpgrade[1] = true;
+			upgradebuttons[17].interactable = false;
+		}
+	}
+
+	public void BuySponsorThree(){
+		if (StaticGameStats.avaliableMoney >= 4){
+			StaticGameStats.avaliableMoney -= 4;
+			StaticGameStats.SponsorUpgrade[2] = true;
+			upgradebuttons[18].interactable = false;
+		}
+	}
 }

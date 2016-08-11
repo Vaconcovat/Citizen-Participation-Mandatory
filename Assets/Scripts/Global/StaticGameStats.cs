@@ -32,6 +32,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static bool[] TierTwoUpgrades = new bool[]{false, false, false, false};
 	public static bool[] TierThreeUpgrades = new bool[]{false, false, false, false};
 	public static bool[] Abilites = new bool[]{false, false, false, false};
+	public static bool[] SponsorUpgrade = new bool[]{false, false, false};
 	public static int sponsor;
 	public static int arenasPlayed = 0;
 
