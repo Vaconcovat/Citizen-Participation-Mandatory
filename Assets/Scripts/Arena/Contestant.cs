@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Contestant : MonoBehaviour {
-
+	public enum Trait{Sick, Strong, Scared, Fearless, Merciful, Relentless};
 	public enum ContestantType{Player, AI, Guard, Medic};
 
+	public List<Trait> traits;
 
 	[Header("Contestant Settings")]
 	public ContestantType type;
@@ -94,7 +96,6 @@ public class Contestant : MonoBehaviour {
 	void Start () {
 		body = GetComponent<Rigidbody>();
 		coll = GetComponent<Collider>();
-		health = maxHealth;
         baseSpeed = movespeed;
         //temp change color for enemies
         if(type == ContestantType.AI){
@@ -109,7 +110,48 @@ public class Contestant : MonoBehaviour {
         	contestantTidBit = gen.GetTidBit();
         }
 
-			
+        //----------------------------------------------------
+        //GENERATE TRAITS
+
+        //20% chance to be sick, 20% chance to be strong
+        float random = Random.value;
+        if (random < 0.2f){
+        	traits.Add(Trait.Sick);
+        }
+        else if (random > 0.8f){
+        	traits.Add(Trait.Strong);
+        }
+
+        //20% chance to be scared, 20% chance to be fearless
+		random = Random.value;
+		if (random < 0.2f){
+        	traits.Add(Trait.Scared);
+        }
+        else if (random > 0.8f){
+        	traits.Add(Trait.Fearless);
+        }
+
+		//20% chance to be merciful, 20% chance to be relentless
+		random = Random.value;
+		if (random < 0.2f){
+        	traits.Add(Trait.Merciful);
+        }
+        else if (random > 0.8f){
+        	traits.Add(Trait.Relentless);
+        }
+
+        //
+        //------------------------------------------------------
+
+
+        if(traits.Contains(Trait.Sick)){
+        	maxHealth = 80;
+        }
+		if(traits.Contains(Trait.Strong)){
+        	maxHealth = 120;
+        }
+
+		health = maxHealth;
 	}
 	
 	// Update is called once per frame
