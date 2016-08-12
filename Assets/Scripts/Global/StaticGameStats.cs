@@ -88,32 +88,32 @@ public class StaticGameStats : MonoBehaviour {
 		case 0:
 			if (TierOneUpgrades [2]) {
 				govRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-				Debug.Log ("GOV: MOD " + govRep.ToString ());
+				//Debug.Log ("GOV: MOD " + govRep.ToString ());
 				break;
 			} else {
 				govRep += amount;
-				Debug.Log("GOV: " + govRep.ToString());
+				//Debug.Log("GOV: " + govRep.ToString());
 				break;
 			}
 				
 		case 1:
 			if (TierOneUpgrades [2]) {
 				corRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-				Debug.Log ("COR: MOD " + corRep.ToString ());
+				//Debug.Log ("COR: MOD " + corRep.ToString ());
 				break;
 			} else {
 				corRep += amount;
-				Debug.Log("COR: " + corRep.ToString());
+				//Debug.Log("COR: " + corRep.ToString());
 				break;
 			}
 		case 2:
 			if (TierOneUpgrades [2]) {
 				rebRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-				Debug.Log ("REB: MOD" + rebRep.ToString ());
+				//Debug.Log ("REB: MOD" + rebRep.ToString ());
 				break;
 			} else {
 				rebRep += amount;
-				Debug.Log("REB: " + rebRep.ToString());
+				//Debug.Log("REB: " + rebRep.ToString());
 				break;
 			}
 		}

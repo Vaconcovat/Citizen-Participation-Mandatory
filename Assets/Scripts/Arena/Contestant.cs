@@ -103,7 +103,6 @@ public class Contestant : MonoBehaviour {
         }
         ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
         if(contestantName == ""){
-        	Debug.Log("Test");
         	contestantName = gen.GetFirstName() + " " + gen.GetLastName();
         }
         if(contestantTidBit == ""){
@@ -276,6 +275,7 @@ public class Contestant : MonoBehaviour {
 			if(GetComponent<AIController>().state == AIController.AIState.Beacon || GetComponent<AIController>().state == AIController.AIState.Evacuating){
 				GetComponent<AIController>().beacon.gameObject.SetActive(false);
 			}
+			GetComponent<AIController>().state = AIController.AIState.Dead;
 			FindObjectOfType<RoundManager>().Death();
 		}
 		else if(type == ContestantType.Guard){

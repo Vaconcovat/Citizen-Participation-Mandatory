@@ -91,7 +91,6 @@ public class Bullet : MonoBehaviour {
 					FindObjectOfType<StaticGameStats>().Influence(1,0.5f);
 				}
 				if (owner.type == Contestant.ContestantType.AI) {
-						Debug.Log ("I'm gaining " + (damage / 200f) + " confidence from hitting an enemy");
 						owner.GetComponent<AIController> ().confidence += damage / 200f;
 				}
 			}

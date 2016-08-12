@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// This is a very basic use of navmesh agents to pathfind towards the player constantly
 /// </summary>
 public class AIController : MonoBehaviour {
-	public enum AIState{Searching, Hunting, Fighting, Fleeing, Beacon, Evacuating};
+	public enum AIState{Searching, Hunting, Fighting, Fleeing, Beacon, Evacuating, Dead};
 
 	NavMeshAgent agent;
 
@@ -306,6 +306,11 @@ public class AIController : MonoBehaviour {
 	}
 
 	void Fighting(){
+		//if we don't have a gun, we can't fight
+		if(c.equipped == null){
+			StartSearch();
+			return;
+		}
 		destination = engagedTarget.transform.position;
 
 		//constantly re-evaluate
@@ -314,21 +319,72 @@ public class AIController : MonoBehaviour {
 		}
 
 		//move towards our target, slow down when we're really close
-		if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
-			agent.speed = 0.5f;
+		if(!engagedTarget.isPlayer){
+			if(engagedTarget.GetComponent<AIController>().state != AIState.Beacon){
+				if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
+					agent.speed = 0.5f;
+				}
+				else{
+					agent.speed = c.movespeed * 0.8f;
+				}
+			}
+			else{
+				agent.speed = c.movespeed * 0.8f;
+				if(agent.remainingDistance < 2.0f){
+					if(c.traits.Contains(Contestant.Trait.Merciful)){
+						engagedTarget.GetComponent<AIController>().StartEvac();
+						StartHunt();
+					}
+					else if(c.traits.Contains(Contestant.Trait.Relentless)){
+						engagedTarget.GetComponent<AIController>().Execute();
+						StartHunt();
+					}
+					else{
+						if(confidence > 0){
+							engagedTarget.GetComponent<AIController>().StartEvac();
+							StartHunt();
+						}
+						else{
+							engagedTarget.GetComponent<AIController>().Execute();
+							StartHunt();
+						}
+					}
+				}
+			}
 		}
-		else{
-			agent.speed = c.movespeed * 0.8f;
+		else if(c.equipped != null){
+			if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
+				agent.speed = 0.5f;
+			}
+			else{
+				agent.speed = c.movespeed * 0.8f;
+			}
 		}
+		if(agent.remainingDistance < 1.5f){
+			agent.speed = -3;
+		}
+
+
 
 		//rotate towards our target
 		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(engagedTarget.transform.position - transform.position), Time.deltaTime, 0));
 
 		//if we're looking directly at them and we're in range, shoot
-		if(LineOfSight(engagedTarget.GetComponent<Collider>(),viewRadius) && agent.remainingDistance < c.equipped.GetRangeHint(false)){
-			c.UseEquipped(true);
-			c.UseEquipped(false);
+		if(c.equipped != null){
+			if(LineOfSight(engagedTarget.GetComponent<Collider>(),viewRadius) && agent.remainingDistance < c.equipped.GetRangeHint(false)){
+				if(!engagedTarget.isPlayer){
+					if(engagedTarget.GetComponent<AIController>().state != AIState.Beacon){
+						c.UseEquipped(true);
+						c.UseEquipped(false);
+					}
+				}
+				else{
+					c.UseEquipped(true);
+					c.UseEquipped(false);
+				}
+			}
 		}
+
 
 		//if our gun runs out of ammo, throw it away
 		if(c.GetAmmo() == 0){
@@ -341,10 +397,7 @@ public class AIController : MonoBehaviour {
 			StartHunt ();
 		}
 
-		//if we don't have a gun, we can't fight
-		if(c.equipped == null){
-			StartSearch();
-		}
+
 		confidence = Mathf.Clamp(confidence + (confidenceGain * Time.deltaTime),-1,1);
 		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
 			StartBeacon();
@@ -374,11 +427,9 @@ public class AIController : MonoBehaviour {
 
 
 		if(confidence > -(myThreat - theirThreat)){
-			Debug.Log("I'm not scared of my target because my confidence says i'm more threatening");
 			return true;
 		}
 		else{
-			Debug.Log("I'm scared because i'm not confident enough to take on my target");
 			return false;
 		}
 
@@ -403,7 +454,7 @@ public class AIController : MonoBehaviour {
 			Vector3 dirToTarget = (target.position - transform.position).normalized;
 			float dstToTarget = Vector3.Distance (transform.position, target.position);
 			//are they close enough?
-			if (dstToTarget < detectRaduis){
+			if (dstToTarget < detectRaduis || Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2){
 				//Check if there is an obstacle between ourselves and our target
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
 					//if it is an alive contestant
@@ -411,21 +462,10 @@ public class AIController : MonoBehaviour {
 						if(target.gameObject.GetComponent<Contestant>().type == Contestant.ContestantType.Medic){
 							continue;
 						}
-						//make sure we don't detect ourselves
-						if(target != transform){
-							visibleTargets.Add(target);
-						}
-					}
-				}
-			}
-			//Check if the target is within our view angle
-			else if (Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2) {
-				//Check if there is an obstacle between ourselves and our target
-				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
-					//if it is an alive contestant
-					if(target.gameObject.GetComponent<Contestant>().isAlive){
-						if(target.gameObject.GetComponent<Contestant>().type == Contestant.ContestantType.Medic){
-							continue;
+						if(target.gameObject.GetComponent<Contestant>().type == Contestant.ContestantType.AI){
+							if(target.gameObject.GetComponent<AIController>().state == AIState.Beacon || target.gameObject.GetComponent<AIController>().state == AIState.Evacuating){
+								continue;
+							}
 						}
 						//make sure we don't detect ourselves
 						if(target != transform){

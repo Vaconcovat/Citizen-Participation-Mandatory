@@ -41,8 +41,6 @@ public class ContestantGenerator : MonoBehaviour {
 		//parse the Fighting lines
 		FightingList = new List<string>();
 		FightingList.AddRange(FightingStr.Split("\n"[0]));
-
-		Debug.Log("Random Info: " + FnameList[Random.Range(0,FnameList.Count)] + " " + LnameList[Random.Range(0,LnameList.Count)] + ": " +TidBitList[Random.Range(0,TidBitList.Count)]);
 	}
 	
 	public string GetFirstName(){
