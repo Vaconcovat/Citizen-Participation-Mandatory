@@ -152,4 +152,23 @@ public class Item : MonoBehaviour {
 			}
 		}
 	}
+
+	public float GetRangeHint(bool min){
+		if(min){
+			if(type == ItemType.Ranged){
+				return GetComponent<RangedWeapon>().RangeHintMin;
+			}
+			else{
+				return 0;
+			}
+		}
+		else{
+			if(type == ItemType.Ranged){
+				return GetComponent<RangedWeapon>().RangeHintMax;
+			}
+			else{
+				return 100;
+			}
+		}
+	}
 }

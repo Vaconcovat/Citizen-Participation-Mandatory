@@ -48,6 +48,7 @@ public class AIController : MonoBehaviour {
 	public AI_MedicController medic;
 
 	bool medicVisited = false;
+	float confidenceGain;
 
 	// Use this for initialization
 	void Start () {
@@ -58,6 +59,18 @@ public class AIController : MonoBehaviour {
 		cGen = FindObjectOfType<ContestantGenerator>();
 		StartSearch();
 		StartCoroutine ("FindTargetsWithDelay", .5f);
+		if(c.traits.Contains(Contestant.Trait.Fearless)){
+			confidenceGain = 0.02f;
+			confidence = 0.5f;
+		}
+		else if(c.traits.Contains(Contestant.Trait.Scared)){
+			confidenceGain = 0.005f;
+			confidence = -0.5f;
+		}
+		else{
+			confidenceGain = 0.01f;
+			confidence = 0;
+		}
 	}
 	
 	// Update is called once per frame
@@ -87,7 +100,7 @@ public class AIController : MonoBehaviour {
 		}
 	}
 
-	void StartEvac(){
+	public void StartEvac(){
 		state = AIState.Evacuating;
 		beacon.text = "[ MEDICAL EVAC INBOUND ]";
 		RoundManager rm = FindObjectOfType<RoundManager>();
@@ -142,7 +155,7 @@ public class AIController : MonoBehaviour {
 				}
 			}
 			if(Input.GetKeyDown(KeyCode.Q)){
-				c.Die();
+				Execute();
 			}
 		}
 		else{
@@ -163,12 +176,7 @@ public class AIController : MonoBehaviour {
 		center = new Vector3(-5f,1.63f,-35.2f);
 		towardsCenter = rand + ((center - rand).normalized) * (confidence*2);
 		NavMeshPath path = new NavMeshPath();
-		if(NavMesh.CalculatePath(transform.position, towardsCenter, NavMesh.AllAreas, path)){
-			destination = towardsCenter;
-		}
-		else{
-			Wander();
-		}
+		destination = towardsCenter;
 	}
 
 	void Hunting(){
@@ -195,7 +203,7 @@ public class AIController : MonoBehaviour {
 			c.ThrowEquipped();
 		}
 
-		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		confidence = Mathf.Clamp(confidence + (confidenceGain * Time.deltaTime),-1,1);
 		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
 			StartBeacon();
 		}
@@ -235,7 +243,7 @@ public class AIController : MonoBehaviour {
 		if(c.GetAmmo() == 0){
 			c.ThrowEquipped();
 		}
-		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		confidence = Mathf.Clamp(confidence + (confidenceGain * Time.deltaTime),-1,1);
 		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
 			StartBeacon();
 		}
@@ -258,7 +266,7 @@ public class AIController : MonoBehaviour {
 				StartFlee();
 			}
 		}
-		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		confidence = Mathf.Clamp(confidence + (confidenceGain * Time.deltaTime),-1,1);
 		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
 			StartBeacon();
 		}
@@ -306,8 +314,7 @@ public class AIController : MonoBehaviour {
 		}
 
 		//move towards our target, slow down when we're really close
-		//need to define engagement range here!
-		if(agent.remainingDistance < 5){
+		if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
 			agent.speed = 0.5f;
 		}
 		else{
@@ -317,8 +324,8 @@ public class AIController : MonoBehaviour {
 		//rotate towards our target
 		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(engagedTarget.transform.position - transform.position), Time.deltaTime, 0));
 
-		//if we're looking directly at them, shoot
-		if(LineOfSight(engagedTarget.GetComponent<Collider>(),viewRadius)){
+		//if we're looking directly at them and we're in range, shoot
+		if(LineOfSight(engagedTarget.GetComponent<Collider>(),viewRadius) && agent.remainingDistance < c.equipped.GetRangeHint(false)){
 			c.UseEquipped(true);
 			c.UseEquipped(false);
 		}
@@ -338,7 +345,7 @@ public class AIController : MonoBehaviour {
 		if(c.equipped == null){
 			StartSearch();
 		}
-		confidence = Mathf.Clamp(confidence + (0.01f * Time.deltaTime),-1,1);
+		confidence = Mathf.Clamp(confidence + (confidenceGain * Time.deltaTime),-1,1);
 		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
 			StartBeacon();
 		}
@@ -470,7 +477,10 @@ public class AIController : MonoBehaviour {
 		player.movespeed = StaticGameStats.Upgrade9NormalSpeed;
 	}
 
-
+	public void Execute(){
+		Debug.Log("Executed");
+		c.Die();
+	}
 
 
 }

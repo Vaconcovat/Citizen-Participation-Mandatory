@@ -3,7 +3,6 @@ using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class RangedWeapon : MonoBehaviour {
-	public enum RangeHint{Long,Med,Short};
 
 	[Header("Ranged Weapon Settings")]
 	[Tooltip("The time in seconds that this weapon must wait between shots. Set to 0 for fan the hammer.")]
@@ -49,6 +48,9 @@ public class RangedWeapon : MonoBehaviour {
 	public GameObject bullet;
 	public LayerMask obstacleMask;
 	public GameObject muzzleFlash;
+
+	public float RangeHintMin = 1;
+	public float RangeHintMax = 5;
 
 	/// <summary>
 	/// Internal counter for the gun's fire rate.

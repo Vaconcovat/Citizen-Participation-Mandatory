@@ -30,7 +30,8 @@ public class ItemSpawner : MonoBehaviour {
 		}
 
 		if(selection == poolselection.Sponsor){
-			Instantiate(pool.items[Random.Range(0,pool.items.Length)],new Vector2(transform.position.x, transform.position.y - 0.5f),Quaternion.identity);
+			GameObject spawned = (GameObject)Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
+			spawned.GetComponent<Rigidbody>().AddTorque(Random.onUnitSphere*10);
 		}
 		if(respawning){
 			StartCoroutine("respawn");
