@@ -12,65 +12,42 @@ public class SkillCoolDown : MonoBehaviour {
 	public KeyCode Ability4;
 	public Contestant player;
 	public GameObject weaponTrackerUI, contestantTrackerUI;
+	Ray ray;
+	RaycastHit hit;
+	public bool isReady = false;
 
 	void FixedUpdate()
 	{
-		if (Input.GetKey (Ability1)) 
+		if (Input.GetKeyDown (Ability1)) 
 		{
 			//If the ability is not currently cooling down
-			if (skills [0].currentCooldown >= skills [0].cooldown) 
+			if (skills [0].currentCooldown >= skills [0].cooldown)
 			{
-				//Fill up the player's weapon
-				if(player.equipped == null){
-					return;
-				}
-				if (player.equipped.GetComponent<RangedWeapon> ().ammo < player.equipped.GetComponent<RangedWeapon> ().Maxammo) 
-				{
-					player.equipped.GetComponent<RangedWeapon> ().AddAmmo (player.equipped.GetComponent<RangedWeapon> ().Maxammo - player.equipped.GetComponent<RangedWeapon> ().ammo);
-				}
-				skills [0].currentCooldown = 0;
+				Stun ();
 			}
 		}
 
-		else if (Input.GetKey (Ability2)) 
+		else if (Input.GetKeyDown (Ability2)) 
 		{
 			//If the ability is not currently cooling down
 			if (skills [1].currentCooldown >= skills [1].cooldown) 
 			{
-				//Display info about all weapons
-				Item[] items = FindObjectsOfType<Item>();
-				foreach (Item i in items){
-					if(i.type != Item.ItemType.Ranged){
-						continue;
-					}
-					GameObject spawned = (GameObject)Instantiate(weaponTrackerUI);
-					spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
-					UI_WeaponTracker tracker = spawned.GetComponent<UI_WeaponTracker>();
-					tracker.item = i;
-				}
+				BioScan();
 				skills [1].currentCooldown = 0;
 			}
 		}
 
-		else if (Input.GetKey (Ability3)) 
+		else if (Input.GetKeyDown (Ability3)) 
 		{
 			//If the ability is not currently cooling down
 			if (skills [2].currentCooldown >= skills [2].cooldown) 
 			{
-				Contestant[] contestants = FindObjectsOfType<Contestant>();
-				foreach (Contestant c in contestants){
-					if(c.type == Contestant.ContestantType.AI){
-						GameObject spawned = (GameObject)Instantiate(contestantTrackerUI);
-						spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
-						UI_ContestantTracker tracker = spawned.GetComponent<UI_ContestantTracker>();
-						tracker.contest = c;
-					}
-				}
+				
 				skills [2].currentCooldown = 0;
 			}
 		}
 
-		else if (Input.GetKey (Ability4)) 
+		else if (Input.GetKeyDown (Ability4)) 
 		{
 			//If the ability is not currently cooling down
 			if (skills [3].currentCooldown >= skills [3].cooldown) 
@@ -101,6 +78,57 @@ public class SkillCoolDown : MonoBehaviour {
 			}
 
 		}
+		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+	}
+
+	public void BioScan()
+	{
+		//Display Information About Contestants
+		Contestant[] contestants = FindObjectsOfType<Contestant>();
+		foreach (Contestant c in contestants){
+			if(c.type == Contestant.ContestantType.AI){
+				GameObject spawned = (GameObject)Instantiate(contestantTrackerUI);
+				spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+				UI_ContestantTracker tracker = spawned.GetComponent<UI_ContestantTracker>();
+				tracker.contest = c;
+			}
+		}
+
+		//Display info about all weapons
+		Item[] items = FindObjectsOfType<Item>();
+		foreach (Item i in items){
+			if(i.type != Item.ItemType.Ranged){
+				continue;
+			}
+			GameObject spawned = (GameObject)Instantiate(weaponTrackerUI);
+			spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+			UI_WeaponTracker tracker = spawned.GetComponent<UI_WeaponTracker>();
+			tracker.item = i;
+		}
+	}
+
+	public void Stun()
+	{
+		if (isReady == true) {
+			if (Physics.Raycast (ray, out hit)) 
+			{
+				if (hit.collider.tag == "Contestant") 
+				{
+					//Only Performs this code if the ray hits a contestant
+					print (hit.collider.name);
+				}
+			}
+			print ("Shock Collar Activated, ZZZZZZZAP");
+			skills [0].currentCooldown = 0;
+			isReady = false;
+		} 
+		else {
+			print ("Shock Collar Armed, Use with Caution");
+			skills [0].currentCooldown = 0;
+			isReady = true;
+		}
+
+		
 	}
 }
 
@@ -112,4 +140,5 @@ public class Skill
 	[HideInInspector]
 	public float currentCooldown;
 }
+
 
