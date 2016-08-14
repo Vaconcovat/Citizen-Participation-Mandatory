@@ -25,6 +25,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Text abortText;
 	public Image abortImage;
 	public Text upgradesText;
+	public Text announcementsText;
 	float grainFloor;
 
 
@@ -39,12 +40,21 @@ public class InterfaceManager : MonoBehaviour {
 	public AudioSource music;
 
 	RoundManager rm;
+	float announcetimer;
+	bool activeannounce;
+
 	// Use this for initialization
 	void Start () {
 		rm = FindObjectOfType<RoundManager>();
 		abortButton.enabled = false;
 		abortText.enabled = false;
 		abortImage.enabled = false;
+
+		announcementsText.text = "";
+		announcetimer = 3.0f;
+		activeannounce = false;
+
+
 		//Upgrades Text
 		upgradesText.text = "";
 
@@ -169,5 +179,21 @@ public class InterfaceManager : MonoBehaviour {
 			hpText.text = "";
 			deadText.text = "";
 		}
+
+		if(activeannounce){
+			if(announcetimer > 0){
+				announcetimer -= Time.deltaTime;
+			}
+			else{
+				activeannounce = false;
+				announcetimer = 3.0f;
+				announcementsText.text = "";
+			}
+		}
+	}
+
+	public void Announce(string s){
+		activeannounce = true;
+		announcementsText.text = s;
 	}
 }

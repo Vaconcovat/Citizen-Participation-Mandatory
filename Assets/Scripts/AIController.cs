@@ -110,6 +110,7 @@ public class AIController : MonoBehaviour {
 		medic.target = this.c;
 		medic.spawn = medicSpawn;
 		rm.outerBayDoors.SetActive(false);
+		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]\n[ EVAC INBOUND ]");
 	}
 
 	void Evacuating(){
@@ -518,7 +519,7 @@ public class AIController : MonoBehaviour {
 	}
 
 	public void Execute(){
-		Debug.Log("Executed");
+		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " EXECUTED ]");
 		c.Die();
 	}
 

@@ -58,27 +58,38 @@ public class AI_GuardController : MonoBehaviour {
 
 	void Chase(){
 		agent.destination = target.transform.position;
+
 		if(agent.remainingDistance < closingDistance){
 			agent.speed = closingSpeed;
-			if(target.equipped == null){
-				endStatus = endRoundStatus.Capture;
-			}
-			else{
-				if(talktimer <= 0){
-					talktimer = minTalkTime;
-					if(Random.value < 0.5f){
-						c.Say("[Drop the weapon!]");
-					}
-				}
-				else{
-					talktimer -= Time.deltaTime;
-				}
-			}
 		}
 		else{
 			agent.speed = speed;
 		}
 
+		if(Input.GetKeyDown(KeyCode.E)){
+			endStatus = endRoundStatus.Capture;
+			if (target.equipped != null){
+				target.equipped.Unequip();
+				target.equipped = null;
+			}
+			target.GetComponent<PlayerController>().enabled = false;
+		}
+		else{
+			if(talktimer <= 0){
+				talktimer = minTalkTime;
+				if(Random.value < 0.5f){
+					if(target.equipped != null){
+						c.Say("DROP THE WEAPON!");
+					}
+					else{
+						c.Say("SURRENDER!");
+					}
+				}
+			}
+			else{
+				talktimer -= Time.deltaTime;
+			}
+		}
 	}
 
 	void Fight(){

@@ -18,9 +18,12 @@ public class RoundManager : MonoBehaviour {
 	Contestant[] contestants;
 	bool roundOver = false;
 	public float govtime;
+	InterfaceManager im;
+
 	// Use this for initialization
 
 	void Awake () {
+		im = FindObjectOfType<InterfaceManager>();
 		contestants = FindObjectsOfType<Contestant>();
 		totalContestants = contestants.Length;
 		aliveContestants = totalContestants;
@@ -54,8 +57,11 @@ public class RoundManager : MonoBehaviour {
 			if (!roundOver){
 				roundOver = true;
 				SpawnGuards();
-				Debug.Log(aliveContestants);
 			}
+		}
+
+		if(roundOver){
+			im.Announce("ROUND OVER\nPRESS [E] TO SURRENDER");
 		}
 	}
 
