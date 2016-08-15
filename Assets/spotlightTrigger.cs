@@ -26,6 +26,7 @@ public class spotlightTrigger : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Contestant") {
 			Debug.Log ("Player exited the trigger");
+			lightToBeChanged.color = Color.white;
 		}
 	}
 }
