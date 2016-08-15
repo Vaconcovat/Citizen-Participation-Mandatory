@@ -4,7 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	Contestant contestant;
-	Vector3 pos, moveDir;
+	public static Vector3 pos;
+	Vector3 moveDir;
 	Rigidbody body;
 
 	[Header("Settings")]

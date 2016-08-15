@@ -353,11 +353,6 @@ public class Contestant : MonoBehaviour {
 		inventory = temp;
 	}
 
-	public void UseFromBackpack(){
-		if (StaticGameStats.TierTwoUpgrades [0]) {
-		}
-	}
-
 	/// <summary>
 	/// This class stores information about incoming damage, including who is dealing the damage.
 	/// </summary>

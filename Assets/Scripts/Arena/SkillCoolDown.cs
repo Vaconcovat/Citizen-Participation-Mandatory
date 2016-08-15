@@ -12,18 +12,30 @@ public class SkillCoolDown : MonoBehaviour {
 	public KeyCode Ability4;
 	public Contestant player;
 	public GameObject weaponTrackerUI, contestantTrackerUI;
-	Ray ray;
-	RaycastHit hit;
-	public bool isReady = false;
+	public bool isPrimed = false;
+	public 
+
 
 	void FixedUpdate()
 	{
 		if (Input.GetKeyDown (Ability1)) 
 		{
 			//If the ability is not currently cooling down
-			if (skills [0].currentCooldown >= skills [0].cooldown)
+			if ((skills [0].currentCooldown >= skills [0].cooldown) && (skills [4].currentCooldown >= skills[4].cooldown))
 			{
-				Stun ();
+				if (isPrimed) 
+				{
+					Stun ();
+					print ("Shock Collar Activated, ZZZZZZZAP");
+					isPrimed = false;
+					skills [0].currentCooldown = 0;
+				} else 
+				{
+					print ("Shock Collar Armed, Use with Caution");
+					isPrimed = true;
+					skills [4].currentCooldown = 0;
+				}
+
 			}
 		}
 
@@ -52,7 +64,7 @@ public class SkillCoolDown : MonoBehaviour {
 			//If the ability is not currently cooling down
 			if (skills [3].currentCooldown >= skills [3].cooldown) 
 			{
-				//Whatever Skill 1 Does
+				Blackout ();
 				skills [3].currentCooldown = 0;
 			}
 		}
@@ -65,6 +77,7 @@ public class SkillCoolDown : MonoBehaviour {
 		skills [1].currentCooldown = skills [1].cooldown;
 		skills [2].currentCooldown = skills [2].cooldown;
 		skills [3].currentCooldown = skills [3].cooldown;
+		skills [4].currentCooldown = skills [4].cooldown;
 	}
 
 	void Update()
@@ -78,13 +91,12 @@ public class SkillCoolDown : MonoBehaviour {
 			}
 
 		}
-		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 	}
 
 	public void BioScan()
 	{
-		//Display Information About Contestants
 		Contestant[] contestants = FindObjectsOfType<Contestant>();
+		//Display Information About Contestants
 		foreach (Contestant c in contestants){
 			if(c.type == Contestant.ContestantType.AI){
 				GameObject spawned = (GameObject)Instantiate(contestantTrackerUI);
@@ -109,25 +121,27 @@ public class SkillCoolDown : MonoBehaviour {
 
 	public void Stun()
 	{
-		if (isReady == true) {
-			if (Physics.Raycast (ray, out hit)) 
-			{
-				if (hit.collider.tag == "Contestant") 
+		float closestDistance = Mathf.Infinity;
+		Contestant closestContestant = null;
+		Contestant[] contestants = FindObjectsOfType<Contestant>();
+		foreach (Contestant c in contestants){
+			if (c.type == Contestant.ContestantType.AI) {
+				float distance = Vector3.Distance (PlayerController.pos, c.transform.position);
+				if (distance < closestDistance)
 				{
-					//Only Performs this code if the ray hits a contestant
-					print (hit.collider.name);
+					closestDistance = distance;
+					closestContestant = c;
 				}
 			}
-			print ("Shock Collar Activated, ZZZZZZZAP");
-			skills [0].currentCooldown = 0;
-			isReady = false;
-		} 
-		else {
-			print ("Shock Collar Armed, Use with Caution");
-			skills [0].currentCooldown = 0;
-			isReady = true;
 		}
+		if (closestDistance < 10) {
+			Debug.Log ("The closest contestant to the cursor is " + closestContestant.contestantName + " at " + closestDistance + " metres away");
+		}
+			
+	}
 
+	public void Blackout()
+	{
 		
 	}
 }
@@ -137,6 +151,7 @@ public class Skill
 {
 	public float cooldown;
 	public Image skillIcon;
+	public string AbilityName;
 	[HideInInspector]
 	public float currentCooldown;
 }
