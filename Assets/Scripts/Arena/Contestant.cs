@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Contestant : MonoBehaviour {
 	public enum Trait{Sick, Strong, Scared, Fearless, Merciful, Relentless};
-	public enum ContestantType{Player, AI, Guard, Medic};
+	public enum ContestantType{Player, AI, Guard, Medic, Target};
 
 	public List<Trait> traits;
 
@@ -91,6 +91,8 @@ public class Contestant : MonoBehaviour {
 	public Transform anchor;
 
 	GameObject currentTalkCard;
+	/* Comment: Tried to integrate same system used Overhead display from SkillCoolDown to no avail*/
+	//public GameObject contestantTrackerUI;
 
 	// Use this for initialization
 	void Start () {
@@ -101,6 +103,10 @@ public class Contestant : MonoBehaviour {
         if(type == ContestantType.AI){
         	GetComponent<MeshRenderer>().material.color = Color.blue;
         }
+		if(type == ContestantType.Target){
+			GetComponent<MeshRenderer>().material.color = Color.magenta;
+		}
+
         ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
         if(contestantName == ""){
         	contestantName = gen.GetFirstName() + " " + gen.GetLastName();
@@ -259,6 +265,8 @@ public class Contestant : MonoBehaviour {
 					foreach(AI_GuardController guard in guards){
 						guard.endStatus  = AI_GuardController.endRoundStatus.Fight;
 					}
+				} else if (type == ContestantType.Target) {
+					Debug.Log ("Target took damage");
 				}
 			}
 		}
@@ -289,7 +297,12 @@ public class Contestant : MonoBehaviour {
 			}else{
 				FindObjectOfType<StaticGameStats>().Influence(0, -10.0f);
 			}
+		} else if(type == ContestantType.Target){
+			//GetComponent<AI_GuardController>().enabled = false;
+			GetComponent<NavMeshAgent>().enabled = false;
+			print ("Target died a horrible death!");
 		}
+
 		else{
 			GetComponent<AI_MedicController>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
