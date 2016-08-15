@@ -19,7 +19,7 @@ public class spotlightTrigger : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Contestant") {
 			//Debug.Log ("Player is within trigger");
-			if (toBeRemoved.name == "Wall (85)") {
+			if (toBeRemoved.name == "Wall (85)" || toBeRemoved.name == "Wall (89)") {
 				if (allTargetsDead () == true) {
 					Destroy (toBeRemoved, 0.5f);
 					lightToBeChanged.color = Color.green;
