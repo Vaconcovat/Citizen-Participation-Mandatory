@@ -72,32 +72,25 @@ public class Bullet : MonoBehaviour {
 	public void Fire(Vector3 vector){
 		Vector3 v = vector * velocityModifier;
 		body.AddForce(v, ForceMode.Impulse);
+		if (isSponsored) {
+			FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponFireIncrease);
+		}
 	}
 
 	void OnCollisionEnter(Collision coll){
 		if (areaOfEffect > 0){
 			Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
 			foreach (Collider a in colliders){
-				if (a.gameObject.tag == "Contestant" && isSponsored){
-					FindObjectOfType<StaticGameStats>().Influence(1,2.0f);
-				}
 				a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
 			}
 			Destroy(gameObject);
 		}
 		else{
 			if (coll.gameObject.tag == "Contestant"){
-				if (isSponsored) {
-					FindObjectOfType<StaticGameStats>().Influence(1,0.5f);
-				}
 				if (owner.type == Contestant.ContestantType.AI) {
 						owner.GetComponent<AIController> ().confidence += damage / 200f;
 				}
 			}
-			if (coll.gameObject.tag != "Contestant" && isSponsored){
-				FindObjectOfType<StaticGameStats>().Influence(1,-0.5f);
-			}
-
 			coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, body.velocity.normalized, coll.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);
 		}

@@ -63,6 +63,38 @@ public class StaticGameStats : MonoBehaviour {
 	public static int Upgrade11ThrownBuff = 2;
 	public static bool Upgrade11AlreadyTriggered = false;
 
+	//Rep Gain Triggers
+	//1.0f = 1% Rep Gain
+
+	//Government Rep Increase
+	public static float GovExecutionIncrease = 2.0f;
+	public static float GovOnCameraKillIncrease = 0.5f;
+	public static float GovEndOfRoundSurrenderIncrease = 0.25f;
+
+	//Government Rep Decrease
+	public static float GovKillGuardsDecrease = -1.5f;
+	public static float GovActivateMedicBeaconDecrease = -0.75f;
+
+	//Rebel Rep Increase
+	public static float RebSuccessfulExtractionIncrease = 2.5f;
+	public static float RebKillGuardsIncrease = 1.0f;
+	public static float RebActivateMedicBeaconIncrease = 0.5f;
+	public static float RebEndOfRoundTriumphIncrease = 5.0f;
+
+	//Rebel Rep Decrease
+	public static float RebEndOfRoundSurrenderDecrease = -1.0f;
+	public static float RebOnCameraExecutionDecrease = -1.5f;
+	public static float RebOnCameraKill = -0.25f;
+
+	//Corporate Rep Increase
+	public static float CorSponsorWeaponFireIncrease = 0.05f;
+	public static float CorSponsorWeaponKillIncrease = 1.5f;
+	public static float CorSponsorItemUseIncrease = 1.0f;
+
+	//Corporate Rep Decrease
+	public static float CorEndOfTournamentDecayDecrease = -2.0f;
+	public static float CorSponsorWeaponDeathDecrease = -1.0f;
+
 
 
 

@@ -43,12 +43,6 @@ public class RoundManager : MonoBehaviour {
                 j++;
             }
         }
-        if (StaticGameStats.TierTwoUpgrades[0]){
-        	govtime = 45.0f;
-        }
-        else{
-        	govtime = 30.0f;
-        }
 	}
 	
 	// Update is called once per frame
@@ -66,12 +60,6 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	public void endRound(){
-		if (Time.timeSinceLevelLoad < govtime){
-			FindObjectOfType<StaticGameStats>().Influence(0, 5.0f);
-			FindObjectOfType<StaticGameStats>().Influence(2, -2.0f);
-		}else{
-			FindObjectOfType<StaticGameStats>().Influence(0, -5.0f);
-		}
 		if (roundNumber < 5){
 			roundNumber++;
 			GetComponent<SceneChange>().RoundRestart();

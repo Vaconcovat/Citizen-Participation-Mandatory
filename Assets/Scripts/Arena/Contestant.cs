@@ -249,6 +249,10 @@ public class Contestant : MonoBehaviour {
 			if (health <= 0){
 				killer = damage.owner;
 				Die();
+				if (killer.equipped.isSponsored) 
+				{
+					FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponKillIncrease);
+				}
 			}	
 			if (damage.damage > 0){
 				GameObject blood = (GameObject)Instantiate(bloodSplatter,new Vector3(damage.location.x,0.1f,damage.location.z),Quaternion.Euler(90,Random.Range(0f,360f),0));
@@ -287,15 +291,15 @@ public class Contestant : MonoBehaviour {
 			FindObjectOfType<RoundManager>().Death();
 		}
 		else if(type == ContestantType.Guard){
+			FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovKillGuardsDecrease);
+			FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebKillGuardsIncrease);
 			GetComponent<AI_GuardController>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
 		}
 		else if(type == ContestantType.Player){
 			GetComponent<PlayerController>().enabled = false;
-			if (Time.timeSinceLevelLoad < FindObjectOfType<RoundManager>().govtime){
-				FindObjectOfType<StaticGameStats>().Influence(0, 10.0f);
-			}else{
-				FindObjectOfType<StaticGameStats>().Influence(0, -10.0f);
+			if (player.equipped.isSponsored) {
+				FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease);
 			}
 		} else if(type == ContestantType.Target){
 			//GetComponent<AI_GuardController>().enabled = false;

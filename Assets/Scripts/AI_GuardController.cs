@@ -73,6 +73,8 @@ public class AI_GuardController : MonoBehaviour {
 				target.equipped = null;
 			}
 			target.GetComponent<PlayerController>().enabled = false;
+			FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovEndOfRoundSurrenderIncrease);
+			FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebEndOfRoundSurrenderDecrease);
 		}
 		else{
 			if(talktimer <= 0){

@@ -149,6 +149,8 @@ public class AIController : MonoBehaviour {
 		if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 2){
 			beacon.text = "[ E ] Mercy | [ Q ] Execute";
 			if(Input.GetKeyDown(KeyCode.E)){
+				FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovActivateMedicBeaconDecrease);	
+				FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebActivateMedicBeaconIncrease);
 				StartEvac();
 				if (StaticGameStats.TierThreeUpgrades [0]) {
 					player.movespeed = StaticGameStats.Upgrade9MovementSpeedBuff;
@@ -157,6 +159,7 @@ public class AIController : MonoBehaviour {
 				}
 			}
 			if(Input.GetKeyDown(KeyCode.Q)){
+				FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovExecutionIncrease);
 				Execute();
 			}
 		}
