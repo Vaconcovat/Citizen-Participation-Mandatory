@@ -112,6 +112,9 @@ public class SkillCoolDown : MonoBehaviour {
 			if(i.type != Item.ItemType.Ranged){
 				continue;
 			}
+			if(i.equipper != null){
+				continue;
+			}
 			GameObject spawned = (GameObject)Instantiate(weaponTrackerUI);
 			spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 			UI_WeaponTracker tracker = spawned.GetComponent<UI_WeaponTracker>();

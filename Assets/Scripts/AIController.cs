@@ -49,6 +49,7 @@ public class AIController : MonoBehaviour {
 
 	bool medicVisited = false;
 	float confidenceGain;
+	public LayerMask raycastMask;
 
 	// Use this for initialization
 	void Start () {
@@ -323,7 +324,7 @@ public class AIController : MonoBehaviour {
 		if(!engagedTarget.isPlayer){
 			if(engagedTarget.GetComponent<AIController>().state != AIState.Beacon){
 				if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
-					agent.speed = 0.5f;
+					agent.speed = 0;
 				}
 				else{
 					agent.speed = c.movespeed * 0.8f;
@@ -355,14 +356,11 @@ public class AIController : MonoBehaviour {
 		}
 		else if(c.equipped != null){
 			if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
-				agent.speed = 0.5f;
+				agent.speed = 0;
 			}
 			else{
 				agent.speed = c.movespeed * 0.8f;
 			}
-		}
-		if(agent.remainingDistance < 1.5f){
-			agent.speed = -3;
 		}
 
 
@@ -491,14 +489,22 @@ public class AIController : MonoBehaviour {
 	/// <returns><c>true</c>, if we are looking directly at our target, <c>false</c> otherwise.</returns>
 	/// <param name="losTarget">Los target.</param>
 	bool LineOfSight(Collider losTarget, float dist){
-		Debug.DrawRay(transform.position, transform.forward * dist);
+		Debug.DrawRay(transform.position + new Vector3(0,1,0), transform.forward * dist);
 		RaycastHit hit;
-		Ray r = new Ray(transform.position, transform.forward);
-		Physics.Raycast(r, out hit, dist);
+		Ray r = new Ray(transform.position + new Vector3(0,1,0), transform.forward);
+		Physics.Raycast(r, out hit, dist, raycastMask.value);
+
 		if(hit.collider == losTarget){
 			return true;
 		}
 		else{
+			if(hit.collider != null){
+				Debug.Log("dont have line of sight because i'm hitting " + hit.collider.name);
+			}
+			else{
+				Debug.Log("dont have LOS because i hit nothing");
+			}
+
 			return false;
 		}
 	}
