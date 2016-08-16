@@ -101,10 +101,10 @@ public class Contestant : MonoBehaviour {
         baseSpeed = movespeed;
         //temp change color for enemies
         if(type == ContestantType.AI){
-        	GetComponent<MeshRenderer>().material.color = Color.blue;
+        	GetComponent<SkinnedMeshRenderer>().material.color = Color.blue;
         }
 		if(type == ContestantType.Target){
-			GetComponent<MeshRenderer>().material.color = Color.magenta;
+			GetComponent<SkinnedMeshRenderer>().material.color = Color.magenta;
 		}
 
         ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
@@ -314,12 +314,12 @@ public class Contestant : MonoBehaviour {
 			equipped.Unequip();
 		}
 		equipped = null;
-		GetComponent<MeshRenderer>().material = hologram;
+		GetComponent<SkinnedMeshRenderer>().material = hologram;
 		if (killer != FindObjectOfType<PlayerController>().GetComponent<Contestant>()){
-			GetComponent<MeshRenderer>().material.color = Color.white;
+			GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
 		}
 		else{
-			GetComponent<MeshRenderer>().material.color = Color.yellow;
+			GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
 		}
 		GameObject spawned = (GameObject)Instantiate(deathCard);
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
