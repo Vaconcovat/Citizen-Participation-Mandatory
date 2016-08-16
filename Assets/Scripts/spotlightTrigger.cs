@@ -7,11 +7,13 @@ public class spotlightTrigger : MonoBehaviour {
 	public GameObject toBeRemoved;
 	public Light lightToBeChanged;
 	public GameObject[] targetsInScene;
+	public bool activated = false;
 
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.gameObject.tag == "Contestant") {
 			//Debug.Log ("Player entered the trigger");
+			activated=true;
 		}
 	}
 

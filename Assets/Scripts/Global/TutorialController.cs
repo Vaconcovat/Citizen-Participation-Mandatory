@@ -1,41 +1,73 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TutorialController : MonoBehaviour {
-
-	public Light light1;
-	public Light light2;
-	public Light light3;
-	public Light light4;
-	Contestant[] targets;
-
-
+	public bool typeOnAwake;
+	public GameObject[] textBoxes;
+	public GameObject[] triggers;
+	public GameObject player;
+	[TextArea(1,20)]
+	public string[] displayedText;
+	public float[] textDelays;
+	public int charactersPerTick = 1;
+	int characterCounter;
+	public int maxLines = 15;
+	int numlines;
 
 	// Use this for initialization
 	void Start () {
-		targets = FindObjectsOfType<Contestant> ();
-		light1 = GetComponent<Light>();
-		light2 = GetComponent<Light>();
-		light3 = GetComponent<Light>();
-		light4 = GetComponent<Light>();
-		for (int i = 0; i < targets.Length; i++) {
-			targets [i].health = 30;
+		//textBoxes [0].GetComponent<TextMesh> ().text = "Message Log:\n<Steve>   Hello there new recruit!\n\tAre you ready to give your life \n\tfor your country's entertainment?";
+		textBoxes [0].GetComponent<TextMesh> ().text = "";
+		for (int i = 1; i < textBoxes.Length; i++) {
+			textBoxes [i].GetComponent<TextMesh> ().text = "Wait for\nnew text";
+		}
+		if(charactersPerTick < 1){
+			charactersPerTick = 1;
+		}
+		if(typeOnAwake){
+			StartCoroutine("TypeText", 0);
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		/*light1.color -= Color.white / 2.0F * Time.deltaTime;
-		light2.color -= Color.white / 2.0F * Time.deltaTime;
-		light3.color -= Color.white / 2.0F * Time.deltaTime;
-		light4.color -= Color.white / 2.0F * Time.deltaTime;*/
+		if (triggers [0].GetComponent<spotlightTrigger> ().activated == true) {
+			textBoxes[1].GetComponent<TextMesh> ().text = "First Checkpoint\n   Reached";
 
-		for (int i = 0; i < targets.Length; i++) {
-			if (targets [i].health <= 0) {
-				targets [i].isAlive = false;
-				targets [i].Say ("I'm dead");
-				Destroy (targets [i]);
+		}
+	}
+
+
+	IEnumerator TypeText(int index){
+		Debug.Log("Coroutine Running");
+		foreach (char letter in displayedText[index].ToCharArray()){
+			textBoxes [0].GetComponent<TextMesh> ().text += letter;
+			/*if (blip != null){
+				blip.Play();
+			}*/
+			if(textBoxes [0].GetComponent<TextMesh> ().text.Split('\n').Length > maxLines){
+				textBoxes [0].GetComponent<TextMesh> ().text = textBoxes [0].GetComponent<TextMesh> ().text.Substring(textBoxes [0].GetComponent<TextMesh> ().text.IndexOf('\n')+1);
+			}
+			characterCounter++;
+			if(characterCounter == charactersPerTick){
+				characterCounter = 0;
+				yield return new WaitForSeconds(textDelays[index]);
 			}
 		}
+		if (index < displayedText.Length - 1){
+			StartCoroutine("TypeText", (index + 1));
+		}
+		else{
+			/*if(finishedCall != null){
+				finishedCall.SendMessage(finishedCallString,SendMessageOptions.DontRequireReceiver);
+			}*/
+
+		}
+	}
+	public void StartType(){
+		textBoxes [0].GetComponent<TextMesh> ().text = "";
+		StopCoroutine("TypeText");
+		StartCoroutine("TypeText", 0);
 	}
 }
