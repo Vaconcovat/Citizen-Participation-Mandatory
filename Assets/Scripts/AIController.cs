@@ -498,17 +498,9 @@ public class AIController : MonoBehaviour {
 		Physics.Raycast(r, out hit, dist, raycastMask.value);
 
 		if(hit.collider == losTarget){
-			Debug.Log("I have line of sight");
 			return true;
 		}
 		else{
-			if(hit.collider != null){
-				Debug.Log("dont have line of sight because i'm hitting " + hit.collider.name);
-			}
-			else{
-				Debug.Log("dont have LOS because i hit nothing");
-			}
-
 			return false;
 		}
 	}
