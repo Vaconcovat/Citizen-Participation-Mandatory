@@ -76,15 +76,16 @@ public class RangedWeapon : MonoBehaviour {
 			}
 		}
 		if(GetComponent<Item>().equipper != null){
-			Debug.DrawRay(muzzle.position, GetComponent<Item>().equipper.transform.position - muzzle.position);
+			Debug.DrawRay(muzzle.position, GetComponent<Item>().equipper.transform.position  + new Vector3(0,1,0) - muzzle.position);
 		}
 	}
 
 	public void Fire(bool held){
 		//first check that our gun's location is legal (not through a wall)
-		Ray r = new Ray(muzzle.position, GetComponent<Item>().equipper.transform.position - muzzle.position);
-		Debug.DrawRay(muzzle.position, GetComponent<Item>().equipper.transform.position - muzzle.position);
-		if(Physics.Raycast(r,Vector3.Distance(muzzle.position, GetComponent<Item>().equipper.transform.position),obstacleMask)){
+		Ray r = new Ray(muzzle.position, GetComponent<Item>().equipper.transform.position + new Vector3(0,1,0) - muzzle.position);
+
+		if(Physics.Raycast(r,Vector3.Distance(muzzle.position, GetComponent<Item>().equipper.transform.position + new Vector3(0,1,0)),obstacleMask)){
+			Debug.Log("can't fire");
 			return;
 		}
 		//if we're holding the trigger and we're not a fan the hammer gun

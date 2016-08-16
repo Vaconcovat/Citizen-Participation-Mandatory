@@ -111,7 +111,7 @@ public class AIController : MonoBehaviour {
 		medic.target = this.c;
 		medic.spawn = medicSpawn;
 		rm.outerBayDoors.SetActive(false);
-		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]\n[ EVAC INBOUND ]");
+		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]");
 	}
 
 	void Evacuating(){
@@ -327,7 +327,7 @@ public class AIController : MonoBehaviour {
 		if(!engagedTarget.isPlayer){
 			if(engagedTarget.GetComponent<AIController>().state != AIState.Beacon){
 				if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
-					agent.speed = 0;
+					agent.speed = 0.1f;
 				}
 				else{
 					agent.speed = c.movespeed * 0.8f;
@@ -359,7 +359,7 @@ public class AIController : MonoBehaviour {
 		}
 		else if(c.equipped != null){
 			if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
-				agent.speed = 0;
+				agent.speed = 0.1f;
 			}
 			else{
 				agent.speed = c.movespeed * 0.8f;
@@ -369,7 +369,7 @@ public class AIController : MonoBehaviour {
 
 
 		//rotate towards our target
-		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(engagedTarget.transform.position - transform.position), Time.deltaTime, 0));
+		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(engagedTarget.transform.position - transform.position), Time.deltaTime*3, 0));
 
 		//if we're looking directly at them and we're in range, shoot
 		if(c.equipped != null){
@@ -498,6 +498,7 @@ public class AIController : MonoBehaviour {
 		Physics.Raycast(r, out hit, dist, raycastMask.value);
 
 		if(hit.collider == losTarget){
+			Debug.Log("I have line of sight");
 			return true;
 		}
 		else{

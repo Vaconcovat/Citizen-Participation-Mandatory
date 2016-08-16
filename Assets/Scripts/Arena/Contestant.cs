@@ -298,8 +298,10 @@ public class Contestant : MonoBehaviour {
 		}
 		else if(type == ContestantType.Player){
 			GetComponent<PlayerController>().enabled = false;
-			if (player.equipped.isSponsored) {
-				FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease);
+			if(equipped != null){
+				if (equipped.isSponsored) {
+					FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease);
+				}
 			}
 		} else if(type == ContestantType.Target){
 			//GetComponent<AI_GuardController>().enabled = false;
@@ -311,8 +313,8 @@ public class Contestant : MonoBehaviour {
 			GetComponent<AI_MedicController>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
 		}
-		body.isKinematic = true;
-		coll.enabled = false;
+		//body.isKinematic = true;
+		//coll.enabled = false;
 		isAlive = false;
 		if (equipped != null){
 			equipped.Unequip();
