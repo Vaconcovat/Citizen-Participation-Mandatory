@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// This is a very basic use of navmesh agents to pathfind towards the player constantly
 /// </summary>
 public class AIController : MonoBehaviour {
-	public enum AIState{Searching, Hunting, Fighting, Fleeing, Beacon, Evacuating, Dead};
+	public enum AIState{Searching, Hunting, Fighting, Fleeing, Beacon, Evacuating, Dead, Shocked, Blinded};
 
 	NavMeshAgent agent;
 
@@ -17,6 +17,8 @@ public class AIController : MonoBehaviour {
 	int closestWeapon;
 	Contestant c;
 	public Contestant player;
+	public Light DirectionalLight;
+	public Light ContestantLight;
 
 	//just for testing
 	public Vector3 project,rand,center,towardsCenter;
@@ -95,10 +97,44 @@ public class AIController : MonoBehaviour {
 			case AIState.Evacuating:
 				Evacuating();
 				break;
+			case AIState.Blinded:
+				StartCoroutine ("Blinded");
+				break;
+			case AIState.Shocked:
+				StartCoroutine ("Shocked");
+				break;
 		}
 		if(agent.isOnNavMesh){
 			agent.destination = destination;
 		}
+	}
+
+	void StartShocked(){
+		state = AIState.Shocked;
+	}
+
+
+	IEnumerator Shocked() {
+		GetComponent<NavMeshAgent>().enabled = false;
+		yield return new WaitForSeconds (10.0f);
+		GetComponent<NavMeshAgent>().enabled = true;
+	}
+
+	void StartBlinded(){
+		state = AIState.Blinded;
+	}
+
+	IEnumerator Blinded(){
+		viewAngle = 60.0f;
+		viewRadius = 10.0f;
+		DirectionalLight.intensity = 0.0f;
+		ContestantLight.intensity = 8.0f;
+		yield return new WaitForSeconds (10.0f);
+		viewAngle = 120.0f;
+		viewRadius = 12.0f;
+		DirectionalLight.intensity = 0.16f;
+		ContestantLight.intensity = 0.0f;
+		state = AIState.Hunting;
 	}
 
 	public void StartEvac(){
@@ -405,6 +441,8 @@ public class AIController : MonoBehaviour {
 			StartBeacon();
 		}
 	}
+
+
 
 	/// <summary>
 	/// Compares the target.
