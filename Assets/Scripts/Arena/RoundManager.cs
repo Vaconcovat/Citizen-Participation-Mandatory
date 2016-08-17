@@ -57,6 +57,14 @@ public class RoundManager : MonoBehaviour {
 		if(roundOver){
 			im.Announce("ROUND OVER\nPRESS [E] TO SURRENDER", 1);
 		}
+		else{
+			if(FindObjectsOfType<AI_MedicController>().Length > 0){
+				outerBayDoors.SetActive(false);
+			}
+			else{
+				outerBayDoors.SetActive(true);
+			}
+		}
 	}
 
 	public void endRound(){

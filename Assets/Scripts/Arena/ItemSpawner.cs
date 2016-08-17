@@ -38,7 +38,7 @@ public class ItemSpawner : MonoBehaviour {
 		GameObject spawned = (GameObject)Instantiate(UI_Card);
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		tracker = spawned.GetComponent<UI_GenericCard>();
-		tracker.target = GetComponentInParent<Transform>();
+		tracker.target = transform.parent;
 		timer = 0;
 		//Spawn();
 

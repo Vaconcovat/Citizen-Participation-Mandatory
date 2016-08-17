@@ -147,7 +147,6 @@ public class AIController : MonoBehaviour {
 		medic = spawned.GetComponent<AI_MedicController>();
 		medic.target = this.c;
 		medic.spawn = medicSpawn;
-		rm.outerBayDoors.SetActive(false);
 		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]", 3);
 	}
 

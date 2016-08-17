@@ -48,7 +48,7 @@ public class AI_GuardController : MonoBehaviour {
 	void Capture(){
 		agent.destination = target.transform.position;
 		agent.speed = speed;
-		if(Vector3.Distance(transform.position, target.transform.position)< 1f){
+		if(agent.remainingDistance < 1f){
 			FindObjectOfType<RoundManager>().endRound();
 		}
 		if(target.equipped != null){
