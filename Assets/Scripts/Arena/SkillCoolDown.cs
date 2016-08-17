@@ -158,7 +158,11 @@ public class SkillCoolDown : MonoBehaviour {
 
 	public void Blackout()
 	{
-		
+		AIController[] aicontroller = FindObjectsOfType<AIController>();
+		foreach (AIController a in aicontroller)
+		{
+			a.StartBlinded ();
+		}
 	}
 }
 

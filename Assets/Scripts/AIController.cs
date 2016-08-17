@@ -109,7 +109,7 @@ public class AIController : MonoBehaviour {
 		}
 	}
 
-	void StartShocked(){
+	public void StartShocked(){
 		state = AIState.Shocked;
 	}
 
@@ -118,9 +118,10 @@ public class AIController : MonoBehaviour {
 		GetComponent<NavMeshAgent>().enabled = false;
 		yield return new WaitForSeconds (10.0f);
 		GetComponent<NavMeshAgent>().enabled = true;
+		state = AIState.Hunting;
 	}
 
-	void StartBlinded(){
+	public void StartBlinded(){
 		state = AIState.Blinded;
 	}
 
@@ -129,12 +130,12 @@ public class AIController : MonoBehaviour {
 		viewRadius = 10.0f;
 		DirectionalLight.intensity = 0.0f;
 		ContestantLight.intensity = 8.0f;
+		state = AIState.Hunting;
 		yield return new WaitForSeconds (10.0f);
 		viewAngle = 120.0f;
 		viewRadius = 12.0f;
 		DirectionalLight.intensity = 0.16f;
 		ContestantLight.intensity = 0.0f;
-		state = AIState.Hunting;
 	}
 
 	public void StartEvac(){
