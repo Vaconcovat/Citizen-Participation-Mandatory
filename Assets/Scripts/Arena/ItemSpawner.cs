@@ -39,7 +39,7 @@ public class ItemSpawner : MonoBehaviour {
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		tracker = spawned.GetComponent<UI_GenericCard>();
 		tracker.target = GetComponentInParent<Transform>();
-
+		timer = 0;
 		//Spawn();
 
 	}
