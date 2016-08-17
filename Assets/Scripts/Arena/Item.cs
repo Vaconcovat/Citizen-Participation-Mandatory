@@ -43,16 +43,22 @@ public class Item : MonoBehaviour {
 
 	[Range(0,1)]
 	public float threat;
+	public GameObject UI_Card;
 
 	Contestant thrower;
 	Rigidbody body;
 	Collider coll;
 	float impactVelocityMin = 10;
+	UI_WeaponTracker tracker;
 
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody>();
 		coll = GetComponent<Collider>();
+		GameObject spawned = (GameObject)Instantiate(UI_Card);
+		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		tracker = spawned.GetComponent<UI_WeaponTracker>();
+		tracker.item = this;
 	}
 	
 	// Update is called once per frame
@@ -67,7 +73,15 @@ public class Item : MonoBehaviour {
 				transform.position = equipper.anchor.position;
 				transform.rotation = equipper.anchor.rotation;
 			}
+			if(tracker != null){
+				tracker.gameObject.SetActive(false);
+			}
 
+		}
+		else{
+			if(tracker != null){
+				tracker.gameObject.SetActive(true);
+			}
 		}
 
 	}
@@ -145,7 +159,7 @@ public class Item : MonoBehaviour {
 			else{
 				if (c.gameObject.tag == "Contestant"){
 					Contestant grabber = c.gameObject.GetComponent<Contestant>();
-					if (grabber.equipped == null && grabber.cooldownCounter <= 0){
+					if (grabber.equipped == null && grabber.cooldownCounter <= 0 && grabber.type != Contestant.ContestantType.Medic){
 						Equip(grabber);
 					}
 				}
@@ -169,6 +183,15 @@ public class Item : MonoBehaviour {
 			else{
 				return 100;
 			}
+		}
+	}
+
+	public int GetAmmo(){
+		if(type == ItemType.Ranged){
+			return GetComponent<RangedWeapon>().ammo;
+		}
+		else{
+			return GetComponent<OtherItem>().ammo;
 		}
 	}
 }

@@ -147,7 +147,7 @@ public class AIController : MonoBehaviour {
 		medic.target = this.c;
 		medic.spawn = medicSpawn;
 		rm.outerBayDoors.SetActive(false);
-		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]");
+		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]", 3);
 	}
 
 	void Evacuating(){
@@ -293,14 +293,28 @@ public class AIController : MonoBehaviour {
 	void StartSearch(){
 		state = AIState.Searching;
 		agent.speed = c.movespeed;
-		findClosestWeapon();
+		if(!findClosestWeapon()){
+		 	destination = FindObjectsOfType<ItemSpawner>()[Random.Range(0,8)].transform.position;
+		}
 	}
 
 	void Searching(){
 		if (c.equipped != null){
 			StartHunt();
 		}
-		findClosestWeapon();
+
+		if(agent.remainingDistance < 0.1f){
+			StartSearch();
+		}
+
+		foreach(ItemSpawner i in FindObjectsOfType<ItemSpawner>()){
+			if(i.ready){
+				if(Vector3.Distance(i.transform.position, transform.position) < 2){
+					i.Spawn();
+				}
+			}
+		}
+
 		if(visibleTargets.Count > 0){
 			engagedTarget = visibleTargets[0].gameObject.GetComponent<Contestant>();
 			if(!compareTarget(engagedTarget)){
@@ -313,11 +327,11 @@ public class AIController : MonoBehaviour {
 		}
 	}
 
-	public void findClosestWeapon() {
+	public bool findClosestWeapon() {
 		weapons = FindObjectsOfType<RangedWeapon>();
 		if(weapons.Length == 0){
 			destination = center;
-			return;
+			return false;
 		}
 		closestDistance = 100.0f;
 		for (int i = 0; i < weapons.Length; i++) {
@@ -332,9 +346,11 @@ public class AIController : MonoBehaviour {
 		}
 		if(closestDistance == 100.0f){
 			destination = center;
+			return true;
 		}
 		else{
 			destination = weapons[closestWeapon].transform.position;
+			return false;
 		}
 	}
 
@@ -559,7 +575,7 @@ public class AIController : MonoBehaviour {
 	}
 
 	public void Execute(){
-		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " EXECUTED ]");
+		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " EXECUTED ]", 3);
 		c.Die();
 	}
 

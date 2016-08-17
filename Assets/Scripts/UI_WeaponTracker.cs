@@ -28,16 +28,16 @@ public class UI_WeaponTracker : MonoBehaviour {
 		rTrans.position = new Vector3(x,y);
 
 		RangedWeapon wep = item.GetComponent<RangedWeapon>();
-		if(wep.ammo <= 0){
+		if(item.GetAmmo() <= 0){
 			Destroy(gameObject);
 		}
 
 
 		if(displayAmmo){
 			if(wep != null){
-				ammoText.text = item.itemName + "\n" + wep.ammo.ToString() + " / " + wep.Maxammo.ToString() + "\nThreat :" + item.threat.ToString();
+				ammoText.text = item.itemName + "\n" + wep.ammo.ToString() + " / " + wep.Maxammo.ToString();
 			}else{
-				ammoText.text = "--";
+				ammoText.text = item.itemName + "\n--";
 			}
 		}
 	}

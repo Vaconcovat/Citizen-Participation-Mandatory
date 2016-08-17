@@ -51,7 +51,6 @@ public class InterfaceManager : MonoBehaviour {
 		abortImage.enabled = false;
 
 		announcementsText.text = "";
-		announcetimer = 3.0f;
 		activeannounce = false;
 
 
@@ -186,14 +185,14 @@ public class InterfaceManager : MonoBehaviour {
 			}
 			else{
 				activeannounce = false;
-				announcetimer = 3.0f;
 				announcementsText.text = "";
 			}
 		}
 	}
 
-	public void Announce(string s){
+	public void Announce(string s, float time){
 		activeannounce = true;
 		announcementsText.text = s;
+		announcetimer = time;
 	}
 }

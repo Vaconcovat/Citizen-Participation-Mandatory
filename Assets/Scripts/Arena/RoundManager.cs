@@ -55,7 +55,7 @@ public class RoundManager : MonoBehaviour {
 		}
 
 		if(roundOver){
-			im.Announce("ROUND OVER\nPRESS [E] TO SURRENDER");
+			im.Announce("ROUND OVER\nPRESS [E] TO SURRENDER", 1);
 		}
 	}
 

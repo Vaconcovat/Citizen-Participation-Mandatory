@@ -5,11 +5,13 @@ public class ItemSpawner : MonoBehaviour {
 	public enum poolselection{Example, Sponsor, Item};
 	public poolselection selection;
 	public ItemPools.Pool pool;
-
+	public bool autoSpawn;
 	public bool ready;
 	public float readyTime;
+	public GameObject UI_Card;
 
 	float timer;
+	UI_GenericCard tracker;
 
 	// Use this for initialization
 	void Start () {
@@ -33,8 +35,12 @@ public class ItemSpawner : MonoBehaviour {
 				pool = FindObjectOfType<ItemPools>().item;
 				break;
 		}
+		GameObject spawned = (GameObject)Instantiate(UI_Card);
+		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		tracker = spawned.GetComponent<UI_GenericCard>();
+		tracker.target = GetComponentInParent<Transform>();
 
-		Spawn();
+		//Spawn();
 
 	}
 	
@@ -47,21 +53,28 @@ public class ItemSpawner : MonoBehaviour {
 			else{
 				timer = readyTime;
 				ready = true;
+				if(autoSpawn){
+					Spawn();
+				}
 			}
+			tracker.text = "";
 		}
 		else{
-			if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 3){
-				FindObjectOfType<InterfaceManager>().Announce("Press [E] to dispense weapon");
+			if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 3 && !autoSpawn){
+				FindObjectOfType<InterfaceManager>().Announce("Press [E] to dispense weapon", 0.2f);
 				if(Input.GetKeyDown(KeyCode.E)){
 					Spawn();
-					ready = false;
 				}
+			}
+			if(!autoSpawn){
+				tracker.text = "READY";
 			}
 		}
 	
 	}
 
 	public GameObject Spawn(){
+		ready = false;
 		GameObject spawned = (GameObject)Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
 		spawned.GetComponent<Rigidbody>().AddTorque(Random.onUnitSphere*10);
 		return spawned;
