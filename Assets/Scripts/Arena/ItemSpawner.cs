@@ -10,7 +10,7 @@ public class ItemSpawner : MonoBehaviour {
 	public float readyTime;
 	public GameObject UI_Card;
 
-	float timer;
+	public float timer;
 	UI_GenericCard tracker;
 
 	// Use this for initialization

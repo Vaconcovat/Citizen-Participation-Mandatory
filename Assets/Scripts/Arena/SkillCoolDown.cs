@@ -13,7 +13,6 @@ public class SkillCoolDown : MonoBehaviour {
 	public Contestant player;
 	public GameObject weaponTrackerUI, contestantTrackerUI;
 	public bool isPrimed = false;
-	public 
 
 
 	void FixedUpdate()
@@ -54,7 +53,7 @@ public class SkillCoolDown : MonoBehaviour {
 			//If the ability is not currently cooling down
 			if (skills [2].currentCooldown >= skills [2].cooldown) 
 			{
-				
+				Overload();
 				skills [2].currentCooldown = 0;
 			}
 		}
@@ -120,6 +119,20 @@ public class SkillCoolDown : MonoBehaviour {
 //			UI_WeaponTracker tracker = spawned.GetComponent<UI_WeaponTracker>();
 //			tracker.item = i;
 //		}
+	}
+
+	public void Overload(){
+		float closestDist = Mathf.Infinity;
+		ItemSpawner closestSpawner = null;
+		Transform player = FindObjectOfType<PlayerController>().transform;
+		foreach(ItemSpawner i in FindObjectsOfType<ItemSpawner>()){
+			float dist = Vector3.Distance(player.position, i.transform.position);
+			if(dist < closestDist){
+				closestDist = dist;
+				closestSpawner = i;
+			}
+		}
+		closestSpawner.timer = 0f;
 	}
 
 	public void Stun()
