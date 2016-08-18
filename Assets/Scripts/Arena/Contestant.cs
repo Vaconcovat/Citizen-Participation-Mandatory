@@ -94,6 +94,8 @@ public class Contestant : MonoBehaviour {
 	/* Comment: Tried to integrate same system used Overhead display from SkillCoolDown to no avail*/
 	//public GameObject contestantTrackerUI;
 
+	public bool onCamera;
+
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody>();
@@ -157,6 +159,8 @@ public class Contestant : MonoBehaviour {
         }
 
 		health = maxHealth;
+
+		//StartCoroutine("CheckCameraDelay", 0.1f);
 	}
 	
 	// Update is called once per frame
@@ -234,9 +238,9 @@ public class Contestant : MonoBehaviour {
 				}
 			}
 		}
+		onCamera = CheckCamera();
 
-
-		} 
+	} 
 
 	/// <summary>
 	/// Call this to take damage, from a source. You must use a DAMAGEPARAMS class in order to parse the informaiton properly!!
@@ -400,5 +404,22 @@ public class Contestant : MonoBehaviour {
 		card.text = words;
 		card.lifetime = 3.0f;
 		card.target = transform;
+	}
+
+	IEnumerator CheckCameraDelay(float delay){
+		while(true){
+			yield return new WaitForSeconds(delay);
+			onCamera = CheckCamera();
+		}
+	}
+
+	bool CheckCamera(){
+		bool a = false;
+		foreach(Arena_Camera c in FindObjectsOfType<Arena_Camera>()){
+			if(c.visibleContestants.Contains(this)){
+				a = true;
+			}
+		}
+		return a;
 	}
 }

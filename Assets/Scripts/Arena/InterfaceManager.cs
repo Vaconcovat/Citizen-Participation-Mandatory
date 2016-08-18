@@ -35,6 +35,7 @@ public class InterfaceManager : MonoBehaviour {
 
 	[Header("Camera")]
 	public NoiseAndScratches noise;
+	public GameObject cameraGUI;
 
 	[Header("Music")]
 	public AudioSource music;
@@ -187,6 +188,13 @@ public class InterfaceManager : MonoBehaviour {
 				activeannounce = false;
 				announcementsText.text = "";
 			}
+		}
+
+		if(player.isAlive && player.onCamera){
+			cameraGUI.SetActive(true);
+		}
+		else{
+			cameraGUI.SetActive(false);
 		}
 	}
 
