@@ -63,6 +63,8 @@ public class StaticGameStats : MonoBehaviour {
 	public static int Upgrade11ThrownBuff = 2;
 	public static bool Upgrade11AlreadyTriggered = false;
 
+	public static float Ability1MaxDistance = 10.0f;
+
 	//Rep Gain Triggers
 	//1.0f = 1% Rep Gain
 

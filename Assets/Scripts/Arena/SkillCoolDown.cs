@@ -140,20 +140,25 @@ public class SkillCoolDown : MonoBehaviour {
 		float closestDistance = Mathf.Infinity;
 		Contestant closestContestant = null;
 		Contestant[] contestants = FindObjectsOfType<Contestant>();
-		foreach (Contestant c in contestants){
+
+		foreach (Contestant c in contestants) {
 			if (c.type == Contestant.ContestantType.AI) {
+				
 				float distance = Vector3.Distance (PlayerController.pos, c.transform.position);
-				if (distance < closestDistance)
-				{
-					closestDistance = distance;
-					closestContestant = c;
+				if (distance < StaticGameStats.Ability1MaxDistance) {
+					c.ThrowEquipped ();
 				}
 			}
 		}
-		if (closestDistance < 10) {
-			Debug.Log ("The closest contestant to the cursor is " + closestContestant.contestantName + " at " + closestDistance + " metres away");
+
+		AIController[] aicontroller = FindObjectsOfType<AIController>();
+		foreach (AIController a in aicontroller)
+		{
+			float distance = Vector3.Distance (PlayerController.pos, a.transform.position);
+			if (distance < StaticGameStats.Ability1MaxDistance) {
+				a.StartShocked ();
+			}
 		}
-			
 	}
 
 	public void Blackout()
