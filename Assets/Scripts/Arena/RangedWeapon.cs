@@ -116,7 +116,7 @@ public class RangedWeapon : MonoBehaviour {
 			Instantiate(muzzleFlash, muzzle.position, muzzle.rotation);
 		}
 		if(GetComponent<Item>().isSponsored && GetComponent<Item>().equipper.onCameras.Count > 0){
-			FindObjectOfType<StaticGameStats>().Influence(2,0.1f);
+			FindObjectOfType<StaticGameStats>().Influence(2,StaticGameStats.RebWeaponOnCamera, "RebWeaponOnCamera"); //updated to RebWeaponOnCamera
 			GetComponent<Item>().equipper.CameraInfluence(2,true);
 		}
 	}

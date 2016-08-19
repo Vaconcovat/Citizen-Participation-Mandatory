@@ -73,7 +73,7 @@ public class Bullet : MonoBehaviour {
 		Vector3 v = vector * velocityModifier;
 		body.AddForce(v, ForceMode.Impulse);
 		if (isSponsored) {
-			FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponFireIncrease);
+			FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponFireIncrease, "CorSponsorWeaponFireIncrease");
 		}
 	}
 

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 public class RoundManager : MonoBehaviour {
 
@@ -27,6 +29,7 @@ public class RoundManager : MonoBehaviour {
 		contestants = FindObjectsOfType<Contestant>();
 		totalContestants = contestants.Length;
 		aliveContestants = totalContestants;
+		File.WriteAllText (StaticGameStats.path, "");
         //shuffle the spawnpoints
         if (autoSpawn) {
             for (int i = 0; i < contestantSpawns.Count; i++)

@@ -255,7 +255,7 @@ public class Contestant : MonoBehaviour {
 				Die();
 				if (killer.equipped.isSponsored) 
 				{
-					FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponKillIncrease);
+					FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponKillIncrease, "CorSponsorWeaponKillIncrease");
 				}
 			}	
 			if (damage.damage > 0){
@@ -295,8 +295,8 @@ public class Contestant : MonoBehaviour {
 			FindObjectOfType<RoundManager>().Death();
 		}
 		else if(type == ContestantType.Guard){
-			FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovKillGuardsDecrease);
-			FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebKillGuardsIncrease);
+			FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovKillGuardsDecrease, "GovKillGuardsDecrease");
+			FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebKillGuardsIncrease, "RebKillGuardsIncrease");
 			GetComponent<AI_GuardController>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
 		}
@@ -304,7 +304,7 @@ public class Contestant : MonoBehaviour {
 			GetComponent<PlayerController>().enabled = false;
 			if(equipped != null){
 				if (equipped.isSponsored) {
-					FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease);
+					FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease, "CorSponsorWeaponDeathDecrease");
 				}
 			}
 		} else if(type == ContestantType.Target){
