@@ -12,6 +12,8 @@ public class Arena_Camera : MonoBehaviour {
 	public float radius;
 
 	public LayerMask detectMask, cullMask;
+	public GameObject ui_card;
+	UI_GenericCard card;
 
 	// Use this for initialization
 	void Start () {
@@ -63,5 +65,30 @@ public class Arena_Camera : MonoBehaviour {
 			angleInDegrees += transform.eulerAngles.y;
 		}
 		return new Vector3(Mathf.Sin (angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos (angleInDegrees * Mathf.Deg2Rad));
+	}
+
+	public void displayRepChange(int faction, bool positive){
+		if(card != null){
+			Destroy(card.gameObject);
+		}
+		GameObject spawned = (GameObject)Instantiate(ui_card);
+		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		card = spawned.GetComponent<UI_GenericCard>();
+		card.target = transform;
+		string displayText = "";
+		//0 = gov, 1= cor, 2 = reb
+		switch(faction){
+			case 0:
+				displayText = "GOV ";
+				break;
+			case 1:
+				displayText = "COR ";
+				break;
+			case 2:
+				displayText = "REB ";
+				break;
+		}
+		displayText = displayText + ((positive)?"+":"-");
+		card.text = displayText;
 	}
 }

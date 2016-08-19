@@ -115,6 +115,10 @@ public class RangedWeapon : MonoBehaviour {
 			firedBullet.GetComponent<Bullet>().owner = GetComponent<Item>().equipper;
 			Instantiate(muzzleFlash, muzzle.position, muzzle.rotation);
 		}
+		if(GetComponent<Item>().isSponsored && GetComponent<Item>().equipper.onCameras.Count > 0){
+			FindObjectOfType<StaticGameStats>().Influence(2,0.1f);
+			GetComponent<Item>().equipper.CameraInfluence(2,true);
+		}
 	}
 
 	public void AddAmmo(int addedAmmo){

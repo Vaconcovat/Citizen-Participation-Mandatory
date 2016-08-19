@@ -421,4 +421,10 @@ public class Contestant : MonoBehaviour {
 			}
 		}
 	}
+
+	public void CameraInfluence(int faction, bool positive){
+		foreach(Arena_Camera c in onCameras){
+			c.displayRepChange(faction, positive);
+		}
+	}
 }
