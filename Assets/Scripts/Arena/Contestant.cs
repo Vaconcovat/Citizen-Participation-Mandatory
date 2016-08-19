@@ -94,7 +94,7 @@ public class Contestant : MonoBehaviour {
 	/* Comment: Tried to integrate same system used Overhead display from SkillCoolDown to no avail*/
 	//public GameObject contestantTrackerUI;
 
-	public bool onCamera;
+	public List<Arena_Camera> onCameras = new List<Arena_Camera>();
 
 	// Use this for initialization
 	void Start () {
@@ -238,7 +238,7 @@ public class Contestant : MonoBehaviour {
 				}
 			}
 		}
-		onCamera = CheckCamera();
+		CheckCameras();
 
 	} 
 
@@ -409,17 +409,16 @@ public class Contestant : MonoBehaviour {
 	IEnumerator CheckCameraDelay(float delay){
 		while(true){
 			yield return new WaitForSeconds(delay);
-			onCamera = CheckCamera();
+			CheckCameras();
 		}
 	}
 
-	bool CheckCamera(){
-		bool a = false;
+	void CheckCameras(){
+		onCameras.Clear();
 		foreach(Arena_Camera c in FindObjectsOfType<Arena_Camera>()){
 			if(c.visibleContestants.Contains(this)){
-				a = true;
+				onCameras.Add(c);
 			}
 		}
-		return a;
 	}
 }

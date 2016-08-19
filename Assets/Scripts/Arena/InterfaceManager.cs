@@ -190,7 +190,7 @@ public class InterfaceManager : MonoBehaviour {
 			}
 		}
 
-		if(player.isAlive && player.onCamera){
+		if(player.isAlive && player.onCameras.Count > 0){
 			cameraGUI.SetActive(true);
 		}
 		else{
