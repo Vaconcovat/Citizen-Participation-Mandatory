@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
+using System.Text;
+//using System;
 
 public class StaticGameStats : MonoBehaviour {
 	//Reputation variables
@@ -23,6 +26,12 @@ public class StaticGameStats : MonoBehaviour {
 	//Commit
 	public static bool committed = false;
 	public static bool toPost = false;
+
+	//file to keep record
+	//public TextAsset textFile;
+	public static string path = path + Application.dataPath + "/Resources/InfluenceGains.txt";
+
+
 
 	//Arena variables
 	/// <summary>
@@ -82,6 +91,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static float RebKillGuardsIncrease = 1.0f;
 	public static float RebActivateMedicBeaconIncrease = 0.5f;
 	public static float RebEndOfRoundTriumphIncrease = 5.0f;
+	public static float RebWeaponOnCamera = 0.1f;
 
 	//Rebel Rep Decrease
 	public static float RebEndOfRoundSurrenderDecrease = -1.0f;
@@ -117,7 +127,8 @@ public class StaticGameStats : MonoBehaviour {
 	/// </summary>
 	/// <param name="faction">0 = gov, 1= cor, 2 = reb</param>
 	/// <param name="amount">Amount.</param>
-	public void Influence(int faction, float amount){
+	public void Influence(int faction, float amount, string text){
+		checkText (text);
 		switch (faction){
 		case 0:
 			if (TierOneUpgrades [2]) {
@@ -150,6 +161,212 @@ public class StaticGameStats : MonoBehaviour {
 				//Debug.Log("REB: " + rebRep.ToString());
 				break;
 			}
+		}
+	}
+
+	public void checkText(string textToBeChecked){
+		
+		File.AppendAllText (path, "\n");
+
+		switch (textToBeChecked) {
+		case "GovExecutionIncrease":
+			//add predefined text to text file
+			// This text is added only once to the file.
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				string createText = "Increased Government Reputation: Execution";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "GovOnCameraKillIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				Debug.Log("Sent Message to text file");
+				string createText = "Increased Government Reputation: Kill On Camera";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "GovEndOfRoundSurrenderIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				Debug.Log("Sent Message to text file");
+				string createText = "Decreased Government Reputation: Refused to Surrender";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "GovKillGuardsDecrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				Debug.Log("Sent Message to text file");
+				string createText = "Decreased Government Reputation: Killed Guards";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "GovActivateMedicBeaconDecrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				Debug.Log("Sent Message to text file");
+				string createText = "Decreased Government Reputation: Activated Medic Beacon";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "RebSuccessfulExtractionIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("");
+				string createText = "Increased Rebel Reputation: Successful Extraction of Contestant";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "RebKillGuardsIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Increased Rebel Reputation: Killed a Guard";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "RebActivateMedicBeaconIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Increased Rebel Reputation: Activated a Medic Beacon";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "RebEndOfRoundTriumphIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Increased Rebel Reputation: Won the round";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "RebEndOfRoundSurrenderDecrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Decreased Rebel Reputation: Surrendered";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "RebOnCameraExecutionDecrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Decreased Rebel Reputation: Executed a Contestant on Camera";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "RebOnCameraKill":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Decreased Rebel Reputation: Killed a Contestant on Camera";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "CorSponsorWeaponFireIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Increased Corporate Reputation: Used Sponsor Weapon";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "CorSponsorWeaponKillIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Increased Corporate Reputation: Killed with the Sponsor Weapon";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "CorSponsorItemUseIncrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Increased Corporate Reputation: Used Sponsor's Item";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "CorEndOfTournamentDecayDecrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Decreased Corporate Reputation: Took a long time to finish round";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "CorSponsorWeaponDeathDecrease":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Decreased Corporate Reputation: Died with Sponsor Weapon";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
+		case "RebWeaponOnCamera":
+			//add predefined text to text file
+			if (File.Exists(path))
+			{
+				// Create a file to write to.
+				//Debug.Log("Sent Message to text file");
+				string createText = "Decreased Rebel Reputation: Used Weapon on Camera";
+				File.AppendAllText (path, createText);
+			}
+			//add new line to text file
+			break;
 		}
 	}
 }
