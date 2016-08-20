@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Advertisement : MonoBehaviour {
 
-	public Material[] mats;
+	public Material[] AdvertisementTextures;
 	public bool autoSwap = false;
 	public float timer = 0;
 	public float readyTime;
@@ -29,20 +29,7 @@ public class Advertisement : MonoBehaviour {
 	}
 
 	public void SwapAdvert(){
-		int x = Random.Range (1, 3);
-		switch (x) {
-			case 1:
-				Debug.Log ("1");
-				GetComponent<Renderer> ().material = mats [0];
-				break;
-			case 2:
-				Debug.Log ("2");
-				GetComponent<Renderer> ().material = mats [1];
-				break;
-			case 3:
-				Debug.Log ("3");
-				GetComponent<Renderer> ().material = mats [2];
-				break;
-			}
+		int x = Random.Range (1, AdvertisementTextures.Length);
+		GetComponent<Renderer> ().material = AdvertisementTextures [x];
 		}
 }
