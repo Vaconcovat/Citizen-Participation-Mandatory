@@ -29,7 +29,7 @@ public class Advertisement : MonoBehaviour {
 	}
 
 	public void SwapAdvert(){
-		int x = Random.Range (1, AdvertisementTextures.Length);
+		int x = Random.Range (0, AdvertisementTextures.Length);
 		GetComponent<Renderer> ().material = AdvertisementTextures [x];
 		}
 }
