@@ -8,11 +8,6 @@ public class arena_start_Manager : MonoBehaviour {
 	public string text;
 	bool done = false;
 
-	// Use this for initialization
-	void Start(){
-		CheckUpgrades();
-	}
-
 	void Update(){
 		if(done && Input.GetKeyDown(KeyCode.E)){
 			FindObjectOfType<SceneChange>().Arena();
@@ -87,6 +82,8 @@ public class arena_start_Manager : MonoBehaviour {
 			text += "\nSponsorUpgrade3 TEXT";
 		}
 
+		text += "\n[ - - - - SPONSORSHIP - - - - ]\n";
+
 		//chosen sponsor
 		switch(StaticGameStats.sponsor){
 			case(0):
@@ -100,7 +97,7 @@ public class arena_start_Manager : MonoBehaviour {
 				break;
 		}
 
-		at.displayedText[0] = text;
+		at.displayedText[1] = text;
 	}
 	
 	public void arena_start_text(){
