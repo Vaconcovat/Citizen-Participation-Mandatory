@@ -113,7 +113,7 @@ public class StaticGameStats : MonoBehaviour {
 
 	// Use this for initialization
 	//Probably shouldn't ever have anything here, if you do you're bad.
-	void Start () {
+	void Awake () {
 		path = Application.dataPath + "/Resources/InfluenceGains.txt";
 	}
 	

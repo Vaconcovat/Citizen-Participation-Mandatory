@@ -29,7 +29,6 @@ public class RoundManager : MonoBehaviour {
 		contestants = FindObjectsOfType<Contestant>();
 		totalContestants = contestants.Length;
 		aliveContestants = totalContestants;
-		File.WriteAllText (StaticGameStats.path, "");
         //shuffle the spawnpoints
         if (autoSpawn) {
             for (int i = 0; i < contestantSpawns.Count; i++)
@@ -46,6 +45,10 @@ public class RoundManager : MonoBehaviour {
                 j++;
             }
         }
+	}
+
+	void Start(){
+		File.WriteAllText (StaticGameStats.path, "");
 	}
 	
 	// Update is called once per frame
