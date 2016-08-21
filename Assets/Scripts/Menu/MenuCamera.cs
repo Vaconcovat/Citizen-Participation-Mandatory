@@ -79,4 +79,9 @@ public class MenuCamera : MonoBehaviour {
 	public void Sponsor(){
 		state = 10;
 	}
+
+	public void Arena_Start(){
+		state = 11;
+		FindObjectOfType<arena_start_Manager>().arena_start_text();
+	}
 }
