@@ -11,6 +11,7 @@ public class UI_GenericCard : MonoBehaviour {
 	/// </summary>
 	public float lifetime;
 	public bool trackOffscreen;
+	public float offsetLeft, offsetRight, offsetTop, offsetBottom;
 
 	bool limited;
 	RectTransform rTrans;
@@ -48,8 +49,8 @@ public class UI_GenericCard : MonoBehaviour {
 		float x = (pos.x / Screen.width) * size.x * c.transform.localScale.x;
 		float y = (pos.y / Screen.height) * size.y * c.transform.localScale.y;
 		if(trackOffscreen){
-			x = Mathf.Clamp(x,0,c.GetComponent<RectTransform>().rect.width * c.scaleFactor);
-			y = Mathf.Clamp(y,0,c.GetComponent<RectTransform>().rect.height * c.scaleFactor);
+			x = Mathf.Clamp(x,offsetLeft,(c.GetComponent<RectTransform>().rect.width-offsetRight) * c.scaleFactor);
+			y = Mathf.Clamp(y,offsetBottom,(c.GetComponent<RectTransform>().rect.height-offsetTop) * c.scaleFactor);
 		}
 		rTrans.position = new Vector3(x,y);
 	}
