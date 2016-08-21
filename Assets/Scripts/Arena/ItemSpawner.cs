@@ -28,6 +28,9 @@ public class ItemSpawner : MonoBehaviour {
 					case 1:
 						pool = FindObjectOfType<ItemPools>().sponsor1;
 						break;
+					case 2:
+						pool = FindObjectOfType<ItemPools> ().sponsor2;
+						break;
 				}
 				break;
 

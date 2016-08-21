@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SponsorsInterface : MonoBehaviour {
 
 	public Text moneyText, embezText, sponsorText;
-	public Button signMegaCity, signExplodena, commitButton;
+	public Button signMegaCity, signExplodena, signVelocitech, commitButton;
 	public Sprite[] sponsorGunLogos;
 	public int activeSponsor;
 	public int chosenSponsor;
@@ -63,6 +63,7 @@ public class SponsorsInterface : MonoBehaviour {
 		StaticGameStats.activeSponsor = 0;
 		StaticGameStats.chosenSponsor = 0;
 		signMegaCity.interactable = false;
+		signVelocitech.interactable = true;
 		signExplodena.interactable = true;
 	}
 
@@ -71,5 +72,14 @@ public class SponsorsInterface : MonoBehaviour {
 		StaticGameStats.chosenSponsor = 1;
 		signExplodena.interactable = false;
 		signMegaCity.interactable = true;
+		signVelocitech.interactable = true;
+	}
+
+	public void SignVelocitech(){
+		StaticGameStats.activeSponsor = 2;
+		StaticGameStats.chosenSponsor = 2;
+		signExplodena.interactable = true;
+		signMegaCity.interactable = true;
+		signVelocitech.interactable = false;
 	}
 }
