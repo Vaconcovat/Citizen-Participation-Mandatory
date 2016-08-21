@@ -29,7 +29,7 @@ public class StaticGameStats : MonoBehaviour {
 
 	//file to keep record
 	//public TextAsset textFile;
-	public static string path = path + Application.dataPath + "/Resources/InfluenceGains.txt";
+	public static string path;
 
 
 
@@ -114,7 +114,7 @@ public class StaticGameStats : MonoBehaviour {
 	// Use this for initialization
 	//Probably shouldn't ever have anything here, if you do you're bad.
 	void Start () {
-	
+		path = Application.dataPath + "/Resources/InfluenceGains.txt";
 	}
 	
 	// Update is called once per frame
