@@ -4,8 +4,7 @@ using System.Collections;
 public class arena_start_Manager : MonoBehaviour {
 
 	public AutoType at;
-	[TextArea(3,5)]
-	public string text;
+	string text;
 	bool done = false;
 
 	void Update(){
@@ -57,6 +56,19 @@ public class arena_start_Manager : MonoBehaviour {
 			text += "\nT3U4 TEXT";
 		}
 
+		//Sponsor Upgrades
+		if(StaticGameStats.SponsorUpgrade[0]){
+			text += "\nSponsorUpgrade1 TEXT";
+		}
+		if(StaticGameStats.SponsorUpgrade[1]){
+			text += "\nSponsorUpgrade2 TEXT";
+		}
+		if(StaticGameStats.SponsorUpgrade[2]){
+			text += "\nSponsorUpgrade3 TEXT";
+		}
+
+		text += "\n[ - - - - ABILITIES - - - - ]";
+
 		//Abilities
 		if(StaticGameStats.Abilites[0]){
 			text += "\nAbility1 TEXT";
@@ -71,18 +83,7 @@ public class arena_start_Manager : MonoBehaviour {
 			text += "\nAbility4 TEXT";
 		}
 
-		//Sponsor Upgrades
-		if(StaticGameStats.SponsorUpgrade[0]){
-			text += "\nSponsorUpgrade1 TEXT";
-		}
-		if(StaticGameStats.SponsorUpgrade[1]){
-			text += "\nSponsorUpgrade2 TEXT";
-		}
-		if(StaticGameStats.SponsorUpgrade[2]){
-			text += "\nSponsorUpgrade3 TEXT";
-		}
-
-		text += "\n[ - - - - SPONSORSHIP - - - - ]\n";
+		text += "\n[ - - - - SPONSORSHIP - - - - ]";
 
 		//chosen sponsor
 		switch(StaticGameStats.sponsor){
