@@ -87,6 +87,19 @@ public class arena_start_Manager : MonoBehaviour {
 			text += "\nSponsorUpgrade3 TEXT";
 		}
 
+		//chosen sponsor
+		switch(StaticGameStats.sponsor){
+			case(0):
+				text += "\nSponsor 1 chosen";
+				break;
+			case(1):
+				text += "\nSponsor 2 chosen";
+				break;
+			case(2):
+				text += "\nSponsor 3 chosen";
+				break;
+		}
+
 		at.displayedText[0] = text;
 	}
 	
