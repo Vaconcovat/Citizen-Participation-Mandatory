@@ -38,6 +38,20 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.Abilites[1] = false;
 		StaticGameStats.Abilites[2] = false;
 		StaticGameStats.Abilites[3] = false;
+
+		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
+
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+
+
 	}
 
 	// Update is called once per frame
@@ -83,26 +97,31 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.committed = false;
 		StaticGameStats.chosenSponsor = -1;
 		StaticGameStats.activeSponsor = 0;
-
 		StaticGameStats.TierOneUpgrades[0] = false;
 		StaticGameStats.TierOneUpgrades[1] = false;
 		StaticGameStats.TierOneUpgrades[2] = false;
 		StaticGameStats.TierOneUpgrades[3] = false;
-
 		StaticGameStats.TierTwoUpgrades[0] = false;
 		StaticGameStats.TierTwoUpgrades[1] = false;
 		StaticGameStats.TierTwoUpgrades[2] = false;
 		StaticGameStats.TierTwoUpgrades[3] = false;
-
 		StaticGameStats.TierThreeUpgrades[0] = false;
 		StaticGameStats.TierThreeUpgrades[1] = false;
 		StaticGameStats.TierThreeUpgrades[2] = false;
 		StaticGameStats.TierThreeUpgrades[3] = false;
-
 		StaticGameStats.Abilites[0] = false;
 		StaticGameStats.Abilites[1] = false;
 		StaticGameStats.Abilites[2] = false;
 		StaticGameStats.Abilites[3] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
 		upgradebuttons[0].interactable = true;
 		upgradebuttons[1].interactable = true;
 		upgradebuttons[2].interactable = true;
@@ -119,6 +138,9 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		upgradebuttons[13].interactable = true;
 		upgradebuttons[14].interactable = true;
 		upgradebuttons[15].interactable = true;
+		upgradebuttons[16].interactable = true;
+		upgradebuttons[17].interactable = true;
+		upgradebuttons[18].interactable = true;
 		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
 		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();

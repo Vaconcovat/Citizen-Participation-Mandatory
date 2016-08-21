@@ -30,7 +30,7 @@ public class AutoType : MonoBehaviour {
 	}
 	
 	IEnumerator TypeText(int index){
-		Debug.Log("Coroutine Running");
+		//Debug.Log("Coroutine Running");
 		foreach (char letter in displayedText[index].ToCharArray()){
 			textObj.text += letter;
 			if (blip != null){

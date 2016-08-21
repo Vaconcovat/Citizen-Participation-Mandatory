@@ -11,6 +11,7 @@ public class SponsorsInterface : MonoBehaviour {
 	public int chosenSponsor;
 	public int moneyHolder;
 	public int embezzledHolder;
+	public Button[] upgradebuttons;
 
 
 
@@ -65,6 +66,17 @@ public class SponsorsInterface : MonoBehaviour {
 		signMegaCity.interactable = false;
 		signVelocitech.interactable = true;
 		signExplodena.interactable = true;
+		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
+
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
 	}
 
 	public void SignExplodena(){
@@ -73,6 +85,17 @@ public class SponsorsInterface : MonoBehaviour {
 		signExplodena.interactable = false;
 		signMegaCity.interactable = true;
 		signVelocitech.interactable = true;
+		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
+
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
 	}
 
 	public void SignVelocitech(){
@@ -81,5 +104,17 @@ public class SponsorsInterface : MonoBehaviour {
 		signExplodena.interactable = true;
 		signMegaCity.interactable = true;
 		signVelocitech.interactable = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
+		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
+
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+
+		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+
 	}
 }

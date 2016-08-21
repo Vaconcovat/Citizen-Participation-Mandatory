@@ -56,15 +56,37 @@ public class arena_start_Manager : MonoBehaviour {
 			text += "\nT3U4 TEXT";
 		}
 
-		//Sponsor Upgrades
-		if(StaticGameStats.SponsorUpgrade[0]){
-			text += "\nSponsorUpgrade1 TEXT";
+		//Sponsor Upgrades Mega City 1
+		if(StaticGameStats.MegaCity1SponsorUpgrade[0]){
+			text += "\nMega City 1 Sponsor Upgrade 1 TEXT";
 		}
-		if(StaticGameStats.SponsorUpgrade[1]){
-			text += "\nSponsorUpgrade2 TEXT";
+		if(StaticGameStats.MegaCity1SponsorUpgrade[1]){
+			text += "\nMega City 1 Sponsor Upgrade 2 TEXT";
 		}
-		if(StaticGameStats.SponsorUpgrade[2]){
-			text += "\nSponsorUpgrade3 TEXT";
+		if(StaticGameStats.MegaCity1SponsorUpgrade[2]){
+			text += "\nMega City 1 Sponsor Upgrade 3 TEXT";
+		}
+
+		//Sponsor Upgrades Explodena
+		if(StaticGameStats.ExplodenaSponsorUpgrade[0]){
+			text += "\nExplodena Sponsor Upgrade 1 TEXT";
+		}
+		if(StaticGameStats.ExplodenaSponsorUpgrade[1]){
+			text += "\nExplodena Sponsor Upgrade 2 TEXT";
+		}
+		if(StaticGameStats.ExplodenaSponsorUpgrade[2]){
+			text += "\nExplodena Sponsor Upgrade 3 TEXT";
+		}
+
+		//Sponsor Upgrades Velocitech
+		if(StaticGameStats.VelocitechSponsorUpgrade[0]){
+			text += "\nVelocitech Sponsor Upgrade 1 TEXT";
+		}
+		if(StaticGameStats.VelocitechSponsorUpgrade[1]){
+			text += "\nVelocitech Sponsor Upgrade 2 TEXT";
+		}
+		if(StaticGameStats.VelocitechSponsorUpgrade[2]){
+			text += "\nVelocitech Sponsor Upgrade 3 TEXT";
 		}
 
 		text += "\n[ - - - - ABILITIES - - - - ]";
