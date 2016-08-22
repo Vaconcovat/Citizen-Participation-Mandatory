@@ -222,11 +222,11 @@ public class Contestant : MonoBehaviour {
 		if (StaticGameStats.TierTwoUpgrades [2]) {
 			if (equipped != null) {
 				if (equipped.type == Item.ItemType.Ranged) {
-					if ((player.equipped.GetComponent<RangedWeapon> ().ammo == 0) && (StaticGameStats.Upgrade7AlreadyTriggered == false)) { //only triggers once when the health hits 0
+					if ((equipped.GetComponent<RangedWeapon> ().ammo == 0) && (StaticGameStats.Upgrade7AlreadyTriggered == false)) { //only triggers once when the health hits 0
 						StaticGameStats.Upgrade7AlreadyTriggered = true;
 						player.health = player.health + 20;
 					}
-					if (player.equipped.GetComponent<RangedWeapon> ().ammo > 0) { //resets AlreadyTriggered if the ammo goes above 0
+					if (equipped.GetComponent<RangedWeapon> ().ammo > 0) { //resets AlreadyTriggered if the ammo goes above 0
 						StaticGameStats.Upgrade7AlreadyTriggered = false;
 					}
 				}
