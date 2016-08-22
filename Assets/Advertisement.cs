@@ -20,7 +20,7 @@ public class Advertisement : MonoBehaviour {
 			}
 		}
 		else{
-			if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 5 && !autoSwap){
+			if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 10){
 				if(Input.GetKeyDown(KeyCode.E)){
 					SwapAdvert();
 				}

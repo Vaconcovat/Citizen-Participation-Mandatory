@@ -28,6 +28,7 @@ public class SkillCoolDown : MonoBehaviour {
 					print ("Shock Collar Activated, ZZZZZZZAP");
 					isPrimed = false;
 					skills [0].currentCooldown = 0;
+
 				} else 
 				{
 					print ("Shock Collar Armed, Use with Caution");
