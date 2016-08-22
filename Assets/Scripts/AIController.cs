@@ -270,7 +270,7 @@ public class AIController : MonoBehaviour {
 			destination = towardsCenter;
 		}
 		else{
-			Flee(scare);
+			destination = center;
 		}
 	}
 
@@ -346,11 +346,11 @@ public class AIController : MonoBehaviour {
 		}
 		if(closestDistance == 100.0f){
 			destination = center;
-			return true;
+			return false;
 		}
 		else{
 			destination = weapons[closestWeapon].transform.position;
-			return false;
+			return true;
 		}
 	}
 

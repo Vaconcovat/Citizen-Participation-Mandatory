@@ -159,7 +159,7 @@ public class Item : MonoBehaviour {
 			else{
 				if (c.gameObject.tag == "Contestant"){
 					Contestant grabber = c.gameObject.GetComponent<Contestant>();
-					if (grabber.equipped == null && grabber.cooldownCounter <= 0 && grabber.type != Contestant.ContestantType.Medic){
+					if (grabber.equipped == null && grabber.cooldownCounter <= 0 && grabber.type != Contestant.ContestantType.Medic && grabber.isAlive){
 						Equip(grabber);
 					}
 				}

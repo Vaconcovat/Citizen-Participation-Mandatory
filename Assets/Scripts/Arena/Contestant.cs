@@ -334,6 +334,7 @@ public class Contestant : MonoBehaviour {
 		}
 		equipped = null;
 		GetComponent<SkinnedMeshRenderer>().material = hologram;
+		GetComponent<Animator>().enabled = false;
 		if (killer != FindObjectOfType<PlayerController>().GetComponent<Contestant>()){
 			GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
 		}
