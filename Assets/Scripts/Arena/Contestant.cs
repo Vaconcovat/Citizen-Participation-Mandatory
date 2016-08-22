@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Contestant : MonoBehaviour {
 	public enum Trait{Sick, Strong, Scared, Fearless, Merciful, Relentless};
 	public enum ContestantType{Player, AI, Guard, Medic, Target};
+    Animator animator;
 
 	public List<Trait> traits;
 
@@ -100,6 +101,7 @@ public class Contestant : MonoBehaviour {
 	void Start () {
 		body = GetComponent<Rigidbody>();
 		coll = GetComponent<Collider>();
+        animator = GetComponent<Animator>();
         baseSpeed = movespeed;
         //temp change color for enemies
         if(type == ContestantType.AI){
@@ -169,22 +171,25 @@ public class Contestant : MonoBehaviour {
 			if (equipped != null){
 				switch(equipped.stance){
 					case Item.Stance.Pistol:
-						//call animation Walk_Pistol
-						anchor = anchor_pistol;
+                        //call animation Walk_Pistol
+                        animator.Play("rig|Walk_Pistol");
+                        anchor = anchor_pistol;
 						break;
 					case Item.Stance.Rifle:
-						//call animation Walk_Rifle
-						anchor = anchor_rifle;
+                        //call animation Walk_Rifle
+                        animator.Play("rig|Walk_Rifle");
+                        anchor = anchor_rifle;
 						break;
                     case Item.Stance.Shoulder:
                         //call animation Walk_OverShoulder
+                        animator.Play("rig|Walk_OverShoulder");
                         anchor = anchor_shoulder;
                         break;
 				}
 			}
 			else{
-				//spr.sprite = unarmedSprite;
-				if(cooldownCounter > 0){
+                animator.Play("rig|Walk_Unarmed");
+                if (cooldownCounter > 0){
 					cooldownCounter -= Time.deltaTime;
 				}
 			}
