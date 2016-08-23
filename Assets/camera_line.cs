@@ -20,5 +20,9 @@ public class camera_line : MonoBehaviour {
 		if(!contestant.onCameras.Contains(a_camera)){
 			Destroy(gameObject);
 		}
+
+		if(!contestant.isAlive){
+			Destroy(gameObject);
+		}
 	}
 }

@@ -102,8 +102,17 @@ public class Contestant : MonoBehaviour {
         animator = GetComponent<Animator>();
         baseSpeed = movespeed;
         //temp change color for enemies
-        if(type == ContestantType.AI){
-        	GetComponent<SkinnedMeshRenderer>().material.color = Color.blue;
+        switch(type){
+        	case ContestantType.AI:
+				GetComponent<SkinnedMeshRenderer>().material.color = new Color(0.5f,0,0);
+        		break;
+        	case ContestantType.Guard:
+				GetComponent<SkinnedMeshRenderer>().material.color = new Color(0,0,0.5f);
+        		break;
+        	case ContestantType.Medic:
+				GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
+        		break;
+
         }
 		if(type == ContestantType.Target){
 			GetComponent<SkinnedMeshRenderer>().material.color = Color.magenta;
