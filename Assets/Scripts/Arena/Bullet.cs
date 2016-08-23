@@ -80,18 +80,16 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision coll){
-		if (areaOfEffect > 0){
-			Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
-			foreach (Collider a in colliders){
-				if(!Physics.Raycast(transform.position, (a.transform.position-transform.position).normalized, Vector3.Distance(transform.position, a.transform.position), LayerMask.NameToLayer("Unwalkable"))){
-					a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
-				}
-
-			}
-			Destroy(gameObject);
-		}
-		else{
 			if (coll.gameObject.tag == "Contestant"){
+				if (areaOfEffect > 0){
+					Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
+					foreach (Collider a in colliders){
+						if(!Physics.Raycast(transform.position, (a.transform.position-transform.position).normalized, Vector3.Distance(transform.position, a.transform.position), LayerMask.NameToLayer("Unwalkable"))){
+							a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
+						}
+					}
+					Destroy(gameObject);
+				}
 				if (owner.type == Contestant.ContestantType.AI) {
 						owner.GetComponent<AIController> ().confidence += damage / 200f;
 				}
@@ -103,10 +101,18 @@ public class Bullet : MonoBehaviour {
 				bounces--;
 			}
 			else{
+				if (areaOfEffect > 0){
+					Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
+					foreach (Collider a in colliders){
+						if(!Physics.Raycast(transform.position, (a.transform.position-transform.position).normalized, Vector3.Distance(transform.position, a.transform.position), LayerMask.NameToLayer("Unwalkable"))){
+							a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
+						}
+					}
+					Destroy(gameObject);
+				}
 				Destroy(gameObject);
 			}
 
-		}
 	}
 
 	void Zany(){
