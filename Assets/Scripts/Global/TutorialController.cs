@@ -14,11 +14,14 @@ public class TutorialController : MonoBehaviour {
 	int characterCounter;
 	public int maxLines = 15;
 	int numlines;
+	public GameObject[] guards;
+	int health;
 
 	// Use this for initialization
 	void Start () {
 		//textBoxes [0].GetComponent<TextMesh> ().text = "Message Log:\n<Steve>   Hello there new recruit!\n\tAre you ready to give your life \n\tfor your country's entertainment?";
 		textBoxes [0].GetComponent<TextMesh> ().text = "";
+		health = 999;
 		for (int i = 1; i < textBoxes.Length; i++) {
 			textBoxes [i].GetComponent<TextMesh> ().text = "Wait for\nnew text";
 		}
@@ -33,8 +36,13 @@ public class TutorialController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (triggers [0].GetComponent<spotlightTrigger> ().activated == true) {
-			textBoxes[1].GetComponent<TextMesh> ().text = "First Checkpoint\n   Reached";
+			//textBoxes[1].GetComponent<TextMesh> ().text = "First Checkpoint\n   Reached";
 
+		}
+		for (int i = 1; i < guards.Length; i++) {
+			if (guards [i].GetComponent<Contestant> ().health < health) {
+				guardStateChange ();
+			}
 		}
 	}
 
@@ -69,5 +77,11 @@ public class TutorialController : MonoBehaviour {
 		textBoxes [0].GetComponent<TextMesh> ().text = "";
 		StopCoroutine("TypeText");
 		StartCoroutine("TypeText", 0);
+	}
+
+	void guardStateChange () {
+		for (int i = 1; i < guards.Length; i++) {
+			guards [i].GetComponent<AI_GuardController> ().job = AI_GuardController.Job.EndRound;
+		}
 	}
 }
