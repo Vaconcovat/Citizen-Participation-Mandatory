@@ -17,7 +17,7 @@ public class ItemSpawner : MonoBehaviour {
 	void Start () {
 		switch(selection){
 			case poolselection.Example:
-				pool = FindObjectOfType<ItemPools>().example;
+			pool = FindObjectOfType<ItemPools>().BasicWeapons;
 				break;
 
 			case poolselection.Sponsor:

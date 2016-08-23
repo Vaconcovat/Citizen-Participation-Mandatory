@@ -66,17 +66,7 @@ public class SponsorsInterface : MonoBehaviour {
 		signMegaCity.interactable = false;
 		signVelocitech.interactable = true;
 		signExplodena.interactable = true;
-		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
-
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
-
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+		ResetSponsorUpgrades ();
 	}
 
 	public void SignExplodena(){
@@ -85,17 +75,7 @@ public class SponsorsInterface : MonoBehaviour {
 		signExplodena.interactable = false;
 		signMegaCity.interactable = true;
 		signVelocitech.interactable = true;
-		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
-
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
-
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+		ResetSponsorUpgrades ();
 	}
 
 	public void SignVelocitech(){
@@ -104,17 +84,58 @@ public class SponsorsInterface : MonoBehaviour {
 		signExplodena.interactable = true;
 		signMegaCity.interactable = true;
 		signVelocitech.interactable = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
+		ResetSponsorUpgrades ();
 
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+	}
 
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+	void ResetSponsorUpgrades(){
+		if (StaticGameStats.MegaCity1SponsorUpgrade [0] == true) {
+			StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
 
+		if (StaticGameStats.MegaCity1SponsorUpgrade [1] == true) {
+			StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
+
+		if (StaticGameStats.MegaCity1SponsorUpgrade [2] == true) {
+			StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
+
+		//Explodena Sponsor Upgrades
+
+		if (StaticGameStats.ExplodenaSponsorUpgrade [0] == true) {
+			StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
+
+		if (StaticGameStats.ExplodenaSponsorUpgrade [1] == true) {
+			StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
+
+		if (StaticGameStats.ExplodenaSponsorUpgrade [2] == true) {
+			StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
+
+		// Velocitech Sponsor Upgrades
+
+		if (StaticGameStats.VelocitechSponsorUpgrade [0] == true) {
+			StaticGameStats.VelocitechSponsorUpgrade [0] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
+
+		if (StaticGameStats.VelocitechSponsorUpgrade [1] == true) {
+			StaticGameStats.VelocitechSponsorUpgrade [1] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
+
+		if (StaticGameStats.VelocitechSponsorUpgrade [2] == true) {
+			StaticGameStats.VelocitechSponsorUpgrade [2] = false;
+			StaticGameStats.avaliableMoney = StaticGameStats.avaliableMoney + 4;
+		}
 	}
 }

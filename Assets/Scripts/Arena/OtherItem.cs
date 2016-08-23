@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class OtherItem : MonoBehaviour {
-	public enum ItemEffect{Heal, Speed};
+	public enum ItemEffect{Heal, Speed, Damage, CameraSight};
 
 	public ItemEffect effect;
 	public float effectAmount;
@@ -23,7 +23,7 @@ public class OtherItem : MonoBehaviour {
 			ammo = ammo * StaticGameStats.Upgrade1ItemUsageBuff;
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	}
@@ -38,6 +38,12 @@ public class OtherItem : MonoBehaviour {
 					break;
 				case ItemEffect.Speed:
 					Speed (effectAmount);
+					break;
+				case ItemEffect.Damage:
+					Damage (effectAmount);
+					break;
+				case ItemEffect.CameraSight:
+					CameraSight (effectAmount);
 					break;
 				}
 			}
@@ -90,5 +96,12 @@ public class OtherItem : MonoBehaviour {
 				GetComponent<Item> ().Throw ();
 			}
 		}
+	}
+
+	void Damage(float amount){
+		
+	}
+
+	void CameraSight(float amount){
 	}
 }
