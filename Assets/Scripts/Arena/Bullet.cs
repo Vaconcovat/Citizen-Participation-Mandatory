@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour {
 	public float lifetime;
 	public GameObject trail;
 	public float explosiveForce;
-
+	public int bounces;
 	public bool isSponsored;
 	[Header("Runtime Only")]
 	/// <summary>
@@ -43,6 +43,8 @@ public class Bullet : MonoBehaviour {
 	Rigidbody body;
 	Vector3 startPos;
 	float startTime;
+
+	Vector3 v;
 
 	// Use this for initialization
 	void Awake () {
@@ -70,7 +72,7 @@ public class Bullet : MonoBehaviour {
 	}
 
 	public void Fire(Vector3 vector){
-		Vector3 v = vector * velocityModifier;
+		v = vector * velocityModifier;
 		body.AddForce(v, ForceMode.Impulse);
 		if (isSponsored) {
 			FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponFireIncrease, "CorSponsorWeaponFireIncrease");
@@ -78,25 +80,39 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision coll){
-		if (areaOfEffect > 0){
-			Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
-			foreach (Collider a in colliders){
-				if(!Physics.Raycast(transform.position, (a.transform.position-transform.position).normalized, Vector3.Distance(transform.position, a.transform.position), LayerMask.NameToLayer("Unwalkable"))){
-					a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
-				}
-
-			}
-			Destroy(gameObject);
-		}
-		else{
 			if (coll.gameObject.tag == "Contestant"){
+				if (areaOfEffect > 0){
+					Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
+					foreach (Collider a in colliders){
+						if(!Physics.Raycast(transform.position, (a.transform.position-transform.position).normalized, Vector3.Distance(transform.position, a.transform.position), LayerMask.NameToLayer("Unwalkable"))){
+							a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
+						}
+					}
+					Destroy(gameObject);
+				}
 				if (owner.type == Contestant.ContestantType.AI) {
 						owner.GetComponent<AIController> ().confidence += damage / 200f;
 				}
+				coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, body.velocity.normalized, coll.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+				Destroy(gameObject);
 			}
-			coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, body.velocity.normalized, coll.contacts[0].point), SendMessageOptions.DontRequireReceiver);
-			Destroy(gameObject);
-		}
+			else if(bounces > 0){
+				body.AddForce(Vector3.Reflect(transform.forward, coll.contacts[0].normal).normalized * v.magnitude, ForceMode.Impulse);
+				bounces--;
+			}
+			else{
+				if (areaOfEffect > 0){
+					Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
+					foreach (Collider a in colliders){
+						if(!Physics.Raycast(transform.position, (a.transform.position-transform.position).normalized, Vector3.Distance(transform.position, a.transform.position), LayerMask.NameToLayer("Unwalkable"))){
+							a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
+						}
+					}
+					Destroy(gameObject);
+				}
+				Destroy(gameObject);
+			}
+
 	}
 
 	void Zany(){
