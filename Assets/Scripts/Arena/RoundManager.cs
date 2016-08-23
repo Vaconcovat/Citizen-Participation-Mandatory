@@ -55,13 +55,27 @@ public class RoundManager : MonoBehaviour {
 	void Update () {
 		if (aliveContestants == 1){
 			if (!roundOver){
-				roundOver = true;
 				SpawnGuards();
+				roundOver = true;
 			}
 		}
 
 		if(roundOver){
-			im.Announce("ROUND OVER\nPRESS [E] TO SURRENDER", 1);
+			
+			outerBayDoors.SetActive(false);
+			bool noGuards = true;
+			foreach(AI_GuardController a in FindObjectsOfType<AI_GuardController>()){
+				if(a.GetComponent<Contestant>().isAlive){
+					noGuards = false;
+				}
+			}
+			if(noGuards){
+				im.Announce("GUARDS EXHAUSTED\nPLEASE WAIT FOR FURTHER INSTRUCTIONS", 1);
+				Invoke("Triumph", 5);
+			}
+			else{
+				im.Announce("ROUND OVER\nPRESS [E] TO SURRENDER", 1);
+			}
 		}
 		else{
 			if(FindObjectsOfType<AI_MedicController>().Length > 0){
@@ -71,6 +85,11 @@ public class RoundManager : MonoBehaviour {
 				outerBayDoors.SetActive(true);
 			}
 		}
+	}
+
+	void Triumph(){
+		FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.RebEndOfRoundTriumphIncrease, "RebEndOfRoundTriumphIncrease");
+		endRound();
 	}
 
 	public void endRound(){

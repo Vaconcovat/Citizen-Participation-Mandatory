@@ -109,6 +109,7 @@ public class AI_GuardController : MonoBehaviour {
 		if(c.GetAmmo() == 0){
 			StartRetreat();
 		}
+		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(target.transform.position - transform.position), Time.deltaTime*3, 0));
 	}
 
 	void StartRetreat(){
@@ -126,9 +127,9 @@ public class AI_GuardController : MonoBehaviour {
 	}
 
 	bool LineOfSight(Collider losTarget, float dist){
-		Debug.DrawRay(transform.position, transform.forward * dist);
+		Debug.DrawRay(transform.position+ new Vector3(0,1,0), transform.forward * dist);
 		RaycastHit hit;
-		Ray r = new Ray(transform.position, transform.forward);
+		Ray r = new Ray(transform.position + new Vector3(0,1,0), transform.forward);
 		Physics.Raycast(r, out hit, dist);
 		if(hit.collider == losTarget){
 			return true;

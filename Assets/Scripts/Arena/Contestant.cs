@@ -376,12 +376,6 @@ public class Contestant : MonoBehaviour {
 		equipped = null;
 		GetComponent<SkinnedMeshRenderer>().material = hologram;
 		GetComponent<Animator>().enabled = false;
-		if (killer != FindObjectOfType<PlayerController>().GetComponent<Contestant>()){
-			GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
-		}
-		else{
-			GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
-		}
 		GameObject spawned = (GameObject)Instantiate(deathCard);
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		UI_DeathCard tracker = spawned.GetComponent<UI_DeathCard>();
