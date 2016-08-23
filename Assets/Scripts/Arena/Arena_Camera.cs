@@ -12,7 +12,7 @@ public class Arena_Camera : MonoBehaviour {
 	public float radius;
 
 	public LayerMask detectMask, cullMask;
-	public GameObject ui_card;
+	public GameObject ui_card, line;
 	UI_GenericCard card;
 
 	// Use this for initialization
@@ -57,7 +57,8 @@ public class Arena_Camera : MonoBehaviour {
 
 				}
 			}
-		} 
+		}
+		DrawLines(); 
 	}
 
 	public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal) {
@@ -90,5 +91,26 @@ public class Arena_Camera : MonoBehaviour {
 		}
 		displayText = displayText + ((positive)?"+":"-");
 		card.text = displayText;
+	}
+
+	public void DrawLines(){
+		bool lineExists;
+		foreach(Contestant c in visibleContestants){
+			if(!c.isAlive){
+				continue;
+			}
+			lineExists = false;
+			foreach(camera_line c_l in FindObjectsOfType<camera_line>()){
+				if(c_l.a_camera == this && c_l.contestant == c){
+					lineExists = true;
+				}
+			}
+			if(!lineExists){
+				GameObject spawned = (GameObject)Instantiate(line, transform.position, Quaternion.identity);
+				camera_line l = spawned.GetComponent<camera_line>();
+				l.a_camera = this;
+				l.contestant = c;
+			}
+		}
 	}
 }

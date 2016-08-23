@@ -218,7 +218,6 @@ public class AIController : MonoBehaviour {
 		rand = project + new Vector3(randomCircle.x,0,randomCircle.y)*3.0f;
 		center = new Vector3(-5f,1.63f,-35.2f);
 		towardsCenter = rand + ((center - rand).normalized) * (confidence*2);
-		NavMeshPath path = new NavMeshPath();
 		destination = towardsCenter;
 	}
 

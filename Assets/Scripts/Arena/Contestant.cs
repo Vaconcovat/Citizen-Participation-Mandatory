@@ -87,7 +87,6 @@ public class Contestant : MonoBehaviour {
     float baseSpeed;
 
     Rigidbody body;
-	Collider coll;
 	//SpriteRenderer spr;
 	public Transform anchor;
 
@@ -100,7 +99,6 @@ public class Contestant : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody>();
-		coll = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         baseSpeed = movespeed;
         //temp change color for enemies

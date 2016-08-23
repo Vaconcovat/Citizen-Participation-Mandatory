@@ -138,8 +138,6 @@ public class SkillCoolDown : MonoBehaviour {
 
 	public void Stun()
 	{
-		float closestDistance = Mathf.Infinity;
-		Contestant closestContestant = null;
 		Contestant[] contestants = FindObjectsOfType<Contestant>();
 
 		foreach (Contestant c in contestants) {
