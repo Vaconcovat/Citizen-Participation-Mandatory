@@ -16,44 +16,44 @@ public class arena_start_Manager : MonoBehaviour {
 	void CheckUpgrades() {
 		//T1
 		if(StaticGameStats.TierOneUpgrades[0]){
-			text += "\nT1U1 TEXT";
+			text += "\nItems have +1 Available Charges!";
 		}
 		if(StaticGameStats.TierOneUpgrades[1]){
-			text += "\nT1U2 TEXT";
+			text += "\nThrown weapons deal double damage!";
 		}
 		if(StaticGameStats.TierOneUpgrades[2]){
-			text += "\nT1U3 TEXT";
+			text += "\nAll Reputation gain is increased by 5%!";
 		}
 		if(StaticGameStats.TierOneUpgrades[3]){
-			text += "\nT1U4 TEXT";
+			text += "\nALL weapons have +20% ammo!";
 		}
 
 		//T2
 		if(StaticGameStats.TierTwoUpgrades[0]){
-			text += "\nT2U1 TEXT";
+			text += "\nSpacebar now uses items in the backpack slot!";
 		}
 		if(StaticGameStats.TierTwoUpgrades[1]){
-			text += "\nT2U2 TEXT";
+			text += "\nFire rate -20%, Bullet Damage +20%!";
 		}
 		if(StaticGameStats.TierTwoUpgrades[2]){
-			text += "\nT2U3 TEXT";
+			text += "\nGain +20% Max Health back upon emptying a weapon!";
 		}
 		if(StaticGameStats.TierTwoUpgrades[3]){
-			text += "\nT2U4 TEXT";
+			text += "\nGain +50% movement speed while holding an empty weapon!";
 		}
 
 		//T3
 		if(StaticGameStats.TierThreeUpgrades[0]){
-			text += "\nT3U1 TEXT";
+			text += "\nBloodlust Enabled!";
 		}
 		if(StaticGameStats.TierThreeUpgrades[1]){
-			text += "\nT3U2 TEXT";
+			text += "\nHealth kits are different!";
 		}
 		if(StaticGameStats.TierThreeUpgrades[2]){
-			text += "\nT3U3 TEXT";
+			text += "\nWeapons are thrown automatically and deal 1.2x damage when thrown!";
 		}
 		if(StaticGameStats.TierThreeUpgrades[3]){
-			text += "\nT3U4 TEXT";
+			text += "\nGuards always spawn with rifles!";
 		}
 
 		//Sponsor Upgrades Mega City 1
@@ -93,16 +93,16 @@ public class arena_start_Manager : MonoBehaviour {
 
 		//Abilities
 		if(StaticGameStats.Abilites[0]){
-			text += "\nAbility1 TEXT";
+			text += "\nSHOCK COLLAR";
 		}
 		if(StaticGameStats.Abilites[1]){
-			text += "\nAbility2 TEXT";
+			text += "\nBIO SCAN";
 		}
 		if(StaticGameStats.Abilites[2]){
-			text += "\nAbility3 TEXT";
+			text += "\nVENDOR OVERLOAD";
 		}
 		if(StaticGameStats.Abilites[3]){
-			text += "\nAbility4 TEXT";
+			text += "\nBLACKOUT";
 		}
 
 		text += "\n[ - - - - SPONSORSHIP - - - - ]";
@@ -110,13 +110,13 @@ public class arena_start_Manager : MonoBehaviour {
 		//chosen sponsor
 		switch(StaticGameStats.sponsor){
 			case(0):
-				text += "\nSponsor 1 chosen";
+				text += "\nPrismex";
 				break;
 			case(1):
-				text += "\nSponsor 2 chosen";
+				text += "\nExplodena";
 				break;
 			case(2):
-				text += "\nSponsor 3 chosen";
+				text += "\nVelocitech";
 				break;
 		}
 
