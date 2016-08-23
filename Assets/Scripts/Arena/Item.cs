@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 	public enum ItemType{Ranged, Melee, Other};
-	public enum Stance{Rifle, Pistol, Shoulder, Unarmed};
+	public enum Stance{Rifle, Pistol, Shoulder, Shotgun, Sniper, Unarmed};
 
 	[Header("Item Settings")]
 	[Tooltip("The name of the Item.")]

@@ -35,7 +35,7 @@ public class Contestant : MonoBehaviour {
 	/// <summary>
 	/// The anchor.
 	/// </summary>
-	public Transform anchor_rifle, anchor_pistol, anchor_shoulder;
+	public Transform anchor_rifle, anchor_pistol, anchor_shoulder, anchor_shotgun, anchor_sniper;
 	[Tooltip("How much time in seconds after unequipping a weapon must the contestant wait")]
 	/// <summary>
 	/// How much time in seconds after unequipping a weapon must the contestant wait
@@ -192,7 +192,17 @@ public class Contestant : MonoBehaviour {
                         animator.Play("rig|Walk_OverShoulder");
                         anchor = anchor_shoulder;
                         break;
-				}
+                    case Item.Stance.Shotgun:
+                        //call animation Walk_OverShoulder
+                        animator.Play("rig|Walk_Rifle");
+                        anchor = anchor_shotgun;
+                        break;
+                    case Item.Stance.Sniper:
+                        //call animation Walk_OverShoulder
+                        animator.Play("rig|Walk_Rifle");
+                        anchor = anchor_sniper;
+                        break;
+                }
 			}
 			else{
                 animator.Play("rig|Walk_Unarmed");
