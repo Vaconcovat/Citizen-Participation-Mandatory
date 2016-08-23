@@ -81,7 +81,10 @@ public class Bullet : MonoBehaviour {
 		if (areaOfEffect > 0){
 			Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
 			foreach (Collider a in colliders){
-				a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
+				if(!Physics.Raycast(transform.position, (a.transform.position-transform.position).normalized, Vector3.Distance(transform.position, a.transform.position), LayerMask.NameToLayer("Unwalkable"))){
+					a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
+				}
+
 			}
 			Destroy(gameObject);
 		}
