@@ -261,10 +261,12 @@ public class Contestant : MonoBehaviour {
 			body.AddForce(damage.knockback, ForceMode.Impulse);
 			if (health <= 0){
 				killer = damage.owner;
-				Die();
-				if (killer.equipped.isSponsored) 
-				{
-					FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponKillIncrease, "CorSponsorWeaponKillIncrease");
+				Die(null);
+				if (killer.equipped.isSponsored) {
+					if(onCameras.Count > 0){
+						FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponKillIncrease, "CorSponsorWeaponKillIncrease");
+						CameraInfluence(1, true);
+					}
 				}
 			}	
 			if (damage.damage > 0){
@@ -293,41 +295,73 @@ public class Contestant : MonoBehaviour {
 	/// <summary>
 	/// Turns this contestant into a corpse.
 	/// </summary>
-	public void Die(){
-		if (type == ContestantType.AI){
-			GetComponent<AIController>().enabled = false;
-			GetComponent<NavMeshAgent>().enabled = false;
-			if(GetComponent<AIController>().state == AIController.AIState.Beacon || GetComponent<AIController>().state == AIController.AIState.Evacuating){
-				GetComponent<AIController>().beacon.gameObject.SetActive(false);
-			}
-			GetComponent<AIController>().state = AIController.AIState.Dead;
-			FindObjectOfType<RoundManager>().Death();
-		}
-		else if(type == ContestantType.Guard){
-			FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovKillGuardsDecrease, "GovKillGuardsDecrease");
-			FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebKillGuardsIncrease, "RebKillGuardsIncrease");
-			GetComponent<AI_GuardController>().enabled = false;
-			GetComponent<NavMeshAgent>().enabled = false;
-		}
-		else if(type == ContestantType.Player){
-			GetComponent<PlayerController>().enabled = false;
-			if(equipped != null){
-				if (equipped.isSponsored) {
-					FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease, "CorSponsorWeaponDeathDecrease");
+	public void Die(string title){
+		switch(type){
+			case ContestantType.Player:
+				if(equipped != null){
+					if (equipped.isSponsored) {
+						if(onCameras.Count > 0){
+							FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease, "CorSponsorWeaponDeathDecrease");
+							CameraInfluence(1, false);
+						}
+					}
 				}
-			}
-		} else if(type == ContestantType.Target){
-			//GetComponent<AI_GuardController>().enabled = false;
-			GetComponent<NavMeshAgent>().enabled = false;
-			print ("Target died a horrible death!");
+				GetComponent<PlayerController>().enabled = false;
+				break;
+
+			case ContestantType.AI:
+				if(equipped != null){
+					if (equipped.isSponsored) {
+						if(onCameras.Count > 0){
+							FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease, "CorSponsorWeaponDeathDecrease");
+							CameraInfluence(1, false);
+						}
+					}
+				}
+				if(onCameras.Count > 0){
+					if(title == null){
+						title = "KILLED ON CAMERA";
+					}
+					FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovOnCameraKillIncrease, "GovOnCameraKillIncrease");
+					CameraInfluence(0, true);
+					FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebOnCameraKill, "RebOnCameraKill");
+					CameraInfluence(2, false);
+				}
+				else{
+					if(title == null){
+						title = "DECEASED";
+					}
+				}
+				GetComponent<AIController>().enabled = false;
+				GetComponent<NavMeshAgent>().enabled = false;
+				if(GetComponent<AIController>().state == AIController.AIState.Beacon || GetComponent<AIController>().state == AIController.AIState.Evacuating){
+					GetComponent<AIController>().beacon.gameObject.SetActive(false);
+				}
+				GetComponent<AIController>().state = AIController.AIState.Dead;
+				FindObjectOfType<RoundManager>().Death();
+				break;
+
+			case ContestantType.Guard:
+				if(onCameras.Count > 0){
+					if(title == null){
+						title = "KILLED ON CAMERA";
+					}
+					FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovKillGuardsDecrease, "GovKillGuardsDecrease");
+					FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebKillGuardsIncrease, "RebKillGuardsIncrease");
+				}
+				else{
+					title = "DECEASED";
+				}
+				GetComponent<AI_GuardController>().enabled = false;
+				GetComponent<NavMeshAgent>().enabled = false;
+				break;
+
+			case ContestantType.Medic:
+				GetComponent<AI_MedicController>().enabled = false;
+				GetComponent<NavMeshAgent>().enabled = false;
+				break;
 		}
 
-		else{
-			GetComponent<AI_MedicController>().enabled = false;
-			GetComponent<NavMeshAgent>().enabled = false;
-		}
-		//body.isKinematic = true;
-		//coll.enabled = false;
 		isAlive = false;
 		if (equipped != null){
 			equipped.Unequip();
@@ -345,6 +379,7 @@ public class Contestant : MonoBehaviour {
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		UI_DeathCard tracker = spawned.GetComponent<UI_DeathCard>();
 		tracker.contest = this;
+		tracker.title = title;
 		if(currentTalkCard != null){
 			Destroy(currentTalkCard);
 		}

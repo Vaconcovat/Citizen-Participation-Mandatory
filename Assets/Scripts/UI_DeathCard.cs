@@ -5,6 +5,7 @@ using System.Collections;
 public class UI_DeathCard : MonoBehaviour {
 
 	public Contestant contest;
+	public string title = "DECEASED";
 
 	RectTransform rTrans;
 	Canvas c;
@@ -26,6 +27,6 @@ public class UI_DeathCard : MonoBehaviour {
 		float y = (pos.y / Screen.height) * size.y * c.transform.localScale.y;
 		rTrans.position = new Vector3(x,y);
 
-		cardText.text = "DECEASED:\n" + contest.contestantName + "\n" + contest.contestantTidBit;
+		cardText.text = title + ":\n" + contest.contestantName + "\n" + contest.contestantTidBit;
 	}
 }

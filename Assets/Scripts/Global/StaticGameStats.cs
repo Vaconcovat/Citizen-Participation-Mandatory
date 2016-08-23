@@ -93,7 +93,6 @@ public class StaticGameStats : MonoBehaviour {
 	public static float RebKillGuardsIncrease = 1.0f;
 	public static float RebActivateMedicBeaconIncrease = 0.5f;
 	public static float RebEndOfRoundTriumphIncrease = 5.0f;
-	public static float RebWeaponOnCamera = 0.1f;
 
 	//Rebel Rep Decrease
 	public static float RebEndOfRoundSurrenderDecrease = -1.0f;

@@ -42,10 +42,10 @@ public class AI_MedicController : MonoBehaviour {
 
 	void Evacuating(){
 		agent.destination = spawn;
-		if(agent.remainingDistance < 0.5f && Vector3.Distance(transform.position, target.transform.position) < 3){
+		if(agent.remainingDistance < 0.5f){
 			if(target.isAlive){
 				FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebSuccessfulExtractionIncrease, "RebSuccessfulExtractionIncrease");
-				target.Die();
+				target.Die("MERCIED");
 			}
 			Destroy(tracker_card.gameObject);
 			Destroy(gameObject);

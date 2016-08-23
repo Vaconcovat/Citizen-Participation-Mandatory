@@ -148,6 +148,11 @@ public class AIController : MonoBehaviour {
 		medic.target = this.c;
 		medic.spawn = medicSpawn;
 		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]", 3);
+		if(c.onCameras.Count > 0){
+				FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovActivateMedicBeaconDecrease, "GovActivateMedicBeaconDecrease");	
+				FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebActivateMedicBeaconIncrease, "RebActivateMedicBeaconIncrease");
+				c.CameraInfluence(2, true);
+		}
 	}
 
 	void Evacuating(){
@@ -185,8 +190,6 @@ public class AIController : MonoBehaviour {
 		if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 2){
 			beacon.text = "[ E ] Mercy | [ Q ] Execute";
 			if(Input.GetKeyDown(KeyCode.E)){
-				FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovActivateMedicBeaconDecrease, "GovActivateMedicBeaconDecrease");	
-				FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebActivateMedicBeaconIncrease, "RebActivateMedicBeaconIncrease");
 				StartEvac();
 				if (StaticGameStats.TierThreeUpgrades [0]) {
 					player.movespeed = StaticGameStats.Upgrade9MovementSpeedBuff;
@@ -195,7 +198,6 @@ public class AIController : MonoBehaviour {
 				}
 			}
 			if(Input.GetKeyDown(KeyCode.Q)){
-				FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovExecutionIncrease, "GovExecutionIncrease");
 				Execute();
 			}
 		}
@@ -576,7 +578,14 @@ public class AIController : MonoBehaviour {
 
 	public void Execute(){
 		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " EXECUTED ]", 3);
-		c.Die();
+		if(c.onCameras.Count > 0){
+			FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovExecutionIncrease, "GovExecutionIncrease");
+			c.CameraInfluence(0, true);
+			c.Die("EXECUTED ON CAMERA");
+		}
+		else{
+			c.Die("EXECUTED");
+		}
 	}
 
 
