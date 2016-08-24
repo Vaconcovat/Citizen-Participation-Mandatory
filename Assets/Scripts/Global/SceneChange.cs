@@ -27,4 +27,8 @@ public class SceneChange : MonoBehaviour {
 	public void RoundRestart(){
 		SceneManager.LoadScene(1);
 	}
+
+	public void Tutorial(){
+		SceneManager.LoadScene ("TutorialLevel");
+	}
 }

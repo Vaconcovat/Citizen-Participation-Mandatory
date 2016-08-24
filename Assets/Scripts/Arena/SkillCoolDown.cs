@@ -19,6 +19,9 @@ public class SkillCoolDown : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (Ability1)) 
 		{
+			if (!StaticGameStats.Abilites [0]) {
+				return;
+			}
 			//If the ability is not currently cooling down
 			if ((skills [0].currentCooldown >= skills [0].cooldown) && (skills [4].currentCooldown >= skills[4].cooldown))
 			{
@@ -41,6 +44,9 @@ public class SkillCoolDown : MonoBehaviour {
 
 		else if (Input.GetKeyDown (Ability2)) 
 		{
+			if (!StaticGameStats.Abilites [1]) {
+				return;
+			}
 			//If the ability is not currently cooling down
 			if (skills [1].currentCooldown >= skills [1].cooldown) 
 			{
@@ -51,6 +57,9 @@ public class SkillCoolDown : MonoBehaviour {
 
 		else if (Input.GetKeyDown (Ability3)) 
 		{
+			if (!StaticGameStats.Abilites [2]) {
+				return;
+			}
 			//If the ability is not currently cooling down
 			if (skills [2].currentCooldown >= skills [2].cooldown) 
 			{
@@ -61,6 +70,9 @@ public class SkillCoolDown : MonoBehaviour {
 
 		else if (Input.GetKeyDown (Ability4)) 
 		{
+			if (!StaticGameStats.Abilites [3]) {
+				return;
+			}
 			//If the ability is not currently cooling down
 			if (skills [3].currentCooldown >= skills [3].cooldown) 
 			{
@@ -78,6 +90,19 @@ public class SkillCoolDown : MonoBehaviour {
 		skills [2].currentCooldown = skills [2].cooldown;
 		skills [3].currentCooldown = skills [3].cooldown;
 		skills [4].currentCooldown = skills [4].cooldown;
+
+		if (!StaticGameStats.Abilites [0]) {
+			skills [0].skillIcon.transform.parent.gameObject.SetActive (false);
+		}
+		if (!StaticGameStats.Abilites [1]) {
+			skills [1].skillIcon.transform.parent.gameObject.SetActive (false);
+		}
+		if (!StaticGameStats.Abilites [2]) {
+			skills [2].skillIcon.transform.parent.gameObject.SetActive (false);
+		}
+		if (!StaticGameStats.Abilites [3]) {
+			skills [3].skillIcon.transform.parent.gameObject.SetActive (false);
+		}
 	}
 
 	void Update()

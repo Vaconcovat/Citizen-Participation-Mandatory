@@ -9,7 +9,7 @@ public class arena_start_Manager : MonoBehaviour {
 
 	void Update(){
 		if(done && Input.GetKeyDown(KeyCode.E)){
-			FindObjectOfType<SceneChange>().Arena();
+			FindObjectOfType<SceneChange>().Tutorial();
 		}
 	}
 
@@ -110,13 +110,13 @@ public class arena_start_Manager : MonoBehaviour {
 		//chosen sponsor
 		switch(StaticGameStats.sponsor){
 			case(0):
-				text += "\nPrismex";
+				text += "\nPrismex Technologies Contract Signed!";
 				break;
 			case(1):
-				text += "\nExplodena";
+				text += "\nExplodena Industries Contract Signed!";
 				break;
 			case(2):
-				text += "\nVelocitech";
+				text += "\nVelocitech Incorporated Contract Signed!";
 				break;
 		}
 
