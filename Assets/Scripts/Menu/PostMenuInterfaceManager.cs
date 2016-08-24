@@ -46,6 +46,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 
 		StaticGameStats.avaliableMoney = govMoney + corMoney + rebMoney;
 		totalMoney.text = "Total Funding Recieved: " + StaticGameStats.avaliableMoney.ToString();
+		Debug.Log (StaticGameStats.avaliableMoney);
 
 		//set the overlay bars
 		govBarOverlay.fillAmount = gov_P / 100.0f;
