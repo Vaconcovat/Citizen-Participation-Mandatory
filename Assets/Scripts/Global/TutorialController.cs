@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TutorialController : MonoBehaviour {
 	public bool typeOnAwake;
@@ -43,6 +44,9 @@ public class TutorialController : MonoBehaviour {
 			if (guards [i].GetComponent<Contestant> ().health < guards [i].GetComponent<Contestant> ().maxHealth) {
 				guardStateChange ();
 			}
+		}
+		if(player.GetComponent<Contestant>().isAlive == false){
+			SceneManager.LoadScene(2);
 		}
 	}
 

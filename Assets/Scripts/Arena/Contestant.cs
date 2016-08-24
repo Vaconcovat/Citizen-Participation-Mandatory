@@ -115,7 +115,7 @@ public class Contestant : MonoBehaviour {
 
         }
 		if(type == ContestantType.Target){
-			GetComponent<SkinnedMeshRenderer>().material.color = Color.magenta;
+			//GetComponent<SkinnedMeshRenderer>().material.color = Color.magenta;
 		}
 
         ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
