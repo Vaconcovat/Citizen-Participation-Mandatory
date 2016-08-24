@@ -40,7 +40,7 @@ public class TutorialController : MonoBehaviour {
 
 		}
 		for (int i = 1; i < guards.Length; i++) {
-			if (guards [i].GetComponent<Contestant> ().health < health) {
+			if (guards [i].GetComponent<Contestant> ().health < guards [i].GetComponent<Contestant> ().maxHealth) {
 				guardStateChange ();
 			}
 		}
