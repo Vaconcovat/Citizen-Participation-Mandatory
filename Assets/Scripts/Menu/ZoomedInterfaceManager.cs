@@ -10,9 +10,13 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 	public PreMenuInterfaceManager PreMenuScript;
 	public Text StatusBarText, ArenaPlanningText, CommsText, ArenaText;
 
+	[TextArea(1,5)]
+	public string preCommitText, postCommitText, arenaCommitText, preNotCommitText, postNotCommitText, arenaNotCommitText;
+
+
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
@@ -25,12 +29,22 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 			ArenaPlanningText.text = "LOCKED";
 			ArenaText.text = "OPEN";
 			CommsText.text = "LOCKED";
+
+			preButton.GetComponent<HoverText> ().tooltip = preCommitText;
+			arenaButton.GetComponent<HoverText> ().tooltip = arenaCommitText;
+			postButton.GetComponent<HoverText> ().tooltip = postCommitText;
+
 		}
 		else{
 			preButton.interactable = true;
 			postButton.interactable = true;
 			arenaButton.interactable = false;
 			commit.text = "NOT COMMITTED";
+
+			preButton.GetComponent<HoverText> ().tooltip = preNotCommitText;
+			arenaButton.GetComponent<HoverText> ().tooltip = arenaNotCommitText;
+			postButton.GetComponent<HoverText> ().tooltip = postNotCommitText;
+
 		}
 	}
 }
