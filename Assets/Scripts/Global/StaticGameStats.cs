@@ -24,7 +24,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static int activeSponsor;
 
 	//Commit
-	public static bool committed = false;
+	public static bool committed = true;
 	public static bool toPost = false;
 
 	//file to keep record
