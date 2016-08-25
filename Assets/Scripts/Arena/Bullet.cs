@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Bullet : MonoBehaviour {
 	public enum MovementType{Standard, Zany};
@@ -51,6 +52,7 @@ public class Bullet : MonoBehaviour {
 		body = GetComponent<Rigidbody>();
 		startPos = transform.position;
 		startTime = Time.time;
+		damage = Mathf.FloorToInt(damage * owner.ContestantDamageModifier);
 		if(StaticGameStats.TierTwoUpgrades[1]){
 			damage = Mathf.RoundToInt(damage * StaticGameStats.Upgrade6DamageBuff);
 		}

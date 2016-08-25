@@ -37,13 +37,13 @@ public class OtherItem : MonoBehaviour {
 					StartCoroutine("Heal",effectAmount);
 					break;
 				case ItemEffect.Speed:
-					Speed (effectAmount);
+					StartCoroutine("Speed", effectAmount);
 					break;
 				case ItemEffect.Damage:
-					Damage (effectAmount);
+					StartCoroutine("Damage", effectAmount);
 					break;
 				case ItemEffect.CameraSight:
-					CameraSight (effectAmount);
+					StartCoroutine("CameraSightRepGains", effectAmount);
 					break;
 				}
 			}
@@ -87,21 +87,55 @@ public class OtherItem : MonoBehaviour {
 		}
 	}
 
-	void Speed(float amount){
+	IEnumerator Speed(float amount){
 		if (ammo >= 1) {
 			_audio.Play ();
 			ammo -= 1;
 			GetComponent<Item> ().equipper.movespeed += amount;
+			if (StaticGameStats.TierThreeUpgrades [3]) {
+				yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration * StaticGameStats.Upgrade12DurationBuff);
+			} else {
+				yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration);
+			}
+			GetComponent<Item> ().equipper.movespeed -= amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
 		}
 	}
 
-	void Damage(float amount){
+	IEnumerator Damage(float amount){
+		if (ammo >= 1) {
+			_audio.Play ();
+			ammo -= 1;
+			GetComponent<Contestant> ().ContestantDamageModifier += amount;
+			if (StaticGameStats.TierThreeUpgrades [3]) {
+				yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration * StaticGameStats.Upgrade12DurationBuff);
+			} else {
+				yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration);
+			}
+			GetComponent<Contestant> ().ContestantDamageModifier -= amount;
+			if ((consume) && (ammo <= 0)) {
+				GetComponent<Item> ().Throw ();
+			}
+		}
 		
 	}
 
-	void CameraSight(float amount){
+	IEnumerator CameraSightRepGains(float amount){
+		if (ammo >= 1) {
+			_audio.Play ();
+			ammo -= 1;
+			GetComponent<Contestant> ().ContestantRepModifier += amount;
+			if (StaticGameStats.TierThreeUpgrades [3]) {
+				yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration * StaticGameStats.Upgrade12DurationBuff);
+			} else {
+				yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration);
+			}
+			GetComponent<Contestant> ().ContestantRepModifier -= amount;
+			if ((consume) && (ammo <= 0)) {
+				GetComponent<Item> ().Throw ();
+			}
+		}
 	}
 }

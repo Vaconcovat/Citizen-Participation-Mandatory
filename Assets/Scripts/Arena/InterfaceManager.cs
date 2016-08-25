@@ -72,7 +72,7 @@ public class InterfaceManager : MonoBehaviour {
 		}
 
 		if(StaticGameStats.TierTwoUpgrades[0]){
-			upgradesText.text = upgradesText.text + "Spacebar now uses items in the backpack slot!\n";
+			upgradesText.text = upgradesText.text + "Kills on Camera now restore 10% health\n";
 		}
 		if(StaticGameStats.TierTwoUpgrades[1]){
 			upgradesText.text = upgradesText.text + "Fire rate -20%, Bullet Damage +20%!\n";

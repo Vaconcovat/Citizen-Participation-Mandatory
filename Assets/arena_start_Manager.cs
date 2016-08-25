@@ -30,7 +30,7 @@ public class arena_start_Manager : MonoBehaviour {
 
 		//T2
 		if(StaticGameStats.TierTwoUpgrades[0]){
-			text += "\nSpacebar now uses items in the backpack slot!";
+			text += "\nKills on Camera restore 10% Helath";
 		}
 		if(StaticGameStats.TierTwoUpgrades[1]){
 			text += "\nFire rate -20%, Bullet Damage +20%!";
@@ -53,7 +53,7 @@ public class arena_start_Manager : MonoBehaviour {
 			text += "\nWeapons are thrown automatically and deal 1.2x damage when thrown!";
 		}
 		if(StaticGameStats.TierThreeUpgrades[3]){
-			text += "\nGuards always spawn with rifles!";
+			text += "\nSponsor Item Duration Increased by 50%";
 		}
 
 		//Sponsor Upgrades Mega City 1

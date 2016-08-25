@@ -32,7 +32,10 @@ public class StaticGameStats : MonoBehaviour {
 	//public TextAsset textFile;
 	public static string path;
 
-
+	//Sponsor Items
+	public static float VelocitechItemDuration = 5.0f;
+	public static float ExplodenaItemDuration = 5.0f;
+	public static float PrismexItemDuration = 5.0f;
 
 	//Arena variables
 	/// <summary>
@@ -54,11 +57,10 @@ public class StaticGameStats : MonoBehaviour {
 	public static float Upgrade3ReputationGainBuff = 1.05f; //Ability 3 increases all rep gain by 5%
 	public static float Upgrade4MaxAmmoBuff = 1.2f; //Ability 4 increases the ammo of all weapons by 20%
 
-	public static int Upgrade5PlayerMoveSpeed = 10;
-	public static int Upgrade5PlayerNewSpeed = 15;
+	public static float Upgrade5HealAmount = 10.0f;
 
 	public static float Upgrade6FireRateNerf = 0.8f;
-	public static int Upgrade6DamageBuff = 2; //wanted to be 1.2 but this can only accept whole numbers
+	public static int Upgrade6DamageBuff = 2; 
 
 	public static bool Upgrade7AlreadyTriggered = false;
 	public static int Upgrade7HealAmount = 20;
@@ -72,8 +74,10 @@ public class StaticGameStats : MonoBehaviour {
 
 	public static float Upgrade10HealAmount = 3.0f;
 
-	public static int Upgrade11ThrownBuff = 2;
+	public static int Upgrade11ThrownBuff = 4;
 	public static bool Upgrade11AlreadyTriggered = false;
+
+	public static float Upgrade12DurationBuff = 1.5f;
 
 	public static float Ability1MaxDistance = 10.0f;
 
@@ -121,6 +125,11 @@ public class StaticGameStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (StaticGameStats.TierOneUpgrades [2]) {
+			StaticGameStats.Upgrade3ReputationGainBuff = 1.05f;
+		} else {
+			StaticGameStats.Upgrade3ReputationGainBuff = 1.0f;
+		}
 	
 	}
 
@@ -133,36 +142,17 @@ public class StaticGameStats : MonoBehaviour {
 		checkText (text);
 		switch (faction){
 		case 0:
-			if (TierOneUpgrades [2]) {
-				govRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-				//Debug.Log ("GOV: MOD " + govRep.ToString ());
-				break;
-			} else {
-				govRep += amount;
-				//Debug.Log("GOV: " + govRep.ToString());
-				break;
-			}
-				
+			govRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
+			//Debug.Log ("GOV: MOD " + govRep.ToString ());
+			break;
 		case 1:
-			if (TierOneUpgrades [2]) {
-				corRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-				//Debug.Log ("COR: MOD " + corRep.ToString ());
-				break;
-			} else {
-				corRep += amount;
-				//Debug.Log("COR: " + corRep.ToString());
-				break;
-			}
+			corRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
+			//Debug.Log ("GOV: MOD " + govRep.ToString ());
+			break;
 		case 2:
-			if (TierOneUpgrades [2]) {
-				rebRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-				//Debug.Log ("REB: MOD" + rebRep.ToString ());
-				break;
-			} else {
-				rebRep += amount;
-				//Debug.Log("REB: " + rebRep.ToString());
-				break;
-			}
+			rebRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
+			//Debug.Log ("GOV: MOD " + govRep.ToString ());
+			break;
 		}
 	}
 

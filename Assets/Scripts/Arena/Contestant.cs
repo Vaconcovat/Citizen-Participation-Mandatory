@@ -85,6 +85,11 @@ public class Contestant : MonoBehaviour {
 	public Item inventory;
 	public bool beaconActive = false;
     float baseSpeed;
+	public float ContestantDamageModifier = 1.5f;
+	public float ContestantRepModifier = 1.0f;
+	/// <summary>
+	/// The Contestants individual Damage Modifier
+	/// </summary>
 
     Rigidbody body;
 	//SpriteRenderer spr;
@@ -279,9 +284,15 @@ public class Contestant : MonoBehaviour {
 			if (health <= 0){
 				killer = damage.owner;
 				Die(null);
+				if (StaticGameStats.TierTwoUpgrades [0]) {
+					if (killer.onCameras.Count > 0) {
+						GetComponent<Contestant>().killer.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.Upgrade5HealAmount),GetComponent<Contestant>().killer,Vector2.zero,Vector2.zero));
+					}
+				}
+
 				if (killer.equipped.isSponsored) {
 					if(onCameras.Count > 0){
-						FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponKillIncrease, "CorSponsorWeaponKillIncrease");
+						FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponKillIncrease * ContestantRepModifier, "CorSponsorWeaponKillIncrease");
 						CameraInfluence(1, true);
 					}
 				}
@@ -318,7 +329,7 @@ public class Contestant : MonoBehaviour {
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease, "CorSponsorWeaponDeathDecrease");
+							FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease * ContestantRepModifier, "CorSponsorWeaponDeathDecrease");
 							CameraInfluence(1, false);
 						}
 					}
@@ -330,7 +341,7 @@ public class Contestant : MonoBehaviour {
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease, "CorSponsorWeaponDeathDecrease");
+							FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease * ContestantRepModifier, "CorSponsorWeaponDeathDecrease");
 							CameraInfluence(1, false);
 						}
 					}
@@ -339,9 +350,9 @@ public class Contestant : MonoBehaviour {
 					if(title == null){
 						title = "KILLED ON CAMERA";
 					}
-					FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovOnCameraKillIncrease, "GovOnCameraKillIncrease");
+					FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovOnCameraKillIncrease * ContestantRepModifier, "GovOnCameraKillIncrease");
 					CameraInfluence(0, true);
-					FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebOnCameraKill, "RebOnCameraKill");
+					FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebOnCameraKill * ContestantRepModifier, "RebOnCameraKill");
 					CameraInfluence(2, false);
 				}
 				else{
@@ -363,8 +374,8 @@ public class Contestant : MonoBehaviour {
 					if(title == null){
 						title = "KILLED ON CAMERA";
 					}
-					FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovKillGuardsDecrease, "GovKillGuardsDecrease");
-					FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebKillGuardsIncrease, "RebKillGuardsIncrease");
+					FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovKillGuardsDecrease * ContestantRepModifier, "GovKillGuardsDecrease");
+					FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebKillGuardsIncrease * ContestantRepModifier, "RebKillGuardsIncrease");
 				}
 				else{
 					title = "DECEASED";
