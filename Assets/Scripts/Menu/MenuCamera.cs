@@ -84,4 +84,8 @@ public class MenuCamera : MonoBehaviour {
 		state = 11;
 		FindObjectOfType<arena_start_Manager>().arena_start_text();
 	}
+
+	public void Questionaire(){
+		state = 12;
+	}
 }
