@@ -113,7 +113,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static float CorEndOfTournamentDecayDecrease = -2.0f;
 	public static float CorSponsorWeaponDeathDecrease = -1.0f;
 
-
+	public static string PlayerName;
 
 
 
