@@ -66,7 +66,7 @@ public class AI_GuardController : MonoBehaviour {
 			agent.speed = speed;
 		}
 
-		if(Input.GetKeyDown(KeyCode.E)){
+		if(Input.GetKeyDown(KeyCode.Q)){
 			endStatus = endRoundStatus.Capture;
 			if (target.equipped != null){
 				target.equipped.Unequip();

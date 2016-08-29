@@ -74,7 +74,7 @@ public class RoundManager : MonoBehaviour {
 				Invoke("Triumph", 5);
 			}
 			else{
-				im.Announce("ROUND OVER\nPRESS [E] TO SURRENDER", 1);
+				im.Announce("ROUND OVER\nPRESS [Q] TO SURRENDER", 1);
 			}
 		}
 		else{
