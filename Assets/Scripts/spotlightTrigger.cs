@@ -6,7 +6,7 @@ public class spotlightTrigger : MonoBehaviour {
 
 	public GameObject toBeRemoved;
 	public Light lightToBeChanged;
-	public GameObject[] targetsInScene;
+	public GameObject target;
 	public bool activated = false;
 
 	void OnTriggerEnter (Collider other)
@@ -21,15 +21,10 @@ public class spotlightTrigger : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Contestant") {
 			//Debug.Log ("Player is within trigger");
-			if (toBeRemoved.name == "Wall (85)" || toBeRemoved.name == "Wall (89)") {
-				if (allTargetsDead () == true || StaticGameStats.tutorialDone) {
-					Destroy (toBeRemoved, 0.5f);
-					lightToBeChanged.color = Color.green;
-					StaticGameStats.tutorialDone = true;
-				}
-			} else {
+			if (TargetsDead () == true || StaticGameStats.tutorialDone) {
 				Destroy (toBeRemoved, 0.5f);
 				lightToBeChanged.color = Color.green;
+				StaticGameStats.tutorialDone = true;
 			}
 		}
 	}
@@ -41,19 +36,8 @@ public class spotlightTrigger : MonoBehaviour {
 		}
 	}
 
-	bool allTargetsDead () {
-		int targets = 0;
-		int totalTargets = targetsInScene.Length;
-		for(int i = 0; i<targetsInScene.Length; i++) {
-			if (targetsInScene[i].GetComponent<Contestant>().type.ToString() == "Target") { 
-				if (targetsInScene[i].GetComponent<Contestant>().isAlive == false) {
-					targets++;
-				}
-			}
-		}
-		//Currently in place of text system (Still having trouble understanding
-		print (targets + " out of " + totalTargets + " targets killed!");
-		if (targets == targetsInScene.Length) {
+	bool TargetsDead () {
+		if (target.GetComponent<Contestant>().isAlive == false) {
 			return true;
 		} else {
 			return false;

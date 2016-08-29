@@ -27,7 +27,7 @@ public class StaticGameStats : MonoBehaviour {
 	//Commit
 	public static bool committed = false;
 	public static bool toPost = false;
-	public static bool tutorialDone = true;
+	public static bool tutorialDone = false;
 
 	//file to keep record
 	//public TextAsset textFile;
