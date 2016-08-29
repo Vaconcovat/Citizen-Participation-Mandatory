@@ -141,6 +141,7 @@ public class StaticGameStats : MonoBehaviour {
 
 	public void Influence(InfluenceTrigger type, float amount){
 		influenceList.Add(type);
+		FindObjectOfType<InterfaceManager>().Influence(type);
 		switch(type){
 			case InfluenceTrigger.ActivateMedicBeacon:
 				UpdateInfluence(0, (amount!=0)?amount:GovActivateMedicBeaconDecrease);

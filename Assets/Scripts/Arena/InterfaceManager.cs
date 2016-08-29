@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using UnityStandardAssets.ImageEffects;
 
 public class InterfaceManager : MonoBehaviour {
@@ -24,7 +25,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Button abortButton;
 	public Text abortText;
 	public Image abortImage;
-	public Text announcementsText;
+	public Text announcementsText, influenceFeed;
 	float grainFloor;
 
 
@@ -42,18 +43,21 @@ public class InterfaceManager : MonoBehaviour {
 	RoundManager rm;
 	float announcetimer;
 	bool activeannounce;
+	string influenceText;
+	int[] influenceCounts;
+
+	List<StaticGameStats.InfluenceTrigger> influences;
 
 	// Use this for initialization
 	void Start () {
+		influences = new List<StaticGameStats.InfluenceTrigger>();
 		rm = FindObjectOfType<RoundManager>();
 		abortButton.enabled = false;
 		abortText.enabled = false;
 		abortImage.enabled = false;
-
 		announcementsText.text = "";
 		activeannounce = false;
-
-
+		influenceCounts = new int[4];
 
 	}
 	
@@ -155,11 +159,79 @@ public class InterfaceManager : MonoBehaviour {
 		else{
 			cameraGUI.SetActive(false);
 		}
+
+		//influences
+		influenceFeed.text = influenceText;
 	}
 
 	public void Announce(string s, float time){
 		activeannounce = true;
 		announcementsText.text = s;
 		announcetimer = time;
+	}
+
+	public void Influence(StaticGameStats.InfluenceTrigger type){
+		int temp;
+		if(!influences.Contains(type)){
+			influences.Add(type);
+			influenceCounts[influences.Count - 1] = 1;
+		}
+		else{
+			int index = influences.IndexOf(type);
+			influenceCounts[index] += 1;
+			temp = influenceCounts[influences.Count - 1];
+		}
+
+		if(influences.Count > 3){
+			influences.RemoveAt(0);
+			influenceCounts[0] = influenceCounts[1];
+			influenceCounts[1] = influenceCounts[2];
+			influenceCounts[2] = influenceCounts[3];
+		}
+
+		influenceText = "";
+		string s = "";
+		int x = 0;
+		foreach(StaticGameStats.InfluenceTrigger i in influences){
+			switch(i){
+				case StaticGameStats.InfluenceTrigger.ActivateMedicBeacon:
+					s = "(REB+ | GOV-) Televised 'Act of Mercy'";
+					break;
+				case StaticGameStats.InfluenceTrigger.EndOfRoundSurrender:
+					s = "(GOV+ | REB-) Surrendered at end of round";
+					break;
+				case StaticGameStats.InfluenceTrigger.EndOfRoundTriumph:
+					s = "(REB+) Resisted all guards!";
+					break;
+				case StaticGameStats.InfluenceTrigger.Execution:
+					s = "(GOV+) Televised Execution";
+					break;
+				case StaticGameStats.InfluenceTrigger.KillGuard:
+					s = "(REB+) Guard killed!";
+					break;
+				case StaticGameStats.InfluenceTrigger.OnCameraKill:
+					s = "(GOV+ | REB -) Televised Kill";
+					break;
+				case StaticGameStats.InfluenceTrigger.SponsorItemUse:
+					s = "(COR+) Televised sponsor item use";
+					break;
+				case StaticGameStats.InfluenceTrigger.SponsorWeaponDeath:
+					s = "(COR-) Televised death with a sponsored weapon";
+					break;
+				case StaticGameStats.InfluenceTrigger.SponsorWeaponFire:
+					s = "(COR+) Televised sponsor weapon use";
+					break;
+				case StaticGameStats.InfluenceTrigger.SponsorWeaponKill:
+					s = "(COR+) Televised kill with a sponsor weapon";
+					break;
+				case StaticGameStats.InfluenceTrigger.SuccessfulExtraction:
+					s = "(REB+) Injured contestant successfully extracted!";
+					break;
+			}
+			s += (influenceCounts[x] > 1)?(" x" + influenceCounts[x]):"";
+			influenceText += s + "\n";
+			x++;
+
+		}
 	}
 }

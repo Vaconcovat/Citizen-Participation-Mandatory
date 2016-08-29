@@ -18,6 +18,7 @@ public class AI_MedicController : MonoBehaviour {
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		tracker_card = spawned.GetComponent<UI_GenericCard>();
 		tracker_card.target = transform;
+		agent.speed = GetComponent<Contestant>().movespeed;
 	}
 	
 	// Update is called once per frame
