@@ -292,7 +292,7 @@ public class Contestant : MonoBehaviour {
 
 				if (killer.equipped.isSponsored) {
 					if(onCameras.Count > 0){
-						FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponKillIncrease * ContestantRepModifier, "CorSponsorWeaponKillIncrease");
+						FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponKill, 0);
 						CameraInfluence(1, true);
 					}
 				}
@@ -329,7 +329,7 @@ public class Contestant : MonoBehaviour {
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease * ContestantRepModifier, "CorSponsorWeaponDeathDecrease");
+							FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
 							CameraInfluence(1, false);
 						}
 					}
@@ -341,7 +341,7 @@ public class Contestant : MonoBehaviour {
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponDeathDecrease * ContestantRepModifier, "CorSponsorWeaponDeathDecrease");
+						FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
 							CameraInfluence(1, false);
 						}
 					}
@@ -350,9 +350,8 @@ public class Contestant : MonoBehaviour {
 					if(title == null){
 						title = "KILLED ON CAMERA";
 					}
-					FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovOnCameraKillIncrease * ContestantRepModifier, "GovOnCameraKillIncrease");
+					FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.OnCameraKill, 0);
 					CameraInfluence(0, true);
-					FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebOnCameraKill * ContestantRepModifier, "RebOnCameraKill");
 					CameraInfluence(2, false);
 				}
 				else{
@@ -374,8 +373,7 @@ public class Contestant : MonoBehaviour {
 					if(title == null){
 						title = "KILLED ON CAMERA";
 					}
-					FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovKillGuardsDecrease * ContestantRepModifier, "GovKillGuardsDecrease");
-					FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebKillGuardsIncrease * ContestantRepModifier, "RebKillGuardsIncrease");
+					FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.KillGuard, 0);
 				}
 				else{
 					title = "DECEASED";

@@ -88,7 +88,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	void Triumph(){
-		FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.RebEndOfRoundTriumphIncrease, "RebEndOfRoundTriumphIncrease");
+		FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.EndOfRoundTriumph, 0);
 		endRound();
 	}
 

@@ -149,8 +149,7 @@ public class AIController : MonoBehaviour {
 		medic.spawn = medicSpawn;
 		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]", 3);
 		if(c.onCameras.Count > 0){
-				FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovActivateMedicBeaconDecrease, "GovActivateMedicBeaconDecrease");	
-				FindObjectOfType<StaticGameStats>().Influence(2, StaticGameStats.RebActivateMedicBeaconIncrease, "RebActivateMedicBeaconIncrease");
+				FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.ActivateMedicBeacon, 0);	
 				c.CameraInfluence(2, true);
 		}
 	}
@@ -578,7 +577,7 @@ public class AIController : MonoBehaviour {
 	public void Execute(){
 		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " EXECUTED ]", 3);
 		if(c.onCameras.Count > 0){
-			FindObjectOfType<StaticGameStats>().Influence(0, StaticGameStats.GovExecutionIncrease, "GovExecutionIncrease");
+			FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.Execution, 0);
 			c.CameraInfluence(0, true);
 			c.Die("EXECUTED ON CAMERA");
 		}

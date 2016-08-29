@@ -52,6 +52,10 @@ public class Bullet : MonoBehaviour {
 		body = GetComponent<Rigidbody>();
 		startPos = transform.position;
 		startTime = Time.time;
+
+	}
+
+	void Start(){
 		damage = Mathf.FloorToInt(damage * owner.ContestantDamageModifier);
 		if(StaticGameStats.TierTwoUpgrades[1]){
 			damage = Mathf.RoundToInt(damage * StaticGameStats.Upgrade6DamageBuff);
@@ -76,9 +80,6 @@ public class Bullet : MonoBehaviour {
 	public void Fire(Vector3 vector){
 		v = vector * velocityModifier;
 		body.AddForce(v, ForceMode.Impulse);
-		if (isSponsored) {
-			FindObjectOfType<StaticGameStats>().Influence(1, StaticGameStats.CorSponsorWeaponFireIncrease, "CorSponsorWeaponFireIncrease");
-		}
 	}
 
 	void OnCollisionEnter(Collision coll){
