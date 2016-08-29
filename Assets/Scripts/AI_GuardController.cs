@@ -101,7 +101,7 @@ public class AI_GuardController : MonoBehaviour {
 		else{
 			agent.speed = speed;
 		}
-		if(LineOfSight(target.GetComponent<Collider>(),15)){
+		if(LineOfSight(target.GetComponent<Collider>(),15) && target.isAlive){
 			c.UseEquipped(true);
 			c.UseEquipped(false);
 		}
