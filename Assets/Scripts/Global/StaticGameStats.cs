@@ -125,6 +125,7 @@ public class StaticGameStats : MonoBehaviour {
 	//Probably shouldn't ever have anything here, if you do you're bad.
 	void Awake () {
 		path = Application.dataPath + "/Resources/InfluenceGains.txt";
+		influenceList = new List<InfluenceTrigger>();
 	}
 	
 	// Update is called once per frame
