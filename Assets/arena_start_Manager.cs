@@ -50,7 +50,7 @@ public class arena_start_Manager : MonoBehaviour {
 			text += "\nHealth kits are different!";
 		}
 		if(StaticGameStats.TierThreeUpgrades[2]){
-			text += "\nWeapons are thrown automatically and deal 1.2x damage when thrown!";
+			text += "\nWeapons are thrown automatically and deal 4x damage when thrown!";
 		}
 		if(StaticGameStats.TierThreeUpgrades[3]){
 			text += "\nSponsor Item Duration Increased by 50%";
