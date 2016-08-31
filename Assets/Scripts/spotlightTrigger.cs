@@ -6,8 +6,9 @@ public class spotlightTrigger : MonoBehaviour {
 
 	public GameObject toBeRemoved;
 	public Light lightToBeChanged;
-	public GameObject target;
+	public GameObject[] targets;
 	public bool activated = false;
+	int targetsDead;
 
 	void OnTriggerEnter (Collider other)
 	{
@@ -37,7 +38,13 @@ public class spotlightTrigger : MonoBehaviour {
 	}
 
 	bool TargetsDead () {
-		if (target.GetComponent<Contestant>().isAlive == false) {
+		targetsDead = 0;
+		for (int i = 0; i < targets.Length; i++) {
+			if (targets [i].GetComponent<Contestant> ().isAlive == false) {
+				targetsDead++;
+			}
+		}
+		if(targetsDead == 3) {
 			return true;
 		} else {
 			return false;
