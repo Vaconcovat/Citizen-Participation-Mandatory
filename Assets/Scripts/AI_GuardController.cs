@@ -5,7 +5,7 @@ public class AI_GuardController : MonoBehaviour {
 	public enum Job{StartRound, EndRound};
 	public Job job;
 
-	public enum endRoundStatus{Chase, Fight, Capture, Retreat};
+	public enum endRoundStatus{Chase, Fight, Capture, Retreat, TutorialGuard};
 	public endRoundStatus endStatus;
 
 	public Contestant target;
@@ -39,6 +39,9 @@ public class AI_GuardController : MonoBehaviour {
 					break;
 				case endRoundStatus.Retreat:
 					Retreat();
+					break;
+				case endRoundStatus.TutorialGuard:
+					TutorialGuard();
 					break;
 			}
 
@@ -138,5 +141,34 @@ public class AI_GuardController : MonoBehaviour {
 		}
 	}
 
+	void TutorialGuard(){
+		agent.destination = target.transform.position;
 
+		if(agent.remainingDistance < closingDistance){
+			agent.speed = closingSpeed;
+		}
+		else{
+			agent.speed = speed;
+		}
+
+		if(talktimer <= 0){
+			talktimer = minTalkTime;
+			if (Random.value <= 0.25f) {
+				if (target.equipped != null) {
+					c.Say ("Don't even think about it");
+				} else {
+					c.Say ("Keep moving prisoner!");
+				}
+			} else if (0.25f < Random.value && Random.value <= 0.5f) {
+				c.Say ("*Pushes you with gun*");
+			} else if (0.5f < Random.value  && Random.value <= 0.75f) {
+				c.Say ("Move it move it. Hurry up!");
+			} else if (0.75f < Random.value && Random.value <= 1.0f) {
+				c.Say ("Extra waterboarding for failure!");
+			}
+		}
+		else{
+			talktimer -= Time.deltaTime;
+		}
+	}
 }
