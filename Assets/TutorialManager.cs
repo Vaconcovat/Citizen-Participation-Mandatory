@@ -10,7 +10,6 @@ public class TutorialManager : MonoBehaviour {
 	public Image gunLogo;
 	public Image[] corners;
 	public Text recText;
-	public Text announcementsText;
 
 
 	[Header("Player")]
@@ -29,12 +28,9 @@ public class TutorialManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//rm = FindObjectOfType<RoundManager>();
-		//abortButton.enabled = false;
-		//abortText.enabled = false;
-		//abortImage.enabled = false;
 
-		announcementsText.text = "";
+
+
 		activeannounce = false;
 	}
 
@@ -61,7 +57,6 @@ public class TutorialManager : MonoBehaviour {
 			}
 			else{
 				activeannounce = false;
-				announcementsText.text = "";
 			}
 		}
 
@@ -75,7 +70,6 @@ public class TutorialManager : MonoBehaviour {
 
 	public void Announce(string s, float time){
 		activeannounce = true;
-		announcementsText.text = s;
 		announcetimer = time;
 	}
 }
