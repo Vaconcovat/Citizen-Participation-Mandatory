@@ -35,6 +35,11 @@ public class InterfaceManager : MonoBehaviour {
 
 	[Header("Camera")]
 	public NoiseAndScratches noise;
+	public ColorCorrectionCurves colourCurves;
+	[Range(0,5)]
+	public float offCameraSaturation;
+	[Range(0,5)]
+	public float onCameraSaturation;
 	public GameObject cameraGUI;
 
 	[Header("Music")]
@@ -155,9 +160,11 @@ public class InterfaceManager : MonoBehaviour {
 
 		if(player.isAlive && player.onCameras.Count > 0){
 			cameraGUI.SetActive(true);
+			colourCurves.saturation = onCameraSaturation;
 		}
 		else{
 			cameraGUI.SetActive(false);
+			colourCurves.saturation = offCameraSaturation;
 		}
 
 		//influences
