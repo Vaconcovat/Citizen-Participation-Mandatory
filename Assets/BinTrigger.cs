@@ -9,6 +9,7 @@ public class BinTrigger : MonoBehaviour {
 		if (other.gameObject.tag == "Weapon") {
 			Debug.Log ("Gun entered the trigger");
 			Destroy(other.gameObject);
+			other.gameObject.GetComponent<Item> ().tracker.gameObject.SetActive(false);
 		}
 	}
 

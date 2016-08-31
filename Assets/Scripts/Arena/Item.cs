@@ -49,7 +49,7 @@ public class Item : MonoBehaviour {
 	Rigidbody body;
 	Collider coll;
 	float impactVelocityMin = 10;
-	UI_WeaponTracker tracker;
+	public UI_WeaponTracker tracker;
 
 	// Use this for initialization
 	void Start () {
