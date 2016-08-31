@@ -44,7 +44,7 @@ public class spotlightTrigger : MonoBehaviour {
 				targetsDead++;
 			}
 		}
-		if(targetsDead == 3) {
+		if(targetsDead == targets.Length) {
 			return true;
 		} else {
 			return false;
