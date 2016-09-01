@@ -92,6 +92,10 @@ public class MenuCamera : MonoBehaviour {
 		} else {
 			state = 1;	
 		}
+	}
 
+	public void Tutorial_Start(){
+		state = 13;
+		FindObjectOfType<tutorial_start_Manager>().tutorial_start_text();
 	}
 }

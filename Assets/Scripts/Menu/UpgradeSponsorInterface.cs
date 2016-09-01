@@ -38,20 +38,6 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.Abilites[1] = false;
 		StaticGameStats.Abilites[2] = false;
 		StaticGameStats.Abilites[3] = false;
-
-		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
-
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
-
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
-
-
 	}
 
 	// Update is called once per frame
@@ -113,15 +99,6 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.Abilites[1] = false;
 		StaticGameStats.Abilites[2] = false;
 		StaticGameStats.Abilites[3] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [0] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [1] = false;
-		StaticGameStats.MegaCity1SponsorUpgrade [2] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [0] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [1] = false;
-		StaticGameStats.ExplodenaSponsorUpgrade [2] = false;
 		upgradebuttons[0].interactable = true;
 		upgradebuttons[1].interactable = true;
 		upgradebuttons[2].interactable = true;
@@ -138,9 +115,6 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		upgradebuttons[13].interactable = true;
 		upgradebuttons[14].interactable = true;
 		upgradebuttons[15].interactable = true;
-		upgradebuttons[16].interactable = true;
-		upgradebuttons[17].interactable = true;
-		upgradebuttons[18].interactable = true;
 		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
 		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
