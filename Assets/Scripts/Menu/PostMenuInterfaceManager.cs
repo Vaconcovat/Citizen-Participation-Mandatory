@@ -84,6 +84,11 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 				spend.SetActive(false);
 				moneyobject.SetActive(false);
             }
+            else{
+            	WinText.enabled = false;
+            	LoseText.enabled = false;
+            	NormalText.enabled = true;
+            }
         }
 
 
