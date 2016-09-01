@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class SponsorsInterface : MonoBehaviour {
 
-	public Text moneyText, embezText, sponsorText;
+	public Text moneyText, embezText, sponsorText, directory;
 	public Button signMegaCity, signExplodena, signVelocitech, commitButton;
 	public Sprite[] sponsorGunLogos;
 	public int activeSponsor;
@@ -33,6 +33,7 @@ public class SponsorsInterface : MonoBehaviour {
 		else{
 			commitButton.interactable = false;
 		}
+		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\PLANNING\SPONSORS.gov";
 	}
 
 	public void AddMoney(){

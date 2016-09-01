@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UpgradeSponsorInterface : MonoBehaviour {
 
-	public Text moneyText, embezText, sponsorText;
+	public Text moneyText, embezText, sponsorText, directory;
 	public Image gunIcon, gunIcon2;
 	public Button signMegaCity1, signExplodena, commitButton;
 	public Button[] upgradebuttons;
@@ -52,6 +52,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		else{
 			commitButton.interactable = false;
 		}
+		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\PLANNING.gov";
 	}
 
 	public void AddMoney(){

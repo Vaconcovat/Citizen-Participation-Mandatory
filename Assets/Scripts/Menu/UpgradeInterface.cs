@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UpgradeInterface : MonoBehaviour {
 
-	public Text moneyText, embezText;
+	public Text moneyText, embezText, directory;
 	public Button commitButton;
 	public Button[] upgradebuttons;
 	public int moneyHolder;
@@ -50,6 +50,7 @@ public class UpgradeInterface : MonoBehaviour {
 		else{
 			commitButton.interactable = false;
 		}
+		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\PLANNING\UPGRADES.gov";
 	}
 
 	public void AddMoney(){

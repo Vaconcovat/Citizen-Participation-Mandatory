@@ -8,7 +8,7 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 	public Text commit;
 	//public Text activeSponsor;  
 	public PreMenuInterfaceManager PreMenuScript;
-	public Text StatusBarText, ArenaPlanningText, CommsText, ArenaText;
+	public Text StatusBarText, ArenaPlanningText, CommsText, ArenaText, WelcomeText, directory;
 
 	[TextArea(1,5)]
 	public string preCommitText, postCommitText, arenaCommitText, preNotCommitText, postNotCommitText, arenaNotCommitText;
@@ -44,7 +44,8 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 			preButton.GetComponent<HoverText> ().tooltip = preNotCommitText;
 			arenaButton.GetComponent<HoverText> ().tooltip = arenaNotCommitText;
 			postButton.GetComponent<HoverText> ().tooltip = postNotCommitText;
-
 		}
+		WelcomeText.text = "Welcome to GovorNet Systems, " + StaticGameStats.PlayerName;
+		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\MAIN.gov";
 	}
 }

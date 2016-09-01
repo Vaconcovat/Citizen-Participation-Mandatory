@@ -15,6 +15,7 @@ public class AutoType : MonoBehaviour {
 	int characterCounter;
 	Text textObj;
 	int numlines;
+	bool alternate = true;
 
 	// Use this for initialization
 	void Start () {
@@ -33,15 +34,18 @@ public class AutoType : MonoBehaviour {
 		//Debug.Log("Coroutine Running");
 		foreach (char letter in displayedText[index].ToCharArray()){
 			textObj.text += letter;
-			if (blip != null){
-				blip.Play();
-			}
 			if(textObj.text.Split('\n').Length > maxLines){
 				textObj.text = textObj.text.Substring(textObj.text.IndexOf('\n')+1);
 			}
 			characterCounter++;
 			if(characterCounter == charactersPerTick){
 				characterCounter = 0;
+				if (blip != null){
+					if(alternate){
+						blip.Play();
+					}
+					alternate = !alternate;
+				}
 				yield return new WaitForSeconds(textDelays[index]);
 			}
 		}

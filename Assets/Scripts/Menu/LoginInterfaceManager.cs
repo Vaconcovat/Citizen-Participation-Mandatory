@@ -16,6 +16,7 @@ public class LoginInterfaceManager : MonoBehaviour {
 	void Update () {
 		if (mcamera.state == 5 && !started){
 			started = true;
+			username.displayedText[0] = StaticGameStats.PlayerName;
 			consoleText.StartType();
 		}
 	}

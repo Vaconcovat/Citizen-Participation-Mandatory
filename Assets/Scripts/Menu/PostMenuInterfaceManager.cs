@@ -15,7 +15,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public Image govBackground, corBackground, rebBackground;
 	public GameObject WinButton, LoseButton, back, spend;
 	public GameObject moneyobject;
-	public Text NormalText;
+	public Text NormalText, directory;
 
 	[Header("Settings")]
 	public float lerpTime;
@@ -137,6 +137,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		if (StaticGameStats.rebRep <= 0){
 			rebBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
 		}
+		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\COMMS.gov";
 	}
 
 	int CheckThresholds(float change){
