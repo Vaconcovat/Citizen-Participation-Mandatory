@@ -13,71 +13,60 @@ public class SkillCoolDown : MonoBehaviour {
 	public Contestant player;
 	public GameObject weaponTrackerUI, contestantTrackerUI;
 	public bool isPrimed = false;
+	public Sprite LockedOut;
 
 
 	void FixedUpdate()
 	{
-		if (Input.GetKeyDown (Ability1)) 
-		{
+		if (Input.GetKeyDown (Ability1)) {
 			if (!StaticGameStats.Abilites [0]) {
 				return;
-			}
-			//If the ability is not currently cooling down
-			if ((skills [0].currentCooldown >= skills [0].cooldown) && (skills [4].currentCooldown >= skills[4].cooldown))
-			{
-				if (isPrimed) 
-				{
-					Stun ();
-					print ("Shock Collar Activated, ZZZZZZZAP");
-					isPrimed = false;
-					skills [0].currentCooldown = 0;
+			} else {
+				//If the ability is not currently cooling down
+				if ((skills [0].currentCooldown >= skills [0].cooldown) && (skills [4].currentCooldown >= skills [4].cooldown)) {
+					if (isPrimed) {
+						Stun ();
+						print ("Shock Collar Activated, ZZZZZZZAP");
+						isPrimed = false;
+						skills [0].currentCooldown = 0;
 
-				} else 
-				{
-					print ("Shock Collar Armed, Use with Caution");
-					isPrimed = true;
-					skills [4].currentCooldown = 0;
+					} else {
+						print ("Shock Collar Armed, Use with Caution");
+						isPrimed = true;
+						skills [4].currentCooldown = 0;
+					}
+
 				}
-
 			}
-		}
-
-		else if (Input.GetKeyDown (Ability2)) 
-		{
+		} else if (Input.GetKeyDown (Ability2)) {
 			if (!StaticGameStats.Abilites [1]) {
 				return;
+			} else {
+				//If the ability is not currently cooling down
+				if (skills [1].currentCooldown >= skills [1].cooldown) {
+					BioScan ();
+					skills [1].currentCooldown = 0;
+				}
 			}
-			//If the ability is not currently cooling down
-			if (skills [1].currentCooldown >= skills [1].cooldown) 
-			{
-				BioScan();
-				skills [1].currentCooldown = 0;
-			}
-		}
-
-		else if (Input.GetKeyDown (Ability3)) 
-		{
+		} else if (Input.GetKeyDown (Ability3)) {
 			if (!StaticGameStats.Abilites [2]) {
 				return;
+			} else {
+				//If the ability is not currently cooling down
+				if (skills [2].currentCooldown >= skills [2].cooldown) {
+					Overload ();
+					skills [2].currentCooldown = 0;
+				}
 			}
-			//If the ability is not currently cooling down
-			if (skills [2].currentCooldown >= skills [2].cooldown) 
-			{
-				Overload();
-				skills [2].currentCooldown = 0;
-			}
-		}
-
-		else if (Input.GetKeyDown (Ability4)) 
-		{
+		} else if (Input.GetKeyDown (Ability4)) {
 			if (!StaticGameStats.Abilites [3]) {
 				return;
-			}
-			//If the ability is not currently cooling down
-			if (skills [3].currentCooldown >= skills [3].cooldown) 
-			{
-				Blackout ();
-				skills [3].currentCooldown = 0;
+			} else {
+				//If the ability is not currently cooling down
+				if (skills [3].currentCooldown >= skills [3].cooldown) {
+					Blackout ();
+					skills [3].currentCooldown = 0;
+				}
 			}
 		}
 			
@@ -92,16 +81,16 @@ public class SkillCoolDown : MonoBehaviour {
 		skills [4].currentCooldown = skills [4].cooldown;
 
 		if (!StaticGameStats.Abilites [0]) {
-			skills [0].skillIcon.transform.parent.gameObject.SetActive (false);
+			skills [0].skillIcon.sprite = LockedOut;
 		}
 		if (!StaticGameStats.Abilites [1]) {
-			skills [1].skillIcon.transform.parent.gameObject.SetActive (false);
+			skills [1].skillIcon.sprite = LockedOut;
 		}
 		if (!StaticGameStats.Abilites [2]) {
-			skills [2].skillIcon.transform.parent.gameObject.SetActive (false);
+			skills [2].skillIcon.sprite = LockedOut;
 		}
 		if (!StaticGameStats.Abilites [3]) {
-			skills [3].skillIcon.transform.parent.gameObject.SetActive (false);
+			skills [3].skillIcon.sprite = LockedOut;
 		}
 	}
 
