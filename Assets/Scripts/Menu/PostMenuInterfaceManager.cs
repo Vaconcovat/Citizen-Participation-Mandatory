@@ -10,10 +10,12 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public Text govMoneyText, corMoneyText, rebMoneyText;
 	public Image govBar, corBar, rebBar;
 	public Text totalMoney;
-	public AutoType infoText, infoText2;
+	public AutoType LoseText, WinText;
 	public Image govBarOverlay, corBarOverlay, rebBarOverlay;
 	public Image govBackground, corBackground, rebBackground;
-	public GameObject discpline, discpline2, back, spend, moneyobject;
+	public GameObject WinButton, LoseButton, back, spend;
+	public GameObject moneyobject;
+	public Text NormalText;
 
 	[Header("Settings")]
 	public float lerpTime;
@@ -44,9 +46,15 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		corMoney = CheckThresholds(cor_change);
 		rebMoney = CheckThresholds(reb_change);
 
+		//Disable the Win / Lose Text and Buttons
+		WinButton.SetActive(false);
+		WinText.enabled = false;
+		LoseButton.SetActive(false);
+		LoseText.enabled = false;
+
+
 		StaticGameStats.avaliableMoney = govMoney + corMoney + rebMoney;
 		totalMoney.text = "Total Funding Recieved: " + StaticGameStats.avaliableMoney.ToString();
-		Debug.Log (StaticGameStats.avaliableMoney);
 
 		//set the overlay bars
 		govBarOverlay.fillAmount = gov_P / 100.0f;
@@ -54,27 +62,28 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		rebBarOverlay.fillAmount = reb_P / 100.0f;
 
 
-		if (StaticGameStats.govRep <= 0 || StaticGameStats.corRep <= 0 || StaticGameStats.rebRep <= 0){
-			infoText.displayedText[0] = "You have recieved a 0% satisfaction report.\nDisciplinary actions will be administered.\n\nGovorNet Systems takes this matter very\nseriously. We do not issue warnings. You cannot\nmake an appeal to these consequences.\n\nPlease connect to the GovorNet Department of Re-Education\nfor decommision. Do not disconnect from GovorNet systems. \nDo not power off this machine.\n\nFailure to follow these instructions will be considered treason.";
-			infoText.StartType();
-			discpline.SetActive(true);
+		if ((StaticGameStats.govRep <= 0) || (StaticGameStats.corRep <= 0) || (StaticGameStats.rebRep <= 0)){
+			NormalText.enabled = false;
+			LoseText.enabled = true;
+			//LoseText.displayedText[0] = "You have recieved a 0% satisfaction report.\nDisciplinary actions will be administered.\n\nGovorNet Systems takes this matter very\nseriously. We do not issue warnings. You cannot\nmake an appeal to these consequences.\n\nPlease connect to the GovorNet Department of Re-Education\nfor decommision. Do not disconnect from GovorNet systems. \nDo not power off this machine.\n\nFailure to follow these instructions will be considered treason.";
+			LoseText.StartType();
+			LoseButton.SetActive(true);
 			back.SetActive(false);
 			spend.SetActive(false);
 			moneyobject.SetActive(false);
 		}
+
 		else{
-			if (StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100){
-				//infoText.displayedText[0] = "One or more RELOCATION OFFERS recieved!\n\n\n\n\n\nYou will be able to accept a relocation offer once you have committed this arena.";
-				//infoText.StartType();
-                infoText2.displayedText[0] = "You have recieved a 100% arena satisfaction report.\nOne or more RELOCATION OFFERS received for your efforts.\n\nGovorNet Systems takes this matter very\nseriously. We do not issue warnings. You cannot\nmake an appeal to these awards.\n\nPlease connect to the GovorNet Department of Ceremonies\nfor awarding. Do not disconnect from GovorNet systems. \nDo not power off this machine.\n\nFailure to follow these instructions will result in no awards.";
-                infoText2.StartType();
-                discpline2.SetActive(true);
-                back.SetActive(false);
-                spend.SetActive(false);
-                moneyobject.SetActive(false);
+			if ((StaticGameStats.govRep >= 100) || (StaticGameStats.corRep >= 100) || (StaticGameStats.rebRep >= 100)){
+				NormalText.enabled = false;
+				WinText.enabled = true;
+                //WinText.displayedText[0] = "You have recieved a 100% arena satisfaction report.\nOne or more RELOCATION OFFERS received for your efforts.\n\nGovorNet Systems takes this matter very\nseriously. We do not issue warnings. You cannot\nmake an appeal to these awards.\n\nPlease connect to the GovorNet Department of Ceremonies\nfor awarding. Do not disconnect from GovorNet systems. \nDo not power off this machine.\n\nFailure to follow these instructions will result in no awards.";
+                WinText.StartType();
+				WinButton.SetActive(true);
+				back.SetActive(false);
+				spend.SetActive(false);
+				moneyobject.SetActive(false);
             }
-			discpline.SetActive(false);
-            discpline2.SetActive(false);
         }
 
 

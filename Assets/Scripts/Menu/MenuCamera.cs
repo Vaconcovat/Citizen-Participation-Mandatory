@@ -57,6 +57,7 @@ public class MenuCamera : MonoBehaviour {
 
 	public void Login(){
 		state = 5;
+		StaticGameStats.QuestionnaireDone = true;
 	}
 
 	public void Lose(){
@@ -86,6 +87,11 @@ public class MenuCamera : MonoBehaviour {
 	}
 
 	public void Questionaire(){
-		state = 12;
+		if (StaticGameStats.QuestionnaireDone == false) {
+			state = 12;
+		} else {
+			state = 1;	
+		}
+
 	}
 }
