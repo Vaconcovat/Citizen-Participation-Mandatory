@@ -16,7 +16,6 @@ public class MenuCamera : MonoBehaviour {
 		if(StaticGameStats.toPost){
 			Post();
 			StaticGameStats.toPost = false;
-			FindObjectOfType<BootInterfaceManager>().skipped = true;
 		}
 		else{
 			state = 4;
