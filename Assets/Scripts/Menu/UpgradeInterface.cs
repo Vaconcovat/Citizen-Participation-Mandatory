@@ -323,14 +323,14 @@ public class UpgradeInterface : MonoBehaviour {
 		if (!buttonActive [12]) {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
-				StaticGameStats.TierThreeUpgrades [0] = true;
+				StaticGameStats.Abilites [0] = true;
 				ChangeColorToGreen(12);
 				buttonActive [12] = true;
 
 			}
 		} else {
 			StaticGameStats.avaliableMoney += 4;
-			StaticGameStats.TierThreeUpgrades [0] = false;
+			StaticGameStats.Abilites [0] = false;
 			buttonActive [12] = false;
 			ChangeColorToWhite (12);
 		}
@@ -340,14 +340,14 @@ public class UpgradeInterface : MonoBehaviour {
 		if (!buttonActive [13]) {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
-				StaticGameStats.TierThreeUpgrades [1] = true;
+				StaticGameStats.Abilites [1] = true;
 				ChangeColorToGreen(13);
 				buttonActive [13] = true;
 
 			}
 		} else {
 			StaticGameStats.avaliableMoney += 4;
-			StaticGameStats.TierThreeUpgrades [1] = false;
+			StaticGameStats.Abilites [1] = false;
 			buttonActive [13] = false;
 			ChangeColorToWhite (13);
 		}
@@ -357,14 +357,14 @@ public class UpgradeInterface : MonoBehaviour {
 		if (!buttonActive [14]) {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
-				StaticGameStats.TierThreeUpgrades [2] = true;
+				StaticGameStats.Abilites [2] = true;
 				ChangeColorToGreen(14);
 				buttonActive [14] = true;
 
 			}
 		} else {
 			StaticGameStats.avaliableMoney += 4;
-			StaticGameStats.TierThreeUpgrades [2] = false;
+			StaticGameStats.Abilites [2] = false;
 			buttonActive [14] = false;
 			ChangeColorToWhite (14);
 		}
@@ -374,14 +374,14 @@ public class UpgradeInterface : MonoBehaviour {
 		if (!buttonActive [15]) {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
-				StaticGameStats.TierThreeUpgrades [3] = true;
+				StaticGameStats.Abilites [3] = true;
 				ChangeColorToGreen(15);
 				buttonActive [15] = true;
 
 			}
 		} else {
 			StaticGameStats.avaliableMoney += 4;
-			StaticGameStats.TierThreeUpgrades [3] = false;
+			StaticGameStats.Abilites [3] = false;
 			buttonActive [15] = false;
 			ChangeColorToWhite (15);
 		}
