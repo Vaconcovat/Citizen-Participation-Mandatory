@@ -15,6 +15,8 @@ public class tutorial_start_Manager : MonoBehaviour {
 		
 
 	public void tutorial_start_text(){
+		Debug.Log ("I Am STARTING SOME TEXT NOW");
+		//The line below is what is breaking it
 		at.StartType();
 	}
 
