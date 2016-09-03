@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BinTrigger : MonoBehaviour {
 
+	public static bool ThrownWeapon = false;
 
 	void OnTriggerEnter (Collider other)
 	{
@@ -10,16 +11,7 @@ public class BinTrigger : MonoBehaviour {
 			Debug.Log ("Gun entered the trigger");
 			Destroy(other.gameObject);
 			other.gameObject.GetComponent<Item> ().tracker.gameObject.SetActive(false);
+			ThrownWeapon = true;
 		}
-	}
-
-	void OnTriggerStay (Collider other)
-	{
-		Debug.Log ("Gun stayed in the trigger");
-	}
-
-	void OnTriggerExit (Collider other)
-	{
-		Debug.Log ("Gun exited the trigger");
 	}
 }

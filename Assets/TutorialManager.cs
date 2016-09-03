@@ -11,6 +11,9 @@ public class TutorialManager : MonoBehaviour {
 	public Image[] corners;
 	public Text recText;
 
+	public GameObject ExitDoor;
+	public Contestant Victim;
+
 
 	[Header("Player")]
 	public Contestant player;
@@ -36,6 +39,10 @@ public class TutorialManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if ((Victim.isAlive == false) && (BinTrigger.ThrownWeapon == true))
+		{
+			ExitDoor.gameObject.SetActive (false);
+		}
 		if (player.equipped != null){
 			if (player.equipped.type == Item.ItemType.Ranged){
 				ammo.text = player.equipped.GetComponent<RangedWeapon>().ammo.ToString();
