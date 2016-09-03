@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UpgradeSponsorInterface : MonoBehaviour {
 
@@ -12,6 +13,9 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	public int activeSponsor;
 	public int chosenSponsor;
 	public int availableMoney;
+
+	Color greyColor;
+	Color whiteColor;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +42,9 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.Abilites[1] = false;
 		StaticGameStats.Abilites[2] = false;
 		StaticGameStats.Abilites[3] = false;
+
+		greyColor = Color.grey;
+		whiteColor = Color.white;
 	}
 
 	// Update is called once per frame
@@ -100,22 +107,18 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.Abilites[1] = false;
 		StaticGameStats.Abilites[2] = false;
 		StaticGameStats.Abilites[3] = false;
-		upgradebuttons[0].interactable = true;
-		upgradebuttons[1].interactable = true;
-		upgradebuttons[2].interactable = true;
-		upgradebuttons[3].interactable = true;
-		upgradebuttons[4].interactable = true;
-		upgradebuttons[5].interactable = true;
-		upgradebuttons[6].interactable = true;
-		upgradebuttons[7].interactable = true;
-		upgradebuttons[8].interactable = true;
-		upgradebuttons[9].interactable = true;
-		upgradebuttons[10].interactable = true;
-		upgradebuttons[11].interactable = true;
-		upgradebuttons[12].interactable = true;
-		upgradebuttons[13].interactable = true;
-		upgradebuttons[14].interactable = true;
-		upgradebuttons[15].interactable = true;
+
+		for (int i = 0; i < 16; i++) {
+			UpgradeInterface.buttonActive [i] = false;
+			if (i <= 11) {
+				ChangeColorToGrey (i);
+			} else {
+				ChangeColorToWhite (i);
+			}
+		}
+
+
+
 		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
 		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
@@ -136,6 +139,19 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		else{
 			FindObjectOfType<MenuCamera>().ZoomedOut();
 		}
+	}
 
+	void ChangeColorToGrey(int num) {
+		ColorBlock cb = upgradebuttons [num].colors;
+		cb.normalColor = greyColor;
+		cb.highlightedColor = greyColor;
+		upgradebuttons [num].colors = cb;
+	}
+
+	void ChangeColorToWhite(int num) {
+		ColorBlock cb = upgradebuttons [num].colors;
+		cb.normalColor = whiteColor;
+		cb.highlightedColor = whiteColor;
+		upgradebuttons [num].colors = cb;
 	}
 }

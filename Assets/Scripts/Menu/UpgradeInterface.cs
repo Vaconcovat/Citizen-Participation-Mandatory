@@ -10,8 +10,7 @@ public class UpgradeInterface : MonoBehaviour {
 	public Button[] upgradebuttons;
 	public int moneyHolder;
 	public int embezzledHolder;
-	bool[] buttonActive;
-	int numOfButtons; //Make sure you update this if the number of buttons change from 16
+	public static bool[] buttonActive = new bool[16];
 	Color greenColor;
 	Color greyColor;
 	Color whiteColor;
@@ -48,9 +47,7 @@ public class UpgradeInterface : MonoBehaviour {
 		/// <summary>
 		/// This sets 16 values in buttonActive to false 
 		/// </summary>
-		numOfButtons = 16;
-		buttonActive = new bool[16];
-		for (int i = 0; i < numOfButtons; i++) {
+		for (int i = 0; i < buttonActive.Length; i++) {
 			buttonActive [i] = false;
 		}
 
