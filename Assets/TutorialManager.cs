@@ -8,9 +8,7 @@ public class TutorialManager : MonoBehaviour {
 	[Header("UI GameObjects")]
 	public Text ammo;
 	public Image gunLogo;
-	public Image[] corners;
-	public Text recText;
-
+	public Text announceText;
 	public GameObject ExitDoor;
 	public Contestant Victim;
 
@@ -33,7 +31,7 @@ public class TutorialManager : MonoBehaviour {
 	void Start () {
 
 
-
+		announceText.text = "";
 		activeannounce = false;
 	}
 
@@ -64,6 +62,7 @@ public class TutorialManager : MonoBehaviour {
 			}
 			else{
 				activeannounce = false;
+				announceText.text = "";
 			}
 		}
 
@@ -76,6 +75,7 @@ public class TutorialManager : MonoBehaviour {
 	}
 
 	public void Announce(string s, float time){
+		announceText.text = s;
 		activeannounce = true;
 		announcetimer = time;
 	}
