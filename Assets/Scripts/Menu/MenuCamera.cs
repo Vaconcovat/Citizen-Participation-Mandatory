@@ -7,7 +7,7 @@ public class MenuCamera : MonoBehaviour {
 	/// </summary>
 	public int state;
 	public Transform[] waypoints;
-	public GameObject _MainMenu, _ZoomedOut, _Post, _Boot, _Login, _Lose, _Win, _UpgradeSponsor, _Upgrades, _Sponsors, _Arena_Start, _Questionaire, _Tutorial_start;
+	public GameObject _MainMenu, _ZoomedOut, _Post, _Boot, _Login, _Lose, _Win, _UpgradeSponsor, _Upgrades, _Sponsors, _Arena_Start, _Questionaire, _Tutorial_start, _ArenaMap;
 	public bool teleport;
 	public float speed;
 	public AudioSource audioP;
@@ -114,8 +114,14 @@ public class MenuCamera : MonoBehaviour {
 		FindObjectOfType<tutorial_start_Manager>().tutorial_start_text();
 	}
 
+	public void ArenaMap(){
+		DisableAllBut (_ArenaMap);
+		state = 14;
+		FindObjectOfType<ArenaMap_Manager>().ArenaMap_start_text();
+	}
+
 	void DisableAllBut(GameObject screen){
-		GameObject[] screens = new GameObject[]{_MainMenu, _ZoomedOut, _Post, _Boot, _Login, _Lose, _Win, _UpgradeSponsor, _Upgrades, _Sponsors, _Arena_Start, _Questionaire, _Tutorial_start};
+		GameObject[] screens = new GameObject[]{_MainMenu, _ZoomedOut, _Post, _Boot, _Login, _Lose, _Win, _UpgradeSponsor, _Upgrades, _Sponsors, _Arena_Start, _Questionaire, _Tutorial_start, _ArenaMap};
 		foreach(GameObject g in screens){
 			if(screen != g){
 				g.SetActive(false);

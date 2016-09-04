@@ -11,6 +11,9 @@ public class arena_start_Manager : MonoBehaviour {
 		if(done && Input.GetKeyDown(KeyCode.E)){
 			FindObjectOfType<SceneChange> ().Arena ();
 		}
+		if (done && Input.GetKeyDown (KeyCode.Q)) {
+			FindObjectOfType<MenuCamera> ().ArenaMap ();
+		}
 	}
 
 	void CheckUpgrades() {
