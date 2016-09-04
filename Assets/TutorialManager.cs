@@ -11,7 +11,8 @@ public class TutorialManager : MonoBehaviour {
 	public Text announceText;
 	public GameObject ExitDoor;
 	public Contestant Victim;
-
+	public Image fader;
+	public AutoType log_autoType;
 
 	[Header("Player")]
 	public Contestant player;
@@ -26,13 +27,14 @@ public class TutorialManager : MonoBehaviour {
 	//RoundManager rm;
 	float announcetimer;
 	bool activeannounce;
+	string plantName;
+	bool fading = false;
 
 	// Use this for initialization
 	void Start () {
-
-
 		announceText.text = "";
 		activeannounce = false;
+		player.GetComponent<PlayerController>().enabled = false;
 	}
 
 	// Update is called once per frame
@@ -72,11 +74,40 @@ public class TutorialManager : MonoBehaviour {
 		else{
 			cameraGUI.SetActive(false);
 		}
+
+		if(fading){
+			fader.color = new Color(0,0,0,fader.color.a - Time.deltaTime);
+		}
 	}
 
 	public void Announce(string s, float time){
 		announceText.text = s;
 		activeannounce = true;
 		announcetimer = time;
+	}
+
+	public void start_log(){
+		plantName = player.contestantName;
+		log_autoType.displayedText[0] = "CONNECTING TO NEURAL INTERFACE...     \nSUCCESS!\nPLANT:   [   ";
+		log_autoType.displayedText[1] = plantName;
+		log_autoType.displayedText[2] = "   ]\n\nVITALS: 100%\nHEART RATE: " + Random.Range(90,121).ToString() +" BMP\nNEURAL INTERFERENCE: " + Random.Range(0.0001f, 0.001f).ToString() + "mY\nCONNECTION STABLE!\n\n                           ";
+		log_autoType.finishedCallString = "Controls";
+		log_autoType.StartType(); 
+	}
+
+	public void Controls(){
+		log_autoType.GetComponent<Text>().alignment = TextAnchor.LowerLeft;
+		player.GetComponent<PlayerController>().enabled = true;
+		music.Play();
+		fading = true;
+		log_autoType.displayedText[0] = "FULL NEURAL CONTROL READY!\n                     \nUSE [ W A S D ] TO MOVE PLANT\nUSE [ MOUSE ] TO AIM\nUSE [ LMB ] TO FIRE WEAPONS/USE ITEMS\nUSE [ RMB ] TO THROW\n\n[   ";
+		log_autoType.displayedText[1] = plantName;
+		log_autoType.displayedText[2] = "   ]\nALL CONTESTANTS MUST COMPLETE\nORIENTATION IN ORDER TO COMPETE \nIN THE ARENA.\n\nCONTESTANTS MUST FIRE A WEAPON\nAT A LIVE TARGET, THEN DISPENSE\nOF THE WEAPON TO PASS.\n\n";
+		log_autoType.finishedCallString = "ControlsDone";
+		log_autoType.StartType(); 
+	}
+
+	public void ControlsDone(){
+		log_autoType.GetComponent<Text>().color = new Color(1,1,1,0.5f);
 	}
 }

@@ -40,7 +40,7 @@ public class AutoType : MonoBehaviour {
 			characterCounter++;
 			if(characterCounter == charactersPerTick){
 				characterCounter = 0;
-				if (blip != null){
+				if (blip != null && letter != ' '){
 					if(alternate){
 						blip.Play();
 					}

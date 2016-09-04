@@ -117,11 +117,10 @@ public class Contestant : MonoBehaviour {
         	case ContestantType.Medic:
 				GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
         		break;
-
+        	case ContestantType.Target:
+        		GetComponent<SkinnedMeshRenderer>().material.color = new Color(0.5f,0,0);
+        		break;
         }
-		if(type == ContestantType.Target){
-			//GetComponent<SkinnedMeshRenderer>().material.color = Color.magenta;
-		}
 
         ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
         if(contestantName == ""){
