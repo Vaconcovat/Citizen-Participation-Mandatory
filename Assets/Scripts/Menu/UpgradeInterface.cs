@@ -221,19 +221,19 @@ public class UpgradeInterface : MonoBehaviour {
 	}
 
 	public void BuyTierTwoUpgradeFour(){
-		if (!buttonActive [8]) {
+		if (!buttonActive[7]) {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
 				StaticGameStats.TierTwoUpgrades [3] = true;
-				ChangeColorToGreen(8);
-				buttonActive [8] = true;
+				ChangeColorToGreen(7);
+				buttonActive [7] = true;
 
 			}
 		} else {
 			StaticGameStats.avaliableMoney += 4;
 			StaticGameStats.TierTwoUpgrades [3] = false;
-			buttonActive [8] = false;
-			ChangeColorToGrey (8);
+			buttonActive [7] = false;
+			ChangeColorToGrey (7);
 		}
 	}
 

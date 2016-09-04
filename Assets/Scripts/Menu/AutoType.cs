@@ -61,6 +61,7 @@ public class AutoType : MonoBehaviour {
 	}
 
 	public void StartType(){
+		textObj = GetComponent<Text>();
 		textObj.text = "";
 		StopCoroutine("TypeText");
 		StartCoroutine("TypeText", 0);

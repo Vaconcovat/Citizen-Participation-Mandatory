@@ -13,21 +13,21 @@ public class MenuCamera : MonoBehaviour {
 	public AudioSource audioP;
 	public bool isAlreadyStarted = false;
 
-	void Awake(){
+	void Start(){
 		if(StaticGameStats.toPost){
 			Post();
 			StaticGameStats.toPost = false;
 		}
+		else if (LoadArena.FromTutorial == true) {
+			Arena_Start ();
+		}
 		else{
-			state = 4;
+			Boot();
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (LoadArena.FromTutorial == true) {
-			Arena_Start ();
-		}
 		if(teleport){
 			transform.position = waypoints[state].position;
 		}
@@ -56,6 +56,11 @@ public class MenuCamera : MonoBehaviour {
 		if (!audioP.isPlaying){
 			audioP.Play();
 		}
+	}
+
+	public void Boot(){
+		DisableAllBut(_Boot);
+		state = 4;
 	}
 
 	public void Login(){
