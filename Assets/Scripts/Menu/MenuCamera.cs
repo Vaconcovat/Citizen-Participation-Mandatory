@@ -25,7 +25,7 @@ public class MenuCamera : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (LoadArena.FromTutorial = true) {
+		if (LoadArena.FromTutorial == true) {
 			Arena_Start ();
 		}
 		if(teleport){
