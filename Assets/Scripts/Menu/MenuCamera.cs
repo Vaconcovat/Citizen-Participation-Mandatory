@@ -11,6 +11,7 @@ public class MenuCamera : MonoBehaviour {
 	public bool teleport;
 	public float speed;
 	public AudioSource audioP;
+	public bool isAlreadyStarted = false;
 
 	void Awake(){
 		if(StaticGameStats.toPost){
@@ -24,6 +25,9 @@ public class MenuCamera : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (LoadArena.FromTutorial = true) {
+			Arena_Start ();
+		}
 		if(teleport){
 			transform.position = waypoints[state].position;
 		}
@@ -87,9 +91,12 @@ public class MenuCamera : MonoBehaviour {
 	}
 
 	public void Arena_Start(){
-		DisableAllBut(_Arena_Start);
-		state = 11;
-		FindObjectOfType<arena_start_Manager>().arena_start_text();
+		if (isAlreadyStarted == false) {
+			DisableAllBut(_Arena_Start);
+			state = 11;
+			FindObjectOfType<arena_start_Manager>().arena_start_text();
+			isAlreadyStarted = true;
+		}
 	}
 
 	public void Questionaire(){
