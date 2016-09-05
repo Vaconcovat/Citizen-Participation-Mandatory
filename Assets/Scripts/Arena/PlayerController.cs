@@ -59,9 +59,12 @@ public class PlayerController : MonoBehaviour {
 		moveDir.y -= gravity * Time.deltaTime;
 		body.velocity = moveDir;
 
-		if(Input.GetKeyUp(KeyCode.LeftControl)){
-			contestant.swap();
+		if (StaticGameStats.TierOneUpgrades [1]) {
+			if(Input.GetKeyUp(KeyCode.LeftControl)){
+				contestant.swap();
+			}
 		}
+
 	}
 
 	void FaceMouse(){

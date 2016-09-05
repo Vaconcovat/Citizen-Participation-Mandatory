@@ -22,7 +22,7 @@ public class arena_start_Manager : MonoBehaviour {
 			text += "\nItems have +1 Available Charges!";
 		}
 		if(StaticGameStats.TierOneUpgrades[1]){
-			text += "\nThrown weapons deal double damage!";
+			text += "\nBackpack Slot Unlocked, Press L-CTRL to Swap Weapons!";
 		}
 		if(StaticGameStats.TierOneUpgrades[2]){
 			text += "\nAll Reputation gain is increased by 5%!";

@@ -45,6 +45,8 @@ public class InterfaceManager : MonoBehaviour {
 	[Header("Music")]
 	public AudioSource music;
 
+	public GameObject Backpack;
+
 	RoundManager rm;
 	float announcetimer;
 	bool activeannounce;
@@ -68,6 +70,11 @@ public class InterfaceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (StaticGameStats.TierOneUpgrades [1]) {
+			Backpack.gameObject.SetActive (true);
+		} else {
+			Backpack.gameObject.SetActive (false);
+		}
 		healthbar.fillAmount = (player.health * 1.0f) / (player.maxHealth * 1.0f);
 		if (player.equipped != null){
 			if (player.equipped.type == Item.ItemType.Ranged){
