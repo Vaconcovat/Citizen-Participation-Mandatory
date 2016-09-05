@@ -20,8 +20,15 @@ public class BootInterfaceManager : MonoBehaviour {
 			skipped = true;
 			logoWaitTime = 3;
 		}
-		if (Input.GetKeyDown("space") && !skipped){
+		if (Input.GetKeyDown(KeyCode.Space) && !skipped){
 			FindObjectOfType<MenuCamera>().MainMenu();
+			displayed = false;
+			skipped = true;
+			logoWaitTime = 3;
+		}
+		if (Input.GetKeyDown(KeyCode.Delete) && !skipped){
+			FindObjectOfType<MenuCamera>().MainMenu();
+			StaticGameStats.QuestionnaireDone = true;
 			displayed = false;
 			skipped = true;
 			logoWaitTime = 3;

@@ -21,26 +21,6 @@ public class UpgradeInterface : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StaticGameStats.TierOneUpgrades[0] = false;
-		StaticGameStats.TierOneUpgrades[1] = false;
-		StaticGameStats.TierOneUpgrades[2] = false;
-		StaticGameStats.TierOneUpgrades[3] = false;
-
-		StaticGameStats.TierTwoUpgrades[0] = false;
-		StaticGameStats.TierTwoUpgrades[1] = false;
-		StaticGameStats.TierTwoUpgrades[2] = false;
-		StaticGameStats.TierTwoUpgrades[3] = false;
-
-		StaticGameStats.TierThreeUpgrades[0] = false;
-		StaticGameStats.TierThreeUpgrades[1] = false;
-		StaticGameStats.TierThreeUpgrades[2] = false;
-		StaticGameStats.TierThreeUpgrades[3] = false;
-
-		StaticGameStats.Abilites[0] = false;
-		StaticGameStats.Abilites[1] = false;
-		StaticGameStats.Abilites[2] = false;
-		StaticGameStats.Abilites[3] = false;
-
 		moneyHolder = StaticGameStats.moneyHolder;
 		embezzledHolder = StaticGameStats.embezzleHolder;
 

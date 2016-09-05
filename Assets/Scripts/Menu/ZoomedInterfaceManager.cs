@@ -40,6 +40,9 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 			postButton.interactable = true;
 			arenaButton.interactable = false;
 			commit.text = "NOT COMMITTED";
+			ArenaPlanningText.text = "AWAITING INPUT...";
+			ArenaText.text = "AWAITING CONSTRUCTION PLAN...";
+			CommsText.text = "3 CHANNELS WAITING";
 
 			preButton.GetComponent<HoverText> ().tooltip = preNotCommitText;
 			arenaButton.GetComponent<HoverText> ().tooltip = arenaNotCommitText;
