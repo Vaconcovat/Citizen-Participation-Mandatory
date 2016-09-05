@@ -141,9 +141,6 @@ public class Item : MonoBehaviour {
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
 				int throwDamage = Mathf.RoundToInt(body.velocity.magnitude);
-				if(StaticGameStats.TierOneUpgrades[1]){
-					throwDamage = Mathf.RoundToInt(throwDamage * StaticGameStats.Upgrade2ThrownBuff);
-				}
 				if(StaticGameStats.TierThreeUpgrades [2]) {
 					throwDamage = Mathf.RoundToInt(throwDamage * StaticGameStats.Upgrade11ThrownBuff);
 				}

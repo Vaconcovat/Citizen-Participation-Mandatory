@@ -52,7 +52,6 @@ public class StaticGameStats : MonoBehaviour {
 
 	//Global Value Editing
 	public static int Upgrade1ItemUsageBuff = 2; //Ability 1 Doubles the number of item uses
-	public static int Upgrade2ThrownBuff = 2; //Ability 2 Doubles the damage of thrown weapons
 	public static float Upgrade3ReputationGainBuff = 1.05f; //Ability 3 increases all rep gain by 5%
 	public static float Upgrade4MaxAmmoBuff = 1.2f; //Ability 4 increases the ammo of all weapons by 20%
 
