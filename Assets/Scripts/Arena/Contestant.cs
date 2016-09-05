@@ -109,7 +109,7 @@ public class Contestant : MonoBehaviour {
         //temp change color for enemies
         switch(type){
         	case ContestantType.AI:
-				GetComponent<SkinnedMeshRenderer>().material.color = new Color(0.5f,0,0);
+				GetComponent<SkinnedMeshRenderer>().material.color = new Color(255,0,0);
         		break;
         	case ContestantType.Guard:
 				GetComponent<SkinnedMeshRenderer>().material.color = new Color(0,0,0.5f);
