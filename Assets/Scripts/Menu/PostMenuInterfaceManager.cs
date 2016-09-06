@@ -16,6 +16,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public GameObject WinButton, LoseButton, back, spend;
 	public GameObject moneyobject;
 	public Text NormalText, directory;
+	public Text GovStatus, CorStatus, RebStatus;
 
 	[Header("Settings")]
 	public float lerpTime;
@@ -52,6 +53,56 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		LoseButton.SetActive(false);
 		LoseText.enabled = false;
 
+		if (StaticGameStats.govRep > 80.0f){
+			GovStatus.text = "Current Status:\t\tEVACUATION ORDER IMMINENT";
+			GovStatus.color = Color.blue;
+		} else if (StaticGameStats.govRep >= 75.0f) {
+			GovStatus.text = "Current Status:\t\tPleased";
+			GovStatus.color = Color.green;
+		} else if (StaticGameStats.govRep >= 50.0f) {
+			GovStatus.text = "Current Status:\t\tNeutral";
+			GovStatus.color = Color.white;
+		} else if (StaticGameStats.govRep > 25.0f){
+			GovStatus.text = "Current Status:\t\tAngry";
+			GovStatus.color = Color.red;
+		} else if (StaticGameStats.govRep < 25.0f){
+			GovStatus.text = "Current Status:\t\tEXECUTION ORDER IMMINENT";
+			GovStatus.color = Color.yellow;
+		}
+
+		if (StaticGameStats.corRep > 80.0f){
+			CorStatus.text = "Current Status:\t\tEVACUATION ORDER IMMINENT";
+			CorStatus.color = Color.blue;
+		} else if (StaticGameStats.corRep >= 75.0f) {
+			CorStatus.text = "Current Status:\t\tPleased";
+			CorStatus.color = Color.green;
+		} else if (StaticGameStats.corRep >= 50.0f) {
+			CorStatus.text = "Current Status:\t\tNeutral";
+			CorStatus.color = Color.white;
+		} else if (StaticGameStats.corRep > 25.0f){
+			CorStatus.text = "Current Status:\t\tAngry";
+			CorStatus.color = Color.red;
+		} else if (StaticGameStats.corRep < 25.0f){
+			CorStatus.text = "Current Status:\t\tEXECUTION ORDER IMMINENT";
+			CorStatus.color = Color.yellow;
+		}
+
+		if (StaticGameStats.rebRep > 80.0f){
+			RebStatus.text = "Current Status:\t\tEVACUATION ORDER IMMINENT";
+			RebStatus.color = Color.blue;
+		} else if (StaticGameStats.rebRep >= 75.0f) {
+			RebStatus.text = "Current Status:\t\tPleased";
+			RebStatus.color = Color.green;
+		} else if (StaticGameStats.rebRep >= 50.0f) {
+			RebStatus.text = "Current Status:\t\tNeutral";
+			RebStatus.color = Color.white;
+		} else if (StaticGameStats.rebRep > 25.0f){
+			RebStatus.text = "Current Status:\t\tAngry";
+			RebStatus.color = Color.red;
+		} else if (StaticGameStats.rebRep < 25.0f){
+			RebStatus.text = "Current Status:\t\tEXECUTION ORDER IMMINENT";
+			RebStatus.color = Color.yellow;
+		}
 
 		StaticGameStats.avaliableMoney = govMoney + corMoney + rebMoney;
 		totalMoney.text = "Total Funding Recieved: " + StaticGameStats.avaliableMoney.ToString();
@@ -174,4 +225,5 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 			return threshold_values[4];
 		}
 	}
+		
 }
