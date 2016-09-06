@@ -40,6 +40,7 @@ public class Bullet : MonoBehaviour {
 	/// Who shot this bullet.
 	/// </summary>
 	public Contestant owner;
+	public GameObject flare;
 
 	Rigidbody body;
 	Vector3 startPos;
@@ -91,7 +92,9 @@ public class Bullet : MonoBehaviour {
 							a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
 						}
 					}
+					Explosion ();
 					Destroy(gameObject);
+					
 				}
 				if (owner.type == Contestant.ContestantType.AI) {
 						owner.GetComponent<AIController> ().confidence += damage / 200f;
@@ -111,6 +114,7 @@ public class Bullet : MonoBehaviour {
 							a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
 						}
 					}
+					Explosion ();
 					Destroy(gameObject);
 				}
 				Destroy(gameObject);
@@ -126,5 +130,11 @@ public class Bullet : MonoBehaviour {
 
 		//body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.5f, ForceMode.Impulse);
 		//transform.localScale = new Vector3(Mathf.Cos(Time.frameCount/10), Mathf.Cos(Time.frameCount/10), 1) * 0.5f;
+	}
+
+	void Explosion ()
+	{
+		Instantiate (flare, transform.position, Quaternion.identity);
+		Destroy (flare, 1f);
 	}
 }
