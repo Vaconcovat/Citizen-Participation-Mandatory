@@ -134,7 +134,7 @@ public class Bullet : MonoBehaviour {
 
 	void Explosion ()
 	{
-		Instantiate (flare, transform.position, Quaternion.identity);
-		Destroy (flare, 1f);
+		GameObject spawned = (GameObject)Instantiate (flare, transform.position, Quaternion.identity);
+		Destroy(spawned, 1);
 	}
 }

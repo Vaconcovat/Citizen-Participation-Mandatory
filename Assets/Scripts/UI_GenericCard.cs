@@ -53,5 +53,9 @@ public class UI_GenericCard : MonoBehaviour {
 			y = Mathf.Clamp(y,offsetBottom,(c.GetComponent<RectTransform>().rect.height-offsetTop) * c.scaleFactor);
 		}
 		rTrans.position = new Vector3(x,y);
+
+		if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
+			Destroy(gameObject);
+		}
 	}
 }

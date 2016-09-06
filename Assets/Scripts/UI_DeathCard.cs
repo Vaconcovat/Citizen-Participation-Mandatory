@@ -28,5 +28,9 @@ public class UI_DeathCard : MonoBehaviour {
 		rTrans.position = new Vector3(x,y);
 
 		cardText.text = title + ":\n" + contest.contestantName + "\n" + contest.contestantTidBit;
+
+		if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
+			Destroy(gameObject);
+		}
 	}
 }

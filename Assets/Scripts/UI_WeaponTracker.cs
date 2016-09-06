@@ -40,6 +40,10 @@ public class UI_WeaponTracker : MonoBehaviour {
 				ammoText.text = item.itemName + "\n--";
 			}
 		}
+
+		if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
+			Destroy(gameObject);
+		}
 	}
 
 

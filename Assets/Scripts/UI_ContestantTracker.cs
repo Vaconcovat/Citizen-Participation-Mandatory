@@ -57,7 +57,7 @@ public class UI_ContestantTracker : MonoBehaviour {
 		rightText.text = text;
 		LeftText.text = text;
 
-		if(!contest.isAlive){
+		if(!contest.isAlive || !FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
 			Destroy(gameObject);
 		}
 
