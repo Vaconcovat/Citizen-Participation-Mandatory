@@ -135,6 +135,6 @@ public class Bullet : MonoBehaviour {
 	void Explosion ()
 	{
 		Instantiate (flare, transform.position, Quaternion.identity);
-		Destroy (flare, 1f);
+	//Destroy (flare, 1f);
 	}
 }
