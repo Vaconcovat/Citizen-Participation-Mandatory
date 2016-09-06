@@ -67,6 +67,7 @@ public class TutorialSpawner : MonoBehaviour {
 	}
 
 	public GameObject Spawn(){
+		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().vendor, transform.position, 1.0f, true);
 		ready = false;
 		GameObject spawned = (GameObject)Instantiate(pool.items[Random.Range(0,pool.items.Length)],this.transform.position,Quaternion.identity);
 		spawned.GetComponent<Rigidbody>().AddTorque(Random.onUnitSphere*10);

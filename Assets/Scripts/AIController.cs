@@ -139,6 +139,7 @@ public class AIController : MonoBehaviour {
 	}
 
 	public void StartEvac(){
+		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().mercy, transform.position, 0.7f, true);
 		state = AIState.Evacuating;
 		beacon.text = "[ MEDICAL EVAC INBOUND ]";
 		RoundManager rm = FindObjectOfType<RoundManager>();
@@ -575,6 +576,7 @@ public class AIController : MonoBehaviour {
 	}
 
 	public void Execute(){
+		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().execute, transform.position, 0.7f, true);
 		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " EXECUTED ]", 3);
 		if(c.onCameras.Count > 0){
 			FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.Execution, 0);

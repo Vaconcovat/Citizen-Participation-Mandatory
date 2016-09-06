@@ -302,6 +302,10 @@ public class Contestant : MonoBehaviour {
 				}
 			}	
 			if (damage.damage > 0){
+				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().hurt, transform.position, 0.5f, true);
+				if(damage.owner.isPlayer){
+					FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().hit, transform.position, 1f, false);
+				}
 				GameObject blood = (GameObject)Instantiate(bloodSplatter,new Vector3(damage.location.x,0.1f,damage.location.z),Quaternion.Euler(90,Random.Range(0f,360f),0));
 				float scale = Random.Range(0.08f,0.2f);
 				blood.transform.localScale = new Vector3(scale,scale,1);
@@ -339,6 +343,7 @@ public class Contestant : MonoBehaviour {
 					}
 				}
 				GetComponent<PlayerController>().enabled = false;
+				FindObjectOfType<AudioListener>().enabled = false;
 				break;
 
 			case ContestantType.AI:
@@ -352,6 +357,7 @@ public class Contestant : MonoBehaviour {
 				}
 				if(onCameras.Count > 0){
 					if(title == null){
+						FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 						title = "KILLED ON CAMERA";
 					}
 					FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.OnCameraKill, 0);
@@ -360,6 +366,7 @@ public class Contestant : MonoBehaviour {
 				}
 				else{
 					if(title == null){
+						FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 						title = "DECEASED";
 					}
 				}
@@ -373,6 +380,7 @@ public class Contestant : MonoBehaviour {
 				break;
 
 			case ContestantType.Guard:
+				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 				if(onCameras.Count > 0){
 					if(title == null){
 						title = "KILLED ON CAMERA";
@@ -387,8 +395,14 @@ public class Contestant : MonoBehaviour {
 				break;
 
 			case ContestantType.Medic:
+				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 				GetComponent<AI_MedicController>().enabled = false;
 				GetComponent<NavMeshAgent>().enabled = false;
+				break;
+
+			case ContestantType.Target:
+				title = "DECEASED";
+				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 				break;
 		}
 

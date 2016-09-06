@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
 public class RangedWeapon : MonoBehaviour {
 
 	[Header("Ranged Weapon Settings")]
@@ -48,6 +47,7 @@ public class RangedWeapon : MonoBehaviour {
 	public GameObject bullet;
 	public LayerMask obstacleMask;
 	public GameObject muzzleFlash;
+	public AudioClip shootSound, emptySound;
 
 	public float RangeHintMin = 1;
 	public float RangeHintMax = 5;
@@ -89,25 +89,21 @@ public class RangedWeapon : MonoBehaviour {
 			return;
 		}
 		//if we're holding the trigger and we're not a fan the hammer gun
-		if (held && fireRate != 0){
-			if (ammo > 0 && cooldownCounter <= 0){
+		if (held && cooldownCounter <= 0){
+			if (ammo > 0){
 				Shoot();
 				SubtractAmmo (1);
 				cooldownCounter = fireRate;
 			}
-		}
-		//if we tapped the trigger and we are a fan the hammer gun
-		else if (!held && fireRate == 0){
-			if (ammo > 0){
-				Shoot();
-				SubtractAmmo (1);
+			else{
+				FindObjectOfType<SoundManager>().PlayEffect(emptySound, transform.position, 0.7f, true);
+				cooldownCounter = fireRate;
 			}
 		}
 	}
 
 	void Shoot(){
-		AudioSource audio = GetComponent<AudioSource> ();
-		audio.Play ();
+		FindObjectOfType<SoundManager>().PlayEffect(shootSound, transform.position, 1.0f, true);
 		for (int i = 0; i < bulletsPerShot; i++){
 			GameObject firedBullet = (GameObject)Instantiate(bullet, muzzle.position, muzzle.rotation);
 			Vector3 angle = new Vector3(transform.forward.x + (Random.Range(-spread, spread)),0, transform.forward.z + (Random.Range(-spread, spread))).normalized;

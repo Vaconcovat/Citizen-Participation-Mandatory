@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
 public class OtherItem : MonoBehaviour {
 	public enum ItemEffect{Heal, Speed, Damage, CameraSight};
 
 	public ItemEffect effect;
 	public float effectAmount;
 	public bool consume;
-	public AudioSource _audio;
+	public AudioClip _audio;
 	[Tooltip("How many Uses this Item has.")]
 	/// <summary>
 	/// The ammo.
@@ -18,7 +17,6 @@ public class OtherItem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_audio = GetComponent<AudioSource> ();
 		if (StaticGameStats.TierOneUpgrades [0]) {
 			ammo = ammo * StaticGameStats.Upgrade1ItemUsageBuff;
 		}
@@ -30,8 +28,8 @@ public class OtherItem : MonoBehaviour {
 
 	public void Use(bool held){
 		if (!held){
-			if (ammo != 0)
-			{
+			if (ammo != 0){
+				FindObjectOfType<SoundManager>().PlayEffect(_audio, transform.position, 1.0f, true);
 				switch (effect) {
 				case ItemEffect.Heal:
 					StartCoroutine("Heal",effectAmount);
@@ -47,12 +45,14 @@ public class OtherItem : MonoBehaviour {
 					break;
 				}
 			}
+			else{
+				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().empty_gun, transform.position, 1.0f, false);
+			}
 		}
 	}
 
 	IEnumerator Heal(float amount){
 		if (ammo >= 1) {
-			_audio.Play ();
 			ammo -= 1;
 			if (StaticGameStats.TierThreeUpgrades [1]) { //Heals 3% of max health 12 times over 12 seconds, total health restored 36
 				GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.Upgrade10HealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
@@ -89,7 +89,6 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator Speed(float amount){
 		if (ammo >= 1) {
-			_audio.Play ();
 			ammo -= 1;
 			GetComponent<Item> ().equipper.movespeed += amount;
 			if (StaticGameStats.TierThreeUpgrades [3]) {
@@ -105,8 +104,7 @@ public class OtherItem : MonoBehaviour {
 	}
 
 	IEnumerator Damage(float amount){
-		if (ammo >= 1) {
-			_audio.Play ();
+		if (ammo >= 1) {;
 			ammo -= 1;
 			GetComponent<Contestant> ().ContestantDamageModifier += amount;
 			if (StaticGameStats.TierThreeUpgrades [3]) {
@@ -124,7 +122,6 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator CameraSightRepGains(float amount){
 		if (ammo >= 1) {
-			_audio.Play ();
 			ammo -= 1;
 			GetComponent<Contestant> ().ContestantRepModifier += amount;
 			if (StaticGameStats.TierThreeUpgrades [3]) {

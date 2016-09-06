@@ -104,6 +104,7 @@ public class Bullet : MonoBehaviour {
 			}
 			else if(bounces > 0){
 				body.AddForce(Vector3.Reflect(transform.forward, coll.contacts[0].normal).normalized * v.magnitude, ForceMode.Impulse);
+				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().bounce, transform.position, 0.3f, true);
 				bounces--;
 			}
 			else{
@@ -117,6 +118,7 @@ public class Bullet : MonoBehaviour {
 					Explosion ();
 					Destroy(gameObject);
 				}
+				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().bullet_hit_wall, transform.position, 0.3f, true);
 				Destroy(gameObject);
 			}
 
@@ -134,6 +136,7 @@ public class Bullet : MonoBehaviour {
 
 	void Explosion ()
 	{
+		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
 		GameObject spawned = (GameObject)Instantiate (flare, transform.position, Quaternion.identity);
 		Destroy(spawned, 1);
 	}
