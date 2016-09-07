@@ -14,6 +14,7 @@ public class UpgradeInterface : MonoBehaviour {
 	Color greenColor;
 	Color greyColor;
 	Color whiteColor;
+	Color blackColor;
 
 
 
@@ -34,6 +35,7 @@ public class UpgradeInterface : MonoBehaviour {
 		whiteColor = Color.white;
 		greenColor = Color.green;
 		greyColor = Color.grey;
+		blackColor = Color.black;
 	}
 
 	// Update is called once per frame
@@ -370,6 +372,7 @@ public class UpgradeInterface : MonoBehaviour {
 		cb.highlightedColor = greenColor;
 		EventSystem.current.SetSelectedGameObject(null);
 		upgradebuttons [num].colors = cb;
+		upgradebuttons [num].transform.GetChild (0).GetComponent<Text> ().color = blackColor;
 	}
 
 	void ChangeColorToGrey(int num) {
@@ -377,6 +380,7 @@ public class UpgradeInterface : MonoBehaviour {
 		cb.normalColor = greyColor;
 		cb.highlightedColor = greyColor;
 		upgradebuttons [num].colors = cb;
+		upgradebuttons [num].transform.GetChild (0).GetComponent<Text> ().color = whiteColor;
 	}
 
 	void ChangeColorToWhite(int num) {
