@@ -303,7 +303,11 @@ public class UpgradeInterface : MonoBehaviour {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
 				StaticGameStats.Abilites [0] = true;
-				ChangeColorToGreen(12);
+				ColorBlock cb = upgradebuttons [12].colors;
+				cb.normalColor = greenColor;
+				cb.highlightedColor = greenColor;
+				EventSystem.current.SetSelectedGameObject(null);
+				upgradebuttons [12].colors = cb;
 				buttonActive [12] = true;
 
 			}
@@ -311,7 +315,11 @@ public class UpgradeInterface : MonoBehaviour {
 			StaticGameStats.avaliableMoney += 4;
 			StaticGameStats.Abilites [0] = false;
 			buttonActive [12] = false;
-			ChangeColorToWhite (12);
+			ColorBlock cb = upgradebuttons [12].colors;
+			cb.normalColor = whiteColor;
+			cb.highlightedColor = whiteColor;
+			EventSystem.current.SetSelectedGameObject(null);
+			upgradebuttons [12].colors = cb;
 		}
 	}
 
@@ -320,7 +328,11 @@ public class UpgradeInterface : MonoBehaviour {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
 				StaticGameStats.Abilites [1] = true;
-				ChangeColorToGreen(13);
+				ColorBlock cb = upgradebuttons [13].colors;
+				cb.normalColor = greenColor;
+				cb.highlightedColor = greenColor;
+				EventSystem.current.SetSelectedGameObject(null);
+				upgradebuttons [13].colors = cb;
 				buttonActive [13] = true;
 
 			}
@@ -328,7 +340,11 @@ public class UpgradeInterface : MonoBehaviour {
 			StaticGameStats.avaliableMoney += 4;
 			StaticGameStats.Abilites [1] = false;
 			buttonActive [13] = false;
-			ChangeColorToWhite (13);
+			ColorBlock cb = upgradebuttons [13].colors;
+			cb.normalColor = whiteColor;
+			cb.highlightedColor = whiteColor;
+			EventSystem.current.SetSelectedGameObject(null);
+			upgradebuttons [13].colors = cb;
 		}
 	}
 
@@ -337,7 +353,11 @@ public class UpgradeInterface : MonoBehaviour {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
 				StaticGameStats.Abilites [2] = true;
-				ChangeColorToGreen(14);
+				ColorBlock cb = upgradebuttons [14].colors;
+				cb.normalColor = greenColor;
+				cb.highlightedColor = greenColor;
+				EventSystem.current.SetSelectedGameObject(null);
+				upgradebuttons [14].colors = cb;
 				buttonActive [14] = true;
 
 			}
@@ -345,7 +365,11 @@ public class UpgradeInterface : MonoBehaviour {
 			StaticGameStats.avaliableMoney += 4;
 			StaticGameStats.Abilites [2] = false;
 			buttonActive [14] = false;
-			ChangeColorToWhite (14);
+			ColorBlock cb = upgradebuttons [14].colors;
+			cb.normalColor = whiteColor;
+			cb.highlightedColor = whiteColor;
+			EventSystem.current.SetSelectedGameObject(null);
+			upgradebuttons [14].colors = cb;
 		}
 	}
 
@@ -354,7 +378,11 @@ public class UpgradeInterface : MonoBehaviour {
 			if (StaticGameStats.avaliableMoney >= 4) {
 				StaticGameStats.avaliableMoney -= 4;
 				StaticGameStats.Abilites [3] = true;
-				ChangeColorToGreen(15);
+				ColorBlock cb = upgradebuttons [15].colors;
+				cb.normalColor = greenColor;
+				cb.highlightedColor = greenColor;
+				EventSystem.current.SetSelectedGameObject(null);
+				upgradebuttons [15].colors = cb;
 				buttonActive [15] = true;
 
 			}
@@ -362,7 +390,11 @@ public class UpgradeInterface : MonoBehaviour {
 			StaticGameStats.avaliableMoney += 4;
 			StaticGameStats.Abilites [3] = false;
 			buttonActive [15] = false;
-			ChangeColorToWhite (15);
+			ColorBlock cb = upgradebuttons [15].colors;
+			cb.normalColor = whiteColor;
+			cb.highlightedColor = whiteColor;
+			EventSystem.current.SetSelectedGameObject(null);
+			upgradebuttons [15].colors = cb;
 		}
 	}
 
