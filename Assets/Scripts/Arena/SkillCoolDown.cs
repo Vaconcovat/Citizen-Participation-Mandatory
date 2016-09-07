@@ -157,7 +157,7 @@ public class SkillCoolDown : MonoBehaviour {
 		foreach (Contestant c in contestants) {
 			if (c.type == Contestant.ContestantType.AI) {
 				
-				float distance = Vector3.Distance (PlayerController.pos, c.transform.position);
+				float distance = Vector3.Distance (FindObjectOfType<PlayerController>().pos, c.transform.position);
 				if (distance < StaticGameStats.Ability1MaxDistance) {
 					c.ThrowEquipped ();
 				}
@@ -167,7 +167,7 @@ public class SkillCoolDown : MonoBehaviour {
 		AIController[] aicontroller = FindObjectsOfType<AIController>();
 		foreach (AIController a in aicontroller)
 		{
-			float distance = Vector3.Distance (PlayerController.pos, a.transform.position);
+			float distance = Vector3.Distance (FindObjectOfType<PlayerController>().pos, a.transform.position);
 			if (distance < StaticGameStats.Ability1MaxDistance) {
 				a.StartShocked ();
 			}

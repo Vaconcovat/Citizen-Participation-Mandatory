@@ -185,7 +185,6 @@ public class InterfaceManager : MonoBehaviour {
 	}
 
 	public void Influence(StaticGameStats.InfluenceTrigger type){
-		int temp;
 		if(!influences.Contains(type)){
 			influences.Add(type);
 			influenceCounts[influences.Count - 1] = 1;
@@ -193,7 +192,6 @@ public class InterfaceManager : MonoBehaviour {
 		else{
 			int index = influences.IndexOf(type);
 			influenceCounts[index] += 1;
-			temp = influenceCounts[influences.Count - 1];
 		}
 
 		if(influences.Count > 3){

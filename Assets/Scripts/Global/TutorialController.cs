@@ -16,13 +16,13 @@ public class TutorialController : MonoBehaviour {
 	public int maxLines = 15;
 	int numlines;
 	public GameObject[] guards;
-	int health;
+	//int health;
 
 	// Use this for initialization
 	void Start () {
 		//textBoxes [0].GetComponent<TextMesh> ().text = "Message Log:\n<Steve>   Hello there new recruit!\n\tAre you ready to give your life \n\tfor your country's entertainment?";
 		textBoxes [0].GetComponent<TextMesh> ().text = "";
-		health = 999;
+		//health = 999;
 		for (int i = 1; i < textBoxes.Length; i++) {
 			textBoxes [i].GetComponent<TextMesh> ().text = "Wait for\nnew text";
 		}

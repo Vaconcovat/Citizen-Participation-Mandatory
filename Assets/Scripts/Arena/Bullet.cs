@@ -41,6 +41,8 @@ public class Bullet : MonoBehaviour {
 	/// </summary>
 	public Contestant owner;
 	public GameObject flare;
+	public Vector3 vel;
+	public float mag;
 
 	Rigidbody body;
 	Vector3 startPos;
@@ -76,11 +78,13 @@ public class Bullet : MonoBehaviour {
 		if (lifetime <= 0){
 			Destroy(gameObject);
 		}
+		vel = body.velocity;
+		mag = body.velocity.magnitude;
 	}
 
 	public void Fire(Vector3 vector){
 		v = vector * velocityModifier;
-		body.AddForce(v, ForceMode.Impulse);
+		body.velocity = v;
 	}
 
 	void OnCollisionEnter(Collision coll){
@@ -103,7 +107,14 @@ public class Bullet : MonoBehaviour {
 				Destroy(gameObject);
 			}
 			else if(bounces > 0){
-				body.AddForce(Vector3.Reflect(transform.forward, coll.contacts[0].normal).normalized * v.magnitude, ForceMode.Impulse);
+				RaycastHit hit;
+				Ray r = new Ray(transform.position,body.velocity);
+				Physics.Raycast(r, out hit, Time.deltaTime*mag + 0.1f);
+				Vector3 reflect = Vector3.Reflect(r.direction, hit.normal);
+				body.velocity = reflect * v.magnitude;
+				//transform.rotation = Quaternion.LookRotation(reflect);
+
+				Debug.Log("bounced! " + reflect.magnitude + " * " + v.magnitude + " = " + mag);
 				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().bounce, transform.position, 0.3f, true);
 				bounces--;
 			}

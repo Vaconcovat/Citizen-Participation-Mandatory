@@ -343,7 +343,6 @@ public class Contestant : MonoBehaviour {
 					}
 				}
 				GetComponent<PlayerController>().enabled = false;
-				FindObjectOfType<AudioListener>().enabled = false;
 				break;
 
 			case ContestantType.AI:

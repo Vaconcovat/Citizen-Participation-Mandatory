@@ -7,7 +7,7 @@ public class ArenaMap_Manager : MonoBehaviour {
 	public AutoType at;
 	string text;
 	public Image logo;
-	bool displayed = false;
+	//bool displayed = false;
 	public bool skipped = false;
 	bool done = false;
 
@@ -31,7 +31,7 @@ public class ArenaMap_Manager : MonoBehaviour {
 	public void DisplayLogo(){
 		if(!skipped){
 			logo.enabled = true;
-			displayed = true;
+			//displayed = true;
 		}
 	}
 }
