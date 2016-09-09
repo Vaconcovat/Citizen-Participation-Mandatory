@@ -372,7 +372,10 @@ public class Contestant : MonoBehaviour {
 				GetComponent<AIController>().enabled = false;
 				GetComponent<NavMeshAgent>().enabled = false;
 				if(GetComponent<AIController>().state == AIController.AIState.Beacon || GetComponent<AIController>().state == AIController.AIState.Evacuating){
-					GetComponent<AIController>().beacon.gameObject.SetActive(false);
+					GameObject _beacon = GetComponent<AIController> ().beacon.gameObject;
+					if (_beacon != null) {
+						_beacon.SetActive (false);
+					}
 				}
 				GetComponent<AIController>().state = AIController.AIState.Dead;
 				FindObjectOfType<RoundManager>().Death();

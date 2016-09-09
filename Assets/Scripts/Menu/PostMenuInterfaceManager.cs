@@ -23,6 +23,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public float[] thresholds;
 	public int[] threshold_values;
 	int govMoney, corMoney, rebMoney;
+	int MoneyRecievedThisRound;
 	float t;
 
 	//pointers
@@ -104,8 +105,11 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 			RebStatus.color = Color.yellow;
 		}
 
-		StaticGameStats.avaliableMoney += govMoney + corMoney + rebMoney;
-		totalMoney.text = "Total Funding Recieved: " + StaticGameStats.avaliableMoney.ToString();
+		MoneyRecievedThisRound = govMoney + corMoney + rebMoney;
+		if (StaticGameStats.toPost) {
+			StaticGameStats.avaliableMoney += MoneyRecievedThisRound;
+		}
+		totalMoney.text = "Funding Recived from Last Tournament: " + MoneyRecievedThisRound.ToString();
 
 		//set the overlay bars
 		govBarOverlay.fillAmount = gov_P / 100.0f;

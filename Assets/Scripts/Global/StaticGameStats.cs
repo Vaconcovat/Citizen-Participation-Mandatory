@@ -16,9 +16,7 @@ public class StaticGameStats : MonoBehaviour {
 
 	//money variables
 	public static int avaliableMoney;
-	public static int embezzledMoney = 0;
 	public static int moneyHolder;
-	public static int embezzleHolder;
 
 	//sponsor variables
 	public static int chosenSponsor = -1;

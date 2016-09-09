@@ -19,7 +19,9 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		chosenSponsor = StaticGameStats.chosenSponsor;
+		Debug.Log ("Before Updating " + StaticGameStats.avaliableMoney);
 		availableMoney = StaticGameStats.avaliableMoney;
+		Debug.Log ("After Updating " + StaticGameStats.avaliableMoney);
 		greyColor = Color.grey;
 		whiteColor = Color.white;
 	}
@@ -81,13 +83,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	public void Commit(){
 		StaticGameStats.committed = true;
 		StaticGameStats.sponsor = StaticGameStats.chosenSponsor;
-		//do upgrades here
-		if((StaticGameStats.govRep >= 100 || StaticGameStats.corRep >= 100 || StaticGameStats.rebRep >= 100)&&StaticGameStats.embezzledMoney >= 100){
-			FindObjectOfType<MenuCamera>().Win();
-		}
-		else{
-			FindObjectOfType<MenuCamera>().ZoomedOut();
-		}
+		FindObjectOfType<MenuCamera>().ZoomedOut();
 	}
 
 	void ChangeColorToGrey(int num) {
