@@ -17,6 +17,8 @@ public class HoverText : MonoBehaviour {
 		StatusBar.displayedText[0] = tooltip;
 		StatusBar.textDelays = new float[1];
 		StatusBar.textDelays[0] = 0;
+		StatusBar.textColors = new Color[1];
+		StatusBar.textColors[0] = new Color(0,0,0,0);
 		StatusBar.StartType();
 	}
 }
