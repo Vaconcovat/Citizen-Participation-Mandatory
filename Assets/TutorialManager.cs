@@ -29,6 +29,7 @@ public class TutorialManager : MonoBehaviour {
 	bool activeannounce;
 	string plantName;
 	bool fading = false;
+	bool dead = false;
 
 	// Use this for initialization
 	void Start () {
@@ -75,8 +76,17 @@ public class TutorialManager : MonoBehaviour {
 			cameraGUI.SetActive(false);
 		}
 
+		if(!player.isAlive && !dead){
+			dead = true;
+			fading = false;
+			PlantDied();
+		}
+
 		if(fading){
-			fader.color = new Color(0,0,0,fader.color.a - Time.deltaTime);
+			fader.color = new Color(0,0,0,Mathf.Max(0, fader.color.a - Time.deltaTime));
+		}
+		else{
+			fader.color = new Color(0,0,0,Mathf.Min(1, fader.color.a + Time.deltaTime));
 		}
 	}
 
@@ -109,5 +119,19 @@ public class TutorialManager : MonoBehaviour {
 
 	public void ControlsDone(){
 		log_autoType.GetComponent<Text>().color = new Color(1,1,1,0.5f);
+	}
+
+	public void PlantDied(){
+		log_autoType.GetComponent<Text>().color = new Color(1,1,1,1f);
+		plantName = player.contestantName;
+		log_autoType.displayedText[0] = "DISCIPLINARY ACTION TAKEN ON PLANT:   [   ";
+		log_autoType.displayedText[1] = plantName;
+		log_autoType.displayedText[2] = "   ] \n DO NOT DISOBEY GUARDS INSTRUCTIONS \n\n [ " + plantName + " ] WILL BE REPLACED SHORTLY\nPLEASE WAIT...                                                                                             ";
+		log_autoType.finishedCallString = "Restart";
+		log_autoType.StartType(); 
+	}
+
+	public void Restart(){
+		FindObjectOfType<SceneChange>().Tutorial();
 	}
 }

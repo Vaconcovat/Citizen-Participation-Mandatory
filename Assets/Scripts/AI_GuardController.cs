@@ -116,7 +116,14 @@ public class AI_GuardController : MonoBehaviour {
 
 	void StartRetreat(){
 		RoundManager rm = FindObjectOfType<RoundManager>();
-		agent.destination = rm.outerSpawns[Random.Range(0,rm.outerSpawns.Count)].position;
+		if(rm != null){
+			agent.destination = rm.outerSpawns[Random.Range(0,rm.outerSpawns.Count)].position;
+		}
+		else{
+			ItemSpawner[] spawners = FindObjectsOfType<ItemSpawner>();
+			agent.destination = spawners[Random.Range(0,spawners.Length)].transform.position;
+		}
+
 		endStatus = endRoundStatus.Retreat;
 		agent.speed = speed;
 	}
@@ -143,13 +150,9 @@ public class AI_GuardController : MonoBehaviour {
 
 	void TutorialGuard(){
 		agent.destination = target.transform.position;
+		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(target.transform.position - transform.position), Time.deltaTime*3, 0));
 
-		if(agent.remainingDistance < closingDistance){
-			agent.speed = closingSpeed;
-		}
-		else{
-			agent.speed = speed;
-		}
+		agent.speed = 0;
 
 		if(talktimer <= 0){
 			talktimer = minTalkTime;
@@ -159,12 +162,6 @@ public class AI_GuardController : MonoBehaviour {
 				} else {
 					c.Say ("Keep moving prisoner!");
 				}
-			} else if (0.25f < Random.value && Random.value <= 0.5f) {
-				c.Say ("*Pushes you with gun*");
-			} else if (0.5f < Random.value  && Random.value <= 0.75f) {
-				c.Say ("Move it move it. Hurry up!");
-			} else if (0.75f < Random.value && Random.value <= 1.0f) {
-				c.Say ("Extra waterboarding for failure!");
 			}
 		}
 		else{

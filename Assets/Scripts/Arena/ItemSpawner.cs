@@ -9,6 +9,7 @@ public class ItemSpawner : MonoBehaviour {
 	public bool ready;
 	public float readyTime;
 	public GameObject UI_Card;
+	public bool announce = true;
 
 	public float timer;
 	UI_GenericCard tracker;
@@ -64,7 +65,9 @@ public class ItemSpawner : MonoBehaviour {
 		}
 		else{
 			if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 3 && !autoSpawn){
-				FindObjectOfType<InterfaceManager>().Announce("Press [E] to dispense weapon", 0.2f);
+				if(announce){
+					FindObjectOfType<InterfaceManager>().Announce("Press [E] to dispense weapon", 0.2f);
+				}
 				if(Input.GetKeyDown(KeyCode.E)){
 					Spawn();
 				}
