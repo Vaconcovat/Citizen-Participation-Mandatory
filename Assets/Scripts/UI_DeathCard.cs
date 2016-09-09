@@ -28,7 +28,7 @@ public class UI_DeathCard : MonoBehaviour {
 		rTrans.position = new Vector3(x,y);
 
 		cardText.text = title + ":\n" + contest.contestantName;
-		if(Vector3.Distance(contest.transform.position, FindObjectOfType<PlayerController>().pos) < 3 || Vector3.Distance(contest.transform.position, FindObjectOfType<PlayerController>().transform.position) < 5){
+		if(Vector3.Distance(contest.transform.position, FindObjectOfType<PlayerController>().pos) < 1.5f || Vector3.Distance(contest.transform.position, FindObjectOfType<PlayerController>().transform.position) < 2){
 			cardText.text = cardText.text + "\n" + contest.contestantTidBit;
 		}
 		if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){

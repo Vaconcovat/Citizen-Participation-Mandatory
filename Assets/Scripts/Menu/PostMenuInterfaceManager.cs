@@ -104,7 +104,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 			RebStatus.color = Color.yellow;
 		}
 
-		StaticGameStats.avaliableMoney = govMoney + corMoney + rebMoney;
+		StaticGameStats.avaliableMoney += govMoney + corMoney + rebMoney;
 		totalMoney.text = "Total Funding Recieved: " + StaticGameStats.avaliableMoney.ToString();
 
 		//set the overlay bars

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class UpgradeSponsorInterface : MonoBehaviour {
 
-	public Text moneyText, embezText, sponsorText, directory;
+	public Text moneyText, sponsorText, directory;
 	public Image gunIcon, gunIcon2;
 	public Button signMegaCity1, signExplodena, commitButton;
 	public Button[] upgradebuttons;
@@ -29,39 +29,13 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		availableMoney = StaticGameStats.avaliableMoney;
 		chosenSponsor = StaticGameStats.chosenSponsor;
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
-		embezText.text = StaticGameStats.embezzledMoney.ToString();
-		if(availableMoney == 0 && chosenSponsor != -1){
+		if(chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
 		else{
 			commitButton.interactable = false;
 		}
 		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\PLANNING.gov";
-	}
-
-	public void AddMoney(){
-		if(StaticGameStats.avaliableMoney >= 1){
-			StaticGameStats.avaliableMoney--;
-			StaticGameStats.embezzledMoney++;
-		}
-	}
-
-	public void AddMoney5(){
-		if(StaticGameStats.avaliableMoney >= 5){
-			for (int i = 0; i <= 4; i++) {
-				StaticGameStats.avaliableMoney--;
-				StaticGameStats.embezzledMoney++;
-			}
-		}
-	}
-
-	public void AddMoney10(){
-		if(StaticGameStats.avaliableMoney >= 10){
-			for (int i = 0; i <= 9; i++) {
-				StaticGameStats.avaliableMoney--;
-				StaticGameStats.embezzledMoney++;
-			}	
-		}
 	}
 
 	public void Revert(){
@@ -97,9 +71,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 
 
 		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
-		StaticGameStats.embezzledMoney = StaticGameStats.embezzleHolder;
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
-		embezText.text = StaticGameStats.embezzledMoney.ToString();
 		signExplodena.interactable = true;
 		signMegaCity1.interactable = true;
         commitButton.interactable = false;

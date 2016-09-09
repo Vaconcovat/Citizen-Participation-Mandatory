@@ -301,7 +301,14 @@ public class AIController : MonoBehaviour {
 
 	void Searching(){
 		if (c.equipped != null){
-			StartHunt();
+			if(c.equipped.type == Item.ItemType.Ranged){
+				StartHunt();
+			}
+			else{
+				c.UseEquipped(true);
+				c.UseEquipped(false);
+			}
+
 		}
 
 		if(agent.remainingDistance < 0.1f){

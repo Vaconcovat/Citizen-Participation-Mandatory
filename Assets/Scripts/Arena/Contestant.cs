@@ -447,6 +447,9 @@ public class Contestant : MonoBehaviour {
 			if (equipped.type == Item.ItemType.Ranged){
 				return equipped.GetComponent<RangedWeapon>().ammo;
 			}
+			if(equipped.type == Item.ItemType.Other){
+				return equipped.GetComponent<OtherItem>().ammo;
+			}
 			return -1;
 		}
 		return -1;

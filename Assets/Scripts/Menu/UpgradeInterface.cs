@@ -5,11 +5,10 @@ using UnityEngine.EventSystems;
 
 public class UpgradeInterface : MonoBehaviour {
 
-	public Text moneyText, embezText, directory;
+	public Text moneyText, directory;
 	public Button commitButton;
 	public Button[] upgradebuttons;
 	public int moneyHolder;
-	public int embezzledHolder;
 	public static bool[] buttonActive = new bool[16];
 	Color greenColor;
 	Color greyColor;
@@ -23,7 +22,6 @@ public class UpgradeInterface : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		moneyHolder = StaticGameStats.moneyHolder;
-		embezzledHolder = StaticGameStats.embezzleHolder;
 
 		/// <summary>
 		/// This sets 16 values in buttonActive to false 
@@ -41,7 +39,6 @@ public class UpgradeInterface : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
-		embezText.text = StaticGameStats.embezzledMoney.ToString();
 		if(StaticGameStats.avaliableMoney == 0 && StaticGameStats.chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
@@ -51,30 +48,7 @@ public class UpgradeInterface : MonoBehaviour {
 		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\PLANNING\UPGRADES.gov";
 	}
 
-	public void AddMoney(){
-		if(StaticGameStats.avaliableMoney >= 1){
-			StaticGameStats.avaliableMoney--;
-			StaticGameStats.embezzledMoney++;
-		}
-	}
 
-	public void AddMoney5(){
-		if(StaticGameStats.avaliableMoney >= 5){
-			for (int i = 0; i <= 4; i++) {
-				StaticGameStats.avaliableMoney--;
-				StaticGameStats.embezzledMoney++;
-			}
-		}
-	}
-
-	public void AddMoney10(){
-		if(StaticGameStats.avaliableMoney >= 10){
-			for (int i = 0; i <= 9; i++) {
-				StaticGameStats.avaliableMoney--;
-				StaticGameStats.embezzledMoney++;
-			}	
-		}
-	}
 
 	//TIER ONE UPGRADES
 

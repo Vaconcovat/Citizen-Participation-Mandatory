@@ -8,6 +8,7 @@ public class OtherItem : MonoBehaviour {
 	public float effectAmount;
 	public bool consume;
 	public AudioClip _audio;
+	Contestant effector;
 	[Tooltip("How many Uses this Item has.")]
 	/// <summary>
 	/// The ammo.
@@ -30,6 +31,7 @@ public class OtherItem : MonoBehaviour {
 		if (!held){
 			if (ammo != 0){
 				FindObjectOfType<SoundManager>().PlayEffect(_audio, transform.position, 1.0f, true);
+				effector = GetComponent<Item>().equipper;
 				switch (effect) {
 				case ItemEffect.Heal:
 					StartCoroutine("Heal",effectAmount);
@@ -44,16 +46,18 @@ public class OtherItem : MonoBehaviour {
 					StartCoroutine("CameraSightRepGains", effectAmount);
 					break;
 				}
+				ammo-=1;
 			}
 			else{
-				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().empty_gun, transform.position, 1.0f, false);
+				if(GetComponent<Item>().equipper.type == Contestant.ContestantType.Player){
+					FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().empty_gun, transform.position, 1.0f, false);
+				}
 			}
 		}
 	}
 
 	IEnumerator Heal(float amount){
 		if (ammo >= 1) {
-			ammo -= 1;
 			if (StaticGameStats.TierThreeUpgrades [1]) { //Heals 3% of max health 12 times over 12 seconds, total health restored 36
 				GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.Upgrade10HealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 				yield return new WaitForSeconds (1.0f);
@@ -89,14 +93,13 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator Speed(float amount){
 		if (ammo >= 1) {
-			ammo -= 1;
-			GetComponent<Item> ().equipper.movespeed += amount;
+			effector.movespeed += amount;
 			if (StaticGameStats.TierThreeUpgrades [3]) {
 				yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration * StaticGameStats.Upgrade12DurationBuff);
 			} else {
 				yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration);
 			}
-			GetComponent<Item> ().equipper.movespeed -= amount;
+			effector.movespeed -= amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
@@ -105,14 +108,13 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator Damage(float amount){
 		if (ammo >= 1) {;
-			ammo -= 1;
-			GetComponent<Contestant> ().ContestantDamageModifier += amount;
+			effector.ContestantDamageModifier += amount;
 			if (StaticGameStats.TierThreeUpgrades [3]) {
 				yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration * StaticGameStats.Upgrade12DurationBuff);
 			} else {
 				yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration);
 			}
-			GetComponent<Contestant> ().ContestantDamageModifier -= amount;
+			effector.ContestantDamageModifier -= amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
@@ -122,14 +124,13 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator CameraSightRepGains(float amount){
 		if (ammo >= 1) {
-			ammo -= 1;
-			GetComponent<Contestant> ().ContestantRepModifier += amount;
+			effector.ContestantRepModifier += amount;
 			if (StaticGameStats.TierThreeUpgrades [3]) {
 				yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration * StaticGameStats.Upgrade12DurationBuff);
 			} else {
 				yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration);
 			}
-			GetComponent<Contestant> ().ContestantRepModifier -= amount;
+			effector.ContestantRepModifier -= amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
