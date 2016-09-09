@@ -157,10 +157,10 @@ public class AI_GuardController : MonoBehaviour {
 		if(talktimer <= 0){
 			talktimer = minTalkTime;
 			if (Random.value <= 0.25f) {
-				if (target.equipped != null) {
-					c.Say ("Don't even think about it");
+				if (target.equipped == null) {
+					c.Say (FindObjectOfType<ContestantGenerator>().GetLine(ContestantGenerator.LineType.GuardPassive));
 				} else {
-					c.Say ("Keep moving prisoner!");
+					c.Say (FindObjectOfType<ContestantGenerator>().GetLine(ContestantGenerator.LineType.GuardThreat));
 				}
 			}
 		}

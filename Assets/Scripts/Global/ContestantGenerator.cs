@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ContestantGenerator : MonoBehaviour {
-	public TextAsset FirstNames, LastNames, TidBits, Pleading, Retreating, Fighting;
-	private List<string> FnameList, LnameList, TidBitList, PleadingList, RetreatingList, FightingList;
+	public TextAsset FirstNames, LastNames, TidBits, Pleading, Retreating, Fighting, GuardPassive, GuardThreat;
+	private List<string> FnameList, LnameList, TidBitList, PleadingList, RetreatingList, FightingList, GuardPassiveList, GuardThreatList;
 
-	public enum LineType{Plead, Retreat, Fight};
+	public enum LineType{Plead, Retreat, Fight, GuardPassive, GuardThreat};
 
 
 	// Use this for initialization
@@ -17,6 +17,8 @@ public class ContestantGenerator : MonoBehaviour {
 		string PleadingStr = Pleading.text;
 		string RetreatingStr = Retreating.text;
 		string FightingStr = Fighting.text;
+		string GuardPassiveStr = GuardPassive.text;
+		string GuardThreatStr = GuardThreat.text;
 
 		//parse the first names
 		FnameList = new List<string>();
@@ -41,6 +43,14 @@ public class ContestantGenerator : MonoBehaviour {
 		//parse the Fighting lines
 		FightingList = new List<string>();
 		FightingList.AddRange(FightingStr.Split("\n"[0]));
+
+		//parse the guard passive lines
+		GuardPassiveList = new List<string>();
+		GuardPassiveList.AddRange(GuardPassiveStr.Split("\n"[0]));
+
+		//parse the guard threat lines
+		GuardThreatList = new List<string>();
+		GuardThreatList.AddRange(GuardThreatStr.Split("\n"[0]));
 	}
 	
 	public string GetFirstName(){
@@ -66,6 +76,12 @@ public class ContestantGenerator : MonoBehaviour {
 				break;
 			case LineType.Fight:
 				line = FightingList[Random.Range(0,FightingList.Count)];
+				break;
+			case LineType.GuardPassive:
+				line = GuardPassiveList[Random.Range(0,GuardPassiveList.Count)];
+				break;
+			case LineType.GuardThreat:
+				line = GuardThreatList[Random.Range(0,GuardThreatList.Count)];
 				break;
 		}
 		return line;
