@@ -17,6 +17,8 @@ public class arena_start_Manager : MonoBehaviour {
 	}
 
 	void CheckUpgrades() {
+		text += "\n[ - - - - UPGRADES - - - - ]";
+		
 		//T1
 		if(StaticGameStats.TierOneUpgrades[0]){
 			text += "\nItems have +1 Available Charges!";
