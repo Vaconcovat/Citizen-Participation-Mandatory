@@ -79,6 +79,13 @@ public class MenuCamera : MonoBehaviour {
 		if (!audioP.isPlaying){
 			audioP.Play();
 		}
+		if ((StaticGameStats.govRep <= 0) || (StaticGameStats.corRep <= 0) || (StaticGameStats.rebRep <= 0)) {
+			FindObjectOfType<PostMenuInterfaceManager> ().Victory ();
+		} else if ((StaticGameStats.govRep >= 100) || (StaticGameStats.corRep >= 100) || (StaticGameStats.rebRep >= 100)) {
+			FindObjectOfType<PostMenuInterfaceManager> ().Lose ();
+		} else {
+			FindObjectOfType<PostMenuInterfaceManager> ().Normal ();
+		}
 	}
 
 	public void Boot(){
@@ -111,6 +118,7 @@ public class MenuCamera : MonoBehaviour {
 	public void Upgrade(){
 		DisableAllBut(_Upgrades);
 		state = 9;
+		FindObjectOfType<UpgradeInterface>().Upgrade();
 	}
 
 	public void Sponsor(){

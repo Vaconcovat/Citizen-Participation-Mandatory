@@ -49,8 +49,6 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		rebMoney = CheckThresholds(reb_change);
 
 		//Disable the Win / Lose Text and Buttons
-		NormalText.StartType();
-		NormalText.enabled = true;
 		WinButton.SetActive(false);
 		WinText.enabled = false;
 		LoseButton.SetActive(false);
@@ -123,8 +121,6 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		if ((StaticGameStats.govRep <= 0) || (StaticGameStats.corRep <= 0) || (StaticGameStats.rebRep <= 0)){
 			NormalText.enabled = false;
 			LoseText.enabled = true;
-			//LoseText.displayedText[0] = "You have recieved a 0% satisfaction report.\nDisciplinary actions will be administered.\n\nGovorNet Systems takes this matter very\nseriously. We do not issue warnings. You cannot\nmake an appeal to these consequences.\n\nPlease connect to the GovorNet Department of Re-Education\nfor decommision. Do not disconnect from GovorNet systems. \nDo not power off this machine.\n\nFailure to follow these instructions will be considered treason.";
-			LoseText.StartType();
 			LoseButton.SetActive(true);
 			back.SetActive(false);
 			spend.SetActive(false);
@@ -135,8 +131,6 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 			if ((StaticGameStats.govRep >= 100) || (StaticGameStats.corRep >= 100) || (StaticGameStats.rebRep >= 100)){
 				NormalText.enabled = false;
 				WinText.enabled = true;
-                //WinText.displayedText[0] = "You have recieved a 100% arena satisfaction report.\nOne or more RELOCATION OFFERS received for your efforts.\n\nGovorNet Systems takes this matter very\nseriously. We do not issue warnings. You cannot\nmake an appeal to these awards.\n\nPlease connect to the GovorNet Department of Ceremonies\nfor awarding. Do not disconnect from GovorNet systems. \nDo not power off this machine.\n\nFailure to follow these instructions will result in no awards.";
-                WinText.StartType();
 				WinButton.SetActive(true);
 				back.SetActive(false);
 				spend.SetActive(false);
@@ -149,9 +143,19 @@ public class PostMenuInterfaceManager : MonoBehaviour {
             }
         }
 
-
 	}
-	
+
+	public void Victory(){
+		WinText.StartType ();
+	}
+
+	public void Lose(){
+		LoseText.StartType ();
+	}
+
+	public void Normal(){
+		NormalText.StartType ();
+	}
 	// Update is called once per frame
 	void Update () {
 

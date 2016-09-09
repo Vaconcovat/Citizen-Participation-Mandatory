@@ -10,6 +10,7 @@ public class UpgradeInterface : MonoBehaviour {
 	public Button[] upgradebuttons;
 	public int moneyHolder;
 	public static bool[] buttonActive = new bool[16];
+	public AutoType at;
 	Color greenColor;
 	Color greyColor;
 	Color whiteColor;
@@ -394,6 +395,10 @@ public class UpgradeInterface : MonoBehaviour {
 		cb.normalColor = whiteColor;
 		cb.highlightedColor = whiteColor;
 		upgradebuttons [num].colors = cb;
+	}
+
+	public void Upgrade(){
+		at.StartType();
 	}
 
 }
