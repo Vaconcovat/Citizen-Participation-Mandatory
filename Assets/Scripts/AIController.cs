@@ -305,7 +305,7 @@ public class AIController : MonoBehaviour {
 				StartHunt();
 			}
 			else{
-				if(c.GetAmmo == 0){
+				if(c.GetAmmo() == 0){
 					c.equipped.Throw();
 				}
 				else{
