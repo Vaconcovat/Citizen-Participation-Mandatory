@@ -10,12 +10,12 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public Text govMoneyText, corMoneyText, rebMoneyText;
 	public Image govBar, corBar, rebBar;
 	public Text totalMoney;
-	public AutoType LoseText, WinText;
+	public AutoType LoseText, WinText, NormalText;
 	public Image govBarOverlay, corBarOverlay, rebBarOverlay;
 	public Image govBackground, corBackground, rebBackground;
 	public GameObject WinButton, LoseButton, back, spend;
 	public GameObject moneyobject;
-	public Text NormalText, directory;
+	public Text directory;
 	public Text GovStatus, CorStatus, RebStatus;
 
 	[Header("Settings")]
@@ -49,10 +49,13 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		rebMoney = CheckThresholds(reb_change);
 
 		//Disable the Win / Lose Text and Buttons
+		NormalText.StartType();
+		NormalText.enabled = true;
 		WinButton.SetActive(false);
 		WinText.enabled = false;
 		LoseButton.SetActive(false);
 		LoseText.enabled = false;
+
 
 		if (StaticGameStats.govRep > 80.0f){
 			GovStatus.text = "Current Status:\t\tEVACUATION ORDER IMMINENT";

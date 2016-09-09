@@ -30,7 +30,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	void Update () {
 		availableMoney = StaticGameStats.avaliableMoney;
 		chosenSponsor = StaticGameStats.chosenSponsor;
-		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
+		moneyText.text = "Total Available Funding:" + StaticGameStats.avaliableMoney.ToString();
 		if(chosenSponsor != -1){
 			commitButton.interactable = true;
 		}

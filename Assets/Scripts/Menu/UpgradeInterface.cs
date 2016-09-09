@@ -38,7 +38,7 @@ public class UpgradeInterface : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
+		moneyText.text = "Total Available Funding:" + StaticGameStats.avaliableMoney.ToString();
 		if(StaticGameStats.avaliableMoney == 0 && StaticGameStats.chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
