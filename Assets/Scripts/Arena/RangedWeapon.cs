@@ -106,6 +106,7 @@ public class RangedWeapon : MonoBehaviour {
 		FindObjectOfType<SoundManager>().PlayEffect(shootSound, transform.position, 1.0f, true);
 		for (int i = 0; i < bulletsPerShot; i++){
 			GameObject firedBullet = (GameObject)Instantiate(bullet, muzzle.position, muzzle.rotation);
+			firedBullet.tag = "Bullet";
 			Vector3 angle = new Vector3(transform.forward.x + (Random.Range(-spread, spread)),0, transform.forward.z + (Random.Range(-spread, spread))).normalized;
 			firedBullet.GetComponent<Bullet>().Fire(angle * muzzleVelocity);
 			firedBullet.GetComponent<Bullet>().owner = GetComponent<Item>().equipper;
