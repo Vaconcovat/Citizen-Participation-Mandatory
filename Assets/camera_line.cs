@@ -14,15 +14,21 @@ public class camera_line : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		ln.SetPosition(0, a_camera.transform.position);
-		ln.SetPosition(1, contestant.transform.position);
-
-		if(!contestant.onCameras.Contains(a_camera)){
+		if(a_camera == null){
 			Destroy(gameObject);
 		}
+		else{
+			ln.SetPosition(0, a_camera.transform.position);
+			ln.SetPosition(1, contestant.transform.position);
 
-		if(!contestant.isAlive){
-			Destroy(gameObject);
+			if(!contestant.onCameras.Contains(a_camera)){
+				Destroy(gameObject);
+			}
+	
+			if(!contestant.isAlive){
+				Destroy(gameObject);
+			}
 		}
+
 	}
 }

@@ -36,26 +36,32 @@ public class UI_GenericCard : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(limited){
-			if(lifetime <= 0){
-				Destroy(gameObject);
-			}
-			else{
-				lifetime -= Time.deltaTime;
-			}
-		}
-		cardText.text = text;
-		Vector3 pos = Camera.main.WorldToScreenPoint(target.position);
-		float x = (pos.x / Screen.width) * size.x * c.transform.localScale.x;
-		float y = (pos.y / Screen.height) * size.y * c.transform.localScale.y;
-		if(trackOffscreen){
-			x = Mathf.Clamp(x,offsetLeft,(c.GetComponent<RectTransform>().rect.width-offsetRight) * c.scaleFactor);
-			y = Mathf.Clamp(y,offsetBottom,(c.GetComponent<RectTransform>().rect.height-offsetTop) * c.scaleFactor);
-		}
-		rTrans.position = new Vector3(x,y);
-
-		if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
+		if(target == null){
 			Destroy(gameObject);
 		}
+		else{
+			if(limited){
+				if(lifetime <= 0){
+					Destroy(gameObject);
+				}
+				else{
+					lifetime -= Time.deltaTime;
+				}
+			}
+			cardText.text = text;
+			Vector3 pos = Camera.main.WorldToScreenPoint(target.position);
+			float x = (pos.x / Screen.width) * size.x * c.transform.localScale.x;
+			float y = (pos.y / Screen.height) * size.y * c.transform.localScale.y;
+			if(trackOffscreen){
+				x = Mathf.Clamp(x,offsetLeft,(c.GetComponent<RectTransform>().rect.width-offsetRight) * c.scaleFactor);
+				y = Mathf.Clamp(y,offsetBottom,(c.GetComponent<RectTransform>().rect.height-offsetTop) * c.scaleFactor);
+			}
+			rTrans.position = new Vector3(x,y);
+	
+			if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
+				Destroy(gameObject);
+			}
+		}
+
 	}
 }
