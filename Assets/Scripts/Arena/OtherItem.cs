@@ -14,7 +14,7 @@ public class OtherItem : MonoBehaviour {
 	/// The ammo.
 	/// </summary>
 	public int ammo;
-
+	public GameObject flare;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +32,7 @@ public class OtherItem : MonoBehaviour {
 			if (ammo != 0){
 				FindObjectOfType<SoundManager>().PlayEffect(_audio, transform.position, 1.0f, true);
 				effector = GetComponent<Item>().equipper;
+				Explosion ();
 				switch (effect) {
 				case ItemEffect.Heal:
 					StartCoroutine("Heal",effectAmount);
@@ -135,5 +136,12 @@ public class OtherItem : MonoBehaviour {
 				GetComponent<Item> ().Throw ();
 			}
 		}
+	}
+
+	void Explosion ()
+	{
+		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
+		GameObject spawned = (GameObject)Instantiate (flare, transform.position, Quaternion.identity);
+		Destroy(spawned, 1);
 	}
 }
