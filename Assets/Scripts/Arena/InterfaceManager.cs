@@ -50,7 +50,8 @@ public class InterfaceManager : MonoBehaviour {
 	RoundManager rm;
 	float announcetimer;
 	bool activeannounce;
-	string influenceText;
+	[HideInInspector]
+	public static string influenceText;
 	int[] influenceCounts;
 
 	List<StaticGameStats.InfluenceTrigger> influences;

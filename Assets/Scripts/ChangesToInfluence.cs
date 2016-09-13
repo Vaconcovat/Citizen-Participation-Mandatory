@@ -1,34 +1,40 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 
 public class ChangesToInfluence : MonoBehaviour {
 
-	public TextAsset influenceFile;
+	string inflText;
 	private List<string> influenceList;
-	public Text textObj;
+	bool roundOver;
 
 	void Awake  () {
-		string influenceStr = influenceFile.text;
-
 		influenceList = new List<string>();
-		influenceList.AddRange(influenceStr.Split("\n"[0]));
+		roundOver = false;
 	}
 
 	// Use this for initialization
 	void Start () {
-		string[] infArray = influenceList.ToArray();
-		for (int i = 0; i < influenceList.Count; i++) {
-			foreach (char letter in infArray[i].ToCharArray()) {
-				textObj.text += letter;
-			}
-			textObj.text += "\n";
-		}
+		inflText = InterfaceManager.influenceText.ToString();
+		influenceList.AddRange(inflText.Split("\n"[0]));
+		//string[] infArray = influenceList.ToArray();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(roundOver){
+			//do something printInfluence();
+
+		}
+	}
+
+	void printInfluence() {
+		for (int i = 0; i < influenceList.Count; i++) {
+			foreach (char letter in influenceList[i].ToCharArray()) {
+				this.GetComponent<Text>().text += letter;
+			}
+			this.GetComponent<Text>().text += "\n";
+		}
 	}
 }

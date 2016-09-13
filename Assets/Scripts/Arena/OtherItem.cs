@@ -32,7 +32,6 @@ public class OtherItem : MonoBehaviour {
 			if (ammo != 0){
 				FindObjectOfType<SoundManager>().PlayEffect(_audio, transform.position, 1.0f, true);
 				effector = GetComponent<Item>().equipper;
-				Explosion ();
 				switch (effect) {
 				case ItemEffect.Heal:
 					StartCoroutine("Heal",effectAmount);
@@ -90,6 +89,7 @@ public class OtherItem : MonoBehaviour {
 				GetComponent<Item>().Throw();
 			}
 		}
+		Explosion ();
 	}
 
 	IEnumerator Speed(float amount){
@@ -140,8 +140,10 @@ public class OtherItem : MonoBehaviour {
 
 	void Explosion ()
 	{
+		//Debug.Log ("Health Kit Used");
 		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
 		GameObject spawned = (GameObject)Instantiate (flare, transform.position, Quaternion.identity);
-		Destroy(spawned, 1);
+		Debug.Log ("Explosion");
+		Destroy(spawned, 5.0f);
 	}
 }
