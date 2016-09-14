@@ -57,6 +57,10 @@ public class MenuCamera : MonoBehaviour {
 		if (state == 1 && Input.GetKeyDown(KeyCode.Delete)){
 			StaticGameStats.committed = !StaticGameStats.committed;
 		}
+
+		if(state == 9 && Input.GetKeyDown(KeyCode.Delete)){
+			StaticGameStats.avaliableMoney++;
+		}
 	}
 
 	public void MainMenu(){

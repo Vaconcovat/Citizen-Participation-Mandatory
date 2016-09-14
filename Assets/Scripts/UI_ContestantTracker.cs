@@ -50,10 +50,7 @@ public class UI_ContestantTracker : MonoBehaviour {
 			leftObj.SetActive(false);
 		}
 
-		string text = "Health: " + contest.health.ToString() + "%\nStatus: " + ai.state.ToString() + "\nConfidence: " + ai.confidence.ToString("F2") + "\nTraits: ";
-		foreach (Contestant.Trait trait in contest.traits){
-			text = text + trait.ToString() + " ";
-		}
+		string text = contest.contestantName + "\nHealth: " + contest.health.ToString() + "%";
 		rightText.text = text;
 		LeftText.text = text;
 
