@@ -158,8 +158,13 @@ public class MenuCamera : MonoBehaviour {
 
 	public void Orientation(){
 		DisableAllBut(_Orientation);
-		state = 3;
-		FindObjectOfType<orientation_manager>().Orientation();
+		if(StaticGameStats.QuestionnaireDone == false){
+			state = 3;
+			FindObjectOfType<orientation_manager>().Orientation();
+		}
+		else{
+			ZoomedOut();
+		}
 	}
 
 	void DisableAllBut(GameObject screen){
