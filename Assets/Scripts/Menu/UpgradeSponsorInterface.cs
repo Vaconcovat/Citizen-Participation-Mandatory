@@ -19,9 +19,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		chosenSponsor = StaticGameStats.chosenSponsor;
-		Debug.Log ("Before Updating " + StaticGameStats.avaliableMoney);
 		availableMoney = StaticGameStats.avaliableMoney;
-		Debug.Log ("After Updating " + StaticGameStats.avaliableMoney);
 		greyColor = Color.grey;
 		whiteColor = Color.white;
 	}
