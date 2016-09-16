@@ -19,6 +19,36 @@ public class SkillCoolDown : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if (Input.GetKeyDown (Ability1)) {
+			if (!StaticGameStats.Abilites [1]) {
+				return;
+			} else {
+				//If the ability is not currently cooling down
+				if (skills [1].currentCooldown >= skills [1].cooldown) {
+					BioScan ();
+					skills [1].currentCooldown = 0;
+				}
+			}
+		} else if (Input.GetKeyDown (Ability2)) {
+			if (!StaticGameStats.Abilites [3]) {
+				return;
+			} else {
+				//If the ability is not currently cooling down
+				if (skills [3].currentCooldown >= skills [3].cooldown) {
+					Blackout ();
+					skills [3].currentCooldown = 0;
+				}
+			}
+		} else if (Input.GetKeyDown (Ability3)) {
+			if (!StaticGameStats.Abilites [2]) {
+				return;
+			} else {
+				//If the ability is not currently cooling down
+				if (skills [2].currentCooldown >= skills [2].cooldown) {
+					Overload ();
+					skills [2].currentCooldown = 0;
+				}
+			}
+		} else if (Input.GetKeyDown (Ability4)) {
 			if (!StaticGameStats.Abilites [0]) {
 				return;
 			} else {
@@ -36,36 +66,6 @@ public class SkillCoolDown : MonoBehaviour {
 						skills [4].currentCooldown = 0;
 					}
 
-				}
-			}
-		} else if (Input.GetKeyDown (Ability2)) {
-			if (!StaticGameStats.Abilites [1]) {
-				return;
-			} else {
-				//If the ability is not currently cooling down
-				if (skills [1].currentCooldown >= skills [1].cooldown) {
-					BioScan ();
-					skills [1].currentCooldown = 0;
-				}
-			}
-		} else if (Input.GetKeyDown (Ability3)) {
-			if (!StaticGameStats.Abilites [2]) {
-				return;
-			} else {
-				//If the ability is not currently cooling down
-				if (skills [2].currentCooldown >= skills [2].cooldown) {
-					Overload ();
-					skills [2].currentCooldown = 0;
-				}
-			}
-		} else if (Input.GetKeyDown (Ability4)) {
-			if (!StaticGameStats.Abilites [3]) {
-				return;
-			} else {
-				//If the ability is not currently cooling down
-				if (skills [3].currentCooldown >= skills [3].cooldown) {
-					Blackout ();
-					skills [3].currentCooldown = 0;
 				}
 			}
 		}

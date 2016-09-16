@@ -59,9 +59,9 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		StaticGameStats.Abilites[2] = false;
 		StaticGameStats.Abilites[3] = false;
 
-		for (int i = 0; i < 16; i++) {
+		for (int i = 0; i < 11; i++) {
 			UpgradeInterface.buttonActive [i] = false;
-			if (i <= 11) {
+			if (i <= 7) {
 				ChangeColorToGrey (i);
 			} else {
 				ChangeColorToWhite (i);
