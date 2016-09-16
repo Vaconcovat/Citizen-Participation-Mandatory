@@ -16,14 +16,14 @@ public class UpgradeInterface : MonoBehaviour {
 	Color whiteColor;
 	Color blackColor;
 	[Header("Upgrade Costs")]
-	public int upgrade1Cost = 4; //Description
-	public int upgrade2Cost = 4; //Description
-	public int upgrade3Cost = 4; //Description
-	public int upgrade4Cost = 4; //Description
-	public int upgrade5Cost = 4; //Description
-	public int upgrade6Cost = 4; //Description
+	public int upgrade1Cost = 2; //Description
+	public int upgrade2Cost = 2; //Description
+	public int upgrade3Cost = 2; //Description
+	public int upgrade4Cost = 3; //Description
+	public int upgrade5Cost = 3; //Description
+	public int upgrade6Cost = 3; //Description
 	public int upgrade7Cost = 4; //Description
-	public int upgrade8Cost = 4; //Description
+	public int upgrade8Cost = 5; //Description
 	[Header("Ability Costs")]
 	public int ability1Cost = 4; //Description
 	public int ability2Cost = 4; //Description
@@ -40,7 +40,7 @@ public class UpgradeInterface : MonoBehaviour {
 		/// <summary>
 		/// This sets 16 values in buttonActive to false 
 		/// </summary>
-		for (int i = 0; i < buttonActive.Length; i++) {
+		for (int i = 0; i <= buttonActive.Length; i++) {
 			buttonActive [i] = false;
 		}
 
