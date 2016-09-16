@@ -230,49 +230,7 @@ public class Contestant : MonoBehaviour {
 		if (health > maxHealth){
 			health = maxHealth;
 		}
-
-
-		if (StaticGameStats.TierTwoUpgrades [3]) {
-			if(equipped != null){
-				if (equipped.type == Item.ItemType.Ranged) {
-					if (player.equipped.GetComponent<RangedWeapon> ().ammo == 0) {
-						player.movespeed = StaticGameStats.Upgrade8MovementSpeedBuff;
-					}
-				}
-			} 
-			else {
-				player.movespeed = StaticGameStats.Upgrade8NormalSpeed;
-			}
-		}
-
-		if (StaticGameStats.TierTwoUpgrades [2]) {
-			if (equipped != null) {
-				if (equipped.type == Item.ItemType.Ranged) {
-					if ((equipped.GetComponent<RangedWeapon> ().ammo == 0) && (StaticGameStats.Upgrade7AlreadyTriggered == false)) { //only triggers once when the health hits 0
-						StaticGameStats.Upgrade7AlreadyTriggered = true;
-						player.health = player.health + 20;
-					}
-					if (equipped.GetComponent<RangedWeapon> ().ammo > 0) { //resets AlreadyTriggered if the ammo goes above 0
-						StaticGameStats.Upgrade7AlreadyTriggered = false;
-					}
-				}
-			}
-		}
-
-		if (StaticGameStats.TierThreeUpgrades [2]) {
-			if (equipped != null) {
-				if (equipped.type == Item.ItemType.Ranged) {
-					if ((equipped.GetComponent<RangedWeapon> ().ammo == 0) && (StaticGameStats.Upgrade7AlreadyTriggered == false)) { //only triggers once when the ammo hits 0
-						StaticGameStats.Upgrade7AlreadyTriggered = true;
-						ThrowEquipped ();
-
-					}
-					if (player.equipped.GetComponent<RangedWeapon> ().ammo > 0) { //resets AlreadyTriggered if the ammo goes above 0
-						StaticGameStats.Upgrade7AlreadyTriggered = false;
-					}
-				}
-			}
-		}
+			
 		CheckCameras();
 
 	} 
@@ -288,12 +246,6 @@ public class Contestant : MonoBehaviour {
 			if (health <= 0){
 				killer = damage.owner;
 				Die(null);
-				if (StaticGameStats.TierTwoUpgrades [0]) {
-					if (killer.onCameras.Count > 0) {
-						GetComponent<Contestant>().killer.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.Upgrade5HealAmount),GetComponent<Contestant>().killer,Vector2.zero,Vector2.zero));
-					}
-				}
-
 				if (killer.equipped.isSponsored) {
 					if(onCameras.Count > 0){
 						FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponKill, 0);

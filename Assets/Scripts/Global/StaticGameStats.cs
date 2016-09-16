@@ -7,7 +7,7 @@ using System.Text;
 
 public class StaticGameStats : MonoBehaviour {
 	//Reputation variables
-	public static float govRep = 50.0f;
+	public static float govRep = 100.0f;
 	public static float corRep = 50.0f;
 	public static float rebRep = 50.0f;
 	public static float oldgovRep = 50.0f;
@@ -41,9 +41,10 @@ public class StaticGameStats : MonoBehaviour {
 	/// <summary>
 	/// [General Upgrade 0], [nothing]
 	/// </summary>
-	public static bool[] TierOneUpgrades = new bool[]{false, false, false, false};
-	public static bool[] TierTwoUpgrades = new bool[]{false, false, false, false};
-	public static bool[] TierThreeUpgrades = new bool[]{false, false, false, false};
+	public static bool[] TierOneUpgrades = new bool[]{false, false, false};
+	public static bool[] TierTwoUpgrades = new bool[]{false, false, false};
+	public static bool[] TierThreeUpgrades = new bool[]{false};
+	public static bool[] TierFourUpgrades = new bool[]{false};
 	public static bool[] Abilites = new bool[]{false, false, false, false};
 	public static int sponsor;
 	public static int arenasPlayed = 0;
@@ -125,11 +126,7 @@ public class StaticGameStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (StaticGameStats.TierOneUpgrades [2]) {
-			StaticGameStats.Upgrade3ReputationGainBuff = 1.05f;
-		} else {
-			StaticGameStats.Upgrade3ReputationGainBuff = 1.0f;
-		}
+		
 	
 	}
 
@@ -182,15 +179,30 @@ public class StaticGameStats : MonoBehaviour {
 		switch (faction){
 		case 0:
 			govRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-			//Debug.Log ("GOV: MOD " + govRep.ToString ());
+			if (govRep > 100.0f) {
+				govRep = 100.0f;
+			}
+			if (govRep < 0.0f) {
+				govRep = 0.0f;
+			}
 			break;
 		case 1:
 			corRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-			//Debug.Log ("GOV: MOD " + govRep.ToString ());
+			if (corRep > 100.0f) {
+				corRep = 100.0f;
+			}
+			if (corRep < 0.0f) {
+				corRep = 0.0f;
+			}
 			break;
 		case 2:
 			rebRep += (amount * StaticGameStats.Upgrade3ReputationGainBuff);
-			//Debug.Log ("GOV: MOD " + govRep.ToString ());
+			if (rebRep > 100.0f) {
+				rebRep = 100.0f;
+			}
+			if (rebRep < 0.0f) {
+				rebRep = 0.0f;
+			}
 			break;
 		}
 	}

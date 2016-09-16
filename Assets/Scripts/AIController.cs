@@ -191,11 +191,6 @@ public class AIController : MonoBehaviour {
 			beacon.text = "[ E ] Mercy | [ Q ] Execute";
 			if(Input.GetKeyDown(KeyCode.E)){
 				StartEvac();
-				if (StaticGameStats.TierThreeUpgrades [0]) {
-					player.movespeed = StaticGameStats.Upgrade9MovementSpeedBuff;
-					player.health = player.health + StaticGameStats.Upgrade9HealAmount;
-					Invoke ("RevertMoveSpeed", 5);
-				}
 			}
 			if(Input.GetKeyDown(KeyCode.Q)){
 				Execute();
@@ -582,10 +577,6 @@ public class AIController : MonoBehaviour {
 		Gizmos.DrawLine(rand,towardsCenter);
 		Gizmos.color = Color.red;
 		Gizmos.DrawLine(transform.position, towardsCenter);
-	}
-
-	void RevertMoveSpeed(){
-		player.movespeed = StaticGameStats.Upgrade9NormalSpeed;
 	}
 
 	public void Execute(){

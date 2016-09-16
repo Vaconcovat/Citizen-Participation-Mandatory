@@ -60,9 +60,6 @@ public class Bullet : MonoBehaviour {
 
 	void Start(){
 		damage = Mathf.FloorToInt(damage * owner.ContestantDamageModifier);
-		if(StaticGameStats.TierTwoUpgrades[1]){
-			damage = Mathf.RoundToInt(damage * StaticGameStats.Upgrade6DamageBuff);
-		}
 	}
 	
 	// Update is called once per frame

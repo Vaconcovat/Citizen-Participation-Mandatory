@@ -21,60 +21,51 @@ public class arena_start_Manager : MonoBehaviour {
 		
 		//T1
 		if(StaticGameStats.TierOneUpgrades[0]){
-			text += "\nItems have +1 Available Charges!";
+			text += "\nBackpack Slot Unlocked, Press L-CTRL to Swap Weapons!";
 		}
 		if(StaticGameStats.TierOneUpgrades[1]){
-			text += "\nBackpack Slot Unlocked, Press L-CTRL to Swap Weapons!";
+			text += "\nAll Non-Sponsored Weapons have +50% Ammo";
 		}
 		if(StaticGameStats.TierOneUpgrades[2]){
 			text += "\nAll Reputation gain is increased by 5%!";
 		}
-		if(StaticGameStats.TierOneUpgrades[3]){
-			text += "\nALL weapons have +20% ammo!";
-		}
 
 		//T2
 		if(StaticGameStats.TierTwoUpgrades[0]){
-			text += "\nKills on Camera restore 10% Helath";
+			text += "\nAmount of Cameras in Arena Doubled";
 		}
 		if(StaticGameStats.TierTwoUpgrades[1]){
-			text += "\nFire rate -20%, Bullet Damage +20%!";
+			text += "\nThrown Weapons now Cause Knockback";
 		}
 		if(StaticGameStats.TierTwoUpgrades[2]){
-			text += "\nGain +20% Max Health back upon emptying a weapon!";
-		}
-		if(StaticGameStats.TierTwoUpgrades[3]){
-			text += "\nGain +50% movement speed while holding an empty weapon!";
+			text += "\nAll Contestants are now Merciful";
 		}
 
 		//T3
 		if(StaticGameStats.TierThreeUpgrades[0]){
-			text += "\nBloodlust Enabled!";
+			text += "\nHealth Kits Now Restore More Health over time";
 		}
-		if(StaticGameStats.TierThreeUpgrades[1]){
-			text += "\nHealth kits are different!";
-		}
-		if(StaticGameStats.TierThreeUpgrades[2]){
-			text += "\nWeapons are thrown automatically and deal 4x damage when thrown!";
-		}
-		if(StaticGameStats.TierThreeUpgrades[3]){
-			text += "\nSponsor Item Duration Increased by 50%";
+
+		//T4
+		if(StaticGameStats.TierFourUpgrades[0]){
+			text += "\nExecuting an enemy grants bonus Weapon Damage";
+			text += "\nShowing Mercy restores player health";
 		}
 
 		text += "\n[ - - - - ABILITIES - - - - ]";
 
 		//Abilities
 		if(StaticGameStats.Abilites[0]){
-			text += "\nSHOCK COLLAR";
+			text += "\nBIO-SCAN";
 		}
 		if(StaticGameStats.Abilites[1]){
-			text += "\nBIO SCAN";
+			text += "\nBLACKOUT";
 		}
 		if(StaticGameStats.Abilites[2]){
 			text += "\nVENDOR OVERLOAD";
 		}
 		if(StaticGameStats.Abilites[3]){
-			text += "\nBLACKOUT";
+			text += "\nSHOCK COLLAR";
 		}
 
 		text += "\n[ - - - - SPONSORSHIP - - - - ]";

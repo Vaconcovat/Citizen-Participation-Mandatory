@@ -59,12 +59,11 @@ public class RangedWeapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(StaticGameStats.TierOneUpgrades[3]){
-			ammo = Mathf.RoundToInt(ammo * StaticGameStats.Upgrade4MaxAmmoBuff);
-			Maxammo = ammo;
-		}
-		if (StaticGameStats.TierTwoUpgrades [1]) {
-			fireRate = fireRate * StaticGameStats.Upgrade6FireRateNerf;
+		if(StaticGameStats.TierOneUpgrades[1]){
+			if (!GetComponent<Item> ().isSponsored) {
+				ammo = Mathf.RoundToInt(ammo * StaticGameStats.Upgrade4MaxAmmoBuff);
+				Maxammo = ammo;
+			}
 		}
 	}
 	

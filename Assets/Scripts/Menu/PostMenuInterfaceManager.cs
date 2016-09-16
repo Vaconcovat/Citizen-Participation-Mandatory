@@ -117,43 +117,32 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		corBarOverlay.fillAmount = cor_P / 100.0f;
 		rebBarOverlay.fillAmount = reb_P / 100.0f;
 
-
-		if ((StaticGameStats.govRep <= 0) || (StaticGameStats.corRep <= 0) || (StaticGameStats.rebRep <= 0)){
-			NormalText.enabled = false;
-			LoseText.enabled = true;
-			LoseButton.SetActive(true);
-			back.SetActive(false);
-			spend.SetActive(false);
-			moneyobject.SetActive(false);
-		}
-
-		else{
-			if ((StaticGameStats.govRep >= 100) || (StaticGameStats.corRep >= 100) || (StaticGameStats.rebRep >= 100)){
-				NormalText.enabled = false;
-				WinText.enabled = true;
-				WinButton.SetActive(true);
-				back.SetActive(false);
-				spend.SetActive(false);
-				moneyobject.SetActive(false);
-            }
-            else{
-            	WinText.enabled = false;
-            	LoseText.enabled = false;
-            	NormalText.enabled = true;
-            }
-        }
-
 	}
 
 	public void Victory(){
+		NormalText.enabled = false;
+		WinText.enabled = true;
+		WinButton.SetActive(true);
+		back.SetActive(false);
+		spend.SetActive(false);
+		moneyobject.SetActive(false);
 		WinText.StartType ();
 	}
 
 	public void Lose(){
+		NormalText.enabled = false;
+		LoseText.enabled = true;
+		LoseButton.SetActive(true);
+		back.SetActive(false);
+		spend.SetActive(false);
+		moneyobject.SetActive(false);
 		LoseText.StartType ();
 	}
 
 	public void Normal(){
+		WinText.enabled = false;
+		LoseText.enabled = false;
+		NormalText.enabled = true;
 		NormalText.StartType ();
 	}
 	// Update is called once per frame

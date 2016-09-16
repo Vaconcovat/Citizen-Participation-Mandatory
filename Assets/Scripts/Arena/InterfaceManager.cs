@@ -71,7 +71,7 @@ public class InterfaceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (StaticGameStats.TierOneUpgrades [1]) {
+		if (StaticGameStats.TierOneUpgrades [0]) {
 			Backpack.gameObject.SetActive (true);
 		} else {
 			Backpack.gameObject.SetActive (false);
