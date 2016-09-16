@@ -16,6 +16,11 @@ public class Item : MonoBehaviour {
 	/// What itm type this is.
 	/// </summary>
 	public ItemType type;
+	[Tooltip("The Amount of Knockback the enemy will recieve when hit by this weapon")]
+	/// <summary>
+	/// What itm type this is.
+	/// </summary>
+	public int KnockbackAmount;
 	public Stance stance;
 	[Tooltip("Was this item brought to us by a sponsor?")]
 	/// <summary>
@@ -144,6 +149,11 @@ public class Item : MonoBehaviour {
 				if(c.gameObject.tag == "Contestant"){
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
 						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(throwDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+					}
+					if(StaticGameStats.TierTwoUpgrades[2]){
+						if (type == ItemType.Ranged) {
+							c.rigidbody.AddForce (transform.forward.normalized * KnockbackAmount, ForceMode.Impulse);
+						}
 					}
 				}
 				else{

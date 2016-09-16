@@ -92,22 +92,23 @@ public class OtherItem : MonoBehaviour {
 	IEnumerator Speed(float amount){
 		if (ammo >= 1) {
 			effector.movespeed += amount;
-			yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration);
-			effector.movespeed -= amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
+			yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration);
+			effector.movespeed -= amount;
 		}
 	}
 
 	IEnumerator Damage(float amount){
 		if (ammo >= 1) {;
 			effector.ContestantDamageModifier += amount;
-			yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration);
-			effector.ContestantDamageModifier -= amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
+			yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration);
+			effector.ContestantDamageModifier -= amount;
+
 		}
 		
 	}
@@ -115,11 +116,12 @@ public class OtherItem : MonoBehaviour {
 	IEnumerator CameraSightRepGains(float amount){
 		if (ammo >= 1) {
 			effector.ContestantRepModifier += amount;
-			yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration);
-			effector.ContestantRepModifier -= amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
+			yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration);
+			effector.ContestantRepModifier -= amount;
+
 		}
 	}
 
