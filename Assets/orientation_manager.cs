@@ -12,6 +12,9 @@ public class orientation_manager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.Delete)) {
+			FindObjectOfType<MenuCamera> ().ZoomedOut ();
+		}
 		if(done){
 			if(Input.GetKeyDown(KeyCode.Space)){
 				if(i == lines.Length -1){
