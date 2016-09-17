@@ -7,7 +7,6 @@ public class ItemSpawner : MonoBehaviour {
 	public ItemPools.Pool pool;
 	public bool autoSpawn;
 	public bool ready;
-	public float readyTime;
 	public GameObject UI_Card;
 	public bool announce = true;
 
@@ -55,7 +54,7 @@ public class ItemSpawner : MonoBehaviour {
 				timer -= Time.deltaTime;
 			}
 			else{
-				timer = readyTime;
+				timer = StaticGameStats.SpawnerCooldown;
 				ready = true;
 				if(autoSpawn){
 					Spawn();
