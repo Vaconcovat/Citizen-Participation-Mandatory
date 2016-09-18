@@ -92,6 +92,8 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 
     Rigidbody body;
+	public Component[] bones;
+	public GameObject Rig;
 	//SpriteRenderer spr;
 	public Transform anchor;
 
@@ -103,6 +105,7 @@ public class Contestant : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		bones = GetComponentsInChildren<Rigidbody> ();
 		body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         baseSpeed = movespeed;
@@ -318,6 +321,14 @@ public class Contestant : MonoBehaviour {
 	/// Turns this contestant into a corpse.
 	/// </summary>
 	public void Die(string title){
+
+		foreach (Rigidbody ragdoll in bones) 
+		{
+			ragdoll.isKinematic = false;
+		}
+		Rig.SetActive (true);
+		animator.enabled = false;
+
 		switch(type){
 			case ContestantType.Player:
 				if(equipped != null){

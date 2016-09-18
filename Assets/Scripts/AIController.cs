@@ -192,7 +192,7 @@ public class AIController : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.E)){
 				StartEvac();
 				if (StaticGameStats.TierFourUpgrades [0]) {
-					if (c.killer.isPlayer = true) {
+					if (c.killer.isPlayer == true) {
 						StartCoroutine("KarmaHeal");
 					}
 
@@ -201,7 +201,7 @@ public class AIController : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.Q)){
 				Execute();
 				if (StaticGameStats.TierFourUpgrades [0]) {
-					if (c.killer.isPlayer = true) {
+					if (c.killer.isPlayer == true) {
 						StartCoroutine("KarmaDamage");
 					}
 				}

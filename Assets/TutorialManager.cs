@@ -30,6 +30,7 @@ public class TutorialManager : MonoBehaviour {
 	string plantName;
 	bool fading = false;
 	bool dead = false;
+	bool VictimDead = false;
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +41,10 @@ public class TutorialManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if ((Victim.isAlive == false) && (BinTrigger.ThrownWeapon == true))
+		if (Victim.health <= 0) {
+			VictimDead = true;
+		}
+		if ((VictimDead == true) && (BinTrigger.ThrownWeapon == true))
 		{
 			ExitDoor.gameObject.SetActive (false);
 		}
