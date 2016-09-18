@@ -248,7 +248,7 @@ public class Contestant : MonoBehaviour {
                 }
 			}
 			else{
-                animator.Play("Run_Impulse");
+                animator.Play("Idle_Neutral");
                 if (cooldownCounter > 0){
 					cooldownCounter -= Time.deltaTime;
 				}
