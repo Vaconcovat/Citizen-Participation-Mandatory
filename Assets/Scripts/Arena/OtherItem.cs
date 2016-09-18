@@ -56,8 +56,8 @@ public class OtherItem : MonoBehaviour {
 	IEnumerator Heal(float amount){
 		if (ammo >= 1) {
 			if (StaticGameStats.TierThreeUpgrades [0]) { //Heals 4% of max health 12 times over 12 seconds, total health restored 36
-				for (int i = 0; i <= 11; i++) {
-					GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.Upgrade10HealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+				for (int i = 0; i <= StaticGameStats.FirstAidHereHealDuration; i++) {
+					GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.FirstAidHereHealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 					yield return new WaitForSeconds (1.0f);
 				}
 			} else { //heals a flat 25 health in a second

@@ -51,6 +51,17 @@ public class StaticGameStats : MonoBehaviour {
 
 	//Global Value Editing
 	public static int SpawnerCooldown = 20;
+
+	public static int FirstAidHereHealDuration = 11;
+	public static float FirstAidHereHealAmount = 4.0f;
+
+	public static int KarmaGetSomeHealDuration = 5;
+	public static float KarmaGetSomeHealAmount = 5.0f;
+
+	public static int KarmaGetSomeDamageBuffDuration = 10;
+	public static float NormalDamageBuff = 1.0f;
+	public static float KaramGetSomeDamageBuff = 1.10f;
+
 	public static int Upgrade1ItemUsageBuff = 2; //Ability 1 Doubles the number of item uses
 	public static float Upgrade3ReputationGainBuff = 1.05f; //Ability 3 increases all rep gain by 5%
 	public static float Upgrade4MaxAmmoBuff = 1.2f; //Ability 4 increases the ammo of all weapons by 20%
@@ -70,7 +81,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static int Upgrade9MovementSpeedBuff = 15;
 	public static int Upgrade9HealAmount = 20;
 
-	public static float Upgrade10HealAmount = 4.0f;
+
 
 	public static int Upgrade11ThrownBuff = 4;
 	public static bool Upgrade11AlreadyTriggered = false;

@@ -191,14 +191,40 @@ public class AIController : MonoBehaviour {
 			beacon.text = "[ E ] Mercy | [ Q ] Execute";
 			if(Input.GetKeyDown(KeyCode.E)){
 				StartEvac();
+				if (StaticGameStats.TierFourUpgrades [0]) {
+					if (c.killer.isPlayer = true) {
+						StartCoroutine("KarmaHeal");
+					}
+
+				}
 			}
 			if(Input.GetKeyDown(KeyCode.Q)){
 				Execute();
+				if (StaticGameStats.TierFourUpgrades [0]) {
+					if (c.killer.isPlayer = true) {
+						StartCoroutine("KarmaDamage");
+					}
+				}
 			}
 		}
 		else{
 			beacon.text = "[ REQUESTING MEDIC ]";
 		}
+	}
+
+	IEnumerator KarmaHeal(){
+		for (int i = 1; i <= StaticGameStats.KarmaGetSomeHealDuration; i++) {
+			player.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.KarmaGetSomeHealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+				yield return new WaitForSeconds (1.0f);
+			}
+	}
+
+	IEnumerator KarmaDamage(){
+		player.ContestantDamageModifier = StaticGameStats.KaramGetSomeDamageBuff;
+		for (int i = 1; i <= StaticGameStats.KarmaGetSomeDamageBuffDuration; i++) {
+			yield return new WaitForSeconds (1.0f);
+		}
+		player.ContestantDamageModifier = StaticGameStats.NormalDamageBuff;
 	}
 
 	void StartHunt(){
