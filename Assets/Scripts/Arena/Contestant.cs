@@ -35,7 +35,7 @@ public class Contestant : MonoBehaviour {
 	/// <summary>
 	/// The anchor.
 	/// </summary>
-	public Transform anchor_rifle, anchor_pistol, anchor_shoulder, anchor_shotgun, anchor_sniper, anchor_rpgdouble;
+	public Transform anchor_rifle, anchor_pistol, anchor_rpg, anchor_shotgun, anchor_sniper, anchor_rpgdouble, anchor_pistolsniper, anchor_gattling, anchor_laserrifle;
 	[Tooltip("How much time in seconds after unequipping a weapon must the contestant wait")]
 	/// <summary>
 	/// How much time in seconds after unequipping a weapon must the contestant wait
@@ -201,39 +201,54 @@ public class Contestant : MonoBehaviour {
 			if (equipped != null){
 				switch(equipped.stance){
 					case Item.Stance.Pistol:
-                        //call animation Walk_Pistol
-                        animator.Play("rig|Walk_Pistol");
+                        //call animation Pistol_Run
+                        animator.Play("Pistol_Run");
                         anchor = anchor_pistol;
 						break;
 					case Item.Stance.Rifle:
-                        //call animation Walk_Rifle
-                        animator.Play("rig|Walk_Rifle");
+                        //call animation Rifle_Run
+                        animator.Play("Rifle_Run");
                         anchor = anchor_rifle;
 						break;
-                    case Item.Stance.Shoulder:
-                        //call animation Walk_OverShoulder
-                        animator.Play("rig|Walk_OverShoulder");
-                        anchor = anchor_shoulder;
+                    case Item.Stance.RPGDouble:
+                        //call animation Rifle_Run
+                        animator.Play("Rifle_Run");
+                        anchor = anchor_rpgdouble;
                         break;
                     case Item.Stance.Shotgun:
-                        //call animation Walk_OverShoulder
-                        animator.Play("rig|Walk_Rifle");
+						//call animation Rifle_Run
+                        animator.Play("Rifle_Run");
                         anchor = anchor_shotgun;
                         break;
                     case Item.Stance.Sniper:
-                        //call animation Walk_OverShoulder
-                        animator.Play("rig|Walk_Rifle");
+						//call animation Rifle_Run
+                        animator.Play("Rifle_Run");
                         anchor = anchor_sniper;
                         break;
-                    case Item.Stance.RPGShoulder:
-                        //call animation Walk_OverShoulder
-                        animator.Play("rig|Walk_OverShoulder");
-                        anchor = anchor_rpgdouble;
+                    case Item.Stance.RPG:
+						//call animation Rifle_Run
+                        animator.Play("Rifle_Run");
+                        anchor = anchor_rpg;
                         break;
+					case Item.Stance.SniperPistol:
+						//call animation Pistol_Run
+					animator.Play("Pistol_Run");
+						anchor = anchor_pistolsniper;
+						break;
+					case Item.Stance.LaserRifle:
+						//call animation Rifle_Run
+						animator.Play("Rifle_Run");
+						anchor = anchor_laserrifle;
+						break;
+					case Item.Stance.Gattling:
+						//call animation Pistol_Run
+					animator.Play ("Rifle_Run");
+						anchor = anchor_gattling;
+						break;
                 }
 			}
 			else{
-                animator.Play("rig|Walk_Unarmed");
+                animator.Play("Run_Impulse");
                 if (cooldownCounter > 0){
 					cooldownCounter -= Time.deltaTime;
 				}
