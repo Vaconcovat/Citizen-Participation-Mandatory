@@ -15,7 +15,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static float oldrebRep = 50.0f;
 
 	//money variables
-	public static int avaliableMoney;
+	public static int avaliableMoney = 40;
 	public static int moneyHolder;
 
 	//sponsor variables

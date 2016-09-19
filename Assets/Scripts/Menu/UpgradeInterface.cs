@@ -199,14 +199,14 @@ public class UpgradeInterface : MonoBehaviour {
 		if (!buttonActive [7]) {
 			if (StaticGameStats.avaliableMoney >=upgrade8Cost) {
 				StaticGameStats.avaliableMoney -=upgrade8Cost;
-				StaticGameStats.TierThreeUpgrades [0] = true;
+				StaticGameStats.TierFourUpgrades [0] = true;
 				ChangeColorToGreen(7);
 				buttonActive [7] = true;
 
 			}
 		} else {
 			StaticGameStats.avaliableMoney +=upgrade8Cost;
-			StaticGameStats.TierThreeUpgrades [0] = false;
+			StaticGameStats.TierFourUpgrades [0] = false;
 			buttonActive [7] = false;
 			ChangeColorToGrey (7);
 		}

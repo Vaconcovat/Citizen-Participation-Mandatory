@@ -4,7 +4,12 @@ using System.Collections;
 public class arena_start_Manager : MonoBehaviour {
 
 	public AutoType at;
-	string text;
+	string textTier1;
+	string textTier2;
+	string textTier3;
+	string textTier4;
+	string textAbilities;
+	string textSponsorship;
 	bool done = false;
 
 	void Update(){
@@ -17,73 +22,81 @@ public class arena_start_Manager : MonoBehaviour {
 	}
 
 	void CheckUpgrades() {
-		text += "\n[ - - - - UPGRADES - - - - ]";
+		textTier1 += "\n[- - - TIER 1 UPGRADES - - -]";
 		
 		//T1
 		if(StaticGameStats.TierOneUpgrades[0]){
-			text += "\nBackpack Slot Unlocked, Press L-CTRL to Swap Weapons!";
+			textTier1 += "\nBackpack Slot Unlocked, Press L-CTRL to Swap Weapons!";
 		}
 		if(StaticGameStats.TierOneUpgrades[1]){
-			text += "\nAll Non-Sponsored Weapons have +50% Ammo";
+			textTier1 += "\nAll Non-Sponsored Weapons have +50% Ammo";
 		}
 		if(StaticGameStats.TierOneUpgrades[2]){
-			text += "\nAll Reputation gain is increased by 5%!";
+			textTier1 += "\nAll Reputation gain is increased by 5%!";
 		}
 
+		textTier2 += "\n[- - - TIER 2 UPGRADES - - -]";
 		//T2
 		if(StaticGameStats.TierTwoUpgrades[0]){
-			text += "\nAmount of Cameras in Arena Doubled";
+			textTier2 += "\nAmount of Cameras in Arena Doubled";
 		}
 		if(StaticGameStats.TierTwoUpgrades[1]){
-			text += "\nThrown Weapons now Cause Knockback";
+			textTier2 += "\nThrown Weapons now Cause Knockback";
 		}
 		if(StaticGameStats.TierTwoUpgrades[2]){
-			text += "\nAll Contestants are now Merciful";
+			textTier2 += "\nAll Contestants are now Merciful";
 		}
 
+		textTier3 += "\n[- - - TIER 3 UPGRADES - - -]";
 		//T3
 		if(StaticGameStats.TierThreeUpgrades[0]){
-			text += "\nHealth Kits Now Restore More Health over time";
+			textTier3 += "\nHealth Kits Now Restore More Health over time";
 		}
 
+		textTier4 += "\n[- - - TIER 4 UPGRADES - - -]";
 		//T4
 		if(StaticGameStats.TierFourUpgrades[0]){
-			text += "\nExecuting an enemy grants bonus Weapon Damage";
-			text += "\nShowing Mercy restores player health";
+			textTier4 += "\nExecuting an enemy grants bonus Weapon Damage";
+			textTier4 += "\nShowing Mercy restores player health";
 		}
 
-		text += "\n[ - - - - ABILITIES - - - - ]";
+		textAbilities += "\n[- - - ABILITIES - - -]";
 
 		//Abilities
 		if(StaticGameStats.Abilites[0]){
-			text += "\nBIO-SCAN";
+			textAbilities += "\nBIO-SCAN";
 		}
 		if(StaticGameStats.Abilites[1]){
-			text += "\nBLACKOUT";
+			textAbilities += "\nBLACKOUT";
 		}
 		if(StaticGameStats.Abilites[2]){
-			text += "\nVENDOR OVERLOAD";
+			textAbilities += "\nVENDOR OVERLOAD";
 		}
 		if(StaticGameStats.Abilites[3]){
-			text += "\nSHOCK COLLAR";
+			textAbilities += "\nSHOCK COLLAR";
 		}
 
-		text += "\n[ - - - - SPONSORSHIP - - - - ]";
+		textSponsorship += "\n[- - - SPONSORSHIP - - -]";
 
 		//chosen sponsor
 		switch(StaticGameStats.sponsor){
 			case(0):
-				text += "\nPrismex Technologies Contract Signed!";
+				textSponsorship += "\nPrismex Technologies Contract Signed!";
 				break;
 			case(1):
-				text += "\nExplodena Industries Contract Signed!";
+				textSponsorship += "\nExplodena Industries Contract Signed!";
 				break;
 			case(2):
-				text += "\nVelocitech Incorporated Contract Signed!";
+				textSponsorship += "\nVelocitech Incorporated Contract Signed!";
 				break;
 		}
 
-		at.displayedText[1] = text;
+		at.displayedText[1] = textTier1;
+		at.displayedText[2] = textTier2;
+		at.displayedText[3] = textTier3;
+		at.displayedText[4] = textTier4;
+		at.displayedText[5] = textAbilities;
+		at.displayedText[6] = textSponsorship;
 	}
 	
 	public void arena_start_text(){
