@@ -7,7 +7,7 @@ using System.Text;
 
 public class StaticGameStats : MonoBehaviour {
 	//Reputation variables
-	public static float govRep = 100.0f;
+	public static float govRep = 50.0f;
 	public static float corRep = 50.0f;
 	public static float rebRep = 50.0f;
 	public static float oldgovRep = 50.0f;
@@ -98,31 +98,31 @@ public class StaticGameStats : MonoBehaviour {
 
 	//Government Rep Increase
 	public static float GovExecutionIncrease = 2.0f;
-	public static float GovOnCameraKillIncrease = 0.5f;
-	public static float GovEndOfRoundSurrenderIncrease = 0.25f;
+	public static float GovOnCameraKillIncrease = 1.5f;
+	public static float GovEndOfRoundSurrenderIncrease = 0.50f;
 
 	//Government Rep Decrease
-	public static float GovKillGuardsDecrease = -1.5f;
+	public static float GovKillGuardsDecrease = -1.0f;
 	public static float GovActivateMedicBeaconDecrease = -0.75f;
 
 	//Rebel Rep Increase
 	public static float RebSuccessfulExtractionIncrease = 2.5f;
 	public static float RebKillGuardsIncrease = 1.0f;
-	public static float RebActivateMedicBeaconIncrease = 0.5f;
-	public static float RebEndOfRoundTriumphIncrease = 5.0f;
+	public static float RebActivateMedicBeaconIncrease = 1.5f;
+	public static float RebEndOfRoundTriumphIncrease = 5.5f;
 
 	//Rebel Rep Decrease
-	public static float RebEndOfRoundSurrenderDecrease = -1.0f;
+	public static float RebEndOfRoundSurrenderDecrease = -0.50f;
 	public static float RebOnCameraExecutionDecrease = -1.5f;
-	public static float RebOnCameraKill = -0.25f;
+	public static float RebOnCameraKill = -1.25f;
 
 	//Corporate Rep Increase
 	public static float CorSponsorWeaponFireIncrease = 0.05f;
-	public static float CorSponsorWeaponKillIncrease = 1.5f;
+	public static float CorSponsorWeaponKillIncrease = 2.5f;
 	public static float CorSponsorItemUseIncrease = 1.0f;
 
 	//Corporate Rep Decrease
-	public static float CorEndOfTournamentDecayDecrease = -2.0f;
+	public static float CorEndOfTournamentDecayDecrease = -1.0f;
 	public static float CorSponsorWeaponDeathDecrease = -1.0f;
 
 	public static string PlayerName;
