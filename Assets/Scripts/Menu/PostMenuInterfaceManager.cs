@@ -16,7 +16,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public GameObject WinButton, LoseButton, back, spend;
 	public GameObject moneyobject;
 	public Text directory;
-	public Text GovStatus, CorStatus, RebStatus;
+	public Text GovStatus, CorStatus, RebStatus, NormalTextObject, LoseTextObject, WinTextObject;
 
 	[Header("Settings")]
 	public float lerpTime;
@@ -47,12 +47,6 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		govMoney = CheckThresholds(gov_change);
 		corMoney = CheckThresholds(cor_change);
 		rebMoney = CheckThresholds(reb_change);
-
-		//Disable the Win / Lose Text and Buttons
-		WinButton.SetActive(false);
-		WinText.enabled = false;
-		LoseButton.SetActive(false);
-		LoseText.enabled = false;
 
 
 		if (StaticGameStats.govRep > 80.0f){
@@ -121,28 +115,51 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 
 	public void Victory(){
 		NormalText.enabled = false;
+		LoseText.enabled = false;
 		WinText.enabled = true;
+
+		NormalTextObject.enabled = false;
+		LoseTextObject.enabled = false;
+		WinTextObject.enabled = true;
+
 		WinButton.SetActive(true);
 		back.SetActive(false);
 		spend.SetActive(false);
 		moneyobject.SetActive(false);
+
 		WinText.StartType ();
+		Debug.Log ("You Win");
 	}
 
 	public void Lose(){
+		
 		NormalText.enabled = false;
 		LoseText.enabled = true;
+		WinText.enabled = false;
+
+		NormalTextObject.enabled = false;
+		LoseTextObject.enabled = true;
+		WinTextObject.enabled = false;
+
 		LoseButton.SetActive(true);
 		back.SetActive(false);
 		spend.SetActive(false);
 		moneyobject.SetActive(false);
+
 		LoseText.StartType ();
+		Debug.Log ("You Lose");
 	}
 
 	public void Normal(){
-		WinText.enabled = false;
-		LoseText.enabled = false;
+		
 		NormalText.enabled = true;
+		LoseText.enabled = false;
+		WinText.enabled = false;
+
+		NormalTextObject.enabled = true;
+		LoseTextObject.enabled = false;
+		WinTextObject.enabled = false;
+
 		NormalText.StartType ();
 	}
 	// Update is called once per frame

@@ -9,7 +9,7 @@ public class UpgradeInterface : MonoBehaviour {
 	public Button commitButton;
 	public Button[] upgradebuttons;
 	public int moneyHolder;
-	public static bool[] buttonActive = new bool[11];
+	public static bool[] buttonActive = new bool[12];
 	public AutoType at;
 	Color greenColor;
 	Color greyColor;
@@ -40,7 +40,7 @@ public class UpgradeInterface : MonoBehaviour {
 		/// <summary>
 		/// This sets 16 values in buttonActive to false 
 		/// </summary>
-		for (int i = 0; i <= buttonActive.Length; i++) {
+		for (int i = 0; i < buttonActive.Length; i++) {
 			buttonActive [i] = false;
 		}
 

@@ -57,7 +57,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 
 		for (int i = 0; i < 11; i++) {
 			UpgradeInterface.buttonActive [i] = false;
-			if (i <= 7) {
+			if (i <= 11) {
 				ChangeColorToGrey (i);
 			} else {
 				ChangeColorToWhite (i);

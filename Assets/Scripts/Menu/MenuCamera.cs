@@ -81,9 +81,9 @@ public class MenuCamera : MonoBehaviour {
 			audioP.Play();
 		}
 		if ((StaticGameStats.govRep <= 0) || (StaticGameStats.corRep <= 0) || (StaticGameStats.rebRep <= 0)) {
-			FindObjectOfType<PostMenuInterfaceManager> ().Victory ();
-		} else if ((StaticGameStats.govRep >= 100) || (StaticGameStats.corRep >= 100) || (StaticGameStats.rebRep >= 100)) {
 			FindObjectOfType<PostMenuInterfaceManager> ().Lose ();
+		} else if ((StaticGameStats.govRep >= 100) || (StaticGameStats.corRep >= 100) || (StaticGameStats.rebRep >= 100)) {
+			FindObjectOfType<PostMenuInterfaceManager> ().Victory ();
 		} else {
 			FindObjectOfType<PostMenuInterfaceManager> ().Normal ();
 		}
