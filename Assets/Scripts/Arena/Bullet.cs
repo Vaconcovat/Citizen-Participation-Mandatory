@@ -85,37 +85,38 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision coll){
-			if (coll.gameObject.tag == "Contestant"){
-				if (areaOfEffect > 0){
-					Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
-					foreach (Collider a in colliders){
-						if(!Physics.Raycast(transform.position, (a.transform.position-transform.position).normalized, Vector3.Distance(transform.position, a.transform.position), LayerMask.NameToLayer("Unwalkable"))){
-							a.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance(a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
-						}
+		if (coll.gameObject.tag == "Contestant") {
+			if (areaOfEffect > 0) {
+				Collider[] colliders = Physics.OverlapSphere (transform.position, areaOfEffect);
+				foreach (Collider a in colliders) {
+					if (!Physics.Raycast (transform.position, (a.transform.position - transform.position).normalized, Vector3.Distance (transform.position, a.transform.position), LayerMask.NameToLayer ("Unwalkable"))) {
+						a.gameObject.SendMessage ("TakeDamage", new Contestant.DamageParams (damage, owner, (a.transform.position - this.transform.position).normalized * explosiveForce / Vector3.Distance (a.transform.position, this.transform.position), a.transform.position), SendMessageOptions.DontRequireReceiver);
 					}
-					Explosion ();
-					Destroy(gameObject);
+				}
+				Explosion ();
+				Destroy (gameObject);
 					
-				}
-				if (owner.type == Contestant.ContestantType.AI) {
-						owner.GetComponent<AIController> ().confidence += damage / 200f;
-				}
-				coll.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(damage, owner, body.velocity.normalized, coll.contacts[0].point), SendMessageOptions.DontRequireReceiver);
-				Destroy(gameObject);
 			}
-			else if(bounces > 0){
-				RaycastHit hit;
-				Ray r = new Ray(transform.position,body.velocity);
-				Physics.Raycast(r, out hit, Time.deltaTime*mag + 0.1f);
-				Vector3 reflect = Vector3.Reflect(r.direction, hit.normal);
-				body.velocity = reflect * v.magnitude;
-				//transform.rotation = Quaternion.LookRotation(reflect);
+			if (owner.type == Contestant.ContestantType.AI) {
+				owner.GetComponent<AIController> ().confidence += damage / 200f;
+			}
+			coll.gameObject.SendMessage ("TakeDamage", new Contestant.DamageParams (damage, owner, body.velocity.normalized, coll.contacts [0].point), SendMessageOptions.DontRequireReceiver);
+			Destroy (gameObject);
+		} else if (bounces > 0) {
+			RaycastHit hit;
+			Ray r = new Ray (transform.position, body.velocity);
+			Physics.Raycast (r, out hit, Time.deltaTime * mag + 0.1f);
+			Vector3 reflect = Vector3.Reflect (r.direction, hit.normal);
+			body.velocity = reflect * v.magnitude;
+			//transform.rotation = Quaternion.LookRotation(reflect);
 
-				Debug.Log("bounced! " + reflect.magnitude + " * " + v.magnitude + " = " + mag);
-				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().bounce, transform.position, 0.3f, true);
-				bounces--;
-			}
-			else{
+			Debug.Log ("bounced! " + reflect.magnitude + " * " + v.magnitude + " = " + mag);
+			FindObjectOfType<SoundManager> ().PlayEffect (FindObjectOfType<SoundManager> ().bounce, transform.position, 0.3f, true);
+			bounces--;
+		} else if (coll.gameObject.tag == "BreakerBox") {
+			Debug.Log ("I hit a powerBox");
+			coll.gameObject.SendMessage ("TakeDamage", new PowerBox.DamageParams (damage, owner, body.velocity.normalized, coll.contacts [0].point), SendMessageOptions.DontRequireReceiver);
+		} else{
 				if (areaOfEffect > 0){
 					Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffect);
 					foreach (Collider a in colliders){

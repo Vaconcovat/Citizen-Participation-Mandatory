@@ -3,20 +3,32 @@ using System.Collections;
 
 public class PowerBox : MonoBehaviour {
 	public GameObject Camera;
+	public bool isAlive;
+	public int Health;
 
-	void OnCollisionEnter (Collision col)
-	{
-		if ((col.gameObject.tag == "Bullet") || (col.gameObject.tag == "Weapon"))
-		{
+	void Start () {
+		Health = 25;
+		isAlive = true;
+	}
+
+	void Update(){
+		if (Health <= 0) {
+			isAlive = false;
+		}
+		if (isAlive = false) {
 			Destroy (Camera);
 		}
+
 	}
 
 	public void TakeDamage(DamageParams damage){
-		if (damage.damage > 0) {
-			Destroy (Camera);
+		if (isAlive) {
+			if (damage.damage > 0) {
+				Health -= damage.damage;
+			}
 		}
 	}
+		
 
 	public class DamageParams{
 		public int damage;
