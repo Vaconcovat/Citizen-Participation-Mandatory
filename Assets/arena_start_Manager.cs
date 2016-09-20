@@ -13,10 +13,10 @@ public class arena_start_Manager : MonoBehaviour {
 	bool done = false;
 
 	void Update(){
-		if(done && Input.GetKeyDown(KeyCode.E)){
+		if(done && (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))){
 			FindObjectOfType<SceneChange> ().Arena ();
 		}
-		if (done && Input.GetKeyDown (KeyCode.Q)) {
+		if (done && (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))) {
 			FindObjectOfType<MenuCamera> ().ArenaMap ();
 		}
 	}

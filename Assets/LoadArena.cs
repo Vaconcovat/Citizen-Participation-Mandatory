@@ -9,6 +9,7 @@ public class LoadArena : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.gameObject.tag == "Contestant") {
+			StaticGameStats.tutorialDone = true;
 			RoundManager.roundNumber = 1;
 			FromTutorial = true;
 			SceneManager.LoadScene(0);

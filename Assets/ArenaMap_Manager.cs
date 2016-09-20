@@ -12,7 +12,7 @@ public class ArenaMap_Manager : MonoBehaviour {
 	bool done = false;
 
 	void Update(){
-		if(done && Input.GetKeyDown(KeyCode.E)){
+		if(done && (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))){
 			FindObjectOfType<SceneChange>().Arena();
 		}
 	}
