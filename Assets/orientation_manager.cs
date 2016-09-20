@@ -15,8 +15,13 @@ public class orientation_manager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Delete)) {
 			FindObjectOfType<MenuCamera> ().ZoomedOut ();
 		}
+		if (Input.GetKey (KeyCode.Space)){
+			AutoType.charactersPerTick = 3;
+		} else {
+			AutoType.charactersPerTick = 1;
+		}
 		if(done){
-			if(Input.GetKeyDown(KeyCode.Space)){
+			if(Input.GetKeyDown(KeyCode.X)){
 				if(i == lines.Length -1){
 					FindObjectOfType<MenuCamera>().Questionaire();
 				}
@@ -25,9 +30,7 @@ public class orientation_manager : MonoBehaviour {
 				}
 			}
 		}
-		else{
-			
-		}
+
 
 	}
 
@@ -45,6 +48,7 @@ public class orientation_manager : MonoBehaviour {
 		prompt.SetActive(false);
 		i++;
 		done = false;
+		AutoType.charactersPerTick = 1;
 		at.displayedText[1] = lines[i];
 		at.StartType();
 	}

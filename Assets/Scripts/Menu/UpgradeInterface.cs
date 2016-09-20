@@ -15,6 +15,7 @@ public class UpgradeInterface : MonoBehaviour {
 	Color greyColor;
 	Color whiteColor;
 	Color blackColor;
+	Color darkGreyColor;
 	[Header("Upgrade Costs")]
 	public int upgrade1Cost = 2; //Description
 	public int upgrade2Cost = 2; //Description
@@ -48,6 +49,10 @@ public class UpgradeInterface : MonoBehaviour {
 		greenColor = Color.green;
 		greyColor = Color.grey;
 		blackColor = Color.black;
+		darkGreyColor[0] = 0.34f;
+		darkGreyColor[1] = 0.34f;
+		darkGreyColor[2] = 0.34f;
+
 	}
 
 	// Update is called once per frame
@@ -327,7 +332,7 @@ public class UpgradeInterface : MonoBehaviour {
 	void ChangeColorToGrey(int num) {
 		ColorBlock cb = upgradebuttons [num].colors;
 		cb.normalColor = greyColor;
-		cb.highlightedColor = greyColor;
+		cb.highlightedColor = darkGreyColor;
 		upgradebuttons [num].colors = cb;
 		upgradebuttons [num].transform.GetChild (0).GetComponent<Text> ().color = whiteColor;
 	}

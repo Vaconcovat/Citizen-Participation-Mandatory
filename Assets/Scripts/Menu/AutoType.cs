@@ -12,7 +12,7 @@ public class AutoType : MonoBehaviour {
 	public GameObject finishedCall;
 	public string finishedCallString;
 	public AudioSource blip;
-	public int charactersPerTick = 1;
+	static public int charactersPerTick = 1;
 	int characterCounter;
 	Text textObj;
 	int numlines;
