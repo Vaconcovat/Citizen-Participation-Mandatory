@@ -21,7 +21,9 @@ public class AIController : MonoBehaviour {
 	public Light ContestantLight;
 
 	//just for testing
-	public Vector3 project,rand,center,towardsCenter;
+	[HideInInspector]
+	public Vector3 project,rand,center,towardsCenter,towardsplayer;
+
 	public GameObject beaconCard;
 
 	private RangedWeapon[] weapons;
@@ -32,6 +34,7 @@ public class AIController : MonoBehaviour {
 	public float confidence;
 	public AIState state;
 	public Contestant engagedTarget;
+	public float Player_Gravitation = 2;
 
 	//These are the FOV variables
 	[Header("FOV Varibales")]
@@ -238,8 +241,9 @@ public class AIController : MonoBehaviour {
 		Vector2 randomCircle = Random.insideUnitCircle;
 		rand = project + new Vector3(randomCircle.x,0,randomCircle.y)*3.0f;
 		center = new Vector3(-5f,1.63f,-35.2f);
-		towardsCenter = rand + ((center - rand).normalized) * (confidence*2);
-		destination = towardsCenter;
+		towardsCenter = rand + (((center - rand).normalized) * (confidence*2));
+		towardsplayer = towardsCenter + (((FindObjectOfType<PlayerController>().transform.position - towardsCenter).normalized)*(Player_Gravitation));
+		destination = towardsplayer;
 	}
 
 	void Hunting(){
@@ -601,8 +605,10 @@ public class AIController : MonoBehaviour {
 		Gizmos.DrawLine(transform.position, project);
 		Gizmos.DrawCube(towardsCenter, Vector3.one * 0.1f);
 		Gizmos.DrawLine(rand,towardsCenter);
+		Gizmos.DrawCube(towardsplayer, Vector3.one * 0.1f);
+		Gizmos.DrawLine(towardsCenter,towardsplayer);
 		Gizmos.color = Color.red;
-		Gizmos.DrawLine(transform.position, towardsCenter);
+		Gizmos.DrawLine(transform.position, towardsplayer);
 	}
 
 	public void Execute(){
