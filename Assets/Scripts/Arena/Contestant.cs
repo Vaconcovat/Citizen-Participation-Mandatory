@@ -54,14 +54,7 @@ public class Contestant : MonoBehaviour {
 
 	public Material hologram;
 
-
-	//[Header("SPRITES")]
-	//public Sprite unarmedSprite;
-	//public Sprite rifleSprite;
-	//public Sprite pistolSprite;
-	//public Sprite corpse;
-
-	[Header("Runtime Only")]
+		[Header("Runtime Only")]
 	/// <summary>
 	/// The active health of the contestant.
 	/// </summary>
@@ -90,7 +83,7 @@ public class Contestant : MonoBehaviour {
 	/// <summary>
 	/// The Contestants individual Damage Modifier
 	/// </summary>
-
+	public bool moving;
     Rigidbody body;
 	public Component[] bones;
 	public GameObject Rig;
@@ -205,53 +198,53 @@ public class Contestant : MonoBehaviour {
 				switch(equipped.stance){
 					case Item.Stance.Pistol:
                         //call animation Pistol_Run
-                        animator.Play("Pistol_Run");
+                        animator.Play((moving)?"Pistol_Run":"Pistol_Idle");
                         anchor = anchor_pistol;
 						break;
 					case Item.Stance.Rifle:
                         //call animation Rifle_Run
-                        animator.Play("Rifle_Run");
+						animator.Play((moving)?"Rifle_Run":"Rifle_Idle");
                         anchor = anchor_rifle;
 						break;
                     case Item.Stance.RPGDouble:
                         //call animation Rifle_Run
-                        animator.Play("Rifle_Run");
+						animator.Play((moving)?"Rifle_Run":"Rifle_Idle");
                         anchor = anchor_rpgdouble;
                         break;
                     case Item.Stance.Shotgun:
 						//call animation Rifle_Run
-                        animator.Play("Rifle_Run");
+						animator.Play((moving)?"Rifle_Run":"Rifle_Idle");
                         anchor = anchor_shotgun;
                         break;
                     case Item.Stance.Sniper:
 						//call animation Rifle_Run
-                        animator.Play("Rifle_Run");
+						animator.Play((moving)?"Rifle_Run":"Rifle_Idle");
                         anchor = anchor_sniper;
                         break;
                     case Item.Stance.RPG:
 						//call animation Rifle_Run
-                        animator.Play("Rifle_Run");
+						animator.Play((moving)?"Rifle_Run":"Rifle_Idle");
                         anchor = anchor_rpg;
                         break;
 					case Item.Stance.SniperPistol:
 						//call animation Pistol_Run
-					animator.Play("Pistol_Run");
+						animator.Play((moving)?"Pistol_Run":"Pistol_Idle");
 						anchor = anchor_pistolsniper;
 						break;
 					case Item.Stance.LaserRifle:
 						//call animation Rifle_Run
-						animator.Play("Rifle_Run");
+						animator.Play((moving)?"Rifle_Run":"Rifle_Idle");
 						anchor = anchor_laserrifle;
 						break;
 					case Item.Stance.Gattling:
 						//call animation Pistol_Run
-					animator.Play ("Rifle_Run");
+						animator.Play ((moving)?"Rifle_Run":"Rifle_Idle");
 						anchor = anchor_gattling;
 						break;
                 }
 			}
 			else{
-                animator.Play("Idle_Neutral");
+                animator.Play((moving)?"Run_Impulse":"Idle_Neutral");
                 if (cooldownCounter > 0){
 					cooldownCounter -= Time.deltaTime;
 				}

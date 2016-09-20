@@ -28,6 +28,12 @@ public class PlayerController : MonoBehaviour {
 		KeyboardControls();
 		FaceMouse();
 		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y+cameraDistance, transform.position.z);
+		if(Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0){
+			contestant.moving = false;
+		}
+		else{
+			contestant.moving = true;
+		}
 	}
 
 	void MouseControls(){

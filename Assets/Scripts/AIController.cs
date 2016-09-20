@@ -274,6 +274,7 @@ public class AIController : MonoBehaviour {
 		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
 			StartBeacon();
 		}
+		c.moving = true;
 	}
 
 	void StartFlee(){
@@ -314,6 +315,7 @@ public class AIController : MonoBehaviour {
 		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
 			StartBeacon();
 		}
+		c.moving = true;
 	}
 
 	void StartSearch(){
@@ -364,6 +366,7 @@ public class AIController : MonoBehaviour {
 		if(c.health < 20 && confidence < 0 && state != AIState.Beacon){
 			StartBeacon();
 		}
+		c.moving = true;
 	}
 
 	public bool findClosestWeapon() {
@@ -419,9 +422,11 @@ public class AIController : MonoBehaviour {
 			if(engagedTarget.GetComponent<AIController>().state != AIState.Beacon){
 				if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
 					agent.speed = 0.1f;
+					c.moving = false;
 				}
 				else{
 					agent.speed = c.movespeed * 0.8f;
+					c.moving = true;
 				}
 			}
 			else{
@@ -451,9 +456,11 @@ public class AIController : MonoBehaviour {
 		else if(c.equipped != null){
 			if(agent.remainingDistance < c.equipped.GetRangeHint(true)){
 				agent.speed = 0.1f;
+				c.moving = false;
 			}
 			else{
 				agent.speed = c.movespeed * 0.8f;
+				c.moving = true;
 			}
 		}
 
