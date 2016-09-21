@@ -15,7 +15,7 @@ public class PowerBox : MonoBehaviour {
 		if (Health <= 0) {
 			isAlive = false;
 		}
-		if (isAlive = false) {
+		if (!isAlive) {
 			Destroy (Camera);
 		}
 
