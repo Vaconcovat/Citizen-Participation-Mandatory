@@ -111,9 +111,10 @@ public class OtherItem : MonoBehaviour {
 	void Explosion ()
 	{
 		//Debug.Log ("Health Kit Used");
-		//FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
+		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
 		GameObject spawned = (GameObject)Instantiate (flare, transform.position, Quaternion.identity);
 		spawned.transform.Rotate (90,0,0);
+		spawned.transform.parent = this.transform;
 		Debug.Log ("Explosion");
 		Destroy(spawned, 5.0f);
 
