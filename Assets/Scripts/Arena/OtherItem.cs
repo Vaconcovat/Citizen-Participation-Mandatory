@@ -72,6 +72,7 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator Speed(float amount){
 		if (ammo >= 1) {
+			Explosion ();
 			effector.movespeed += amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
@@ -83,6 +84,7 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator Damage(float amount){
 		if (ammo >= 1) {;
+			Explosion ();
 			effector.ContestantDamageModifier += amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
@@ -91,11 +93,11 @@ public class OtherItem : MonoBehaviour {
 			effector.ContestantDamageModifier -= amount;
 
 		}
-		
 	}
 
 	IEnumerator CameraSightRepGains(float amount){
 		if (ammo >= 1) {
+			Explosion ();
 			effector.ContestantRepModifier += amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
@@ -109,10 +111,11 @@ public class OtherItem : MonoBehaviour {
 	void Explosion ()
 	{
 		//Debug.Log ("Health Kit Used");
-		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
+		//FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
 		GameObject spawned = (GameObject)Instantiate (flare, transform.position, Quaternion.identity);
 		spawned.transform.Rotate (90,0,0);
 		Debug.Log ("Explosion");
 		Destroy(spawned, 5.0f);
+
 	}
 }
