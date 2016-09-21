@@ -7,7 +7,7 @@ public class MenuCamera : MonoBehaviour {
 	/// </summary>
 	public int state;
 	public Transform[] waypoints;
-	public GameObject _MainMenu, _ZoomedOut, _Post, _Boot, _Login, _Lose, _Win, _UpgradeSponsor, _Upgrades, _Sponsors, _Arena_Start, _Questionaire, _Tutorial_start, _ArenaMap, _Orientation;
+	public GameObject _MainMenu, _ZoomedOut, _Post, _Boot, _Login, _Lose, _Win, _UpgradeSponsor, _Upgrades, _Sponsors, _Arena_Start, _Questionaire, _Tutorial_start, _ArenaMap, _Orientation, _Settings;
 	public bool teleport;
 	public float speed;
 	public AudioSource audioP;
@@ -183,5 +183,10 @@ public class MenuCamera : MonoBehaviour {
 	public void Shutdown(){
 		Application.Quit();
 		//UnityEditor.EditorApplication.isPlaying = false;
+	}
+
+	public void Settings(){
+		DisableAllBut (_Settings);
+		state = 15;
 	}
 }
