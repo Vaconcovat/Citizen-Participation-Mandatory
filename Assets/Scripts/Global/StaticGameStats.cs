@@ -7,7 +7,7 @@ using System.Text;
 
 public class StaticGameStats : MonoBehaviour {
 	//Reputation variables
-	public static float govRep = 100.0f;
+	public static float govRep = 50.0f;
 	public static float corRep = 50.0f;
 	public static float rebRep = 50.0f;
 	public static float oldgovRep = 50.0f;
@@ -15,7 +15,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static float oldrebRep = 50.0f;
 
 	//money variables
-	public static int avaliableMoney;
+	public static int avaliableMoney = 10;
 	public static int moneyHolder;
 
 	//sponsor variables
