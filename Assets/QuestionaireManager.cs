@@ -50,13 +50,6 @@ public class QuestionaireManager : MonoBehaviour {
 		if (Username.text != "") {
 			StaticGameStats.PlayerName = Username.text;
 		}
-
-		if (Username.text == "") {
-			UsernameIncorrect.enabled = true;
-		} else {
-			UsernameIncorrect.enabled = false;
-		}
-		
 	}
 
 	public void SetREDACTED(){
