@@ -64,6 +64,8 @@ public class UI_ContestantTracker : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
+		bar_l.fillAmount = contest.health * 0.01f;
+		bar_r.fillAmount = contest.health * 0.01f;
 
 	}
 
