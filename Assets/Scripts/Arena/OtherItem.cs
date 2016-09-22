@@ -16,14 +16,6 @@ public class OtherItem : MonoBehaviour {
 	public int ammo;
 	public GameObject flare;
 
-	// Use this for initialization
-	void Start () {
-	}
-
-	// Update is called once per frame
-	void Update () {
-	}
-
 	public void Use(bool held){
 		if (!held){
 			if (ammo != 0){
@@ -73,24 +65,27 @@ public class OtherItem : MonoBehaviour {
 	IEnumerator Speed(float amount){
 		if (ammo >= 1) {
 			Explosion ();
-			effector.movespeed += amount;
+			effector.movespeed = 15;
+			Debug.Log ("Move Speed" + effector.movespeed);
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
 			yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration);
-			effector.movespeed -= amount;
+			effector.movespeed = 10;
+			Debug.Log ("Move Speed" + effector.movespeed);
 		}
 	}
 
 	IEnumerator Damage(float amount){
 		if (ammo >= 1) {;
 			Explosion ();
-			effector.ContestantDamageModifier += amount;
+			effector.ContestantDamageModifier = 1.5f;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
 			yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration);
-			effector.ContestantDamageModifier -= amount;
+			effector.ContestantDamageModifier = 1.0f;
+
 
 		}
 	}
