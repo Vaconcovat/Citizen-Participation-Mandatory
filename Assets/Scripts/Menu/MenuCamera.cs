@@ -109,6 +109,7 @@ public class MenuCamera : MonoBehaviour {
 	public void Win(){
 		DisableAllBut(_Win);
 		state = 7;
+		FindObjectOfType<WinInterfaceManager>().Win();
 	}
 
 	public void UpgradeSponsor(){

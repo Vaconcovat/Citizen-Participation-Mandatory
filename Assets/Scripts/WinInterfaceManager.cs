@@ -24,7 +24,7 @@ public class WinInterfaceManager : MonoBehaviour {
         }
     }
 
-    public void Lose()
+    public void Win()
     {
         at.StartType();
     }
