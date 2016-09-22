@@ -53,7 +53,8 @@ public class Contestant : MonoBehaviour {
 	public GameObject UI_Card;
 	public Contestant player;
 	public GameObject HealthBar;
-
+	public Transform head;
+	public SkinnedMeshRenderer corpseRenderer;
 	public Material hologram;
 
 		[Header("Runtime Only")]
@@ -405,7 +406,7 @@ public class Contestant : MonoBehaviour {
 			equipped.Unequip();
 		}
 		equipped = null;
-		GetComponent<SkinnedMeshRenderer>().material = hologram;
+		corpseRenderer.material = hologram;
 		GetComponent<Animator>().enabled = false;
 		GameObject spawned = (GameObject)Instantiate(deathCard);
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);

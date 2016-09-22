@@ -136,7 +136,7 @@ public class Bullet : MonoBehaviour {
 	void Zany(){
 		body.velocity = Vector3.zero;
 		startPos += transform.forward * Time.deltaTime * 10;
-		transform.position = startPos + transform.right * Mathf.Sin(15 * (Time.time-startTime)) * 0.5f;
+		transform.position = startPos + transform.right * Mathf.Sin(30 * (Time.time-startTime)) * 0.2f;
 
 
 		//body.AddForce(Quaternion.AngleAxis(90,Vector3.forward) * transform.right * Mathf.Cos(Time.frameCount/10) * 0.5f, ForceMode.Impulse);
