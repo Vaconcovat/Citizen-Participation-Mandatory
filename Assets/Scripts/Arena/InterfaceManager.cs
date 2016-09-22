@@ -13,6 +13,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Image HBSeg3;
 	public Image HBSeg4;
 	public Text ammo;
+	public Text ammoText;
 	public Text timer;
 	public Image gunLogo;
 	public Image backpackDisplay;
@@ -47,6 +48,8 @@ public class InterfaceManager : MonoBehaviour {
 
 	public GameObject Backpack;
 
+	public GameObject AbilityBar;
+
 	RoundManager rm;
 	float announcetimer;
 	bool activeannounce;
@@ -66,6 +69,11 @@ public class InterfaceManager : MonoBehaviour {
 		announcementsText.text = "";
 		activeannounce = false;
 		influenceCounts = new int[4];
+		if ((StaticGameStats.Abilites [0] == false) && (StaticGameStats.Abilites [1] == false) && (StaticGameStats.Abilites [2] == false) && (StaticGameStats.Abilites [3] == false)) {
+			AbilityBar.SetActive (false);
+		} else {
+			AbilityBar.SetActive (true);
+		}
 
 	}
 	
@@ -79,17 +87,19 @@ public class InterfaceManager : MonoBehaviour {
 		healthbar.fillAmount = (player.health * 1.0f) / (player.maxHealth * 1.0f);
 		if (player.equipped != null){
 			if (player.equipped.type == Item.ItemType.Ranged){
-				ammo.text = player.equipped.GetComponent<RangedWeapon>().ammo.ToString();
+				ammo.text = player.equipped.GetComponent<RangedWeapon> ().ammo.ToString () + " / " + player.equipped.GetComponent<RangedWeapon> ().Maxammo.ToString ();
 			}
 			else{
 				ammo.text = "--";
 			}
 			gunLogo.enabled = true;
 			gunLogo.sprite = player.equipped.logo;
+			ammoText.enabled = true;
 		}
 		else{
 			ammo.text = "--";
 			gunLogo.enabled = false;
+			ammoText.enabled = false;
 		}
 		if(player.inventory != null){
 			backpackDisplay.enabled = true;
@@ -109,7 +119,6 @@ public class InterfaceManager : MonoBehaviour {
 
 		if(!player.isAlive){
 			hpText.text = "VITALS OFFLINE";
-			deadText.text = "!! PLANT VITALS CRITICAL !!\n!!PLANT VITALS OFFLINE !!\nCONNECTION TO PLANT LOST.";
 			Camera.main.orthographicSize += Time.deltaTime * 0.3f;
 			foreach(Image g in corners){
 				g.enabled = false;
@@ -123,36 +132,10 @@ public class InterfaceManager : MonoBehaviour {
 			abortText.enabled = true;
 			abortImage.enabled = true;
 		}
-		else if (healthbar.fillAmount < 0.15f){
-			hpText.text = "!! VITALS CRITICAL !!";
-			deadText.text = "!! PLANT VITALS CRITICAL !!";
-		}
-		else if(healthbar.fillAmount < 0.25f){
-			HBSeg2.enabled = false;
-			HBSeg3.enabled = false;
-			HBSeg4.enabled = false;
-			hpText.text = "VITALS < 25%";
-			deadText.text = "";
-		}
-		else if(healthbar.fillAmount < 0.5f){
-			HBSeg2.enabled = true;
-			HBSeg3.enabled = false;
-			HBSeg4.enabled = false;
-			hpText.text = "VITALS < 50%";
-			deadText.text = "";
-		}
-		else if(healthbar.fillAmount < 0.75f){
-			HBSeg2.enabled = true;
-			HBSeg3.enabled = true;
-			HBSeg4.enabled = false;
-			hpText.text = "VITALS < 75%";
-			deadText.text = "";
-		}
-		else{
-			HBSeg2.enabled = true;
-			HBSeg3.enabled = true;
-			HBSeg4.enabled = true;
-			hpText.text = "";
+		hpText.text = player.health.ToString() + " / " + player.maxHealth.ToString();
+		if (!player.isAlive) {
+			deadText.text = "!! PLANT VITALS CRITICAL !!\n!!PLANT VITALS OFFLINE !!\nCONNECTION TO PLANT LOST.";
+		} else {
 			deadText.text = "";
 		}
 
