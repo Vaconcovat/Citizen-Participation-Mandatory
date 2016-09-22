@@ -19,7 +19,7 @@ public class SkillCoolDown : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if (Input.GetKeyDown (Ability1)) {
-			if (!StaticGameStats.Abilites [1]) {
+			if (!StaticGameStats.Abilites [0]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
@@ -29,7 +29,7 @@ public class SkillCoolDown : MonoBehaviour {
 				}
 			}
 		} else if (Input.GetKeyDown (Ability2)) {
-			if (!StaticGameStats.Abilites [3]) {
+			if (!StaticGameStats.Abilites [1]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
@@ -49,7 +49,7 @@ public class SkillCoolDown : MonoBehaviour {
 				}
 			}
 		} else if (Input.GetKeyDown (Ability4)) {
-			if (!StaticGameStats.Abilites [0]) {
+			if (!StaticGameStats.Abilites [3]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
