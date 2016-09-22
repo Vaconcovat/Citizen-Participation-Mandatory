@@ -12,14 +12,16 @@ public class AutoType : MonoBehaviour {
 	public GameObject finishedCall;
 	public string finishedCallString;
 	public AudioSource blip;
-	static public int charactersPerTick = 1;
+	public int charactersPerTick = 1;
 	int characterCounter;
 	Text textObj;
 	int numlines;
 	bool alternate = true;
+	int characters;
 
 	// Use this for initialization
 	void Start () {
+		characters = charactersPerTick;
 		if(charactersPerTick < 1){
 			charactersPerTick = 1;
 		}
@@ -30,10 +32,20 @@ public class AutoType : MonoBehaviour {
 		}
 
 	}
+
+	void Update(){
+		if(Input.GetKey(KeyCode.Space)){
+			characters = charactersPerTick * 2;
+		}
+		else{
+			characters = charactersPerTick;
+		}
+	}
+
 	
 	IEnumerator TypeText(int index){
 		//Debug.Log("Coroutine Running");
-
+		//characters = charactersPerTick;
 		if(textColors[index] != new Color(0,0,0,0)){
 			string preTag, postTag, content, old;
 			preTag = "<color=" + ColorToHex(textColors[index]) + ">";
@@ -47,7 +59,7 @@ public class AutoType : MonoBehaviour {
 					textObj.text = textObj.text.Substring(textObj.text.IndexOf('\n')+1);
 				}
 				characterCounter++;
-				if(characterCounter == charactersPerTick){
+				if(characterCounter == characters){
 					characterCounter = 0;
 					if (blip != null && letter != ' '){
 						if(alternate){
@@ -66,7 +78,7 @@ public class AutoType : MonoBehaviour {
 					textObj.text = textObj.text.Substring(textObj.text.IndexOf('\n')+1);
 				}
 				characterCounter++;
-				if(characterCounter == charactersPerTick){
+				if(characterCounter == characters){
 					characterCounter = 0;
 					if (blip != null && letter != ' '){
 						if(alternate){
@@ -93,6 +105,8 @@ public class AutoType : MonoBehaviour {
 	}
 
 	public void StartType(){
+		characters = charactersPerTick;
+		characterCounter = 0;
 		textObj = GetComponent<Text>();
 		textObj.text = "";
 		StopCoroutine("TypeText");
