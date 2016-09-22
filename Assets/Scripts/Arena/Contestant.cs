@@ -6,6 +6,7 @@ public class Contestant : MonoBehaviour {
 	public enum Trait{Sick, Strong, Scared, Fearless, Merciful, Relentless};
 	public enum ContestantType{Player, AI, Guard, Medic, Target};
     Animator animator;
+	public bool SwapOnInteract;
 
 	public List<Trait> traits;
 
@@ -469,6 +470,45 @@ public class Contestant : MonoBehaviour {
 			this.owner = owner;
 			this.location = location;
 			this.knockback = knockback;
+		}
+	}
+
+	void OnCollisionEnter (Collision col)
+	{
+		if (SwapOnInteract)	{
+			if (equipped != null) { //does the contestant have something equipped
+				if (equipped.type == Item.ItemType.Ranged) { //is their equipped item a ranged weapon
+					if (equipped.GetComponent<RangedWeapon> ().ammo == 0) { //does their equipped ranged weapon have 0 ammo
+						if (col.gameObject.GetComponent<Item> ().itemName == equipped.GetComponent<Item> ().itemName) { //does their equipped ranged weapon with 0 ammo have the same name as the colliding object
+							if (col.gameObject.GetComponent<RangedWeapon> ().ammo != 0) { //does the colliding object with the same name have more than 0 ammo
+								equipped.GetComponent<Item>().Throw();
+								col.gameObject.GetComponent<Item> ().Equip (GetComponent<Contestant> ());
+
+								//Swap ammo with the item on the floor
+								//equipped.GetComponent<RangedWeapon> ().AddAmmo (col.gameObject.GetComponent<RangedWeapon> ().ammo);
+								//col.gameObject.GetComponent<RangedWeapon> ().ammo = 0;
+							}	
+						}
+					}
+				}
+
+				if (equipped.type == Item.ItemType.Other) { //is their equipped item a ranged weapon
+					if (equipped.GetComponent<OtherItem>().ammo == 0) { //does their equipped ranged weapon have 0 ammo
+						if (col.gameObject.GetComponent<Item> ().itemName == equipped.GetComponent<Item> ().itemName) { //does their equipped ranged weapon with 0 ammo have the same name as the colliding object
+							if (col.gameObject.GetComponent<OtherItem> ().ammo != 0) { //does the colliding object with the same name have more than 0 ammo
+								equipped.GetComponent<Item>().Throw();
+								col.gameObject.GetComponent<Item> ().Equip (GetComponent<Contestant> ());
+
+								//Swap ammo with the item on the floor
+								//equipped.GetComponent<RangedWeapon> ().AddAmmo (col.gameObject.GetComponent<RangedWeapon> ().ammo);
+								//col.gameObject.GetComponent<RangedWeapon> ().ammo = 0;
+							}	
+						}
+					}
+				}
+
+			}
+
 		}
 	}
 
