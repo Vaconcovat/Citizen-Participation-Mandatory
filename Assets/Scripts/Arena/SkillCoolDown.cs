@@ -81,16 +81,16 @@ public class SkillCoolDown : MonoBehaviour {
 		skills [4].currentCooldown = skills [4].cooldown;
 
 		if (!StaticGameStats.Abilites [0]) {
-			skills [0].skillIcon.sprite = LockedOut;
+			skills [1].skillIcon.sprite = LockedOut;
 		}
 		if (!StaticGameStats.Abilites [1]) {
-			skills [1].skillIcon.sprite = LockedOut;
+			skills [3].skillIcon.sprite = LockedOut;
 		}
 		if (!StaticGameStats.Abilites [2]) {
 			skills [2].skillIcon.sprite = LockedOut;
 		}
 		if (!StaticGameStats.Abilites [3]) {
-			skills [3].skillIcon.sprite = LockedOut;
+			skills [0].skillIcon.sprite = LockedOut;
 		}
 	}
 

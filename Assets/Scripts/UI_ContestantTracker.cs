@@ -11,6 +11,8 @@ public class UI_ContestantTracker : MonoBehaviour {
 	Vector2 size;
 	public Text rightText, LeftText;
 	public GameObject rightObj, leftObj;
+	public Image underBar_l, bar_l, underBar_r, bar_r;
+	public Color underColour, barColour;
 	AIController ai;
 
 	public bool onRight;
@@ -21,6 +23,10 @@ public class UI_ContestantTracker : MonoBehaviour {
 		c = FindObjectOfType<Canvas>();
 		size = c.GetComponent<RectTransform>().sizeDelta;
 		ai = contest.GetComponent<AIController>();
+		underBar_l.color = underColour;
+		bar_l.color = barColour;
+		underBar_r.color = underColour;
+		bar_r.color = barColour;
 	}
 
 	// Update is called once per frame
@@ -57,6 +63,7 @@ public class UI_ContestantTracker : MonoBehaviour {
 		if(!contest.isAlive || !FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
 			Destroy(gameObject);
 		}
+
 
 	}
 

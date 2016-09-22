@@ -170,7 +170,7 @@ public class MenuCamera : MonoBehaviour {
 	}
 
 	void DisableAllBut(GameObject screen){
-		GameObject[] screens = new GameObject[]{_MainMenu, _ZoomedOut, _Post, _Boot, _Login, _Lose, _Win, _UpgradeSponsor, _Upgrades, _Sponsors, _Arena_Start, _Questionaire, _Tutorial_start, _ArenaMap};
+		GameObject[] screens = new GameObject[]{_MainMenu, _ZoomedOut, _Post, _Boot, _Login, _Lose, _Win, _UpgradeSponsor, _Upgrades, _Sponsors, _Arena_Start, _Questionaire, _Tutorial_start, _ArenaMap, _Orientation, _Settings};
 		foreach(GameObject g in screens){
 			if(screen != g){
 				g.SetActive(false);
