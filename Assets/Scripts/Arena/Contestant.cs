@@ -52,6 +52,7 @@ public class Contestant : MonoBehaviour {
 	public Transform backpack;
 	public GameObject UI_Card;
 	public Contestant player;
+	public GameObject HealthBar;
 
 	public Material hologram;
 
@@ -129,52 +130,52 @@ public class Contestant : MonoBehaviour {
 
         //----------------------------------------------------
         //GENERATE TRAITS
-		if (StaticGameStats.TierTwoUpgrades [2]) {
-			//20% chance to be sick, 20% chance to be strong
-			float random = Random.value;
-			if (random < 0.2f) {
-				traits.Add (Trait.Sick);
-			} else if (random > 0.8f) {
-				traits.Add (Trait.Strong);
-			}
+		if (!isPlayer) {
+			if (StaticGameStats.TierTwoUpgrades [2]) {
+				//20% chance to be sick, 20% chance to be strong
+				float random = Random.value;
+				if (random < 0.2f) {
+					traits.Add (Trait.Sick);
+				} else if (random > 0.8f) {
+					traits.Add (Trait.Strong);
+				}
 
-			//20% chance to be scared, 20% chance to be fearless
-			random = Random.value;
-			if (random < 0.2f) {
-				traits.Add (Trait.Scared);
-			} else if (random > 0.8f) {
-				traits.Add (Trait.Fearless);
-			}
+				//20% chance to be scared, 20% chance to be fearless
+				random = Random.value;
+				if (random < 0.2f) {
+					traits.Add (Trait.Scared);
+				} else if (random > 0.8f) {
+					traits.Add (Trait.Fearless);
+				}
 
-			//Always Applies the Merciful Trait
-			traits.Add (Trait.Merciful);
-		} else {
-			//20% chance to be sick, 20% chance to be strong
-			float random = Random.value;
-			if (random < 0.2f) {
-				traits.Add (Trait.Sick);
-			} else if (random > 0.8f) {
-				traits.Add (Trait.Strong);
-			}
-
-			//20% chance to be scared, 20% chance to be fearless
-			random = Random.value;
-			if (random < 0.2f) {
-				traits.Add (Trait.Scared);
-			} else if (random > 0.8f) {
-				traits.Add (Trait.Fearless);
-			}
-
-			//20% chance to be merciful, 20% chance to be relentless
-			random = Random.value;
-			if (random < 0.2f) {
+				//Always Applies the Merciful Trait
 				traits.Add (Trait.Merciful);
-			} else if (random > 0.8f) {
-				traits.Add (Trait.Relentless);
+			} else {
+				//20% chance to be sick, 20% chance to be strong
+				float random = Random.value;
+				if (random < 0.2f) {
+					traits.Add (Trait.Sick);
+				} else if (random > 0.8f) {
+					traits.Add (Trait.Strong);
+				}
+
+				//20% chance to be scared, 20% chance to be fearless
+				random = Random.value;
+				if (random < 0.2f) {
+					traits.Add (Trait.Scared);
+				} else if (random > 0.8f) {
+					traits.Add (Trait.Fearless);
+				}
+
+				//20% chance to be merciful, 20% chance to be relentless
+				random = Random.value;
+				if (random < 0.2f) {
+					traits.Add (Trait.Merciful);
+				} else if (random > 0.8f) {
+					traits.Add (Trait.Relentless);
+				}
 			}
 		}
-
-        
 
         //
         //------------------------------------------------------
