@@ -141,13 +141,16 @@ public class SkillCoolDown : MonoBehaviour {
 		ItemSpawner closestSpawner = null;
 		Transform player = FindObjectOfType<PlayerController>().transform;
 		foreach(ItemSpawner i in FindObjectsOfType<ItemSpawner>()){
-			float dist = Vector3.Distance(player.position, i.transform.position);
-			if(dist < closestDist){
-				closestDist = dist;
-				closestSpawner = i;
+			if (i.selection == ItemSpawner.poolselection.Example) { //checks if the spawner is an itemSpawner vs a Weapon Spawner
+				float dist = Vector3.Distance(player.position, i.transform.position);
+				if(dist < closestDist){
+					closestDist = dist;
+					closestSpawner = i;
+				}
 			}
 		}
 		closestSpawner.timer = 0f;
+		closestSpawner.SpawnerCooldown = closestSpawner.SpawnerCooldown + 2;
 	}
 
 	public void Stun()

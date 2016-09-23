@@ -183,15 +183,12 @@ public class UpgradeInterface : MonoBehaviour {
 			if (StaticGameStats.avaliableMoney >=upgrade7Cost) {
 				StaticGameStats.avaliableMoney -=upgrade7Cost;
 				StaticGameStats.TierThreeUpgrades [0] = true;
-				StaticGameStats.SpawnerCooldown = 35;
 				ChangeColorToGreen(6);
 				buttonActive [6] = true;
-
 			}
 		} else {
 			StaticGameStats.avaliableMoney +=upgrade7Cost;
 			StaticGameStats.TierThreeUpgrades [0] = false;
-			StaticGameStats.SpawnerCooldown = 20;
 			buttonActive [6] = false;
 			ChangeColorToGrey (6);
 		}

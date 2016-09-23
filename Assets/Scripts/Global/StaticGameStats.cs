@@ -50,7 +50,6 @@ public class StaticGameStats : MonoBehaviour {
 	public static int arenasPlayed = 0;
 
 	//Global Value Editing
-	public static int SpawnerCooldown = 20;
 
 	public static int FirstAidHereHealDuration = 11;
 	public static float FirstAidHereHealAmount = 4.0f;

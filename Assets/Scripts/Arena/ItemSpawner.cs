@@ -6,6 +6,7 @@ public class ItemSpawner : MonoBehaviour {
 	public poolselection selection;
 	public ItemPools.Pool pool;
 	public bool autoSpawn;
+	public int SpawnerCooldown;
 	public bool ready;
 	public GameObject UI_Card;
 	public bool announce = true;
@@ -17,7 +18,7 @@ public class ItemSpawner : MonoBehaviour {
 	void Start () {
 		switch(selection){
 			case poolselection.Example:
-			pool = FindObjectOfType<ItemPools>().BasicWeapons;
+				pool = FindObjectOfType<ItemPools>().BasicWeapons;
 				break;
 
 			case poolselection.Sponsor:
@@ -38,6 +39,11 @@ public class ItemSpawner : MonoBehaviour {
 				pool = FindObjectOfType<ItemPools>().item;
 				break;
 		}
+		if (StaticGameStats.TierThreeUpgrades [0]) {
+			if (selection == poolselection.Item) {
+				SpawnerCooldown = SpawnerCooldown + 15;
+			} 
+		}
 		GameObject spawned = (GameObject)Instantiate(UI_Card);
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		tracker = spawned.GetComponent<UI_GenericCard>();
@@ -54,7 +60,7 @@ public class ItemSpawner : MonoBehaviour {
 				timer -= Time.deltaTime;
 			}
 			else{
-				timer = StaticGameStats.SpawnerCooldown;
+				timer = SpawnerCooldown;
 				ready = true;
 				if(autoSpawn){
 					Spawn();
