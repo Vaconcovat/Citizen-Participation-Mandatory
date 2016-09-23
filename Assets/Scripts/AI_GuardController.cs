@@ -120,7 +120,7 @@ public class AI_GuardController : MonoBehaviour {
 			agent.destination = rm.outerSpawns[Random.Range(0,rm.outerSpawns.Count)].position;
 		}
 		else{
-			ItemSpawner[] spawners = FindObjectsOfType<ItemSpawner>();
+			TutorialSpawner[] spawners = FindObjectsOfType<TutorialSpawner>();
 			agent.destination = spawners[Random.Range(0,spawners.Length)].transform.position;
 		}
 
