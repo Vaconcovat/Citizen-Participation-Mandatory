@@ -81,8 +81,8 @@ public class Contestant : MonoBehaviour {
 	public Item inventory;
 	public bool beaconActive = false;
     float baseSpeed;
-	public float ContestantDamageModifier = 1.5f;
-	public float ContestantRepModifier = 1.0f;
+	public float ContestantDamageModifier;
+	public float ContestantRepModifier;
 	/// <summary>
 	/// The Contestants individual Damage Modifier
 	/// </summary>
@@ -101,6 +101,8 @@ public class Contestant : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		ContestantDamageModifier = 1.0f;
+		ContestantRepModifier = 1.0f;
 		bones = GetComponentsInChildren<Rigidbody> ();
 		body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();

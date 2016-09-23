@@ -65,18 +65,19 @@ public class OtherItem : MonoBehaviour {
 	IEnumerator Speed(float amount){
 		if (ammo >= 1) {
 			Explosion ();
-			effector.movespeed = 15;
+			effector.movespeed = 15.0f;
 			Debug.Log ("Move Speed" + effector.movespeed);
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
 			yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration);
-			effector.movespeed = 10;
+			effector.movespeed = 10.0f;
 			Debug.Log ("Move Speed" + effector.movespeed);
 		}
 	}
 
 	IEnumerator Damage(float amount){
+		effector = GetComponent<Item>().equipper;
 		if (ammo >= 1) {;
 			Explosion ();
 			effector.ContestantDamageModifier = 1.5f;
@@ -91,14 +92,15 @@ public class OtherItem : MonoBehaviour {
 	}
 
 	IEnumerator CameraSightRepGains(float amount){
+		effector = GetComponent<Item>().equipper;
 		if (ammo >= 1) {
 			Explosion ();
-			effector.ContestantRepModifier += amount;
+			effector.ContestantRepModifier = 1.5f;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
 			yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration);
-			effector.ContestantRepModifier -= amount;
+			effector.ContestantRepModifier = 1.0f;
 
 		}
 	}
@@ -107,7 +109,7 @@ public class OtherItem : MonoBehaviour {
 	{
 		//Debug.Log ("Health Kit Used");
 		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
-		GameObject spawned = (GameObject)Instantiate (flare, transform.position, Quaternion.identity);
+		GameObject spawned = (GameObject)Instantiate (flare, this.GetComponent<Item>().equipper.transform.position, Quaternion.identity);
 		spawned.transform.Rotate (90,0,0);
 		spawned.transform.parent = this.GetComponent<Item>().equipper.transform;
 		Debug.Log (this.GetComponent<Item> ().equipper.transform);
