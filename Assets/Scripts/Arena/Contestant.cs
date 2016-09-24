@@ -275,11 +275,13 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	/// <param name="damage"></param>
 	public void TakeDamage(DamageParams damage){
+		Debug.Log (this.name + " HP: " + health);
 		if(isAlive){
 			health -= damage.damage;
 			body.AddForce(damage.knockback, ForceMode.Impulse);
 			if (health <= 0){
 				killer = damage.owner;
+				isAlive = false;
 				Die(null);
 				if (killer.equipped.isSponsored) {
 					if(onCameras.Count > 0){
@@ -377,6 +379,7 @@ public class Contestant : MonoBehaviour {
 				break;
 
 			case ContestantType.Guard:
+				Debug.Log ("Switch stage");
 				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 				if(onCameras.Count > 0){
 					if(title == null){
@@ -402,15 +405,15 @@ public class Contestant : MonoBehaviour {
 				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 				break;
 		}
-
-		isAlive = false;
 		if (equipped != null){
 			equipped.Unequip();
 		}
 		equipped = null;
+		Debug.Log ("Equipped stage");
 		corpseRenderer.material = hologram;
 		GetComponent<Animator>().enabled = false;
 		GameObject spawned = (GameObject)Instantiate(deathCard);
+		Debug.Log ("DeathCard stage");
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		UI_DeathCard tracker = spawned.GetComponent<UI_DeathCard>();
 		tracker.contest = this;
