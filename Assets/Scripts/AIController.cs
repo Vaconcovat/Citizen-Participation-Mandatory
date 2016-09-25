@@ -20,6 +20,7 @@ public class AIController : MonoBehaviour {
 	public Light DirectionalLight;
 	public Light ContestantLight;
 	float shockActiveTime, blindActiveTime;
+	float lightIntensity;
 
 	//just for testing
 	[HideInInspector]
@@ -135,13 +136,14 @@ public class AIController : MonoBehaviour {
 	IEnumerator Blinded(){
 		viewAngle = 60.0f;
 		viewRadius = 10.0f;
+		lightIntensity = DirectionalLight.intensity;
 		DirectionalLight.intensity = 0.0f;
 		ContestantLight.intensity = 8.0f;
 		state = AIState.Hunting;
 		yield return new WaitForSeconds (blindActiveTime);
 		viewAngle = 120.0f;
 		viewRadius = 12.0f;
-		DirectionalLight.intensity = 0.5f;
+		DirectionalLight.intensity = lightIntensity;
 		ContestantLight.intensity = 0.0f;
 	}
 
