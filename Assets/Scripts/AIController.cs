@@ -19,7 +19,7 @@ public class AIController : MonoBehaviour {
 	public Contestant player;
 	public Light DirectionalLight;
 	public Light ContestantLight;
-	float cooldownTime;
+	float shockActiveTime, blindActiveTime;
 
 	//just for testing
 	[HideInInspector]
@@ -64,7 +64,6 @@ public class AIController : MonoBehaviour {
 		agent = GetComponent<NavMeshAgent>();
 		agent.speed = c.movespeed;
 		cGen = FindObjectOfType<ContestantGenerator>();
-		cooldownTime = 10.0f;
 		StartSearch();
 		StartCoroutine ("FindTargetsWithDelay", .5f);
 		if(c.traits.Contains(Contestant.Trait.Fearless)){
@@ -79,6 +78,9 @@ public class AIController : MonoBehaviour {
 			confidenceGain = 0.01f;
 			confidence = 0;
 		}
+
+		shockActiveTime = FindObjectOfType<SkillCoolDown>().shockActiveTime;
+		blindActiveTime = FindObjectOfType<SkillCoolDown>().blindActiveTime;
 	}
 	
 	// Update is called once per frame
@@ -120,9 +122,8 @@ public class AIController : MonoBehaviour {
 
 
 	IEnumerator Shocked() {
-		cooldownTime = GetComponent<SkillCoolDown>().skills [0].cooldown;
 		GetComponent<NavMeshAgent>().enabled = false;
-		yield return new WaitForSeconds (cooldownTime);
+		yield return new WaitForSeconds (shockActiveTime);
 		GetComponent<NavMeshAgent>().enabled = true;
 		state = AIState.Hunting;
 	}
@@ -132,16 +133,15 @@ public class AIController : MonoBehaviour {
 	}
 
 	IEnumerator Blinded(){
-		cooldownTime = GetComponent<SkillCoolDown>().skills [3].cooldown;
 		viewAngle = 60.0f;
 		viewRadius = 10.0f;
 		DirectionalLight.intensity = 0.0f;
 		ContestantLight.intensity = 8.0f;
 		state = AIState.Hunting;
-		yield return new WaitForSeconds (cooldownTime);
+		yield return new WaitForSeconds (blindActiveTime);
 		viewAngle = 120.0f;
 		viewRadius = 12.0f;
-		DirectionalLight.intensity = 0.16f;
+		DirectionalLight.intensity = 0.5f;
 		ContestantLight.intensity = 0.0f;
 	}
 

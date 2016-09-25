@@ -14,6 +14,8 @@ public class SkillCoolDown : MonoBehaviour {
 	public GameObject weaponTrackerUI, contestantTrackerUI;
 	public bool isPrimed = false;
 	public Sprite LockedOut;
+	public float shockActiveTime;
+	public float blindActiveTime;
 
 
 	void FixedUpdate()
