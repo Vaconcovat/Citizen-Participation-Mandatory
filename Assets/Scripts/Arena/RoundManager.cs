@@ -16,6 +16,7 @@ public class RoundManager : MonoBehaviour {
     public bool autoSpawn;
     public GameObject outerBayDoors;
     public GameObject medicPrefab;
+	public bool noGuardDamage;
 
 	Contestant[] contestants;
 	bool roundOver = false;
@@ -25,6 +26,7 @@ public class RoundManager : MonoBehaviour {
 	// Use this for initialization
 
 	void Awake () {
+		noGuardDamage = true;
 		im = FindObjectOfType<InterfaceManager>();
 		contestants = FindObjectsOfType<Contestant>();
 		totalContestants = contestants.Length;
@@ -69,12 +71,13 @@ public class RoundManager : MonoBehaviour {
 					noGuards = false;
 				}
 			}
-			if(noGuards){
-				im.Announce("GUARDS EXHAUSTED\nPLEASE WAIT FOR FURTHER INSTRUCTIONS", 1);
-				Invoke("Triumph", 5);
-			}
-			else{
-				im.Announce("ROUND OVER\nPRESS [Q] TO SURRENDER", 1);
+			if (noGuards) { //if there are no guards alive
+				im.Announce ("GUARDS EXHAUSTED\nPLEASE WAIT FOR FURTHER INSTRUCTIONS", 1);
+				Invoke ("Triumph", 5);
+			} else if ((!noGuards) && (noGuardDamage)) { //if there are guards alive and none are damaged
+				im.Announce ("ROUND OVER\nPRESS [Q] TO SURRENDER", 1);
+			} else { //if there are guards alive and they have been damaged
+				im.Announce ("CONTESTANT RESISTING DETAINMENT\nALL UNITS OPEN FIRE!", 1);
 			}
 		}
 		else{
@@ -93,7 +96,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	public void endRound(){
-		if (roundNumber < 5){
+		if (roundNumber < 3){
 			roundNumber++;
 			GetComponent<SceneChange>().RoundRestart();
 		}

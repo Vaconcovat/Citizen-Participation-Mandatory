@@ -306,6 +306,7 @@ public class Contestant : MonoBehaviour {
 					GetComponent<AIController>().confidence -= (0.01f * damage.damage);
 				}
 				else if(type == ContestantType.Guard){
+					FindObjectOfType<RoundManager> ().noGuardDamage = false;
 					AI_GuardController[] guards = FindObjectsOfType<AI_GuardController>();
 					foreach(AI_GuardController guard in guards){
 						guard.endStatus  = AI_GuardController.endRoundStatus.Fight;

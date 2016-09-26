@@ -71,7 +71,14 @@ public class ItemSpawner : MonoBehaviour {
 		else{
 			if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 3 && !autoSpawn){
 				if(announce){
-					FindObjectOfType<InterfaceManager>().Announce("Press [E] to dispense weapon", 0.2f);
+					switch (selection) {
+						case(selection == poolselection.Item):
+							FindObjectOfType<InterfaceManager> ().Announce ("Press [E] to dispense Item", 0.2f);
+							break;
+						case(selection == poolselection.Example):
+							FindObjectOfType<InterfaceManager> ().Announce ("Press [E] to dispense Weapon", 0.2f);
+							break;
+						}
 				}
 				if(Input.GetKeyDown(KeyCode.E)){
 					Spawn();

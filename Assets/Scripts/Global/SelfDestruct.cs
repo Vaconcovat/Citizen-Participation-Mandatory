@@ -15,7 +15,6 @@ public class SelfDestruct : MonoBehaviour {
 		if(dontDestroyOnLoad){
 			DontDestroyOnLoad(gameObject);
 		}
-		time = FindObjectOfType<SkillCoolDown>().bioscanActiveTime;
 	}
 	
 	// Update is called once per frame
