@@ -16,6 +16,7 @@ public class SkillCoolDown : MonoBehaviour {
 	public Sprite LockedOut;
 	public float shockActiveTime;
 	public float blindActiveTime;
+	public float bioscanActiveTime;
 
 
 	void FixedUpdate()
@@ -25,9 +26,10 @@ public class SkillCoolDown : MonoBehaviour {
 				return;
 			} else {
 				//If the ability is not currently cooling down
-				if (skills [1].currentCooldown >= skills [1].cooldown) {
+				if ((skills [1].currentCooldown >= skills [1].cooldown) && (skills[1].isActive == true)) {
 					BioScan ();
-					skills [1].currentCooldown = 0;
+					skills [1].isActive = false;
+					StartCoroutine("BioScanWait");
 				}
 			}
 		} else if (Input.GetKeyDown (Ability2)) {
@@ -35,9 +37,10 @@ public class SkillCoolDown : MonoBehaviour {
 				return;
 			} else {
 				//If the ability is not currently cooling down
-				if (skills [3].currentCooldown >= skills [3].cooldown) {
+				if ((skills [3].currentCooldown >= skills [3].cooldown) && (skills[3].isActive == true)) {
 					Blackout ();
-					skills [3].currentCooldown = 0;
+					skills [3].isActive = false;
+					StartCoroutine("BlackoutWait");
 				}
 			}
 		} else if (Input.GetKeyDown (Ability3)) {
@@ -47,6 +50,7 @@ public class SkillCoolDown : MonoBehaviour {
 				//If the ability is not currently cooling down
 				if (skills [2].currentCooldown >= skills [2].cooldown) {
 					Overload ();
+					skills [2].isActive = false;
 					skills [2].currentCooldown = 0;
 				}
 			}
@@ -55,15 +59,13 @@ public class SkillCoolDown : MonoBehaviour {
 				return;
 			} else {
 				//If the ability is not currently cooling down
-				if ((skills [0].currentCooldown >= skills [0].cooldown) && (skills [4].currentCooldown >= skills [4].cooldown)) {
+				if ((skills [0].currentCooldown >= skills [0].cooldown) && (skills [4].currentCooldown >= skills [4].cooldown) && (skills[0].isActive == true)) {
 					if (isPrimed) {
 						Stun ();
-						print ("Shock Collar Activated, ZZZZZZZAP");
+						skills [0].isActive = false;
 						isPrimed = false;
-						skills [0].currentCooldown = 0;
-
+						StartCoroutine("ShockCollarWait");
 					} else {
-						print ("Shock Collar Armed, Use with Caution");
 						isPrimed = true;
 						skills [4].currentCooldown = 0;
 					}
@@ -94,6 +96,10 @@ public class SkillCoolDown : MonoBehaviour {
 		if (!StaticGameStats.Abilites [3]) {
 			skills [0].skillIcon.sprite = LockedOut;
 		}
+
+		foreach (Skill s in skills) {
+			s.isActive = true;
+		}
 	}
 
 	void Update()
@@ -104,6 +110,10 @@ public class SkillCoolDown : MonoBehaviour {
 			{
 				s.currentCooldown += Time.deltaTime;
 				s.skillIcon.fillAmount = s.currentCooldown / s.cooldown;
+			}
+
+			if (s.currentCooldown == s.cooldown) {
+				s.isActive = true;
 			}
 
 		}
@@ -187,6 +197,21 @@ public class SkillCoolDown : MonoBehaviour {
 			a.StartBlinded ();
 		}
 	}
+
+	IEnumerator BioScanWait(){
+		yield return new WaitForSeconds (bioscanActiveTime);
+		skills [1].currentCooldown = 0;
+	}
+
+	IEnumerator ShockCollarWait(){
+		yield return new WaitForSeconds (shockActiveTime);
+		skills [0].currentCooldown = 0;
+	}
+
+	IEnumerator BlackoutWait(){
+		yield return new WaitForSeconds (blindActiveTime);
+		skills [3].currentCooldown = 0;
+	}
 }
 
 [System.Serializable]
@@ -197,6 +222,7 @@ public class Skill
 	public string AbilityName;
 	[HideInInspector]
 	public float currentCooldown;
+	public bool isActive;
 }
 
 

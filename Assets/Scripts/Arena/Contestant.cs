@@ -83,6 +83,7 @@ public class Contestant : MonoBehaviour {
     float baseSpeed;
 	public float ContestantDamageModifier;
 	public float ContestantRepModifier;
+	public bool IsDummy;
 	/// <summary>
 	/// The Contestants individual Damage Modifier
 	/// </summary>
@@ -133,7 +134,7 @@ public class Contestant : MonoBehaviour {
 
         //----------------------------------------------------
         //GENERATE TRAITS
-		if (!isPlayer) {
+		if (!isPlayer && !IsDummy) {
 			if (StaticGameStats.TierTwoUpgrades [2]) {
 				//20% chance to be sick, 20% chance to be strong
 				float random = Random.value;

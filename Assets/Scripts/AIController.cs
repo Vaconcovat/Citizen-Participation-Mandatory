@@ -143,7 +143,7 @@ public class AIController : MonoBehaviour {
 		yield return new WaitForSeconds (blindActiveTime);
 		viewAngle = 120.0f;
 		viewRadius = 12.0f;
-		DirectionalLight.intensity = lightIntensity;
+		DirectionalLight.intensity = 0.5f;
 		ContestantLight.intensity = 0.0f;
 	}
 
