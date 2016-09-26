@@ -21,6 +21,11 @@ public class Item : MonoBehaviour {
 	/// What itm type this is.
 	/// </summary>
 	public int KnockbackAmount;
+	[Tooltip("The Amount of Damage this item will do when thrown at an enemy")]
+	/// <summary>
+	/// What itm type this is.
+	/// </summary>
+	public int ThrownDamage;
 	public Stance stance;
 	[Tooltip("Was this item brought to us by a sponsor?")]
 	/// <summary>
@@ -145,10 +150,9 @@ public class Item : MonoBehaviour {
 	void OnCollisionEnter(Collision c){
 		if (equipper == null){
 			if (body.velocity.magnitude > impactVelocityMin){
-				int throwDamage = Mathf.RoundToInt(body.velocity.magnitude);
 				if(c.gameObject.tag == "Contestant"){
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
-						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(throwDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(ThrownDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 					}
 					if(StaticGameStats.TierTwoUpgrades[2]){
 						if (type == ItemType.Ranged) {
@@ -157,7 +161,7 @@ public class Item : MonoBehaviour {
 					}
 				}
 				else{
-					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(throwDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
+					c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(ThrownDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 				}
 			}
 			else{
