@@ -65,14 +65,12 @@ public class OtherItem : MonoBehaviour {
 	IEnumerator Speed(float amount){
 		if (ammo >= 1) {
 			Explosion ();
-			effector.movespeed = 15.0f;
-			Debug.Log ("Move Speed" + effector.movespeed);
+			effector.movespeed = effector.movespeed + amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
 			yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration);
-			effector.movespeed = 10.0f;
-			Debug.Log ("Move Speed" + effector.movespeed);
+			effector.movespeed = effector.movespeed - amount;
 		}
 	}
 
@@ -80,12 +78,12 @@ public class OtherItem : MonoBehaviour {
 		effector = GetComponent<Item>().equipper;
 		if (ammo >= 1) {;
 			Explosion ();
-			effector.ContestantDamageModifier = 1.5f;
+			effector.ContestantDamageModifier = effector.ContestantDamageModifier + amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
 			yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration);
-			effector.ContestantDamageModifier = 1.0f;
+			effector.ContestantDamageModifier = effector.ContestantDamageModifier - amount;
 
 
 		}
@@ -95,12 +93,12 @@ public class OtherItem : MonoBehaviour {
 		effector = GetComponent<Item>().equipper;
 		if (ammo >= 1) {
 			Explosion ();
-			effector.ContestantRepModifier = 1.5f;
+			effector.ContestantRepModifier = effector.ContestantRepModifier + amount;
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
 			yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration);
-			effector.ContestantRepModifier = 1.0f;
+			effector.ContestantRepModifier = effector.ContestantRepModifier - amount;
 
 		}
 	}

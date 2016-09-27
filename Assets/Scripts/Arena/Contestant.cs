@@ -102,8 +102,6 @@ public class Contestant : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ContestantDamageModifier = 1.0f;
-		ContestantRepModifier = 1.0f;
 		bones = GetComponentsInChildren<Rigidbody> ();
 		body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
