@@ -9,11 +9,15 @@ public class SelfDestruct : MonoBehaviour {
 	public float fadeRate;
 	public bool expand;
 	public float expandRate;
+	public bool isUI;
 	public bool dontDestroyOnLoad;
 
 	void Start(){
 		if(dontDestroyOnLoad){
 			DontDestroyOnLoad(gameObject);
+		}
+		if (isUI) {
+			time = FindObjectOfType<SkillCoolDown> ().bioscanActiveTime;
 		}
 	}
 	
