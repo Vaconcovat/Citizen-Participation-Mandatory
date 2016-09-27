@@ -17,6 +17,7 @@ public class RoundManager : MonoBehaviour {
     public GameObject outerBayDoors;
     public GameObject medicPrefab;
 	public bool noGuardDamage;
+	public int preRoundTime;
 
 	Contestant[] contestants;
 	bool roundOver = false;
@@ -51,6 +52,7 @@ public class RoundManager : MonoBehaviour {
 
 	void Start(){
 		File.WriteAllText (StaticGameStats.path, "");
+		StartCoroutine("Countdown");
 	}
 	
 	// Update is called once per frame
@@ -121,5 +123,29 @@ public class RoundManager : MonoBehaviour {
 			spawnedGuard.GetComponent<AI_GuardController>().endStatus = AI_GuardController.endRoundStatus.Chase;
 		}
 		GetComponent<AudioSource>().Stop();
+	}
+
+	void EnableContestants(bool b){
+		foreach(Contestant c in FindObjectsOfType<Contestant>()){
+			if(c.isPlayer){
+				c.GetComponent<PlayerController>().enabled = b;
+			}
+			else{
+				c.GetComponent<AIController>().enabled = b;
+				c.GetComponent<NavMeshAgent>().enabled = b;
+			}
+		}
+	}
+
+	IEnumerator Countdown(){
+		EnableContestants(false);
+		while(preRoundTime > 0){
+			im.Announce(preRoundTime.ToString() + "...", 1);
+			preRoundTime--;
+			yield return new WaitForSeconds(1);
+		}
+		EnableContestants(true);
+		im.Announce("FIGHT!", 2);
+		GetComponent<AudioSource>().Play();
 	}
 }

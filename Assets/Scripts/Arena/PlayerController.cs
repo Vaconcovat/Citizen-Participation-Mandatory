@@ -16,10 +16,15 @@ public class PlayerController : MonoBehaviour {
 
 	float gravity = 20.0f;
 
+	void Awake(){
+		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y+cameraDistance, transform.position.z);
+	}
+
 	// Use this for initialization
 	void Start () {
 		contestant = GetComponent<Contestant>();
 		body = GetComponent<Rigidbody>();
+		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y+cameraDistance, transform.position.z);
 	}
 	
 	// Update is called once per frame
