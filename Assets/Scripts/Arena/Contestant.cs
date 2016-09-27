@@ -438,6 +438,7 @@ public class Contestant : MonoBehaviour {
 	public bool ThrowEquipped(){
 		if (equipped != null){
 			equipped.Throw();
+			FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().throw_item, transform.position, 0.7f, true);
 			return true;
 		}
 		else{

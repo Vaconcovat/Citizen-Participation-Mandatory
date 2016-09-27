@@ -133,7 +133,12 @@ public class Item : MonoBehaviour {
 		body.isKinematic = true;
 		if(equipper.type == Contestant.ContestantType.Player){
 			Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+			FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().equip, transform.position, 1.0f, false);
 		}
+		else{
+			FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().equip, transform.position, 1.0f, true);
+		}
+
 	}
 
 	public void Unequip(){
