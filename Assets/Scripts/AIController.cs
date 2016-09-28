@@ -78,9 +78,12 @@ public class AIController : MonoBehaviour {
 			confidenceGain = 0.01f;
 			confidence = 0;
 		}
+		SkillCoolDown sk = FindObjectOfType<SkillCoolDown>();
+		if(sk != null){
+			shockActiveTime = sk.shockActiveTime;
+			blindActiveTime = sk.blindActiveTime;
+		}
 
-		shockActiveTime = FindObjectOfType<SkillCoolDown>().shockActiveTime;
-		blindActiveTime = FindObjectOfType<SkillCoolDown>().blindActiveTime;
 	}
 	
 	// Update is called once per frame

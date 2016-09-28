@@ -51,6 +51,7 @@ public class AI_GuardController : MonoBehaviour {
 	void Capture(){
 		agent.destination = target.transform.position;
 		agent.speed = speed;
+		c.moving = true;
 		if(agent.remainingDistance < 1f){
 			FindObjectOfType<RoundManager>().endRound();
 		}
@@ -64,9 +65,11 @@ public class AI_GuardController : MonoBehaviour {
 
 		if(agent.remainingDistance < closingDistance){
 			agent.speed = closingSpeed;
+			c.moving = false;
 		}
 		else{
 			agent.speed = speed;
+			c.moving = true;
 		}
 
 		if(Input.GetKeyDown(KeyCode.Q)){
@@ -94,15 +97,18 @@ public class AI_GuardController : MonoBehaviour {
 				talktimer -= Time.deltaTime;
 			}
 		}
+		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(target.transform.position - transform.position), Time.deltaTime*3, 0));
 	}
 
 	void Fight(){
 		agent.destination = target.transform.position;
 		if(agent.remainingDistance < closingDistance){
 			agent.speed = closingSpeed;
+			c.moving = false;
 		}
 		else{
 			agent.speed = speed;
+			c.moving = true;
 		}
 		if(LineOfSight(target.GetComponent<Collider>(),15) && target.isAlive){
 			c.UseEquipped(true);
@@ -126,6 +132,7 @@ public class AI_GuardController : MonoBehaviour {
 
 		endStatus = endRoundStatus.Retreat;
 		agent.speed = speed;
+		c.moving = true;
 	}
 
 	void Retreat(){
@@ -151,7 +158,7 @@ public class AI_GuardController : MonoBehaviour {
 	void TutorialGuard(){
 		agent.destination = target.transform.position;
 		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(target.transform.position - transform.position), Time.deltaTime*3, 0));
-
+		c.moving = false;
 		agent.speed = 0;
 
 		if(talktimer <= 0){
