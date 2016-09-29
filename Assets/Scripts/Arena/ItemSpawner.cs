@@ -48,9 +48,6 @@ public class ItemSpawner : MonoBehaviour {
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		tracker = spawned.GetComponent<UI_GenericCard>();
 		tracker.target = transform.parent;
-		timer = 0;
-		//Spawn();
-
 	}
 	
 	// Update is called once per frame

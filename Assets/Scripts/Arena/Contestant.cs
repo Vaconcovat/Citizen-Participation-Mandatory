@@ -282,12 +282,15 @@ public class Contestant : MonoBehaviour {
 				killer = damage.owner;
 				isAlive = false;
 				Die(null);
-				if (killer.equipped.isSponsored) {
-					if(onCameras.Count > 0){
-						FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponKill, 0);
-						CameraInfluence(1, true);
+				if(killer.equipped != null){
+					if (killer.equipped.isSponsored) {
+						if(onCameras.Count > 0){
+							FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponKill, 0);
+							CameraInfluence(1, true);
+						}
 					}
 				}
+
 			}	
 			if (damage.damage > 0){
 				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().hurt, transform.position, 0.5f, true);
@@ -483,6 +486,9 @@ public class Contestant : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col)
 	{
+		if(col.gameObject.GetComponent<Item>() == null){
+			return;
+		}
 		if (SwapOnInteract)	{
 			if (equipped != null) { //does the contestant have something equipped
 				if (equipped.type == Item.ItemType.Ranged) { //is their equipped item a ranged weapon
