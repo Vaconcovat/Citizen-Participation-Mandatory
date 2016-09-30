@@ -162,9 +162,28 @@ public class InterfaceManager : MonoBehaviour {
 		influenceFeed.text = influenceText;
 	}
 
+	/// <summary>
+	/// Makes an announcement
+	/// </summary>
+	/// <param name="s">Text to display</param>
+	/// <param name="time">How long does this announcement last</param>
 	public void Announce(string s, float time){
 		activeannounce = true;
 		announcementsText.text = s;
+		announcementsText.fontSize = 50;
+		announcetimer = time;
+	}
+
+	/// <summary>
+	/// Makes an announcement, at a certain text size
+	/// </summary>
+	/// <param name="s">Text to display</param>
+	/// <param name="time">How long does this announement last</param>
+	/// <param name="size">Text size. 50 is default.</param>
+	public void Announce(string s, float time, int size){
+		activeannounce = true;
+		announcementsText.text = s;
+		announcementsText.fontSize = size;
 		announcetimer = time;
 	}
 

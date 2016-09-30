@@ -12,6 +12,7 @@ public class UI_GenericCard : MonoBehaviour {
 	public float lifetime;
 	public bool trackOffscreen;
 	public float offsetLeft, offsetRight, offsetTop, offsetBottom;
+	public int textSize = 30;
 
 	bool limited;
 	RectTransform rTrans;
@@ -61,6 +62,7 @@ public class UI_GenericCard : MonoBehaviour {
 			if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
 				Destroy(gameObject);
 			}
+			cardText.fontSize = textSize;
 		}
 
 	}

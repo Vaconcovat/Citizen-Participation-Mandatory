@@ -201,6 +201,7 @@ public class AIController : MonoBehaviour {
 		}
 		if(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 2){
 			beacon.text = "[ E ] Mercy | [ Q ] Execute";
+			beacon.textSize = 50;
 			if(Input.GetKeyDown(KeyCode.E)){
 				StartEvac();
 				if (StaticGameStats.TierFourUpgrades [0]) {
@@ -221,6 +222,7 @@ public class AIController : MonoBehaviour {
 		}
 		else{
 			beacon.text = "[ REQUESTING MEDIC ]";
+			beacon.textSize = 30;
 		}
 	}
 

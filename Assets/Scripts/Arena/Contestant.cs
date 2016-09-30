@@ -84,19 +84,14 @@ public class Contestant : MonoBehaviour {
 	public float ContestantDamageModifier;
 	public float ContestantRepModifier;
 	public bool IsDummy;
-	/// <summary>
-	/// The Contestants individual Damage Modifier
-	/// </summary>
 	public bool moving;
     Rigidbody body;
 	public Component[] bones;
 	public GameObject Rig;
-	//SpriteRenderer spr;
 	public Transform anchor;
+	public SkinnedMeshRenderer aliveRenderer;
 
 	GameObject currentTalkCard;
-	/* Comment: Tried to integrate same system used Overhead display from SkillCoolDown to no avail*/
-	//public GameObject contestantTrackerUI;
 
 	public List<Arena_Camera> onCameras = new List<Arena_Camera>();
 
@@ -109,16 +104,16 @@ public class Contestant : MonoBehaviour {
         //temp change color for enemies
         switch(type){
         	case ContestantType.AI:
-				GetComponent<SkinnedMeshRenderer>().material.color = new Color(255,0,0);
+				aliveRenderer.material.color = new Color(255,0,0);
         		break;
         	case ContestantType.Guard:
-				GetComponent<SkinnedMeshRenderer>().material.color = new Color(0,0,0.5f);
+				aliveRenderer.material.color = new Color(0,0,0.5f);
         		break;
         	case ContestantType.Medic:
-				GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
+				aliveRenderer.material.color = Color.yellow;
         		break;
         	case ContestantType.Target:
-        		GetComponent<SkinnedMeshRenderer>().material.color = new Color(0.5f,0,0);
+				aliveRenderer.material.color = new Color(0.5f,0,0);
         		break;
         }
 
@@ -545,6 +540,19 @@ public class Contestant : MonoBehaviour {
 		card.text = words;
 		card.lifetime = 3.0f;
 		card.target = transform;
+	}
+
+	public void Say(string words, int size){
+		if(currentTalkCard != null){
+			Destroy(currentTalkCard);
+		}
+		currentTalkCard = (GameObject)Instantiate(UI_Card);
+		currentTalkCard.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		UI_GenericCard card = currentTalkCard.GetComponent<UI_GenericCard>();
+		card.text = words;
+		card.lifetime = 3.0f;
+		card.target = transform;
+		card.textSize = size;
 	}
 
 	IEnumerator CheckCameraDelay(float delay){

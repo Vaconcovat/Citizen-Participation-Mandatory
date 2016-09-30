@@ -142,12 +142,12 @@ public class RoundManager : MonoBehaviour {
 	IEnumerator Countdown(){
 		EnableContestants(false);
 		while(preRoundTime > 0){
-			im.Announce(preRoundTime.ToString() + "...", 1);
+			im.Announce(preRoundTime.ToString() + "...", 1.0f, 100);
 			preRoundTime--;
 			yield return new WaitForSeconds(1);
 		}
 		EnableContestants(true);
-		im.Announce("FIGHT!", 2);
+		im.Announce("FIGHT!", 2, 100);
 		GetComponent<AudioSource>().Play();
 	}
 }
