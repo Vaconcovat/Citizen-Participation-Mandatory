@@ -160,8 +160,10 @@ public class AIController : MonoBehaviour {
 		medic.spawn = medicSpawn;
 		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " MERCIED ]", 3);
 		if(c.onCameras.Count > 0){
-				FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.ActivateMedicBeacon, 0);	
-				c.CameraInfluence(2, true);
+			if (!StaticGameStats.FirstRun) {
+				FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.ActivateMedicBeacon, 0);	
+			}
+			c.CameraInfluence(2, true);
 		}
 	}
 
@@ -629,7 +631,9 @@ public class AIController : MonoBehaviour {
 		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().execute, transform.position, 0.7f, true);
 		FindObjectOfType<InterfaceManager>().Announce("[ " + c.contestantName + " EXECUTED ]", 3);
 		if(c.onCameras.Count > 0){
-			FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.Execution, 0);
+			if (!StaticGameStats.FirstRun) {
+				FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.Execution, 0);
+			}
 			c.CameraInfluence(0, true);
 			c.Die("EXECUTED ON CAMERA");
 		}

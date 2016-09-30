@@ -18,7 +18,9 @@ public class SceneChange : MonoBehaviour {
 	}
 
 	public void ToPostArena(){
-		FindObjectOfType<StaticGameStats>().UpdateInfluence(1, StaticGameStats.CorEndOfTournamentDecayDecrease);
+		if (!StaticGameStats.FirstRun) {
+			FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.EndOfTournamentDecay, 1);
+		}
 		StaticGameStats.committed = false;
 		StaticGameStats.toPost = true;
 		SceneManager.LoadScene(0);

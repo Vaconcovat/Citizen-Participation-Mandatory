@@ -116,7 +116,6 @@ public class Item : MonoBehaviour {
 	}
 
 	public void Throw(){
-		Debug.Log("throwing");
 		thrower = equipper;
 		Unequip();
 		body.AddForce(transform.forward.normalized * 30, ForceMode.Impulse);

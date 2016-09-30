@@ -274,7 +274,6 @@ public class Contestant : MonoBehaviour {
 	/// </summary>
 	/// <param name="damage"></param>
 	public void TakeDamage(DamageParams damage){
-		Debug.Log (this.name + " HP: " + health);
 		if(isAlive){
 			health -= damage.damage;
 			body.AddForce(damage.knockback, ForceMode.Impulse);
@@ -285,7 +284,9 @@ public class Contestant : MonoBehaviour {
 				if(killer.equipped != null){
 					if (killer.equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponKill, 0);
+							if (!StaticGameStats.FirstRun) {
+								FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponKill, 0);
+							}
 							CameraInfluence(1, true);
 						}
 					}
@@ -337,7 +338,9 @@ public class Contestant : MonoBehaviour {
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
+							if (!StaticGameStats.FirstRun) {
+								FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
+							}
 							CameraInfluence(1, false);
 						}
 					}
@@ -349,7 +352,9 @@ public class Contestant : MonoBehaviour {
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){
-						FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
+							if (!StaticGameStats.FirstRun) {
+								FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
+							}
 							CameraInfluence(1, false);
 						}
 					}
@@ -359,7 +364,9 @@ public class Contestant : MonoBehaviour {
 						FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 						title = "KILLED ON CAMERA";
 					}
-					FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.OnCameraKill, 0);
+					if (!StaticGameStats.FirstRun) {
+						FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.OnCameraKill, 0);
+					}
 					CameraInfluence(0, true);
 					CameraInfluence(2, false);
 				}
@@ -388,7 +395,9 @@ public class Contestant : MonoBehaviour {
 					if(title == null){
 						title = "KILLED ON CAMERA";
 					}
-					FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.KillGuard, 0);
+					if (!StaticGameStats.FirstRun) {
+						FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.KillGuard, 0);
+					}
 				}
 				else{
 					title = "DECEASED";
