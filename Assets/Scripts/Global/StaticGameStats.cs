@@ -15,7 +15,7 @@ public class StaticGameStats : MonoBehaviour {
 	public static float oldrebRep = 50.0f;
 
 	//money variables
-	public static int avaliableMoney = 10;
+	public static int avaliableMoney;
 	public static int moneyHolder;
 
 	//sponsor variables
@@ -27,6 +27,8 @@ public class StaticGameStats : MonoBehaviour {
 	public static bool toPost = false;
 	public static bool tutorialDone = false;
 	public static bool QuestionnaireDone = false;
+	public static bool FirstRun = true;
+	public static int NumTimesClicked = 0;
 
 	//file to keep record
 	//public TextAsset textFile;
@@ -41,11 +43,11 @@ public class StaticGameStats : MonoBehaviour {
 	/// <summary>
 	/// [General Upgrade 0], [nothing]
 	/// </summary>
-	public static bool[] TierOneUpgrades = new bool[]{false, false, false};
+	public static bool[] TierOneUpgrades = new bool[]{false, true, false};
 	public static bool[] TierTwoUpgrades = new bool[]{false, false, false};
 	public static bool[] TierThreeUpgrades = new bool[]{false};
 	public static bool[] TierFourUpgrades = new bool[]{false};
-	public static bool[] Abilites = new bool[]{false, false, false, false};
+	public static bool[] Abilites = new bool[]{true, false, false, false};
 	public static int sponsor;
 	public static int arenasPlayed = 0;
 
@@ -92,7 +94,7 @@ public class StaticGameStats : MonoBehaviour {
 	//Rep Gain Triggers
 	//1.0f = 1% Rep Gain
 
-	public enum InfluenceTrigger{Execution, OnCameraKill, EndOfRoundSurrender, KillGuard, ActivateMedicBeacon, SuccessfulExtraction, EndOfRoundTriumph, SponsorWeaponFire, SponsorWeaponKill, SponsorItemUse, SponsorWeaponDeath};
+	public enum InfluenceTrigger{Execution, OnCameraKill, EndOfRoundSurrender, KillGuard, ActivateMedicBeacon, SuccessfulExtraction, EndOfRoundTriumph, SponsorWeaponFire, SponsorWeaponKill, SponsorItemUse, SponsorWeaponDeath, EndOfTournamentDecay};
 	public static List<InfluenceTrigger> influenceList;
 
 	//Government Rep Increase
@@ -134,7 +136,7 @@ public class StaticGameStats : MonoBehaviour {
 		path = Application.dataPath + "/Resources/InfluenceGains.txt";
 		influenceList = new List<InfluenceTrigger>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -143,47 +145,49 @@ public class StaticGameStats : MonoBehaviour {
 
 
 	public void Influence(InfluenceTrigger type, float amount){
-		influenceList.Add(type);
-		FindObjectOfType<InterfaceManager>().Influence(type);
-		switch(type){
+			influenceList.Add (type);
+			FindObjectOfType<InterfaceManager> ().Influence (type);
+			switch (type) {
 			case InfluenceTrigger.ActivateMedicBeacon:
-				UpdateInfluence(0, (amount!=0)?amount:GovActivateMedicBeaconDecrease);
-				UpdateInfluence(2, (amount!=0)?amount:RebActivateMedicBeaconIncrease);
+				UpdateInfluence (0, (amount != 0) ? amount : GovActivateMedicBeaconDecrease);
+				UpdateInfluence (2, (amount != 0) ? amount : RebActivateMedicBeaconIncrease);
 				break;
 			case InfluenceTrigger.EndOfRoundSurrender:
-				UpdateInfluence(0, (amount!=0)?amount:GovEndOfRoundSurrenderIncrease);
-				UpdateInfluence(2, (amount!=0)?amount:RebEndOfRoundSurrenderDecrease);
+				UpdateInfluence (0, (amount != 0) ? amount : GovEndOfRoundSurrenderIncrease);
+				UpdateInfluence (2, (amount != 0) ? amount : RebEndOfRoundSurrenderDecrease);
 				break;
 			case InfluenceTrigger.EndOfRoundTriumph:
-				UpdateInfluence(2, (amount!=0)?amount:RebEndOfRoundTriumphIncrease);
+				UpdateInfluence (2, (amount != 0) ? amount : RebEndOfRoundTriumphIncrease);
 				break;
 			case InfluenceTrigger.Execution:
-				UpdateInfluence(0, (amount!=0)?amount:GovExecutionIncrease);
+				UpdateInfluence (0, (amount != 0) ? amount : GovExecutionIncrease);
 				break;
 			case InfluenceTrigger.KillGuard:
-				UpdateInfluence(2, (amount!=0)?amount:RebKillGuardsIncrease);
+				UpdateInfluence (2, (amount != 0) ? amount : RebKillGuardsIncrease);
 				break;
 			case InfluenceTrigger.OnCameraKill:
-				UpdateInfluence(0, (amount!=0)?amount:GovOnCameraKillIncrease);
-				UpdateInfluence(2, (amount!=0)?amount:RebOnCameraKill);
+				UpdateInfluence (0, (amount != 0) ? amount : GovOnCameraKillIncrease);
+				UpdateInfluence (2, (amount != 0) ? amount : RebOnCameraKill);
 				break;
 			case InfluenceTrigger.SponsorItemUse:
-				UpdateInfluence(1, (amount!=0)?amount:CorSponsorItemUseIncrease);
+				UpdateInfluence (1, (amount != 0) ? amount : CorSponsorItemUseIncrease);
 				break;
 			case InfluenceTrigger.SponsorWeaponDeath:
-				UpdateInfluence(1, (amount!=0)?amount:CorSponsorWeaponDeathDecrease);
+				UpdateInfluence (1, (amount != 0) ? amount : CorSponsorWeaponDeathDecrease);
 				break;
 			case InfluenceTrigger.SponsorWeaponFire:
-				UpdateInfluence(1, (amount!=0)?amount:CorSponsorWeaponFireIncrease);
+				UpdateInfluence (1, (amount != 0) ? amount : CorSponsorWeaponFireIncrease);
 				break;
 			case InfluenceTrigger.SponsorWeaponKill:
-				UpdateInfluence(1, (amount!=0)?amount:CorSponsorWeaponKillIncrease);
+				UpdateInfluence (1, (amount != 0) ? amount : CorSponsorWeaponKillIncrease);
 				break;
 			case InfluenceTrigger.SuccessfulExtraction:
-				UpdateInfluence(2, (amount!=0)?amount:RebSuccessfulExtractionIncrease);
+				UpdateInfluence (2, (amount != 0) ? amount : RebSuccessfulExtractionIncrease);
 				break;
-		}
-
+			case InfluenceTrigger.EndOfTournamentDecay:
+				UpdateInfluence (1, (amount != 0) ? amount : CorEndOfTournamentDecayDecrease);
+				break;
+			}
 	}
 
 	public void UpdateInfluence(int faction, float amount){

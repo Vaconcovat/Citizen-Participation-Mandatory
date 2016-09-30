@@ -17,6 +17,8 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public GameObject moneyobject;
 	public Text directory;
 	public Text GovStatus, CorStatus, RebStatus, NormalTextObject, LoseTextObject, WinTextObject;
+	public GameObject NMGov, NMCor, NMReb;
+	public Image GMoney, RMoney, CMoney;
 
 	[Header("Settings")]
 	public float lerpTime;
@@ -35,6 +37,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		t = 0.0f;
+
 		gov_P = StaticGameStats.oldgovRep;
 		cor_P = StaticGameStats.oldcorRep;
 		reb_P = StaticGameStats.oldrebRep;
@@ -44,10 +47,52 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		reb_change = StaticGameStats.rebRep - StaticGameStats.oldrebRep;
 
 		//dish out the money
-		govMoney = CheckThresholds(gov_change);
-		corMoney = CheckThresholds(cor_change);
-		rebMoney = CheckThresholds(reb_change);
+		if (StaticGameStats.FirstRun) {
+			govMoney = 0;
+			corMoney = 0;
+			rebMoney = 0;
+			NMGov.SetActive (true);
+			NMCor.SetActive (true);
+			NMReb.SetActive (true);
+			govMoneyText.enabled = false;
+			GMoney.enabled = false;
 
+			corMoneyText.enabled = false;
+			CMoney.enabled = false;
+
+			rebMoneyText.enabled = false;
+			RMoney.enabled = false;
+		} else {
+			govMoney = CheckThresholds (gov_change);
+			corMoney = CheckThresholds (cor_change);
+			rebMoney = CheckThresholds (reb_change);
+			NMGov.SetActive (false);
+			NMCor.SetActive (false);
+			NMReb.SetActive (false);
+			govMoneyText.enabled = true;
+			GMoney.enabled = true;
+
+			corMoneyText.enabled = true;
+			CMoney.enabled = true;
+
+			rebMoneyText.enabled = true;
+			RMoney.enabled = true;
+		}
+
+		if (StaticGameStats.FirstRun) {
+			MoneyRecievedThisRound = 9;
+		} else {
+			MoneyRecievedThisRound = govMoney + corMoney + rebMoney;
+		}
+		if (StaticGameStats.toPost) {
+			StaticGameStats.avaliableMoney += MoneyRecievedThisRound;
+		}
+		totalMoney.text = "Total Funding Recived: " + MoneyRecievedThisRound.ToString();
+
+		//set the overlay bars
+		govBarOverlay.fillAmount = gov_P / 100.0f;
+		corBarOverlay.fillAmount = cor_P / 100.0f;
+		rebBarOverlay.fillAmount = reb_P / 100.0f;
 
 		if (StaticGameStats.govRep > 80.0f){
 			GovStatus.text = "Current Status:\t\tEVACUATION ORDER IMMINENT";
@@ -99,17 +144,6 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 			RebStatus.text = "Current Status:\t\tEXECUTION ORDER IMMINENT";
 			RebStatus.color = Color.yellow;
 		}
-
-		MoneyRecievedThisRound = govMoney + corMoney + rebMoney;
-		if (StaticGameStats.toPost) {
-			StaticGameStats.avaliableMoney += MoneyRecievedThisRound;
-		}
-		totalMoney.text = "Funding Recived from Last Tournament: " + MoneyRecievedThisRound.ToString();
-
-		//set the overlay bars
-		govBarOverlay.fillAmount = gov_P / 100.0f;
-		corBarOverlay.fillAmount = cor_P / 100.0f;
-		rebBarOverlay.fillAmount = reb_P / 100.0f;
 
 	}
 
@@ -179,18 +213,27 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 			StaticGameStats.oldrebRep = Mathf.Lerp(reb_P, StaticGameStats.rebRep, t);
 		}
 
+		if (StaticGameStats.FirstRun) {
+			govMoneyText.text = "N/A - New Manager";
+		} else {
+			govMoneyText.text = govMoney.ToString ();
+			corMoneyText.text = corMoney.ToString ();
+			rebMoneyText.text = rebMoney.ToString ();
+		}
+
+
 		//Update the UI objects
 		govRepText.text = "GOVERNMENT: \n" + Mathf.Floor(StaticGameStats.oldgovRep).ToString() + " %\n" + gov_change.ToString();
 		govBar.fillAmount = StaticGameStats.oldgovRep / 100.0f;
-		govMoneyText.text = govMoney.ToString();
+
 
 		corRepText.text = "CORPORATE: \n" + Mathf.Floor(StaticGameStats.oldcorRep).ToString() + " %\n" + cor_change.ToString();
 		corBar.fillAmount = StaticGameStats.oldcorRep / 100.0f;
-		corMoneyText.text = corMoney.ToString();
+
 
 		rebRepText.text = "REBEL: \n" + Mathf.Floor(StaticGameStats.oldrebRep).ToString() + " %\n" + reb_change.ToString();
 		rebBar.fillAmount = StaticGameStats.oldrebRep / 100.0f;
-		rebMoneyText.text = rebMoney.ToString();
+
 
 		if (StaticGameStats.govRep >= 100){
 			govBackground.color = new Color(0,0,Mathf.Abs(Mathf.Sin(t*10)),1);
