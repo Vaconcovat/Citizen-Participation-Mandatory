@@ -134,9 +134,6 @@ public class Item : MonoBehaviour {
 			Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
 			FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().equip, transform.position, 1.0f, false);
 		}
-		else{
-			FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().equip, transform.position, 1.0f, true);
-		}
 
 	}
 

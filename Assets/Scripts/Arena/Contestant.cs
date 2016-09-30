@@ -297,13 +297,20 @@ public class Contestant : MonoBehaviour {
 				float scale = Random.Range(0.08f,0.2f);
 				blood.transform.localScale = new Vector3(scale,scale,1);
 				if(type == ContestantType.Player){
-					FindObjectOfType<InterfaceManager>().noise.grainIntensityMax = 2.0f;
+					InterfaceManager im = FindObjectOfType<InterfaceManager>();
+					if (im != null){
+						im.noise.grainIntensityMax = 2.0f;
+					}
+
 				}
 				else if(type == ContestantType.AI){
 					GetComponent<AIController>().confidence -= (0.01f * damage.damage);
 				}
 				else if(type == ContestantType.Guard){
-					FindObjectOfType<RoundManager> ().noGuardDamage = false;
+					RoundManager rm = FindObjectOfType<RoundManager> ();
+					if(rm!=null){
+						rm.noGuardDamage = false;
+					}
 					AI_GuardController[] guards = FindObjectsOfType<AI_GuardController>();
 					foreach(AI_GuardController guard in guards){
 						guard.endStatus  = AI_GuardController.endRoundStatus.Fight;
