@@ -37,6 +37,7 @@ public class TutorialManager : MonoBehaviour {
 		announceText.text = "";
 		activeannounce = false;
 		player.GetComponent<PlayerController>().enabled = false;
+		music.volume = music.volume * PlayerPrefs.GetFloat("MusicVolume");
 	}
 
 	// Update is called once per frame

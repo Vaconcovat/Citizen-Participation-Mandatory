@@ -27,6 +27,7 @@ public class RoundManager : MonoBehaviour {
 	// Use this for initialization
 
 	void Awake () {
+		GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
 		noGuardDamage = true;
 		im = FindObjectOfType<InterfaceManager>();
 		contestants = FindObjectsOfType<Contestant>();

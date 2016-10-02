@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour {
 		GameObject spawned = (GameObject)Instantiate(prefab, position, Quaternion.identity);
 		AudioSource source = spawned.GetComponent<AudioSource>();
 		source.clip = audio;
-		source.volume = volume;
+		source.volume = volume * PlayerPrefs.GetFloat("SFXVolume");
 		source.spatialBlend = (spacial)?1.0f:0.0f;
 		source.Play();
 	}

@@ -14,6 +14,7 @@ public class MenuCamera : MonoBehaviour {
 	public bool isAlreadyStarted = false;
 
 	void Start(){
+		audioP.volume = PlayerPrefs.GetFloat("MusicVolume");
 		if(StaticGameStats.toPost){
 			StaticGameStats.TierOneUpgrades[0] = false;
 			StaticGameStats.TierOneUpgrades[1] = false;

@@ -30,7 +30,10 @@ public class AutoType : MonoBehaviour {
 		if(typeOnAwake){
 			StartCoroutine("TypeText", 0);
 		}
-
+		if(blip != null){
+			float newVolume = PlayerPrefs.GetFloat("SFXVolume") * blip.volume;
+			blip.volume = newVolume;
+		}
 	}
 
 	void Update(){
