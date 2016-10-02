@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 public class Contestant : MonoBehaviour {
 	public enum Trait{Sick, Strong, Scared, Fearless, Merciful, Relentless};
@@ -348,6 +349,25 @@ public class Contestant : MonoBehaviour {
 					}
 				}
 				GetComponent<PlayerController>().enabled = false;
+
+
+				//Analytics
+				//------------------------------
+				RoundManager rm = FindObjectOfType<RoundManager>();
+				if(rm != null){
+					int currentRound = rm.GetRound();
+					int remainingContestants = rm.aliveContestants;
+					float roundTime = Time.timeSinceLevelLoad;
+					Analytics.CustomEvent("PlayerArenaDeath", new Dictionary<string, object>{
+						{"Round", currentRound},
+						{"RemainingContestants", remainingContestants},
+						{"RoundTime", roundTime}
+					});
+				}
+				else{
+					Analytics.CustomEvent("PlayerTutorialDeath");
+				}
+
 				break;
 
 			case ContestantType.AI:
@@ -423,11 +443,9 @@ public class Contestant : MonoBehaviour {
 			equipped.Unequip();
 		}
 		equipped = null;
-		Debug.Log ("Equipped stage");
 		corpseRenderer.material = hologram;
 		GetComponent<Animator>().enabled = false;
 		GameObject spawned = (GameObject)Instantiate(deathCard);
-		Debug.Log ("DeathCard stage");
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		UI_DeathCard tracker = spawned.GetComponent<UI_DeathCard>();
 		tracker.contest = this;

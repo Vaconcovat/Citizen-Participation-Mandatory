@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 using System.Collections;
+using UnityEngine.Analytics;
 
 public class LoseInterfaceManager : MonoBehaviour {
 	public AutoType at;
@@ -22,6 +23,7 @@ public class LoseInterfaceManager : MonoBehaviour {
 
 	public void Lose(){
 		at.StartType();
+		Analytics.CustomEvent("Lose");
 	}
 
 	public void Finished(){

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 using System.Collections;
+using UnityEngine.Analytics;
 
 public class WinInterfaceManager : MonoBehaviour {
 
@@ -27,6 +28,7 @@ public class WinInterfaceManager : MonoBehaviour {
     public void Win()
     {
         at.StartType();
+		Analytics.CustomEvent("Win");
     }
 
     public void Finished()

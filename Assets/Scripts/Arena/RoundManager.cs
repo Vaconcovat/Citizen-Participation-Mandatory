@@ -150,4 +150,8 @@ public class RoundManager : MonoBehaviour {
 		im.Announce("FIGHT!", 2, 100);
 		GetComponent<AudioSource>().Play();
 	}
+
+	public int GetRound(){
+		return roundNumber;
+	}
 }

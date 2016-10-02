@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 public class arena_start_Manager : MonoBehaviour {
 
@@ -14,6 +16,11 @@ public class arena_start_Manager : MonoBehaviour {
 
 	void Update(){
 		if(done && (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))){
+			//----------
+			//Analytics
+			Analytics.CustomEvent("ArenaStart", new Dictionary<string, object>{
+				{"Sponsor", StaticGameStats.sponsor}
+			});
 			FindObjectOfType<SceneChange> ().Arena ();
 		}
 		if (done && (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))) {
