@@ -18,7 +18,7 @@ public class CameraEnabler : MonoBehaviour {
 	public GameObject Powerbox6;
 
 	void Awake () {
-		if (StaticGameStats.TierThreeUpgrades [0]) {
+		if (StaticGameStats.instance.TierThreeUpgrades [0]) {
 			Camera1.SetActive (true);
 			Camera2.SetActive (true);
 			Camera3.SetActive (true);

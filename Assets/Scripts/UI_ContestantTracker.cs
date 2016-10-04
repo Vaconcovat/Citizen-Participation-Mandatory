@@ -13,7 +13,6 @@ public class UI_ContestantTracker : MonoBehaviour {
 	public GameObject rightObj, leftObj;
 	public Image underBar_l, bar_l, underBar_r, bar_r;
 	public Color underColour, barColour;
-	AIController ai;
 
 	public bool onRight;
 
@@ -22,7 +21,6 @@ public class UI_ContestantTracker : MonoBehaviour {
 		rTrans = GetComponent<RectTransform>();
 		c = FindObjectOfType<Canvas>();
 		size = c.GetComponent<RectTransform>().sizeDelta;
-		ai = contest.GetComponent<AIController>();
 		underBar_l.color = underColour;
 		bar_l.color = barColour;
 		underBar_r.color = underColour;

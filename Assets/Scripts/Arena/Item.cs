@@ -155,7 +155,7 @@ public class Item : MonoBehaviour {
 					if(c.gameObject.GetComponent<Contestant>() != thrower){
 						c.gameObject.SendMessage("TakeDamage", new Contestant.DamageParams(ThrownDamage, thrower, Vector3.zero, c.contacts[0].point), SendMessageOptions.DontRequireReceiver);
 					}
-					if(StaticGameStats.TierTwoUpgrades[2]){
+					if(StaticGameStats.instance.TierTwoUpgrades[2]){
 						if (type == ItemType.Ranged) {
 							c.rigidbody.AddForce (transform.forward.normalized * KnockbackAmount, ForceMode.Impulse);
 						}

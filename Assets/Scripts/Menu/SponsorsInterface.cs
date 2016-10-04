@@ -18,41 +18,41 @@ public class SponsorsInterface : MonoBehaviour {
 	void Start () {
 		chosenSponsor = -1;
 		activeSponsor = 0;
-		moneyHolder = StaticGameStats.moneyHolder;
+		moneyHolder = StaticGameStats.instance.moneyHolder;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
-		if(StaticGameStats.avaliableMoney == 0 && StaticGameStats.chosenSponsor != -1){
+		moneyText.text = "Funding:" + StaticGameStats.instance.avaliableMoney.ToString();
+		if(StaticGameStats.instance.avaliableMoney == 0 && StaticGameStats.instance.chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
 		else{
 			commitButton.interactable = false;
 		}
-		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\PLANNING\SPONSORS.gov";
+		directory.text = @"G:\GovorNet\" + StaticGameStats.instance.PlayerName + @"\PLANNING\SPONSORS.gov";
 	}
 
 
 	public void SignMegaCity(){
-		StaticGameStats.activeSponsor = 0;
-		StaticGameStats.chosenSponsor = 0;
+		StaticGameStats.instance.activeSponsor = 0;
+		StaticGameStats.instance.chosenSponsor = 0;
 		signMegaCity.interactable = false;
 		signVelocitech.interactable = true;
 		signExplodena.interactable = true;
 	}
 
 	public void SignExplodena(){
-		StaticGameStats.activeSponsor = 1;
-		StaticGameStats.chosenSponsor = 1;
+		StaticGameStats.instance.activeSponsor = 1;
+		StaticGameStats.instance.chosenSponsor = 1;
 		signExplodena.interactable = false;
 		signMegaCity.interactable = true;
 		signVelocitech.interactable = true;
 	}
 
 	public void SignVelocitech(){
-		StaticGameStats.activeSponsor = 2;
-		StaticGameStats.chosenSponsor = 2;
+		StaticGameStats.instance.activeSponsor = 2;
+		StaticGameStats.instance.chosenSponsor = 2;
 		signExplodena.interactable = true;
 		signMegaCity.interactable = true;
 		signVelocitech.interactable = false;

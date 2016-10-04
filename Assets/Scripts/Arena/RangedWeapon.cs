@@ -59,9 +59,9 @@ public class RangedWeapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(StaticGameStats.TierOneUpgrades[1]){
+		if(StaticGameStats.instance.TierOneUpgrades[1]){
 			if (!GetComponent<Item> ().isSponsored) {
-				ammo = Mathf.RoundToInt(ammo * StaticGameStats.Upgrade4MaxAmmoBuff);
+				ammo = Mathf.RoundToInt(ammo * StaticGameStats.instance.Upgrade4MaxAmmoBuff);
 				Maxammo = ammo;
 			}
 		}
@@ -112,8 +112,8 @@ public class RangedWeapon : MonoBehaviour {
 			Instantiate(muzzleFlash, muzzle.position, muzzle.rotation);
 		}
 		if(GetComponent<Item>().isSponsored && GetComponent<Item>().equipper.onCameras.Count > 0){
-			if (!StaticGameStats.FirstRun) {
-				FindObjectOfType<StaticGameStats>().Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponFire, 0); //updated to RebWeaponOnCamera
+			if (!StaticGameStats.instance.FirstRun) {
+				StaticGameStats.instance.Influence(StaticGameStats.InfluenceTrigger.SponsorWeaponFire, 0); //updated to RebWeaponOnCamera
 			}
 			GetComponent<Item>().equipper.CameraInfluence(1,true);
 		}

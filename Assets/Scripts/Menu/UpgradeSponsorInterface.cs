@@ -18,42 +18,42 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		chosenSponsor = StaticGameStats.chosenSponsor;
-		availableMoney = StaticGameStats.avaliableMoney;
+		chosenSponsor = StaticGameStats.instance.chosenSponsor;
+		availableMoney = StaticGameStats.instance.avaliableMoney;
 		greyColor = Color.grey;
 		whiteColor = Color.white;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		availableMoney = StaticGameStats.avaliableMoney;
-		chosenSponsor = StaticGameStats.chosenSponsor;
-		moneyText.text = "Total Available Funding:" + StaticGameStats.avaliableMoney.ToString();
+		availableMoney = StaticGameStats.instance.avaliableMoney;
+		chosenSponsor = StaticGameStats.instance.chosenSponsor;
+		moneyText.text = "Total Available Funding:" + StaticGameStats.instance.avaliableMoney.ToString();
 		if(chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
 		else{
 			commitButton.interactable = false;
 		}
-		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\PLANNING.gov";
+		directory.text = @"G:\GovorNet\" + StaticGameStats.instance.PlayerName + @"\PLANNING.gov";
 	}
 
 	public void Revert(){
-		StaticGameStats.committed = false;
-		StaticGameStats.chosenSponsor = -1;
-		StaticGameStats.activeSponsor = 0;
-		StaticGameStats.TierOneUpgrades[0] = false;
-		StaticGameStats.TierOneUpgrades[1] = false;
-		StaticGameStats.TierOneUpgrades[2] = false;
-		StaticGameStats.TierTwoUpgrades[0] = false;
-		StaticGameStats.TierTwoUpgrades[1] = false;
-		StaticGameStats.TierTwoUpgrades[2] = false;
-		StaticGameStats.TierThreeUpgrades[0] = false;
-		StaticGameStats.TierFourUpgrades[0] = false;
-		StaticGameStats.Abilites[0] = false;
-		StaticGameStats.Abilites[1] = false;
-		StaticGameStats.Abilites[2] = false;
-		StaticGameStats.Abilites[3] = false;
+		StaticGameStats.instance.committed = false;
+		StaticGameStats.instance.chosenSponsor = -1;
+		StaticGameStats.instance.activeSponsor = 0;
+		StaticGameStats.instance.TierOneUpgrades[0] = false;
+		StaticGameStats.instance.TierOneUpgrades[1] = false;
+		StaticGameStats.instance.TierOneUpgrades[2] = false;
+		StaticGameStats.instance.TierTwoUpgrades[0] = false;
+		StaticGameStats.instance.TierTwoUpgrades[1] = false;
+		StaticGameStats.instance.TierTwoUpgrades[2] = false;
+		StaticGameStats.instance.TierThreeUpgrades[0] = false;
+		StaticGameStats.instance.TierFourUpgrades[0] = false;
+		StaticGameStats.instance.Abilites[0] = false;
+		StaticGameStats.instance.Abilites[1] = false;
+		StaticGameStats.instance.Abilites[2] = false;
+		StaticGameStats.instance.Abilites[3] = false;
 
 		for (int i = 0; i < 11; i++) {
 			UpgradeInterface.buttonActive [i] = false;
@@ -66,8 +66,8 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 
 
 
-		StaticGameStats.avaliableMoney = StaticGameStats.moneyHolder;
-		moneyText.text = "Funding:" + StaticGameStats.avaliableMoney.ToString();
+		StaticGameStats.instance.avaliableMoney = StaticGameStats.instance.moneyHolder;
+		moneyText.text = "Funding:" + StaticGameStats.instance.avaliableMoney.ToString();
 		signExplodena.interactable = true;
 		signMegaCity1.interactable = true;
         commitButton.interactable = false;
@@ -75,8 +75,8 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	}
 
 	public void Commit(){
-		StaticGameStats.committed = true;
-		StaticGameStats.sponsor = StaticGameStats.chosenSponsor;
+		StaticGameStats.instance.committed = true;
+		StaticGameStats.instance.sponsor = StaticGameStats.instance.chosenSponsor;
 		FindObjectOfType<MenuCamera>().ZoomedOut();
 	}
 

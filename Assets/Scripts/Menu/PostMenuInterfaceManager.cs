@@ -38,16 +38,16 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	void Start () {
 		t = 0.0f;
 
-		gov_P = StaticGameStats.oldgovRep;
-		cor_P = StaticGameStats.oldcorRep;
-		reb_P = StaticGameStats.oldrebRep;
+		gov_P = StaticGameStats.instance.oldgovRep;
+		cor_P = StaticGameStats.instance.oldcorRep;
+		reb_P = StaticGameStats.instance.oldrebRep;
 
-		gov_change = StaticGameStats.govRep - StaticGameStats.oldgovRep;
-		cor_change = StaticGameStats.corRep - StaticGameStats.oldcorRep;
-		reb_change = StaticGameStats.rebRep - StaticGameStats.oldrebRep;
+		gov_change = StaticGameStats.instance.govRep - StaticGameStats.instance.oldgovRep;
+		cor_change = StaticGameStats.instance.corRep - StaticGameStats.instance.oldcorRep;
+		reb_change = StaticGameStats.instance.rebRep - StaticGameStats.instance.oldrebRep;
 
 		//dish out the money
-		if (StaticGameStats.FirstRun) {
+		if (StaticGameStats.instance.FirstRun) {
 			govMoney = 0;
 			corMoney = 0;
 			rebMoney = 0;
@@ -79,13 +79,13 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 			RMoney.enabled = true;
 		}
 
-		if (StaticGameStats.FirstRun) {
+		if (StaticGameStats.instance.FirstRun) {
 			MoneyRecievedThisRound = 9;
 		} else {
 			MoneyRecievedThisRound = govMoney + corMoney + rebMoney;
 		}
-		if (StaticGameStats.toPost) {
-			StaticGameStats.avaliableMoney += MoneyRecievedThisRound;
+		if (StaticGameStats.instance.toPost) {
+			StaticGameStats.instance.avaliableMoney += MoneyRecievedThisRound;
 		}
 		totalMoney.text = "Total Funding Recived: " + MoneyRecievedThisRound.ToString();
 
@@ -94,53 +94,53 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		corBarOverlay.fillAmount = cor_P / 100.0f;
 		rebBarOverlay.fillAmount = reb_P / 100.0f;
 
-		if (StaticGameStats.govRep > 80.0f){
+		if (StaticGameStats.instance.govRep > 80.0f){
 			GovStatus.text = "Current Status:\t\tEVACUATION ORDER IMMINENT";
 			GovStatus.color = Color.blue;
-		} else if (StaticGameStats.govRep >= 75.0f) {
+		} else if (StaticGameStats.instance.govRep >= 75.0f) {
 			GovStatus.text = "Current Status:\t\tPleased";
 			GovStatus.color = Color.green;
-		} else if (StaticGameStats.govRep >= 50.0f) {
+		} else if (StaticGameStats.instance.govRep >= 50.0f) {
 			GovStatus.text = "Current Status:\t\tNeutral";
 			GovStatus.color = Color.white;
-		} else if (StaticGameStats.govRep > 25.0f){
+		} else if (StaticGameStats.instance.govRep > 25.0f){
 			GovStatus.text = "Current Status:\t\tAngry";
 			GovStatus.color = Color.red;
-		} else if (StaticGameStats.govRep < 25.0f){
+		} else if (StaticGameStats.instance.govRep < 25.0f){
 			GovStatus.text = "Current Status:\t\tEXECUTION ORDER IMMINENT";
 			GovStatus.color = Color.yellow;
 		}
 
-		if (StaticGameStats.corRep > 80.0f){
+		if (StaticGameStats.instance.corRep > 80.0f){
 			CorStatus.text = "Current Status:\t\tEVACUATION ORDER IMMINENT";
 			CorStatus.color = Color.blue;
-		} else if (StaticGameStats.corRep >= 75.0f) {
+		} else if (StaticGameStats.instance.corRep >= 75.0f) {
 			CorStatus.text = "Current Status:\t\tPleased";
 			CorStatus.color = Color.green;
-		} else if (StaticGameStats.corRep >= 50.0f) {
+		} else if (StaticGameStats.instance.corRep >= 50.0f) {
 			CorStatus.text = "Current Status:\t\tNeutral";
 			CorStatus.color = Color.white;
-		} else if (StaticGameStats.corRep > 25.0f){
+		} else if (StaticGameStats.instance.corRep > 25.0f){
 			CorStatus.text = "Current Status:\t\tAngry";
 			CorStatus.color = Color.red;
-		} else if (StaticGameStats.corRep < 25.0f){
+		} else if (StaticGameStats.instance.corRep < 25.0f){
 			CorStatus.text = "Current Status:\t\tEXECUTION ORDER IMMINENT";
 			CorStatus.color = Color.yellow;
 		}
 
-		if (StaticGameStats.rebRep > 80.0f){
+		if (StaticGameStats.instance.rebRep > 80.0f){
 			RebStatus.text = "Current Status:\t\tEVACUATION ORDER IMMINENT";
 			RebStatus.color = Color.blue;
-		} else if (StaticGameStats.rebRep >= 75.0f) {
+		} else if (StaticGameStats.instance.rebRep >= 75.0f) {
 			RebStatus.text = "Current Status:\t\tPleased";
 			RebStatus.color = Color.green;
-		} else if (StaticGameStats.rebRep >= 50.0f) {
+		} else if (StaticGameStats.instance.rebRep >= 50.0f) {
 			RebStatus.text = "Current Status:\t\tNeutral";
 			RebStatus.color = Color.white;
-		} else if (StaticGameStats.rebRep > 25.0f){
+		} else if (StaticGameStats.instance.rebRep > 25.0f){
 			RebStatus.text = "Current Status:\t\tAngry";
 			RebStatus.color = Color.red;
-		} else if (StaticGameStats.rebRep < 25.0f){
+		} else if (StaticGameStats.instance.rebRep < 25.0f){
 			RebStatus.text = "Current Status:\t\tEXECUTION ORDER IMMINENT";
 			RebStatus.color = Color.yellow;
 		}
@@ -203,17 +203,17 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		t += Time.deltaTime / lerpTime;
 
 		//lerp it up
-		if(StaticGameStats.oldgovRep != StaticGameStats.govRep){
-			StaticGameStats.oldgovRep = Mathf.Lerp(gov_P, StaticGameStats.govRep, t);
+		if(StaticGameStats.instance.oldgovRep != StaticGameStats.instance.govRep){
+			StaticGameStats.instance.oldgovRep = Mathf.Lerp(gov_P, StaticGameStats.instance.govRep, t);
 		}
-		if(StaticGameStats.oldcorRep != StaticGameStats.corRep){
-			StaticGameStats.oldcorRep = Mathf.Lerp(cor_P, StaticGameStats.corRep, t);
+		if(StaticGameStats.instance.oldcorRep != StaticGameStats.instance.corRep){
+			StaticGameStats.instance.oldcorRep = Mathf.Lerp(cor_P, StaticGameStats.instance.corRep, t);
 		}
-		if(StaticGameStats.oldrebRep != StaticGameStats.rebRep){
-			StaticGameStats.oldrebRep = Mathf.Lerp(reb_P, StaticGameStats.rebRep, t);
+		if(StaticGameStats.instance.oldrebRep != StaticGameStats.instance.rebRep){
+			StaticGameStats.instance.oldrebRep = Mathf.Lerp(reb_P, StaticGameStats.instance.rebRep, t);
 		}
 
-		if (StaticGameStats.FirstRun) {
+		if (StaticGameStats.instance.FirstRun) {
 			govMoneyText.text = "N/A - New Manager";
 		} else {
 			govMoneyText.text = govMoney.ToString ();
@@ -223,37 +223,37 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 
 
 		//Update the UI objects
-		govRepText.text = "GOVERNMENT: \n" + Mathf.Floor(StaticGameStats.oldgovRep).ToString() + " %\n" + gov_change.ToString();
-		govBar.fillAmount = StaticGameStats.oldgovRep / 100.0f;
+		govRepText.text = "GOVERNMENT: \n" + Mathf.Floor(StaticGameStats.instance.oldgovRep).ToString() + " %\n" + gov_change.ToString();
+		govBar.fillAmount = StaticGameStats.instance.oldgovRep / 100.0f;
 
 
-		corRepText.text = "CORPORATE: \n" + Mathf.Floor(StaticGameStats.oldcorRep).ToString() + " %\n" + cor_change.ToString();
-		corBar.fillAmount = StaticGameStats.oldcorRep / 100.0f;
+		corRepText.text = "CORPORATE: \n" + Mathf.Floor(StaticGameStats.instance.oldcorRep).ToString() + " %\n" + cor_change.ToString();
+		corBar.fillAmount = StaticGameStats.instance.oldcorRep / 100.0f;
 
 
-		rebRepText.text = "REBEL: \n" + Mathf.Floor(StaticGameStats.oldrebRep).ToString() + " %\n" + reb_change.ToString();
-		rebBar.fillAmount = StaticGameStats.oldrebRep / 100.0f;
+		rebRepText.text = "REBEL: \n" + Mathf.Floor(StaticGameStats.instance.oldrebRep).ToString() + " %\n" + reb_change.ToString();
+		rebBar.fillAmount = StaticGameStats.instance.oldrebRep / 100.0f;
 
 
-		if (StaticGameStats.govRep >= 100){
+		if (StaticGameStats.instance.govRep >= 100){
 			govBackground.color = new Color(0,0,Mathf.Abs(Mathf.Sin(t*10)),1);
 		}
-		if (StaticGameStats.corRep >= 100){
+		if (StaticGameStats.instance.corRep >= 100){
 			corBackground.color = new Color(0,0,Mathf.Abs(Mathf.Sin(t*10)),1);
 		}
-		if (StaticGameStats.rebRep >= 100){
+		if (StaticGameStats.instance.rebRep >= 100){
 			rebBackground.color = new Color(0,0,Mathf.Abs(Mathf.Sin(t*10)),1);
 		}
-		if (StaticGameStats.govRep <= 0){
+		if (StaticGameStats.instance.govRep <= 0){
 			govBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
 		}
-		if (StaticGameStats.corRep <= 0){
+		if (StaticGameStats.instance.corRep <= 0){
 			corBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
 		}
-		if (StaticGameStats.rebRep <= 0){
+		if (StaticGameStats.instance.rebRep <= 0){
 			rebBackground.color = new Color(Mathf.Abs(Mathf.Sin(t*10)),0,0,1);
 		}
-		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\COMMS.gov";
+		directory.text = @"G:\GovorNet\" + StaticGameStats.instance.PlayerName + @"\COMMS.gov";
 	}
 
 	int CheckThresholds(float change){

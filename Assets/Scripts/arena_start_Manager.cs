@@ -20,7 +20,7 @@ public class arena_start_Manager : MonoBehaviour {
 			//Analytics
 			if(PlayerPrefs.GetInt("Analytics") == 1){
 				Analytics.CustomEvent("ArenaStart", new Dictionary<string, object>{
-					{"Sponsor", StaticGameStats.sponsor}
+					{"Sponsor", StaticGameStats.instance.sponsor}
 				});
 			}
 			//---------
@@ -35,37 +35,37 @@ public class arena_start_Manager : MonoBehaviour {
 		textTier1 += "\n[- - - TIER 1 UPGRADES - - -]";
 		
 		//T1
-		if(StaticGameStats.TierOneUpgrades[0]){
+		if(StaticGameStats.instance.TierOneUpgrades[0]){
 			textTier1 += "\nBackpack Slot Unlocked, Press L-CTRL to Swap Weapons!";
 		}
-		if(StaticGameStats.TierOneUpgrades[1]){
+		if(StaticGameStats.instance.TierOneUpgrades[1]){
 			textTier1 += "\nAll Non-Sponsored Weapons have +50% Ammo";
 		}
-		if(StaticGameStats.TierOneUpgrades[2]){
+		if(StaticGameStats.instance.TierOneUpgrades[2]){
 			textTier1 += "\nAll Reputation gain is increased by 5%!";
 		}
 
 		textTier2 += "\n[- - - TIER 2 UPGRADES - - -]";
 		//T2
-		if(StaticGameStats.TierTwoUpgrades[0]){
+		if(StaticGameStats.instance.TierTwoUpgrades[0]){
 			textTier2 += "\nAmount of Cameras in Arena Doubled";
 		}
-		if(StaticGameStats.TierTwoUpgrades[1]){
+		if(StaticGameStats.instance.TierTwoUpgrades[1]){
 			textTier2 += "\nThrown Weapons now Cause Knockback";
 		}
-		if(StaticGameStats.TierTwoUpgrades[2]){
+		if(StaticGameStats.instance.TierTwoUpgrades[2]){
 			textTier2 += "\nAll Contestants are now Merciful";
 		}
 
 		textTier3 += "\n[- - - TIER 3 UPGRADES - - -]";
 		//T3
-		if(StaticGameStats.TierThreeUpgrades[0]){
+		if(StaticGameStats.instance.TierThreeUpgrades[0]){
 			textTier3 += "\nHealth Kits Now Restore More Health over time";
 		}
 
 		textTier4 += "\n[- - - TIER 4 UPGRADES - - -]";
 		//T4
-		if(StaticGameStats.TierFourUpgrades[0]){
+		if(StaticGameStats.instance.TierFourUpgrades[0]){
 			textTier4 += "\nExecuting an enemy grants bonus Weapon Damage";
 			textTier4 += "\nShowing Mercy restores player health";
 		}
@@ -73,23 +73,23 @@ public class arena_start_Manager : MonoBehaviour {
 		textAbilities += "\n[- - - ABILITIES - - -]";
 
 		//Abilities
-		if(StaticGameStats.Abilites[0]){
+		if(StaticGameStats.instance.Abilites[0]){
 			textAbilities += "\nBIO-SCAN";
 		}
-		if(StaticGameStats.Abilites[1]){
+		if(StaticGameStats.instance.Abilites[1]){
 			textAbilities += "\nBLACKOUT";
 		}
-		if(StaticGameStats.Abilites[2]){
+		if(StaticGameStats.instance.Abilites[2]){
 			textAbilities += "\nVENDOR OVERLOAD";
 		}
-		if(StaticGameStats.Abilites[3]){
+		if(StaticGameStats.instance.Abilites[3]){
 			textAbilities += "\nSHOCK COLLAR";
 		}
 
 		textSponsorship += "\n[- - - SPONSORSHIP - - -]";
 
 		//chosen sponsor
-		switch(StaticGameStats.sponsor){
+		switch(StaticGameStats.instance.sponsor){
 			case(0):
 				textSponsorship += "\nPrismex Technologies Contract Signed!";
 				break;

@@ -15,25 +15,25 @@ public class MenuCamera : MonoBehaviour {
 
 	void Start(){
 		audioP.volume = PlayerPrefs.GetFloat("MusicVolume");
-		if(StaticGameStats.toPost){
-			StaticGameStats.TierOneUpgrades[0] = false;
-			StaticGameStats.TierOneUpgrades[1] = false;
-			StaticGameStats.TierOneUpgrades[2] = false;
+		if(StaticGameStats.instance.toPost){
+			StaticGameStats.instance.TierOneUpgrades[0] = false;
+			StaticGameStats.instance.TierOneUpgrades[1] = false;
+			StaticGameStats.instance.TierOneUpgrades[2] = false;
 
-			StaticGameStats.TierTwoUpgrades[0] = false;
-			StaticGameStats.TierTwoUpgrades[1] = false;
-			StaticGameStats.TierTwoUpgrades[2] = false;
+			StaticGameStats.instance.TierTwoUpgrades[0] = false;
+			StaticGameStats.instance.TierTwoUpgrades[1] = false;
+			StaticGameStats.instance.TierTwoUpgrades[2] = false;
 
-			StaticGameStats.TierThreeUpgrades[0] = false;
+			StaticGameStats.instance.TierThreeUpgrades[0] = false;
 
-			StaticGameStats.TierFourUpgrades [0] = false;
+			StaticGameStats.instance.TierFourUpgrades [0] = false;
 
-			StaticGameStats.Abilites[0] = false;
-			StaticGameStats.Abilites[1] = false;
-			StaticGameStats.Abilites[2] = false;
-			StaticGameStats.Abilites[3] = false;
+			StaticGameStats.instance.Abilites[0] = false;
+			StaticGameStats.instance.Abilites[1] = false;
+			StaticGameStats.instance.Abilites[2] = false;
+			StaticGameStats.instance.Abilites[3] = false;
 			Post();
-			StaticGameStats.toPost = false;
+			StaticGameStats.instance.toPost = false;
 		}
 		else if (LoadArena.FromTutorial == true) {
 			Arena_Start ();
@@ -53,11 +53,11 @@ public class MenuCamera : MonoBehaviour {
 		}
 
 		if (state == 1 && Input.GetKeyDown(KeyCode.Delete)){
-			StaticGameStats.committed = !StaticGameStats.committed;
+			StaticGameStats.instance.committed = !StaticGameStats.instance.committed;
 		}
 
 		if(state == 9 && Input.GetKeyDown(KeyCode.Delete)){
-			StaticGameStats.avaliableMoney++;
+			StaticGameStats.instance.avaliableMoney++;
 		}
 	}
 
@@ -81,9 +81,9 @@ public class MenuCamera : MonoBehaviour {
 		if (!audioP.isPlaying){
 			audioP.Play();
 		}
-		if ((StaticGameStats.govRep <= 0) || (StaticGameStats.corRep <= 0) || (StaticGameStats.rebRep <= 0)) {
+		if ((StaticGameStats.instance.govRep <= 0) || (StaticGameStats.instance.corRep <= 0) || (StaticGameStats.instance.rebRep <= 0)) {
 			FindObjectOfType<PostMenuInterfaceManager> ().Lose ();
-		} else if ((StaticGameStats.govRep >= 100) || (StaticGameStats.corRep >= 100) || (StaticGameStats.rebRep >= 100)) {
+		} else if ((StaticGameStats.instance.govRep >= 100) || (StaticGameStats.instance.corRep >= 100) || (StaticGameStats.instance.rebRep >= 100)) {
 			FindObjectOfType<PostMenuInterfaceManager> ().Victory ();
 		} else {
 			FindObjectOfType<PostMenuInterfaceManager> ().Normal ();
@@ -98,7 +98,7 @@ public class MenuCamera : MonoBehaviour {
 	public void Login(){
 		DisableAllBut(_Login);
 		state = 5;
-		StaticGameStats.QuestionnaireDone = true;
+		StaticGameStats.instance.QuestionnaireDone = true;
 	}
 
 	public void Lose(){
@@ -140,7 +140,7 @@ public class MenuCamera : MonoBehaviour {
 
 	public void Questionaire(){
 		DisableAllBut(_Questionaire);
-		if (StaticGameStats.QuestionnaireDone == false) {
+		if (StaticGameStats.instance.QuestionnaireDone == false) {
 			state = 12;
 		} else {
 			ZoomedOut();	
@@ -161,7 +161,7 @@ public class MenuCamera : MonoBehaviour {
 
 	public void Orientation(){
 		DisableAllBut(_Orientation);
-		if(StaticGameStats.QuestionnaireDone == false){
+		if(StaticGameStats.instance.QuestionnaireDone == false){
 			state = 3;
 			FindObjectOfType<orientation_manager>().Orientation();
 		}

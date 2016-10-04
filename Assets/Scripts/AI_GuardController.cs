@@ -79,8 +79,8 @@ public class AI_GuardController : MonoBehaviour {
 				target.equipped = null;
 			}
 			target.GetComponent<PlayerController>().enabled = false;
-			if (!StaticGameStats.FirstRun) {
-				FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.EndOfRoundSurrender, 0);
+			if (!StaticGameStats.instance.FirstRun) {
+				StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.EndOfRoundSurrender, 0);
 			}
 		}
 		else{

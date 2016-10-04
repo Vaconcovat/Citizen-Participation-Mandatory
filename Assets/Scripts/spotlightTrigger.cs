@@ -22,10 +22,10 @@ public class spotlightTrigger : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Contestant") {
 			//Debug.Log ("Player is within trigger");
-			if (TargetsDead () == true || StaticGameStats.tutorialDone) {
+			if (TargetsDead () == true || StaticGameStats.instance.tutorialDone) {
 				Destroy (toBeRemoved, 0.5f);
 				lightToBeChanged.color = Color.green;
-				StaticGameStats.tutorialDone = true;
+				StaticGameStats.instance.tutorialDone = true;
 			}
 		}
 	}

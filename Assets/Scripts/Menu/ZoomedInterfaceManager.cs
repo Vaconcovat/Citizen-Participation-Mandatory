@@ -20,7 +20,7 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(StaticGameStats.committed){
+		if(StaticGameStats.instance.committed){
 			preButton.interactable = false;
 			postButton.interactable = false;
 			arenaButton.interactable = true;
@@ -47,7 +47,7 @@ public class ZoomedInterfaceManager : MonoBehaviour {
 			arenaButton.GetComponent<HoverText> ().tooltip = arenaNotCommitText;
 			postButton.GetComponent<HoverText> ().tooltip = postNotCommitText;
 		}
-		WelcomeText.text = "Welcome to GovorNet Systems, " + StaticGameStats.PlayerName;
-		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\MAIN.gov";
+		WelcomeText.text = "Welcome to GovorNet Systems, " + StaticGameStats.instance.PlayerName;
+		directory.text = @"G:\GovorNet\" + StaticGameStats.instance.PlayerName + @"\MAIN.gov";
 	}
 }

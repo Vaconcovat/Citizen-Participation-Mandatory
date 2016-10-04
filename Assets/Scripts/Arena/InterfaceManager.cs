@@ -69,7 +69,7 @@ public class InterfaceManager : MonoBehaviour {
 		announcementsText.text = "";
 		activeannounce = false;
 		influenceCounts = new int[4];
-		if ((StaticGameStats.Abilites [0] == false) && (StaticGameStats.Abilites [1] == false) && (StaticGameStats.Abilites [2] == false) && (StaticGameStats.Abilites [3] == false)) {
+		if ((StaticGameStats.instance.Abilites [0] == false) && (StaticGameStats.instance.Abilites [1] == false) && (StaticGameStats.instance.Abilites [2] == false) && (StaticGameStats.instance.Abilites [3] == false)) {
 			AbilityBar.SetActive (false);
 		} else {
 			AbilityBar.SetActive (true);
@@ -79,7 +79,7 @@ public class InterfaceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (StaticGameStats.TierOneUpgrades [0]) {
+		if (StaticGameStats.instance.TierOneUpgrades [0]) {
 			Backpack.gameObject.SetActive (true);
 		} else {
 			Backpack.gameObject.SetActive (false);

@@ -48,7 +48,7 @@ public class QuestionaireManager : MonoBehaviour {
 
 	public void SetUsername(){
 		if (Username.text != "") {
-			StaticGameStats.PlayerName = Username.text;
+			StaticGameStats.instance.PlayerName = Username.text;
 		}
 	}
 

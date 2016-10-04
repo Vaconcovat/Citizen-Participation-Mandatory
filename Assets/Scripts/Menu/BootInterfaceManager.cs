@@ -28,7 +28,7 @@ public class BootInterfaceManager : MonoBehaviour {
 //		}
 		if (Input.GetKeyDown(KeyCode.Delete) && !skipped){
 			FindObjectOfType<MenuCamera>().MainMenu();
-			StaticGameStats.QuestionnaireDone = true;
+			StaticGameStats.instance.QuestionnaireDone = true;
 			displayed = false;
 			skipped = true;
 			logoWaitTime = 3;

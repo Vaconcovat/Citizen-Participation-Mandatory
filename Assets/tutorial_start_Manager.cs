@@ -11,10 +11,10 @@ public class tutorial_start_Manager : MonoBehaviour {
 		if(done && (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))){
 			FindObjectOfType<SceneChange>().Tutorial();
 		}
-		if (done && StaticGameStats.tutorialDone && (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2)) ) {
+		if (done && StaticGameStats.instance.tutorialDone && (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2)) ) {
 			FindObjectOfType<SceneChange>().Arena();
 		}
-		if (done && StaticGameStats.tutorialDone && (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3)) ) {
+		if (done && StaticGameStats.instance.tutorialDone && (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3)) ) {
 			FindObjectOfType<MenuCamera> ().ArenaMap ();
 		}
 	}
@@ -23,7 +23,7 @@ public class tutorial_start_Manager : MonoBehaviour {
 		text += "[ - - - - - - - - ]";
 		text += "\nCONNECTION TO TRAINING CENTER READY";
 		text += "\n               PRESS [1] TO LAUNCH TUTORIAL...";
-		if (StaticGameStats.tutorialDone) {
+		if (StaticGameStats.instance.tutorialDone) {
 			text += "\n               PRESS [2] TO LAUNCH ARENA...";
 			text += "\n               PRESS [3] TO LAUNCH ARENA MAP...";
 		}

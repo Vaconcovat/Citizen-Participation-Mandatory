@@ -129,7 +129,7 @@ public class Contestant : MonoBehaviour {
         //----------------------------------------------------
         //GENERATE TRAITS
 		if (!isPlayer && !IsDummy) {
-			if (StaticGameStats.TierTwoUpgrades [2]) {
+			if (StaticGameStats.instance.TierTwoUpgrades [2]) {
 				//20% chance to be sick, 20% chance to be strong
 				float random = Random.value;
 				if (random < 0.2f) {
@@ -280,8 +280,8 @@ public class Contestant : MonoBehaviour {
 				if(killer.equipped != null){
 					if (killer.equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							if (!StaticGameStats.FirstRun) {
-								FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponKill, 0);
+							if (!StaticGameStats.instance.FirstRun) {
+								StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponKill, 0);
 							}
 							CameraInfluence(1, true);
 						}
@@ -341,8 +341,8 @@ public class Contestant : MonoBehaviour {
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							if (!StaticGameStats.FirstRun) {
-								FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
+							if (!StaticGameStats.instance.FirstRun) {
+								StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
 							}
 							CameraInfluence(1, false);
 						}
@@ -378,8 +378,8 @@ public class Contestant : MonoBehaviour {
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){
-							if (!StaticGameStats.FirstRun) {
-								FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
+							if (!StaticGameStats.instance.FirstRun) {
+								StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.SponsorWeaponDeath, 0);
 							}
 							CameraInfluence(1, false);
 						}
@@ -390,8 +390,8 @@ public class Contestant : MonoBehaviour {
 						FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 						title = "KILLED ON CAMERA";
 					}
-					if (!StaticGameStats.FirstRun) {
-						FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.OnCameraKill, 0);
+					if (!StaticGameStats.instance.FirstRun) {
+					StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.OnCameraKill, 0);
 					}
 					CameraInfluence(0, true);
 					CameraInfluence(2, false);
@@ -421,8 +421,8 @@ public class Contestant : MonoBehaviour {
 					if(title == null){
 						title = "KILLED ON CAMERA";
 					}
-					if (!StaticGameStats.FirstRun) {
-						FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.KillGuard, 0);
+					if (!StaticGameStats.instance.FirstRun) {
+						StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.KillGuard, 0);
 					}
 				}
 				else{

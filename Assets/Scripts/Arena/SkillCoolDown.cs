@@ -22,7 +22,7 @@ public class SkillCoolDown : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if (Input.GetKeyDown (Ability1)) {
-			if (!StaticGameStats.Abilites [0]) {
+			if (!StaticGameStats.instance.Abilites [0]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
@@ -33,7 +33,7 @@ public class SkillCoolDown : MonoBehaviour {
 				}
 			}
 		} else if (Input.GetKeyDown (Ability2)) {
-			if (!StaticGameStats.Abilites [1]) {
+			if (!StaticGameStats.instance.Abilites [1]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
@@ -44,7 +44,7 @@ public class SkillCoolDown : MonoBehaviour {
 				}
 			}
 		} else if (Input.GetKeyDown (Ability3)) {
-			if (!StaticGameStats.Abilites [2]) {
+			if (!StaticGameStats.instance.Abilites [2]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
@@ -55,7 +55,7 @@ public class SkillCoolDown : MonoBehaviour {
 				}
 			}
 		} else if (Input.GetKeyDown (Ability4)) {
-			if (!StaticGameStats.Abilites [3]) {
+			if (!StaticGameStats.instance.Abilites [3]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
@@ -84,16 +84,16 @@ public class SkillCoolDown : MonoBehaviour {
 		skills [3].currentCooldown = skills [3].cooldown;
 		skills [4].currentCooldown = skills [4].cooldown;
 
-		if (!StaticGameStats.Abilites [0]) {
+		if (!StaticGameStats.instance.Abilites [0]) {
 			skills [1].skillIcon.sprite = LockedOut;
 		}
-		if (!StaticGameStats.Abilites [1]) {
+		if (!StaticGameStats.instance.Abilites [1]) {
 			skills [3].skillIcon.sprite = LockedOut;
 		}
-		if (!StaticGameStats.Abilites [2]) {
+		if (!StaticGameStats.instance.Abilites [2]) {
 			skills [2].skillIcon.sprite = LockedOut;
 		}
-		if (!StaticGameStats.Abilites [3]) {
+		if (!StaticGameStats.instance.Abilites [3]) {
 			skills [0].skillIcon.sprite = LockedOut;
 		}
 
@@ -173,7 +173,7 @@ public class SkillCoolDown : MonoBehaviour {
 			if (c.type == Contestant.ContestantType.AI) {
 				
 				float distance = Vector3.Distance (FindObjectOfType<PlayerController>().pos, c.transform.position);
-				if (distance < StaticGameStats.Ability1MaxDistance) {
+				if (distance < StaticGameStats.instance.Ability1MaxDistance) {
 					c.ThrowEquipped ();
 				}
 			}
@@ -183,7 +183,7 @@ public class SkillCoolDown : MonoBehaviour {
 		foreach (AIController a in aicontroller)
 		{
 			float distance = Vector3.Distance (FindObjectOfType<PlayerController>().pos, a.transform.position);
-			if (distance < StaticGameStats.Ability1MaxDistance) {
+			if (distance < StaticGameStats.instance.Ability1MaxDistance) {
 				a.StartShocked ();
 			}
 		}

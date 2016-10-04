@@ -47,9 +47,9 @@ public class OtherItem : MonoBehaviour {
 
 	IEnumerator Heal(float amount){
 		if (ammo >= 1) {
-			if (StaticGameStats.TierThreeUpgrades [0]) { //Heals 4% of max health 12 times over 12 seconds, total health restored 36
-				for (int i = 0; i <= StaticGameStats.FirstAidHereHealDuration; i++) {
-					GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.FirstAidHereHealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+			if (StaticGameStats.instance.TierThreeUpgrades [0]) { //Heals 4% of max health 12 times over 12 seconds, total health restored 36
+				for (int i = 0; i <= StaticGameStats.instance.FirstAidHereHealDuration; i++) {
+					GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.instance.FirstAidHereHealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 					yield return new WaitForSeconds (1.0f);
 				}
 			} else { //heals a flat 25 health in a second
@@ -69,7 +69,7 @@ public class OtherItem : MonoBehaviour {
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
-			yield return new WaitForSeconds (StaticGameStats.VelocitechItemDuration);
+			yield return new WaitForSeconds (StaticGameStats.instance.VelocitechItemDuration);
 			effector.movespeed = effector.movespeed - amount;
 		}
 	}
@@ -82,7 +82,7 @@ public class OtherItem : MonoBehaviour {
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
-			yield return new WaitForSeconds (StaticGameStats.ExplodenaItemDuration);
+			yield return new WaitForSeconds (StaticGameStats.instance.ExplodenaItemDuration);
 			effector.ContestantDamageModifier = effector.ContestantDamageModifier - amount;
 
 
@@ -97,7 +97,7 @@ public class OtherItem : MonoBehaviour {
 			if ((consume) && (ammo <= 0)) {
 				GetComponent<Item> ().Throw ();
 			}
-			yield return new WaitForSeconds (StaticGameStats.PrismexItemDuration);
+			yield return new WaitForSeconds (StaticGameStats.instance.PrismexItemDuration);
 			effector.ContestantRepModifier = effector.ContestantRepModifier - amount;
 
 		}

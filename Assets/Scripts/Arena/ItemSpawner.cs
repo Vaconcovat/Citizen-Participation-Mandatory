@@ -22,7 +22,7 @@ public class ItemSpawner : MonoBehaviour {
 				break;
 
 			case poolselection.Sponsor:
-				switch(StaticGameStats.sponsor){
+				switch(StaticGameStats.instance.sponsor){
 					case 0:
 						pool = FindObjectOfType<ItemPools>().sponsor0;
 						break;
@@ -39,7 +39,7 @@ public class ItemSpawner : MonoBehaviour {
 				pool = FindObjectOfType<ItemPools>().item;
 				break;
 		}
-		if (StaticGameStats.TierThreeUpgrades [0]) {
+		if (StaticGameStats.instance.TierThreeUpgrades [0]) {
 			if (selection == poolselection.Item) {
 				SpawnerCooldown = SpawnerCooldown + 15;
 			} 

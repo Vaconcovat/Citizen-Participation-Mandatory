@@ -36,7 +36,7 @@ public class UpgradeInterface : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		moneyHolder = StaticGameStats.moneyHolder;
+		moneyHolder = StaticGameStats.instance.moneyHolder;
 
 		/// <summary>
 		/// This sets 16 values in buttonActive to false 
@@ -57,14 +57,14 @@ public class UpgradeInterface : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		moneyText.text = "Total Available Funding:" + StaticGameStats.avaliableMoney.ToString();
-		if(StaticGameStats.avaliableMoney == 0 && StaticGameStats.chosenSponsor != -1){
+		moneyText.text = "Total Available Funding:" + StaticGameStats.instance.avaliableMoney.ToString();
+		if(StaticGameStats.instance.avaliableMoney == 0 && StaticGameStats.instance.chosenSponsor != -1){
 			commitButton.interactable = true;
 		}
 		else{
 			commitButton.interactable = false;
 		}
-		directory.text = @"G:\GovorNet\" + StaticGameStats.PlayerName + @"\PLANNING\UPGRADES.gov";
+		directory.text = @"G:\GovorNet\" + StaticGameStats.instance.PlayerName + @"\PLANNING\UPGRADES.gov";
 	}
 
 
@@ -73,16 +73,16 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyTierOneUpgradeOne(){
 		if (!buttonActive [0]) {
-			if (StaticGameStats.avaliableMoney >= upgrade1Cost) {
-				StaticGameStats.avaliableMoney -= upgrade1Cost;
-				StaticGameStats.TierOneUpgrades [0] = true;
+			if (StaticGameStats.instance.avaliableMoney >= upgrade1Cost) {
+				StaticGameStats.instance.avaliableMoney -= upgrade1Cost;
+				StaticGameStats.instance.TierOneUpgrades [0] = true;
 				ChangeColorToGreen(0);
 				buttonActive [0] = true;
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney += upgrade1Cost;
-			StaticGameStats.TierOneUpgrades [0] = false;
+			StaticGameStats.instance.avaliableMoney += upgrade1Cost;
+			StaticGameStats.instance.TierOneUpgrades [0] = false;
 			buttonActive [0] = false;
 			ChangeColorToGrey (0);
 		}
@@ -90,16 +90,16 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyTierOneUpgradeTwo(){
 		if (!buttonActive [1]) {
-			if (StaticGameStats.avaliableMoney >=upgrade2Cost) {
-				StaticGameStats.avaliableMoney -=upgrade2Cost;
-				StaticGameStats.TierOneUpgrades [1] = true;
+			if (StaticGameStats.instance.avaliableMoney >=upgrade2Cost) {
+				StaticGameStats.instance.avaliableMoney -=upgrade2Cost;
+				StaticGameStats.instance.TierOneUpgrades [1] = true;
 				ChangeColorToGreen(1);
 				buttonActive [1] = true;
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=upgrade2Cost;
-			StaticGameStats.TierOneUpgrades [1] = false;
+			StaticGameStats.instance.avaliableMoney +=upgrade2Cost;
+			StaticGameStats.instance.TierOneUpgrades [1] = false;
 			buttonActive [1] = false;
 			ChangeColorToGrey (1);
 		}
@@ -107,18 +107,18 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyTierOneUpgradeThree(){
 		if (!buttonActive [2]) {
-			if (StaticGameStats.avaliableMoney >=upgrade3Cost) {
-				StaticGameStats.avaliableMoney -=upgrade3Cost;
-				StaticGameStats.TierOneUpgrades [2] = true;
-				StaticGameStats.Upgrade3ReputationGainBuff = 1.05f;
+			if (StaticGameStats.instance.avaliableMoney >=upgrade3Cost) {
+				StaticGameStats.instance.avaliableMoney -=upgrade3Cost;
+				StaticGameStats.instance.TierOneUpgrades [2] = true;
+				StaticGameStats.instance.Upgrade3ReputationGainBuff = 1.05f;
 				ChangeColorToGreen(2);
 				buttonActive [2] = true;
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=upgrade3Cost;
-			StaticGameStats.TierOneUpgrades [2] = false;
-			StaticGameStats.Upgrade3ReputationGainBuff = 1.0f;
+			StaticGameStats.instance.avaliableMoney +=upgrade3Cost;
+			StaticGameStats.instance.TierOneUpgrades [2] = false;
+			StaticGameStats.instance.Upgrade3ReputationGainBuff = 1.0f;
 			buttonActive [2] = false;
 			ChangeColorToGrey (2);
 		}
@@ -128,16 +128,16 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyTierTwoUpgradeOne(){
 		if (!buttonActive [3]) {
-			if (StaticGameStats.avaliableMoney >=upgrade4Cost) {
-				StaticGameStats.avaliableMoney -=upgrade4Cost;
-				StaticGameStats.TierTwoUpgrades [0] = true;
+			if (StaticGameStats.instance.avaliableMoney >=upgrade4Cost) {
+				StaticGameStats.instance.avaliableMoney -=upgrade4Cost;
+				StaticGameStats.instance.TierTwoUpgrades [0] = true;
 				ChangeColorToGreen(3);
 				buttonActive [3] = true;
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=upgrade4Cost;
-			StaticGameStats.TierTwoUpgrades [0] = false;
+			StaticGameStats.instance.avaliableMoney +=upgrade4Cost;
+			StaticGameStats.instance.TierTwoUpgrades [0] = false;
 			buttonActive [3] = false;
 			ChangeColorToGrey (3);
 		}
@@ -145,15 +145,15 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyTierTwoUpgradeTwo(){
 		if (!buttonActive [4]) {
-			if (StaticGameStats.avaliableMoney >=upgrade5Cost) {
-				StaticGameStats.avaliableMoney -=upgrade5Cost;
-				StaticGameStats.TierTwoUpgrades [1] = true;
+			if (StaticGameStats.instance.avaliableMoney >=upgrade5Cost) {
+				StaticGameStats.instance.avaliableMoney -=upgrade5Cost;
+				StaticGameStats.instance.TierTwoUpgrades [1] = true;
 				ChangeColorToGreen(4);
 				buttonActive [4] = true;
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=upgrade5Cost;
-			StaticGameStats.TierTwoUpgrades [1] = false;
+			StaticGameStats.instance.avaliableMoney +=upgrade5Cost;
+			StaticGameStats.instance.TierTwoUpgrades [1] = false;
 			buttonActive [4] = false;
 			ChangeColorToGrey (4);
 		}
@@ -161,16 +161,16 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyTierTwoUpgradeThree(){
 		if (!buttonActive [5]) {
-			if (StaticGameStats.avaliableMoney >=upgrade6Cost) {
-				StaticGameStats.avaliableMoney -=upgrade6Cost;
-				StaticGameStats.TierTwoUpgrades [2] = true;
+			if (StaticGameStats.instance.avaliableMoney >=upgrade6Cost) {
+				StaticGameStats.instance.avaliableMoney -=upgrade6Cost;
+				StaticGameStats.instance.TierTwoUpgrades [2] = true;
 				ChangeColorToGreen(5);
 				buttonActive [5] = true;
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=upgrade6Cost;
-			StaticGameStats.TierTwoUpgrades [2] = false;
+			StaticGameStats.instance.avaliableMoney +=upgrade6Cost;
+			StaticGameStats.instance.TierTwoUpgrades [2] = false;
 			buttonActive [5] = false;
 			ChangeColorToGrey (5);
 		}
@@ -180,15 +180,15 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyTierThreeUpgradeOne(){
 		if (!buttonActive [6]) {
-			if (StaticGameStats.avaliableMoney >=upgrade7Cost) {
-				StaticGameStats.avaliableMoney -=upgrade7Cost;
-				StaticGameStats.TierThreeUpgrades [0] = true;
+			if (StaticGameStats.instance.avaliableMoney >=upgrade7Cost) {
+				StaticGameStats.instance.avaliableMoney -=upgrade7Cost;
+				StaticGameStats.instance.TierThreeUpgrades [0] = true;
 				ChangeColorToGreen(6);
 				buttonActive [6] = true;
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=upgrade7Cost;
-			StaticGameStats.TierThreeUpgrades [0] = false;
+			StaticGameStats.instance.avaliableMoney +=upgrade7Cost;
+			StaticGameStats.instance.TierThreeUpgrades [0] = false;
 			buttonActive [6] = false;
 			ChangeColorToGrey (6);
 		}
@@ -199,16 +199,16 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyTierFourUpgradeOne(){
 		if (!buttonActive [7]) {
-			if (StaticGameStats.avaliableMoney >=upgrade8Cost) {
-				StaticGameStats.avaliableMoney -=upgrade8Cost;
-				StaticGameStats.TierFourUpgrades [0] = true;
+			if (StaticGameStats.instance.avaliableMoney >=upgrade8Cost) {
+				StaticGameStats.instance.avaliableMoney -=upgrade8Cost;
+				StaticGameStats.instance.TierFourUpgrades [0] = true;
 				ChangeColorToGreen(7);
 				buttonActive [7] = true;
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=upgrade8Cost;
-			StaticGameStats.TierFourUpgrades [0] = false;
+			StaticGameStats.instance.avaliableMoney +=upgrade8Cost;
+			StaticGameStats.instance.TierFourUpgrades [0] = false;
 			buttonActive [7] = false;
 			ChangeColorToGrey (7);
 		}
@@ -219,9 +219,9 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyAbilityOne(){
 		if (!buttonActive [8]) {
-			if (StaticGameStats.avaliableMoney >=ability1Cost) {
-				StaticGameStats.avaliableMoney -=ability1Cost;
-				StaticGameStats.Abilites [0] = true;
+			if (StaticGameStats.instance.avaliableMoney >=ability1Cost) {
+				StaticGameStats.instance.avaliableMoney -=ability1Cost;
+				StaticGameStats.instance.Abilites [0] = true;
 				ColorBlock cb = upgradebuttons [8].colors;
 				cb.normalColor = greenColor;
 				cb.highlightedColor = greenColor;
@@ -231,8 +231,8 @@ public class UpgradeInterface : MonoBehaviour {
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=ability1Cost;
-			StaticGameStats.Abilites [0] = false;
+			StaticGameStats.instance.avaliableMoney +=ability1Cost;
+			StaticGameStats.instance.Abilites [0] = false;
 			buttonActive [8] = false;
 			ColorBlock cb = upgradebuttons [8].colors;
 			cb.normalColor = whiteColor;
@@ -244,9 +244,9 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyAbilityTwo(){
 		if (!buttonActive [9]) {
-			if (StaticGameStats.avaliableMoney >=ability2Cost) {
-				StaticGameStats.avaliableMoney -=ability2Cost;
-				StaticGameStats.Abilites [1] = true;
+			if (StaticGameStats.instance.avaliableMoney >=ability2Cost) {
+				StaticGameStats.instance.avaliableMoney -=ability2Cost;
+				StaticGameStats.instance.Abilites [1] = true;
 				ColorBlock cb = upgradebuttons [9].colors;
 				cb.normalColor = greenColor;
 				cb.highlightedColor = greenColor;
@@ -256,8 +256,8 @@ public class UpgradeInterface : MonoBehaviour {
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=ability2Cost;
-			StaticGameStats.Abilites [1] = false;
+			StaticGameStats.instance.avaliableMoney +=ability2Cost;
+			StaticGameStats.instance.Abilites [1] = false;
 			buttonActive [9] = false;
 			ColorBlock cb = upgradebuttons [9].colors;
 			cb.normalColor = whiteColor;
@@ -269,9 +269,9 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyAbilityThree(){
 		if (!buttonActive [10]) {
-			if (StaticGameStats.avaliableMoney >=ability3Cost) {
-				StaticGameStats.avaliableMoney -=ability3Cost;
-				StaticGameStats.Abilites [2] = true;
+			if (StaticGameStats.instance.avaliableMoney >=ability3Cost) {
+				StaticGameStats.instance.avaliableMoney -=ability3Cost;
+				StaticGameStats.instance.Abilites [2] = true;
 				ColorBlock cb = upgradebuttons [10].colors;
 				cb.normalColor = greenColor;
 				cb.highlightedColor = greenColor;
@@ -281,8 +281,8 @@ public class UpgradeInterface : MonoBehaviour {
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=ability3Cost;
-			StaticGameStats.Abilites [2] = false;
+			StaticGameStats.instance.avaliableMoney +=ability3Cost;
+			StaticGameStats.instance.Abilites [2] = false;
 			buttonActive [10] = false;
 			ColorBlock cb = upgradebuttons [10].colors;
 			cb.normalColor = whiteColor;
@@ -294,9 +294,9 @@ public class UpgradeInterface : MonoBehaviour {
 
 	public void BuyAbilityFour(){
 		if (!buttonActive [11]) {
-			if (StaticGameStats.avaliableMoney >=ability4Cost) {
-				StaticGameStats.avaliableMoney -=ability4Cost;
-				StaticGameStats.Abilites [3] = true;
+			if (StaticGameStats.instance.avaliableMoney >=ability4Cost) {
+				StaticGameStats.instance.avaliableMoney -=ability4Cost;
+				StaticGameStats.instance.Abilites [3] = true;
 				ColorBlock cb = upgradebuttons [11].colors;
 				cb.normalColor = greenColor;
 				cb.highlightedColor = greenColor;
@@ -306,8 +306,8 @@ public class UpgradeInterface : MonoBehaviour {
 
 			}
 		} else {
-			StaticGameStats.avaliableMoney +=ability4Cost;
-			StaticGameStats.Abilites [3] = false;
+			StaticGameStats.instance.avaliableMoney +=ability4Cost;
+			StaticGameStats.instance.Abilites [3] = false;
 			buttonActive [11] = false;
 			ColorBlock cb = upgradebuttons [11].colors;
 			cb.normalColor = whiteColor;

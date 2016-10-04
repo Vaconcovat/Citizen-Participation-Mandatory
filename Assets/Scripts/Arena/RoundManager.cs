@@ -52,7 +52,6 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	void Start(){
-		File.WriteAllText (StaticGameStats.path, "");
 		StartCoroutine("Countdown");
 	}
 	
@@ -94,8 +93,8 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	void Triumph(){
-		if (!StaticGameStats.FirstRun) {
-			FindObjectOfType<StaticGameStats> ().Influence (StaticGameStats.InfluenceTrigger.EndOfRoundTriumph, 0);
+		if (!StaticGameStats.instance.FirstRun) {
+			StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.EndOfRoundTriumph, 0);
 		}
 		endRound();
 	}

@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour {
 		moveDir.y -= gravity * Time.deltaTime;
 		body.velocity = moveDir;
 
-		if (StaticGameStats.TierOneUpgrades [0]) {
+		if (StaticGameStats.instance.TierOneUpgrades [0]) {
 			if(Input.GetKeyUp(KeyCode.LeftControl)){
 				contestant.swap();
 			}

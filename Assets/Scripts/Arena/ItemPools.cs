@@ -31,17 +31,17 @@ public class ItemPools : MonoBehaviour {
 		sponsor0 = new Pool(Prismex_Pool);
 		sponsor1 = new Pool(Explodena_Pool);
         sponsor2 = new Pool(Velocitech_Pool);
-		if ((StaticGameStats.TierTwoUpgrades [2]) && StaticGameStats.chosenSponsor == 0) {
+		if ((StaticGameStats.instance.TierTwoUpgrades [2]) && StaticGameStats.instance.chosenSponsor == 0) {
 			item = new Pool (NoHealthkitPrismex);
-		} else if ((StaticGameStats.TierTwoUpgrades [2]) && StaticGameStats.chosenSponsor == 1) {
+		} else if ((StaticGameStats.instance.TierTwoUpgrades [2]) && StaticGameStats.instance.chosenSponsor == 1) {
 			item = new Pool (NoHealthkitExplodena);
-		} else if ((StaticGameStats.TierTwoUpgrades [2]) && StaticGameStats.chosenSponsor == 2) {
+		} else if ((StaticGameStats.instance.TierTwoUpgrades [2]) && StaticGameStats.instance.chosenSponsor == 2) {
 			item = new Pool (NoHealthkitVelocitech);
-		} else if (StaticGameStats.chosenSponsor == 0) {
+		} else if (StaticGameStats.instance.chosenSponsor == 0) {
 			item = new Pool (HealthkitPrismex);
-		} else if (StaticGameStats.chosenSponsor == 1) {
+		} else if (StaticGameStats.instance.chosenSponsor == 1) {
 			item = new Pool (HealthkitExplodena);
-		} else if (StaticGameStats.chosenSponsor == 2) {
+		} else if (StaticGameStats.instance.chosenSponsor == 2) {
 			item = new Pool (HealthkitVelocitech);
 		} else {
 			item = new Pool (Item_Pool);

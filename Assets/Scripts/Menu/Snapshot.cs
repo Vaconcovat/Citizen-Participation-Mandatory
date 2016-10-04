@@ -5,6 +5,6 @@ public class Snapshot : MonoBehaviour {
 
 	public void FundingSnapshot()
 	{
-		StaticGameStats.moneyHolder = StaticGameStats.avaliableMoney;
+		StaticGameStats.instance.moneyHolder = StaticGameStats.instance.avaliableMoney;
 	}
 }
