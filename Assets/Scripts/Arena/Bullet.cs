@@ -108,9 +108,6 @@ public class Bullet : MonoBehaviour {
 			Physics.Raycast (r, out hit, Time.deltaTime * mag + 0.1f);
 			Vector3 reflect = Vector3.Reflect (r.direction, hit.normal);
 			body.velocity = reflect * v.magnitude;
-			//transform.rotation = Quaternion.LookRotation(reflect);
-
-			Debug.Log ("bounced! " + reflect.magnitude + " * " + v.magnitude + " = " + mag);
 			FindObjectOfType<SoundManager> ().PlayEffect (FindObjectOfType<SoundManager> ().bounce, transform.position, 0.3f, true);
 			bounces--;
 		} else if (coll.gameObject.tag == "BreakerBox") {

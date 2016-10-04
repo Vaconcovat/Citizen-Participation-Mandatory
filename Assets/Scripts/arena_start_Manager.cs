@@ -18,9 +18,12 @@ public class arena_start_Manager : MonoBehaviour {
 		if(done && (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))){
 			//----------
 			//Analytics
-			Analytics.CustomEvent("ArenaStart", new Dictionary<string, object>{
-				{"Sponsor", StaticGameStats.sponsor}
-			});
+			if(PlayerPrefs.GetInt("Analytics") == 1){
+				Analytics.CustomEvent("ArenaStart", new Dictionary<string, object>{
+					{"Sponsor", StaticGameStats.sponsor}
+				});
+			}
+			//---------
 			FindObjectOfType<SceneChange> ().Arena ();
 		}
 		if (done && (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))) {

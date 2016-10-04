@@ -353,21 +353,25 @@ public class Contestant : MonoBehaviour {
 
 				//Analytics
 				//------------------------------
-				RoundManager rm = FindObjectOfType<RoundManager>();
-				if(rm != null){
-					int currentRound = rm.GetRound();
-					int remainingContestants = rm.aliveContestants;
-					float roundTime = Time.timeSinceLevelLoad;
-					Analytics.CustomEvent("PlayerArenaDeath", new Dictionary<string, object>{
-						{"Round", currentRound},
-						{"RemainingContestants", remainingContestants},
-						{"RoundTime", roundTime}
-					});
+				if(PlayerPrefs.GetInt("Analytics") == 1){
+					RoundManager rm = FindObjectOfType<RoundManager>();
+					if(rm != null){
+						int currentRound = rm.GetRound();
+						int remainingContestants = rm.aliveContestants;
+						float roundTime = Time.timeSinceLevelLoad;
+						Debug.Log("Sending player death analytics!");
+						Analytics.CustomEvent("PlayerArenaDeath", new Dictionary<string, object>{
+							{"Round", currentRound},
+							{"RemainingContestants", remainingContestants},
+							{"RoundTime", roundTime}
+						});
+					}
+					else{
+						Analytics.CustomEvent("PlayerTutorialDeath");
+						Debug.Log("Sending player death analytics!");
+					}
 				}
-				else{
-					Analytics.CustomEvent("PlayerTutorialDeath");
-				}
-
+				//------------------------------
 				break;
 
 			case ContestantType.AI:

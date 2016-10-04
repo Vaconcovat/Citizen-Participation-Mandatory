@@ -50,7 +50,9 @@ public class AI_MedicController : MonoBehaviour {
 				}
 				target.Die("MERCIED");
 			}
-			Destroy(tracker_card.gameObject);
+			if(tracker_card != null){
+				Destroy(tracker_card.gameObject);
+			}
 			Destroy(gameObject);
 		}
 	}

@@ -23,7 +23,9 @@ public class LoseInterfaceManager : MonoBehaviour {
 
 	public void Lose(){
 		at.StartType();
-		Analytics.CustomEvent("Lose");
+		if(PlayerPrefs.GetInt("Analytics") == 1){
+			Analytics.CustomEvent("Lose");
+		}
 	}
 
 	public void Finished(){

@@ -28,7 +28,9 @@ public class WinInterfaceManager : MonoBehaviour {
     public void Win()
     {
         at.StartType();
-		Analytics.CustomEvent("Win");
+		if(PlayerPrefs.GetInt("Analytics") == 1){
+			Analytics.CustomEvent("Win");
+		}
     }
 
     public void Finished()
