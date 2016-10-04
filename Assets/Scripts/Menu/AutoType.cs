@@ -70,7 +70,7 @@ public class AutoType : MonoBehaviour {
 						}
 						alternate = !alternate;
 					}
-					yield return new WaitForSeconds(textDelays[index]);
+					yield return new WaitForSeconds(Mathf.Max(textDelays[index],0.01f));
 				}
 			}
 		}
@@ -89,7 +89,7 @@ public class AutoType : MonoBehaviour {
 						}
 						alternate = !alternate;
 					}
-					yield return new WaitForSeconds(textDelays[index]);
+					yield return new WaitForSeconds(Mathf.Max(textDelays[index],0.01f));
 				}
 			}
 		}

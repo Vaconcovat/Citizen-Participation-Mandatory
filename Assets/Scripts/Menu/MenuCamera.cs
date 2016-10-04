@@ -14,6 +14,7 @@ public class MenuCamera : MonoBehaviour {
 	public bool isAlreadyStarted = false;
 
 	void Start(){
+		Debug.Log("Save location: " + Application.persistentDataPath);
 		audioP.volume = PlayerPrefs.GetFloat("MusicVolume");
 		if(StaticGameStats.instance.toPost){
 			StaticGameStats.instance.TierOneUpgrades[0] = false;
@@ -62,6 +63,7 @@ public class MenuCamera : MonoBehaviour {
 	}
 
 	public void MainMenu(){
+		StaticGameStats.instance.Load();
 		DisableAllBut(_MainMenu);
 		state = 0;
 		audioP.Stop();

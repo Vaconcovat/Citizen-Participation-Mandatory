@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class StaticGameStats : MonoBehaviour {
 
@@ -222,4 +223,136 @@ public class StaticGameStats : MonoBehaviour {
 		}
 	}
 
+	public void Save(){
+		Debug.LogAssertion("SAVED!");
+		//Set up the binary formatter and filestream
+		BinaryFormatter binary = new BinaryFormatter();
+		FileStream file = File.Create(Application.persistentDataPath + "/SaveData.gov");
+
+		//set up the savedata
+		SaveData data = new SaveData();
+		data.govRep = govRep;
+		data.corRep = corRep;
+		data.rebRep = rebRep;
+
+		data.avaliableMoney = avaliableMoney;
+		data.moneyHolder = moneyHolder;
+
+		data.chosenSponsor = chosenSponsor;
+		data.activeSponsor = activeSponsor;
+
+		data.committed = committed;
+		data.toPost = toPost ;
+		data.tutorialDone = tutorialDone;
+		data.QuestionnaireDone = QuestionnaireDone;
+		data.FirstRun = FirstRun;
+		data.NumTimesClicked = NumTimesClicked;
+
+		data.TierOneUpgrades0 = TierOneUpgrades[0];
+		data.TierOneUpgrades1 = TierOneUpgrades[1];
+		data.TierOneUpgrades2 = TierOneUpgrades[2];
+		data.TierTwoUpgrades0 = TierTwoUpgrades[0];
+		data.TierTwoUpgrades1 = TierTwoUpgrades[1];
+		data.TierTwoUpgrades2 = TierTwoUpgrades[2];
+		data.TierThreeUpgrade = TierThreeUpgrades[0];
+		data.TierFourUpgrade = TierFourUpgrades[0];
+		data.Abilites0 = Abilites[0];
+		data.Abilites1 = Abilites[1];
+		data.Abilites2 = Abilites[2];
+		data.Abilites3 = Abilites[3];
+		data.sponsor = sponsor;
+		data.arenasPlayed = arenasPlayed;
+
+		data.PlayerName = PlayerName;
+
+		//Serialize the savedata to the file
+		binary.Serialize(file, data);
+		file.Close();
+	}
+
+	public void Load(){
+		if(File.Exists(Application.persistentDataPath + "/SaveData.gov")){
+			Debug.LogAssertion("LOADED!");
+			//Set up the binary formatter and open the file
+			BinaryFormatter binary = new BinaryFormatter();
+			FileStream file = File.Open(Application.persistentDataPath + "/SaveData.gov", FileMode.Open);
+
+			//deserialize the save file
+			SaveData data = (SaveData)binary.Deserialize(file);
+			file.Close();
+
+			//load the variables
+			govRep = data.govRep;
+			corRep = data.corRep;
+			rebRep = data.rebRep;
+				
+			avaliableMoney = data.avaliableMoney;
+			moneyHolder = data.moneyHolder;
+	
+			chosenSponsor = data.chosenSponsor;
+			activeSponsor = data.activeSponsor;
+	
+			committed = data.committed;
+			toPost = data.toPost ;
+			tutorialDone = data.tutorialDone;
+			QuestionnaireDone = data.QuestionnaireDone;
+			FirstRun = data.FirstRun;
+			NumTimesClicked = data.NumTimesClicked;
+	
+			TierOneUpgrades[0] = data.TierOneUpgrades0;
+			TierOneUpgrades[1] = data.TierOneUpgrades1;
+			TierOneUpgrades[2] = data.TierOneUpgrades2;
+			TierTwoUpgrades[0] = data.TierTwoUpgrades0;
+			TierTwoUpgrades[1] = data.TierTwoUpgrades1;
+			TierTwoUpgrades[2] = data.TierTwoUpgrades2;
+			TierThreeUpgrades[0] = data.TierThreeUpgrade;
+			TierFourUpgrades[0] = data.TierFourUpgrade;
+			Abilites[0] = data.Abilites0;
+			Abilites[1] = data.Abilites1;
+			Abilites[2] = data.Abilites2;
+			Abilites[3] = data.Abilites3;
+			sponsor = data.sponsor;
+			arenasPlayed = data.arenasPlayed;
+	
+			PlayerName = data.PlayerName;
+		}
+		else{
+			Debug.LogAssertion("LOAD FAILED: NO FILE");
+		}
+
+	}
+
+	public void DeleteSave(){
+
+	}
+}
+
+[Serializable]
+class SaveData{
+	public float govRep;
+	public float corRep;
+	public float rebRep;
+
+	public int avaliableMoney;
+	public int moneyHolder;
+
+	public int chosenSponsor;
+	public int activeSponsor;
+
+	public bool committed;
+	public bool toPost ;
+	public bool tutorialDone;
+	public bool QuestionnaireDone;
+	public bool FirstRun;
+	public int NumTimesClicked;
+
+	public bool TierOneUpgrades0, TierOneUpgrades1, TierOneUpgrades2;
+	public bool TierTwoUpgrades0, TierTwoUpgrades1, TierTwoUpgrades2;
+	public bool TierThreeUpgrade;
+	public bool TierFourUpgrade;
+	public bool Abilites0, Abilites1, Abilites2, Abilites3;
+	public int sponsor;
+	public int arenasPlayed;
+
+	public string PlayerName;
 }

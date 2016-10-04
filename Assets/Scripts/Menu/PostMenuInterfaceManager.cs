@@ -86,6 +86,8 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		}
 		if (StaticGameStats.instance.toPost) {
 			StaticGameStats.instance.avaliableMoney += MoneyRecievedThisRound;
+			StaticGameStats.instance.arenasPlayed++;
+			StaticGameStats.instance.Save();
 		}
 		totalMoney.text = "Total Funding Recived: " + MoneyRecievedThisRound.ToString();
 
