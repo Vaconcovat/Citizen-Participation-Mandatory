@@ -6,11 +6,13 @@ public class SettingsManager : MonoBehaviour {
 
 	float sfxVolume, musicVolume;
 	public Slider sfxSlider, musicSlider, analyticsSlider;
-	public Text sfxNum, musicNum, analyticsOn, analyticsOff;
+	public Text sfxNum, musicNum, analyticsOn, analyticsOff, deleteText, saveText;
 	int analytics;
+	bool prompt = false;
 	
 	// Use this for initialization
 	void OnEnable () {
+	prompt = false;
 		if(PlayerPrefs.HasKey("SFXVolume")){
 			sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
 			Debug.Log("Prefs has SFXVOLUME: " + sfxVolume);
@@ -40,6 +42,9 @@ public class SettingsManager : MonoBehaviour {
 			analytics = 1;
 			PlayerPrefs.SetInt("Analytics", 1);
 		}
+
+		deleteText.text = "DELETE SAVE";
+		saveText.text = string.Format("{0}\nTournaments: {1}\nMoney: {2}\nRep: [ GOV {3:F0} | COR {4:F0} | REB {5:F0} ]", StaticGameStats.instance.PlayerName, StaticGameStats.instance.arenasPlayed, StaticGameStats.instance.avaliableMoney, StaticGameStats.instance.govRep, StaticGameStats.instance.corRep, StaticGameStats.instance.rebRep);
 	}
 		
 	public void UpdatePrefs(int a){
@@ -61,6 +66,17 @@ public class SettingsManager : MonoBehaviour {
 				analyticsOff.color = (analytics == 0)?Color.white:new Color(1,1,1,0.5f);
 				break;
 		}
+	}
 
+	public void DeleteSave(){
+		if(prompt){
+			if(!StaticGameStats.instance.DeleteSave()){
+				saveText.text = "No file to delete!";
+			}
+		}
+		else{
+			prompt = true;
+			deleteText.text = "<color=red>ARE YOU SURE?</color>";
+		}
 	}
 }

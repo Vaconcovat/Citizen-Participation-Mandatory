@@ -5,10 +5,12 @@ using System.IO;
 using System.Text;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.SceneManagement;
 
 public class StaticGameStats : MonoBehaviour {
 
 	public static StaticGameStats instance;
+
 
 	public float govRep = 50.0f;
 	public float corRep = 50.0f;
@@ -128,8 +130,6 @@ public class StaticGameStats : MonoBehaviour {
 
 
 
-	// Use this for initialization
-	//Probably shouldn't ever have anything here, if you do you're bad.
 	void Awake () {
 
 		//SINGLETON DEFINITION
@@ -322,8 +322,16 @@ public class StaticGameStats : MonoBehaviour {
 
 	}
 
-	public void DeleteSave(){
-
+	public bool DeleteSave(){
+		if(File.Exists(Application.persistentDataPath + "/SaveData.gov")){
+			File.Delete(Application.persistentDataPath + "/SaveData.gov");
+			SceneManager.LoadScene(3);
+			return true;
+		}
+		else{
+			Debug.Log("No file to delete");
+			return false;
+		}
 	}
 }
 
