@@ -12,6 +12,7 @@ public class LoadArena : MonoBehaviour {
 			StaticGameStats.instance.tutorialDone = true;
 			RoundManager.roundNumber = 1;
 			FromTutorial = true;
+			StaticGameStats.instance.Save();
 			SceneManager.LoadScene(0);
 		}
 	}

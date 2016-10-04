@@ -77,6 +77,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	public void Commit(){
 		StaticGameStats.instance.committed = true;
 		StaticGameStats.instance.sponsor = StaticGameStats.instance.chosenSponsor;
+		StaticGameStats.instance.Save();
 		FindObjectOfType<MenuCamera>().ZoomedOut();
 	}
 

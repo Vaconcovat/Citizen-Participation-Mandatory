@@ -152,6 +152,7 @@ public class MenuCamera : MonoBehaviour {
 	public void Tutorial_Start(){
 		DisableAllBut(_Tutorial_start);
 		state = 13;
+		StaticGameStats.instance.Save();
 		FindObjectOfType<tutorial_start_Manager>().tutorial_start_text();
 	}
 
