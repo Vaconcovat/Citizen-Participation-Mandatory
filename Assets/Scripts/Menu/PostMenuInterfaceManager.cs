@@ -20,6 +20,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 	public GameObject NMGov, NMCor, NMReb;
 	public Image GMoney, RMoney, CMoney;
 
+
 	[Header("Settings")]
 	public float lerpTime;
 	public float[] thresholds;
@@ -214,6 +215,7 @@ public class PostMenuInterfaceManager : MonoBehaviour {
 		if(StaticGameStats.instance.oldrebRep != StaticGameStats.instance.rebRep){
 			StaticGameStats.instance.oldrebRep = Mathf.Lerp(reb_P, StaticGameStats.instance.rebRep, t);
 		}
+
 
 		if (StaticGameStats.instance.FirstRun) {
 			govMoneyText.text = "N/A - New Manager";

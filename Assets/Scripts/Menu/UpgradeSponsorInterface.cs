@@ -12,6 +12,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 	public Sprite[] sponsorGunLogos;
 	public int chosenSponsor;
 	public int availableMoney;
+	public Text Critical, Warning, UnspentMoney, UnchosenSponsor;
 
 	Color greyColor;
 	Color whiteColor;
@@ -36,6 +37,22 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 			commitButton.interactable = false;
 		}
 		directory.text = @"G:\GovorNet\" + StaticGameStats.instance.PlayerName + @"\PLANNING.gov";
+
+		if (chosenSponsor == -1) {
+			Critical.enabled = true;
+			UnchosenSponsor.enabled = true;
+		} else {
+			Critical.enabled = false;
+			UnchosenSponsor.enabled = false;
+		}
+
+		if (availableMoney > 0) {
+			Warning.enabled = true;
+			UnspentMoney.enabled = true;
+		} else {
+			Warning.enabled = false;
+			UnspentMoney.enabled = false;
+		}
 	}
 
 	public void Revert(){
