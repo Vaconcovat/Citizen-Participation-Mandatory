@@ -17,70 +17,13 @@ public class SkillCoolDown : MonoBehaviour {
 	public float shockActiveTime;
 	public float blindActiveTime;
 	public float bioscanActiveTime;
-
-
-	void FixedUpdate()
-	{
-		if (Input.GetKeyDown (Ability0)) {
-			if (!StaticGameStats.instance.Abilites [0]) {
-				return;
-			} else {
-				//If the ability is not currently cooling down
-				if ((skills [1].currentCooldown >= skills [1].MaxCooldown) && (skills[1].isUseable == true)) {
-					BioScan ();
-					skills [1].isUseable = false;
-					StartCoroutine("BioScanWait");
-				}
-			}
-		} else if (Input.GetKeyDown (Ability1)) {
-			if (!StaticGameStats.instance.Abilites [1]) {
-				return;
-			} else {
-				//If the ability is not currently cooling down
-				if ((skills [3].currentCooldown >= skills [3].MaxCooldown) && (skills[3].isUseable == true)) {
-					Blackout ();
-					skills [3].isUseable = false;
-					StartCoroutine("BlackoutWait");
-				}
-			}
-		} else if (Input.GetKeyDown (Ability2)) {
-			if (!StaticGameStats.instance.Abilites [2]) {
-				return;
-			} else {
-				//If the ability is not currently cooling down
-				if (skills [2].currentCooldown >= skills [2].MaxCooldown) {
-					Overload ();
-					skills [2].isUseable = false;
-					skills [2].currentCooldown = 0;
-				}
-			}
-		} else if (Input.GetKeyDown (Ability3)) {
-			if (!StaticGameStats.instance.Abilites [3]) {
-				return;
-			} else {
-				//If the ability is not currently cooling down
-				if ((skills [0].currentCooldown >= skills [0].MaxCooldown) && (skills [4].currentCooldown >= skills [4].MaxCooldown) && (skills[0].isUseable == true)) {
-					if (isPrimed) {
-						Stun ();
-						skills [0].isUseable = false;
-						isPrimed = false;
-						StartCoroutine("ShockCollarWait");
-					} else {
-						isPrimed = true;
-						skills [4].currentCooldown = 0;
-					}
-
-				}
-			}
-		}
-			
-	}
+	public float ShockCollarPrimerCooldownTime;
 
 	void Start()
 	{
 		//If the player does not own an ability
 		//set that abilitis logo to a locked out symbol
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 4; i++) {
 			if (!StaticGameStats.instance.Abilites [i]) {
 				skills [i].skillIcon.sprite = LockedOut;
 			}
@@ -96,11 +39,14 @@ public class SkillCoolDown : MonoBehaviour {
 
 	void Update()
 	{
+
+		//COOLDOWN MANAGEMENT
+
 		foreach (Skill s in skills) //For each skill
 		{
 			if (s.currentCooldown < s.MaxCooldown) 	//if the skill's current cooldown is less than its max cooldown
-													//When activated skill's currentcooldown values get set to 0
-													//a skill with a current cooldown equal to its maxCooldown is a fully cooled down ability that is ready for use
+				//When activated skill's currentcooldown values get set to 0
+				//a skill with a current cooldown equal to its maxCooldown is a fully cooled down ability that is ready for use
 			{
 				s.currentCooldown += Time.deltaTime; //increase current cooldown by a factor of time
 				s.skillIcon.fillAmount = s.currentCooldown / s.MaxCooldown; //update the skillicon fillamount to reflect this change
@@ -111,8 +57,72 @@ public class SkillCoolDown : MonoBehaviour {
 			}
 
 		}
-	}
 
+		//ABILITY ACTIVATION
+
+		//ABILITY 0 - BIOSCAN
+		if (Input.GetKeyDown (Ability0)) {
+			if (StaticGameStats.instance.Abilites [0]) {
+				//If the ability is not currently cooling down
+				if ((skills [0].currentCooldown >= skills [0].MaxCooldown) && (skills[0].isUseable == true)) {
+					BioScan ();
+					skills [0].isUseable = false;
+					StartCoroutine("BioScanWait");
+				}
+			} else {
+				return;	
+			}
+		}
+
+		//ABILITY 1 - BLACKOUT
+		if (Input.GetKeyDown (Ability1)) {
+			if (StaticGameStats.instance.Abilites [1]) {
+				if ((skills [1].currentCooldown >= skills [1].MaxCooldown) && (skills[1].isUseable == true)) {
+					Blackout ();
+					skills [1].isUseable = false;
+					StartCoroutine("BlackoutWait");
+				}
+			} else {
+				return;
+			}
+		}
+
+		//ABILITY 2 - OVERLOAD
+		if (Input.GetKeyDown (Ability2)) {
+			if (StaticGameStats.instance.Abilites [2]) {
+				if (skills [2].currentCooldown >= skills [2].MaxCooldown) {
+					Overload ();
+					skills [2].isUseable = false;
+					skills [2].currentCooldown = 0;
+				}
+			} else {
+				return;
+			}
+		}
+
+		//ABILITY 4 - SHOCK COLLAR
+		if (Input.GetKeyDown (Ability3)) {
+			if (StaticGameStats.instance.Abilites [3]) {
+				if ((skills [3].currentCooldown >= skills [3].MaxCooldown) && (skills[3].isUseable == true)) {
+					if (isPrimed) {
+						Stun ();
+						skills [3].isUseable = false;
+						isPrimed = false;
+						StartCoroutine("ShockCollarWait");
+					} else {
+						isPrimed = true;
+						skills [3].currentCooldown = 0;
+					}
+
+				}
+			} else {
+				return;
+			}
+		}
+
+
+	}
+		
 	//ABILITIES
 
 	//ABILITY 1
@@ -208,11 +218,10 @@ public class SkillCoolDown : MonoBehaviour {
 [System.Serializable]
 public class Skill
 {
+	public float currentCooldown;
 	public float MaxCooldown;
 	public Image skillIcon;
 	public string AbilityName;
-	[HideInInspector]
-	public float currentCooldown;
 	public bool isUseable;
 }
 
