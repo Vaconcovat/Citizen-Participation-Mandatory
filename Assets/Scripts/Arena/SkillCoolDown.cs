@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class SkillCoolDown : MonoBehaviour {
 
 	public List<Skill> skills;
+	public KeyCode Ability0;
 	public KeyCode Ability1;
 	public KeyCode Ability2;
 	public KeyCode Ability3;
-	public KeyCode Ability4;
 	public Contestant player;
 	public GameObject weaponTrackerUI, contestantTrackerUI;
 	public bool isPrimed = false;
@@ -21,48 +21,48 @@ public class SkillCoolDown : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if (Input.GetKeyDown (Ability1)) {
+		if (Input.GetKeyDown (Ability0)) {
 			if (!StaticGameStats.instance.Abilites [0]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
-				if ((skills [1].currentCooldown >= skills [1].cooldown) && (skills[1].isActive == true)) {
+				if ((skills [1].currentCooldown >= skills [1].MaxCooldown) && (skills[1].isUseable == true)) {
 					BioScan ();
-					skills [1].isActive = false;
+					skills [1].isUseable = false;
 					StartCoroutine("BioScanWait");
 				}
 			}
-		} else if (Input.GetKeyDown (Ability2)) {
+		} else if (Input.GetKeyDown (Ability1)) {
 			if (!StaticGameStats.instance.Abilites [1]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
-				if ((skills [3].currentCooldown >= skills [3].cooldown) && (skills[3].isActive == true)) {
+				if ((skills [3].currentCooldown >= skills [3].MaxCooldown) && (skills[3].isUseable == true)) {
 					Blackout ();
-					skills [3].isActive = false;
+					skills [3].isUseable = false;
 					StartCoroutine("BlackoutWait");
 				}
 			}
-		} else if (Input.GetKeyDown (Ability3)) {
+		} else if (Input.GetKeyDown (Ability2)) {
 			if (!StaticGameStats.instance.Abilites [2]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
-				if (skills [2].currentCooldown >= skills [2].cooldown) {
+				if (skills [2].currentCooldown >= skills [2].MaxCooldown) {
 					Overload ();
-					skills [2].isActive = false;
+					skills [2].isUseable = false;
 					skills [2].currentCooldown = 0;
 				}
 			}
-		} else if (Input.GetKeyDown (Ability4)) {
+		} else if (Input.GetKeyDown (Ability3)) {
 			if (!StaticGameStats.instance.Abilites [3]) {
 				return;
 			} else {
 				//If the ability is not currently cooling down
-				if ((skills [0].currentCooldown >= skills [0].cooldown) && (skills [4].currentCooldown >= skills [4].cooldown) && (skills[0].isActive == true)) {
+				if ((skills [0].currentCooldown >= skills [0].MaxCooldown) && (skills [4].currentCooldown >= skills [4].MaxCooldown) && (skills[0].isUseable == true)) {
 					if (isPrimed) {
 						Stun ();
-						skills [0].isActive = false;
+						skills [0].isUseable = false;
 						isPrimed = false;
 						StartCoroutine("ShockCollarWait");
 					} else {
@@ -78,11 +78,8 @@ public class SkillCoolDown : MonoBehaviour {
 
 	void Start()
 	{
-		skills [0].currentCooldown = skills [0].cooldown;
-		skills [1].currentCooldown = skills [1].cooldown;
-		skills [2].currentCooldown = skills [2].cooldown;
-		skills [3].currentCooldown = skills [3].cooldown;
-		skills [4].currentCooldown = skills [4].cooldown;
+		//If the player does not own an ability
+		//set that abilitis logo to a locked out symbol
 
 		if (!StaticGameStats.instance.Abilites [0]) {
 			skills [1].skillIcon.sprite = LockedOut;
@@ -97,27 +94,37 @@ public class SkillCoolDown : MonoBehaviour {
 			skills [0].skillIcon.sprite = LockedOut;
 		}
 
+
+		//reset each skills cooldown
+		//set each skill to be useable
 		foreach (Skill s in skills) {
-			s.isActive = true;
+			s.currentCooldown = s.MaxCooldown;
+			s.isUseable = true;
 		}
 	}
 
 	void Update()
 	{
-		foreach (Skill s in skills) 
+		foreach (Skill s in skills) //For each skill
 		{
-			if (s.currentCooldown < s.cooldown) 
+			if (s.currentCooldown < s.MaxCooldown) 	//if the skill's current cooldown is less than its max cooldown
+													//When activated skill's currentcooldown values get set to 0
+													//a skill with a current cooldown equal to its maxCooldown is a fully cooled down ability that is ready for use
 			{
-				s.currentCooldown += Time.deltaTime;
-				s.skillIcon.fillAmount = s.currentCooldown / s.cooldown;
+				s.currentCooldown += Time.deltaTime; //increase current cooldown by a factor of time
+				s.skillIcon.fillAmount = s.currentCooldown / s.MaxCooldown; //update the skillicon fillamount to reflect this change
 			}
 
-			if (s.currentCooldown == s.cooldown) {
-				s.isActive = true;
+			if (s.currentCooldown == s.MaxCooldown) { //if any skill is ever completely cooled off
+				s.isUseable = true; //Set the ability to be usable again
 			}
 
 		}
 	}
+
+	//ABILITIES
+
+	//ABILITY 1
 
 	public void BioScan()
 	{
@@ -131,22 +138,20 @@ public class SkillCoolDown : MonoBehaviour {
 				tracker.contest = c;
 			}
 		}
-
-		//Display info about all weapons
-//		Item[] items = FindObjectsOfType<Item>();
-//		foreach (Item i in items){
-//			if(i.type != Item.ItemType.Ranged){
-//				continue;
-//			}
-//			if(i.equipper != null){
-//				continue;
-//			}
-//			GameObject spawned = (GameObject)Instantiate(weaponTrackerUI);
-//			spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
-//			UI_WeaponTracker tracker = spawned.GetComponent<UI_WeaponTracker>();
-//			tracker.item = i;
-//		}
 	}
+
+	//ABILITY 2
+
+	public void Blackout()
+	{
+		AIController[] aicontroller = FindObjectsOfType<AIController>();
+		foreach (AIController a in aicontroller)
+		{
+			a.StartBlinded ();
+		}
+	}
+
+	//ABILITY 3
 
 	public void Overload(){
 		float closestDist = Mathf.Infinity;
@@ -164,6 +169,8 @@ public class SkillCoolDown : MonoBehaviour {
 		closestSpawner.timer = 0f;
 		closestSpawner.SpawnerCooldown = closestSpawner.SpawnerCooldown + 2;
 	}
+
+	//ABILITY 4
 
 	public void Stun()
 	{
@@ -189,14 +196,7 @@ public class SkillCoolDown : MonoBehaviour {
 		}
 	}
 
-	public void Blackout()
-	{
-		AIController[] aicontroller = FindObjectsOfType<AIController>();
-		foreach (AIController a in aicontroller)
-		{
-			a.StartBlinded ();
-		}
-	}
+
 
 	IEnumerator BioScanWait(){
 		yield return new WaitForSeconds (bioscanActiveTime);
@@ -217,12 +217,12 @@ public class SkillCoolDown : MonoBehaviour {
 [System.Serializable]
 public class Skill
 {
-	public float cooldown;
+	public float MaxCooldown;
 	public Image skillIcon;
 	public string AbilityName;
 	[HideInInspector]
 	public float currentCooldown;
-	public bool isActive;
+	public bool isUseable;
 }
 
 
