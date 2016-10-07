@@ -5,7 +5,7 @@ public class AI_GuardController : MonoBehaviour {
 	public enum Job{StartRound, EndRound};
 	public Job job;
 
-	public enum endRoundStatus{Chase, Fight, Capture, Retreat, TutorialGuard};
+	public enum endRoundStatus{Chase, Fight, Capture, Retreat, TutorialGuard, TutorialEscort};
 	public endRoundStatus endStatus;
 
 	public Contestant target;
@@ -22,6 +22,7 @@ public class AI_GuardController : MonoBehaviour {
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
 		c = GetComponent<Contestant>();
+		minTalkTime += Random.Range(-2.0f, 2.0f);
 	}
 	
 	// Update is called once per frame
@@ -42,6 +43,9 @@ public class AI_GuardController : MonoBehaviour {
 					break;
 				case endRoundStatus.TutorialGuard:
 					TutorialGuard();
+					break;
+				case endRoundStatus.TutorialEscort:
+					TutorialEscort();
 					break;
 			}
 
@@ -162,10 +166,17 @@ public class AI_GuardController : MonoBehaviour {
 		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(target.transform.position - transform.position), Time.deltaTime*3, 0));
 		c.moving = false;
 		agent.speed = 0;
-
+		if(Vector3.Distance(target.transform.position, transform.position) < 3.2f){
+			if(c.currentTalkCard == null){
+				c.Say((Random.value > 0.5f)?"BACK OFF":"STEP BACK",35);
+			}
+		}
+		if(Vector3.Distance(target.transform.position, transform.position) < 1f){
+			endStatus = endRoundStatus.Fight;
+		}
 		if(talktimer <= 0){
-			talktimer = minTalkTime;
-			if (Random.value <= 0.25f) {
+			talktimer = minTalkTime + Random.Range(-2.0f, 2.0f);
+			if (Random.value <= 0.5f && c.currentTalkCard == null) {
 				if (target.equipped == null) {
 					c.Say (FindObjectOfType<ContestantGenerator>().GetLine(ContestantGenerator.LineType.GuardPassive));
 				} else {
@@ -175,6 +186,19 @@ public class AI_GuardController : MonoBehaviour {
 		}
 		else{
 			talktimer -= Time.deltaTime;
+		}
+	}
+
+	void TutorialEscort(){
+		agent.destination = target.transform.position;
+		transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,(target.transform.position - transform.position), Time.deltaTime*3, 0));
+		if(agent.remainingDistance < closingDistance - 2){
+			agent.speed = closingSpeed;
+			c.moving = false;
+		}
+		else{
+			agent.speed = speed;
+			c.moving = true;
 		}
 	}
 }

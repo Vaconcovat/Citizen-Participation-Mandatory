@@ -8,8 +8,8 @@ public class BinTrigger : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.gameObject.tag == "Weapon") {
-			Destroy(other.gameObject);
-			other.gameObject.GetComponent<Item> ().tracker.gameObject.SetActive(false);
+			//Destroy(other.gameObject);
+			other.gameObject.GetComponent<RangedWeapon>().ammo = 0;
 			ThrownWeapon = true;
 		}
 	}

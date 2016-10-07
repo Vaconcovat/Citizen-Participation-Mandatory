@@ -92,7 +92,7 @@ public class Contestant : MonoBehaviour {
 	public Transform anchor;
 	public SkinnedMeshRenderer aliveRenderer;
 
-	GameObject currentTalkCard;
+	public GameObject currentTalkCard;
 
 	public List<Arena_Camera> onCameras = new List<Arena_Camera>();
 

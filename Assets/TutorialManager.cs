@@ -32,8 +32,11 @@ public class TutorialManager : MonoBehaviour {
 	bool dead = false;
 	bool VictimDead = false;
 
+	public MeshRenderer floor;
+
 	// Use this for initialization
 	void Start () {
+		floor.material.color = Color.gray;
 		announceText.text = "";
 		activeannounce = false;
 		player.GetComponent<PlayerController>().enabled = false;
@@ -112,17 +115,17 @@ public class TutorialManager : MonoBehaviour {
 
 	public void Controls(){
 		log_autoType.GetComponent<Text>().alignment = TextAnchor.LowerLeft;
-		player.GetComponent<PlayerController>().enabled = true;
 		music.Play();
 		fading = true;
-		log_autoType.displayedText[0] = "FULL NEURAL CONTROL READY!\n                     \nUSE [ W A S D ] TO MOVE PLANT\nUSE [ MOUSE ] TO AIM\nUSE [ LMB ] TO FIRE WEAPONS/USE ITEMS\nUSE [ RMB ] TO THROW\n\n[   ";
+		log_autoType.displayedText[0] = "FULL NEURAL CONTROL READY!\n                     \n[   ";
 		log_autoType.displayedText[1] = plantName;
-		log_autoType.displayedText[2] = "   ]\nALL CONTESTANTS MUST COMPLETE\nORIENTATION IN ORDER TO COMPETE \nIN THE ARENA.\n\nCONTESTANTS MUST FIRE A WEAPON\nAT A LIVE TARGET, THEN DISPENSE\nOF THE WEAPON TO PASS.\n\n";
+		log_autoType.displayedText[2] = "   ]\nALL CONTESTANTS MUST COMPLETE\nORIENTATION IN ORDER TO COMPETE \nIN THE ARENA.\n\nCONTESTANTS MUST FIRE A WEAPON\nAT A LIVE TARGET, THEN DISPENSE\nOF THE WEAPON TO PASS.\n\nUSE [ W A S D ] TO MOVE PLANT\nUSE [ MOUSE ] TO AIM\nUSE [ LMB ] TO FIRE WEAPONS/USE ITEMS\nUSE [ RMB ] TO THROW\n\n";
 		log_autoType.finishedCallString = "ControlsDone";
 		log_autoType.StartType(); 
 	}
 
 	public void ControlsDone(){
+		player.GetComponent<PlayerController>().enabled = true;
 		log_autoType.GetComponent<Text>().color = new Color(1,1,1,0.5f);
 	}
 
