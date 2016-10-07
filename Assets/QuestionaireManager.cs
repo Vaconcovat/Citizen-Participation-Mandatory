@@ -52,6 +52,12 @@ public class QuestionaireManager : MonoBehaviour {
 		}
 	}
 
+	public void SetRebelname(){
+		if (RebelFName.text + RebelLName.text != null){
+			StaticGameStats.instance.RebelName = RebelFName.text + " " + RebelLName.text;
+		}
+	}
+
 	public void SetREDACTED(){
 		if (MindControl.isOn) {
 			Redacted1.enabled = false;

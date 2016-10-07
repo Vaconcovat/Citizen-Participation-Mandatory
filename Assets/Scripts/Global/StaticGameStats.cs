@@ -128,6 +128,8 @@ public class StaticGameStats : MonoBehaviour {
 
 	public string PlayerName;
 
+	public string RebelName;
+
 
 
 	void Awake () {

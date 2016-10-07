@@ -7,6 +7,7 @@ public class SettingsManager : MonoBehaviour {
 	float sfxVolume, musicVolume;
 	public Slider sfxSlider, musicSlider, analyticsSlider;
 	public Text sfxNum, musicNum, analyticsOn, analyticsOff, deleteText, saveText;
+	public AudioSource sfx, music;
 	int analytics;
 	bool prompt = false;
 	
@@ -53,11 +54,13 @@ public class SettingsManager : MonoBehaviour {
 				sfxVolume = sfxSlider.value;
 				PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
 				sfxNum.text = string.Format("{0:P0}", sfxVolume);
+				sfx.volume = sfxVolume;
 				break;
 			case 1:
 				musicVolume = musicSlider.value;
 				PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
 				musicNum.text = string.Format("{0:P0}", musicVolume);
+				music.volume = musicVolume;
 				break;
 			case 2:
 				PlayerPrefs.SetInt("Analytics", Mathf.RoundToInt(analyticsSlider.value));
@@ -77,6 +80,15 @@ public class SettingsManager : MonoBehaviour {
 		else{
 			prompt = true;
 			deleteText.text = "<color=red>ARE YOU SURE?</color>";
+		}
+	}
+
+	public void PlaySound(bool fx){
+		if(fx){
+			sfx.Play();
+		}
+		else{
+			music.Play();
 		}
 	}
 }

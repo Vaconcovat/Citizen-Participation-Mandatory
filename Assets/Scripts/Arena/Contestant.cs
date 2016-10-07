@@ -102,6 +102,7 @@ public class Contestant : MonoBehaviour {
 		body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         baseSpeed = movespeed;
+        anchor = anchor_pistol;
         //temp change color for enemies
         switch(type){
         	case ContestantType.AI:
@@ -120,7 +121,12 @@ public class Contestant : MonoBehaviour {
 
         ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
         if(contestantName == ""){
-        	contestantName = gen.GetFirstName() + " " + gen.GetLastName();
+        	if(type == ContestantType.Target && StaticGameStats.instance.RebelName != ""){
+        		contestantName = StaticGameStats.instance.RebelName;
+        	}
+        	else{
+				contestantName = gen.GetFirstName() + " " + gen.GetLastName();
+        	}
         }
         if(contestantTidBit == ""){
         	contestantTidBit = gen.GetTidBit();
