@@ -164,6 +164,10 @@ public class SkillCoolDown : MonoBehaviour {
 		{
 			a.StartBlinded ();
 		}
+		Arena_Camera[] cameras = FindObjectsOfType<Arena_Camera>();
+		foreach(Arena_Camera a in cameras){
+			a.active = false;
+		}
 	}
 
 	//ABILITY 3
@@ -225,6 +229,10 @@ public class SkillCoolDown : MonoBehaviour {
 		skills [1].isUseable = false;
 		Blackout (); 
 		yield return new WaitForSeconds (blindActiveTime);
+		Arena_Camera[] cameras = FindObjectsOfType<Arena_Camera>();
+		foreach(Arena_Camera a in cameras){
+			a.active = true;
+		}
 		skills [1].currentCooldown = 0;
 		yield return new WaitForSeconds (skills [1].MaxCooldown);
 		skills [1].isUseable = true;

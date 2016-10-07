@@ -14,7 +14,7 @@ public class camera_line : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(a_camera == null || contestant == null){
+		if(a_camera == null || contestant == null || a_camera.enabled == false){
 			Destroy(gameObject);
 		}
 		else{
@@ -28,6 +28,7 @@ public class camera_line : MonoBehaviour {
 			if(!contestant.isAlive){
 				Destroy(gameObject);
 			}
+
 		}
 
 	}

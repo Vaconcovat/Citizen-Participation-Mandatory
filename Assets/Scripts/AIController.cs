@@ -400,7 +400,6 @@ public class AIController : MonoBehaviour {
 				closestWeapon = i;
 			}
 		}
-		Debug.Log(closestDistance);
 		if(closestDistance == 100.0f){
 			return Vector3.zero;
 		}

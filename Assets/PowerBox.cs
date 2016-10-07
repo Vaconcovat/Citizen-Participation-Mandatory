@@ -16,7 +16,7 @@ public class PowerBox : MonoBehaviour {
 			isAlive = false;
 		}
 		if (!isAlive) {
-			Destroy (Camera);
+			Kill(Camera);
 		}
 
 	}
@@ -43,5 +43,10 @@ public class PowerBox : MonoBehaviour {
 			this.location = location;
 			this.knockback = knockback;
 		}
+	}
+
+	void Kill(GameObject g){
+		g.GetComponent<Arena_Camera>().enabled = false;
+		g.GetComponent<Rigidbody>().isKinematic = false;
 	}
 }

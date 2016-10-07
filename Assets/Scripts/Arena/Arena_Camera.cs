@@ -10,7 +10,7 @@ public class Arena_Camera : MonoBehaviour {
 	[Range(0,180)]
 	public float angle;
 	public float radius;
-
+	public bool active = true;
 	public LayerMask detectMask, cullMask;
 	public GameObject ui_card, line;
 	UI_GenericCard card;
@@ -24,7 +24,12 @@ public class Arena_Camera : MonoBehaviour {
 	void Update () {
 		Debug.DrawLine(transform.position, transform.position + ((DirFromAngle(-angle / 2, false))*radius));
 		Debug.DrawLine(transform.position, transform.position + ((DirFromAngle(angle / 2, false))*radius));
-		Look();
+		if(active){
+			Look();
+		}
+		else{
+			visibleContestants.Clear();
+		}
 	}
 
 	IEnumerator LookDelay(float delay){
@@ -112,5 +117,9 @@ public class Arena_Camera : MonoBehaviour {
 				l.contestant = c;
 			}
 		}
+	}
+
+	void OnDisable(){
+		visibleContestants.Clear();
 	}
 }
