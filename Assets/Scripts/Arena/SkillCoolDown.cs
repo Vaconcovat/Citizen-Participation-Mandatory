@@ -190,7 +190,6 @@ public class SkillCoolDown : MonoBehaviour {
 	public void Stun()
 	{
 		Contestant[] contestants = FindObjectsOfType<Contestant>();
-
 		foreach (Contestant c in contestants) {
 			if (c.type == Contestant.ContestantType.AI) {
 				
