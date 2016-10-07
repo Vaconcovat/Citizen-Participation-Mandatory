@@ -28,6 +28,7 @@ public class InterfaceManager : MonoBehaviour {
 	public Image abortImage;
 	public Text announcementsText, influenceFeed;
 	float grainFloor;
+	public MeshRenderer floor;
 
 
 
@@ -61,6 +62,7 @@ public class InterfaceManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		floor.material.color = Color.gray;
 		influences = new List<StaticGameStats.InfluenceTrigger>();
 		rm = FindObjectOfType<RoundManager>();
 		abortButton.enabled = false;
@@ -158,8 +160,13 @@ public class InterfaceManager : MonoBehaviour {
 			colourCurves.saturation = offCameraSaturation;
 		}
 
-		//influences
-		influenceFeed.text = influenceText;
+		if(StaticGameStats.instance.FirstRun){
+			influenceFeed.text = "NO REPUTATION ASSIGNED - NEW MANAGER";
+		}
+		else{
+			influenceFeed.text = influenceText;
+		}
+
 	}
 
 	/// <summary>
@@ -188,6 +195,7 @@ public class InterfaceManager : MonoBehaviour {
 	}
 
 	public void Influence(StaticGameStats.InfluenceTrigger type){
+		Debug.Log("Influence called  " + type); 
 		if(!influences.Contains(type)){
 			influences.Add(type);
 			influenceCounts[influences.Count - 1] = 1;

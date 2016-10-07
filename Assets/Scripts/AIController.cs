@@ -332,8 +332,12 @@ public class AIController : MonoBehaviour {
 	void StartSearch(){
 		state = AIState.Searching;
 		agent.speed = c.movespeed;
-		if(!findClosestWeapon()){
+		Vector3 closestWep = findClosestWeapon();
+		if(closestWep == Vector3.zero || (Vector3.Distance(transform.position, closestWep) > 30 && Random.value > 0.2f)){
 		 	destination = FindObjectsOfType<ItemSpawner>()[Random.Range(0,8)].transform.position;
+		}
+		else{
+			destination = closestWep;
 		}
 	}
 
@@ -380,11 +384,10 @@ public class AIController : MonoBehaviour {
 		c.moving = true;
 	}
 
-	public bool findClosestWeapon() {
+	public Vector3 findClosestWeapon() {
 		weapons = FindObjectsOfType<RangedWeapon>();
 		if(weapons.Length == 0){
-			destination = center;
-			return false;
+			return Vector3.zero;
 		}
 		closestDistance = 100.0f;
 		for (int i = 0; i < weapons.Length; i++) {
@@ -397,13 +400,12 @@ public class AIController : MonoBehaviour {
 				closestWeapon = i;
 			}
 		}
+		Debug.Log(closestDistance);
 		if(closestDistance == 100.0f){
-			destination = center;
-			return false;
+			return Vector3.zero;
 		}
 		else{
-			destination = weapons[closestWeapon].transform.position;
-			return true;
+			return weapons[closestWeapon].transform.position;
 		}
 	}
 
