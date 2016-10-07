@@ -80,20 +80,11 @@ public class SkillCoolDown : MonoBehaviour {
 	{
 		//If the player does not own an ability
 		//set that abilitis logo to a locked out symbol
-
-		if (!StaticGameStats.instance.Abilites [0]) {
-			skills [1].skillIcon.sprite = LockedOut;
+		for (int i = 0; i < 5; i++) {
+			if (!StaticGameStats.instance.Abilites [i]) {
+				skills [i].skillIcon.sprite = LockedOut;
+			}
 		}
-		if (!StaticGameStats.instance.Abilites [1]) {
-			skills [3].skillIcon.sprite = LockedOut;
-		}
-		if (!StaticGameStats.instance.Abilites [2]) {
-			skills [2].skillIcon.sprite = LockedOut;
-		}
-		if (!StaticGameStats.instance.Abilites [3]) {
-			skills [0].skillIcon.sprite = LockedOut;
-		}
-
 
 		//reset each skills cooldown
 		//set each skill to be useable
