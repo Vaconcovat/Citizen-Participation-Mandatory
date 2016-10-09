@@ -172,7 +172,10 @@ public class AI_GuardController : MonoBehaviour {
 			}
 		}
 		if(Vector3.Distance(target.transform.position, transform.position) < 1f){
-			endStatus = endRoundStatus.Fight;
+			AI_GuardController[] guards = FindObjectsOfType<AI_GuardController>();
+			foreach(AI_GuardController guard in guards){
+				guard.endStatus  = AI_GuardController.endRoundStatus.Fight;
+			}
 		}
 		if(talktimer <= 0){
 			talktimer = minTalkTime + Random.Range(-2.0f, 2.0f);

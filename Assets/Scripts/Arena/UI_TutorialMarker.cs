@@ -5,7 +5,7 @@ using System.Collections;
 public class UI_TutorialMarker : MonoBehaviour {
 
 	public Transform target;
-	public string text;
+	public string text, altText;
 	/// <summary>
 	/// Set to non-zero to make the card have a limited lifetime
 	/// </summary>
@@ -18,14 +18,13 @@ public class UI_TutorialMarker : MonoBehaviour {
 	RectTransform rTrans;
 	Canvas c;
 	Vector2 size;
-	Text cardText;
+	public Text cardText, cardAltText;
 
 	// Use this for initialization
 	void Start () {
 		rTrans = GetComponent<RectTransform>();
 		c = FindObjectOfType<Canvas>();
 		size = c.GetComponent<RectTransform>().sizeDelta;
-		cardText = GetComponentInChildren<Text>();
 		if (lifetime <= 0){
 			limited = false;
 		}
@@ -50,8 +49,10 @@ public class UI_TutorialMarker : MonoBehaviour {
 				}
 			}
 			cardText.text = "";
+			cardAltText.text = "";
 			if((Vector3.Distance(target.position, FindObjectOfType<PlayerController>().pos) < 2.5f)){
 				cardText.text = text;
+				cardAltText.text = altText;
 			}
 			Vector3 pos = Camera.main.WorldToScreenPoint(target.position);
 			float x = (pos.x / Screen.width) * size.x * c.transform.localScale.x;

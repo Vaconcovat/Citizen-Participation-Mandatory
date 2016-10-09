@@ -590,6 +590,19 @@ public class Contestant : MonoBehaviour {
 		card.textSize = size;
 	}
 
+	public void Say(string words, int size, float lifetime){
+		if(currentTalkCard != null){
+			Destroy(currentTalkCard);
+		}
+		currentTalkCard = (GameObject)Instantiate(UI_Card);
+		currentTalkCard.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
+		UI_GenericCard card = currentTalkCard.GetComponent<UI_GenericCard>();
+		card.text = words;
+		card.lifetime = lifetime;
+		card.target = transform;
+		card.textSize = size;
+	}
+
 	IEnumerator CheckCameraDelay(float delay){
 		while(true){
 			yield return new WaitForSeconds(delay);

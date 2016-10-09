@@ -8,9 +8,10 @@ public class BinTrigger : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.gameObject.tag == "Weapon") {
-			//Destroy(other.gameObject);
 			other.gameObject.GetComponent<RangedWeapon>().ammo = 0;
-			ThrownWeapon = true;
+			if(FindObjectOfType<TutorialManager>().state == TutorialManager.TutorialState.Bin){
+				ThrownWeapon = true;
+			}
 		}
 	}
 }

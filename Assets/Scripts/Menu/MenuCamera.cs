@@ -36,7 +36,7 @@ public class MenuCamera : MonoBehaviour {
 			Post();
 			StaticGameStats.instance.toPost = false;
 		}
-		else if (LoadArena.FromTutorial == true) {
+		else if (TutorialTrigger.FromTutorial == true) {
 			Arena_Start ();
 		}
 		else{
