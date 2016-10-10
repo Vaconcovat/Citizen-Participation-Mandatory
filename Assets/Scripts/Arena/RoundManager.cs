@@ -18,6 +18,7 @@ public class RoundManager : MonoBehaviour {
     public GameObject medicPrefab;
 	public bool noGuardDamage;
 	public int preRoundTime;
+	public Contestant Player;
 
 	Contestant[] contestants;
 	bool roundOver = false;
@@ -102,10 +103,13 @@ public class RoundManager : MonoBehaviour {
 	public void endRound(){
 		if (roundNumber < 3){
 			roundNumber++;
-			GetComponent<SceneChange>().RoundRestart();
-		}
-		else{
-			GetComponent<SceneChange>().ToPostArena();
+			if (Player.isAlive) {
+				GetComponent<SceneChange> ().RoundRestart (); //the round number only matters if this triggers
+			} else {
+				GetComponent<SceneChange>().ToPostArena();
+			}
+		} else {
+			GetComponent<SceneChange>().ToPostArena();	
 		}
 	}
 

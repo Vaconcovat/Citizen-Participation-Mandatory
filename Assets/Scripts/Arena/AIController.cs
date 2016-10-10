@@ -19,6 +19,7 @@ public class AIController : MonoBehaviour {
 	public Contestant player;
 	public Light DirectionalLight;
 	public Light ContestantLight;
+	public Light PlayerLight;
 	float shockActiveTime, blindActiveTime;
 
 	//just for testing
@@ -140,12 +141,14 @@ public class AIController : MonoBehaviour {
 		viewRadius = 10.0f;
 		DirectionalLight.intensity = 0.0f;
 		ContestantLight.intensity = 8.0f;
+		PlayerLight.intensity = 8.0f;
 		state = AIState.Hunting;
 		yield return new WaitForSeconds (blindActiveTime);
 		viewAngle = 120.0f;
 		viewRadius = 12.0f;
 		DirectionalLight.intensity = 0.5f;
 		ContestantLight.intensity = 0.0f;
+		PlayerLight.intensity = 0.0f;
 	}
 
 	public void StartEvac(){
