@@ -354,10 +354,11 @@ public class UpgradeInterface : MonoBehaviour {
 		int i = 0;
 		foreach (Button upgrade in upgradebuttons) {
 			ColorBlock cb = upgrade.colors;
+			cb.highlightedColor = darkGreyColor;
 			if (i > 7) {
 				cb.normalColor = whiteColor;
+				cb.highlightedColor = greyColor;
 			}
-			cb.highlightedColor = darkGreyColor;
 			upgrade.colors = cb;
 			i++;
 		}
