@@ -342,7 +342,7 @@ public class UpgradeInterface : MonoBehaviour {
 	void ChangeColorToWhite(int num) {
 		ColorBlock cb = upgradebuttons [num].colors;
 		cb.normalColor = whiteColor;
-		cb.highlightedColor = darkGreyColor;
+		cb.highlightedColor = greyColor;
 		upgradebuttons [num].colors = cb;
 	}
 
