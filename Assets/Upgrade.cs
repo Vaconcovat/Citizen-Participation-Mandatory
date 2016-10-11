@@ -1,13 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Upgrade : MonoBehaviour {
 
 	public int UpgradeCost;
-	public static int Cost;
-
-	void Start(){
-		Cost = UpgradeCost;
-	}
-
 }
