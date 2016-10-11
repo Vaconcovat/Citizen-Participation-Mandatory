@@ -107,7 +107,9 @@ public class OtherItem : MonoBehaviour {
 	{
 		//Debug.Log ("Health Kit Used");
 		FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().explosion, transform.position, 0.3f, true);
-		GameObject spawned = (GameObject)Instantiate (flare, this.GetComponent<Item>().equipper.transform.position, Quaternion.identity);
+		Vector3 pos = this.GetComponent<Item> ().equipper.transform.position;
+		pos.y = pos.y + 1;
+		GameObject spawned = (GameObject)Instantiate (flare, pos, Quaternion.identity);
 		spawned.transform.Rotate (90,0,0);
 		spawned.transform.parent = this.GetComponent<Item>().equipper.transform;
 		Debug.Log (this.GetComponent<Item> ().equipper.transform);
