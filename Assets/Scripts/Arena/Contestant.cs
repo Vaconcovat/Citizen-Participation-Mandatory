@@ -122,7 +122,9 @@ public class Contestant : MonoBehaviour {
         ContestantGenerator gen = FindObjectOfType<ContestantGenerator>();
         if(contestantName == ""){
         	if(type == ContestantType.Target && StaticGameStats.instance.RebelName != ""){
-        		contestantName = StaticGameStats.instance.RebelName;
+				if (StaticGameStats.instance.FirstRun) {
+					contestantName = StaticGameStats.instance.RebelName;
+				}	
         	}
         	else{
 				contestantName = gen.GetFirstName() + " " + gen.GetLastName();
