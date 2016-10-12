@@ -446,7 +446,7 @@ public class AIController : MonoBehaviour {
 			}
 			else{
 				agent.speed = c.movespeed * 0.8f;
-				if(agent.remainingDistance < 2.0f){
+				if(agent.remainingDistance < 2.0f && engagedTarget.isAlive){
 					if(c.traits.Contains(Contestant.Trait.Merciful)){
 						engagedTarget.GetComponent<AIController>().StartEvac();
 						StartHunt();

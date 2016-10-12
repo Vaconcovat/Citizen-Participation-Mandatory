@@ -283,7 +283,6 @@ public class Contestant : MonoBehaviour {
 			body.AddForce(damage.knockback, ForceMode.Impulse);
 			if (health <= 0){
 				killer = damage.owner;
-				isAlive = false;
 				Die(null);
 				if(killer.equipped != null){
 					if (killer.equipped.isSponsored) {
@@ -336,7 +335,10 @@ public class Contestant : MonoBehaviour {
 	/// Turns this contestant into a corpse.
 	/// </summary>
 	public void Die(string title){
-
+		if(!isAlive){
+			return;
+		}
+		isAlive = false;
 		foreach (Rigidbody ragdoll in bones) 
 		{
 			ragdoll.isKinematic = false;
