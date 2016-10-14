@@ -12,12 +12,10 @@ public class SkillCoolDown : MonoBehaviour {
 	public KeyCode Ability3;
 	public Contestant player;
 	public GameObject weaponTrackerUI, contestantTrackerUI;
-	public bool isPrimed = false;
 	public Sprite LockedOut;
 	public float shockActiveTime;
 	public float blindActiveTime;
 	public float bioscanActiveTime;
-	public float ShockCollarPrimerCooldownTime;
 
 	void Start()
 	{
@@ -117,12 +115,8 @@ public class SkillCoolDown : MonoBehaviour {
 		if (Input.GetKeyDown (Ability3)) { //Press the BioScan Button
 			if (StaticGameStats.instance.Abilites [3]) { //Does the Player Own the BioScan Ability
 				if (skills [3].isUseable == true) { //Is The Ability Fully Cooled Down
-					if (skills [3].currentCooldown == skills [3].MaxCooldown) { //Is The Ability Useable
-						if (isPrimed) {
-							StartCoroutine ("ShockCollarWait");
-						} else {
-							StartCoroutine ("ShockCollarPrimerWait");
-						}
+					if (skills [3].currentCooldown == skills [3].MaxCooldown) {//Is The Ability Useable
+						StartCoroutine ("ShockCollarWait");
 					} else {
 						return;
 					}
@@ -232,6 +226,7 @@ public class SkillCoolDown : MonoBehaviour {
 		Arena_Camera[] cameras = FindObjectsOfType<Arena_Camera>();
 		foreach(Arena_Camera a in cameras){
 			a.active = true;
+			//Tom Here is probably where you will want to add the particle effect trigger
 		}
 		skills [1].currentCooldown = 0;
 		yield return new WaitForSeconds (skills [1].MaxCooldown);
@@ -247,7 +242,6 @@ public class SkillCoolDown : MonoBehaviour {
 	}
 
 	IEnumerator ShockCollarWait(){
-		isPrimed = false;
 		skills [3].isUseable = false;
 		Stun ();
 		yield return new WaitForSeconds (shockActiveTime);
@@ -255,16 +249,6 @@ public class SkillCoolDown : MonoBehaviour {
 		yield return new WaitForSeconds (skills [3].MaxCooldown);
 		skills [3].isUseable = true;
 	}
-
-	IEnumerator ShockCollarPrimerWait(){
-		isPrimed = true;
-		skills [3].isUseable = false;
-		skills [3].currentCooldown = skills [3].MaxCooldown - ShockCollarPrimerCooldownTime;
-		yield return new WaitForSeconds (ShockCollarPrimerCooldownTime);
-		skills [3].isUseable = true;
-	}
-
-
 }
 
 [System.Serializable]
