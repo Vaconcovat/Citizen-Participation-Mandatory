@@ -10,19 +10,13 @@ public class ItemPools : MonoBehaviour {
 	public GameObject[] HealthkitPrismex; //Item pool containing the health kit and the prismex item, ACTIVE IF SELECTED
 	public GameObject[] HealthkitExplodena; //Item pool containing the health kit and the explodena item, ACTIVE IF SELECTED
 	public GameObject[] HealthkitVelocitech; //Item pool containing the health kit and the velocitech item, ACTIVE IF SELECTED
-	public GameObject[] NoHealthkitPrismex; //Item pool containing only the prismex item. ACTIVE IF UPGRADE IS SELECTED AND SPONSOR IS SELECTED
-	public GameObject[] NoHealthkitExplodena; //Item pool containing only the explodena item, ACTIVE IF UPGRADE IS SELECTED AND SPONSOR IS SELECTED
-	public GameObject[] NoHealthkitVelocitech; //Item pool containing only the velocitech item, ACTIVE IF UPGRADE IS SELECTED AND SPONSOR IS SELECTED
 	public Pool BasicWeapons;
 	public Pool sponsor0;
 	public Pool sponsor1;
     public Pool sponsor2;
 	public Pool sponsor0HealthKit;
-	public Pool sponsor0NoHealthKit;
 	public Pool sponsor1HealthKit;
-	public Pool sponsor1NoHealthKit;
 	public Pool sponsor2HealthKit;
-	public Pool sponsor2NoHealthKit;
     public Pool item;
 
 	// Use this for initialization
@@ -31,20 +25,14 @@ public class ItemPools : MonoBehaviour {
 		sponsor0 = new Pool(Prismex_Pool);
 		sponsor1 = new Pool(Explodena_Pool);
         sponsor2 = new Pool(Velocitech_Pool);
-		if ((StaticGameStats.instance.TierTwoUpgrades [2]) && StaticGameStats.instance.chosenSponsor == 0) {
-			item = new Pool (NoHealthkitPrismex);
-		} else if ((StaticGameStats.instance.TierTwoUpgrades [2]) && StaticGameStats.instance.chosenSponsor == 1) {
-			item = new Pool (NoHealthkitExplodena);
-		} else if ((StaticGameStats.instance.TierTwoUpgrades [2]) && StaticGameStats.instance.chosenSponsor == 2) {
-			item = new Pool (NoHealthkitVelocitech);
+		if (StaticGameStats.instance.FirstRun) {
+			item = new Pool (Item_Pool);
 		} else if (StaticGameStats.instance.chosenSponsor == 0) {
 			item = new Pool (HealthkitPrismex);
 		} else if (StaticGameStats.instance.chosenSponsor == 1) {
 			item = new Pool (HealthkitExplodena);
 		} else if (StaticGameStats.instance.chosenSponsor == 2) {
 			item = new Pool (HealthkitVelocitech);
-		} else {
-			item = new Pool (Item_Pool);
 		}
 
 	}
