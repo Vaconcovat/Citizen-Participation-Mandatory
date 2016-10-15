@@ -50,6 +50,10 @@ public class InterfaceManager : MonoBehaviour {
 	public GameObject Backpack;
 
 	public GameObject AbilityBar;
+	public Text disconnect_text;
+	public float disconnectHoldTime;
+	float disconnecttimer;
+	bool disconnecting = false;
 
 	RoundManager rm;
 	float announcetimer;
@@ -76,7 +80,7 @@ public class InterfaceManager : MonoBehaviour {
 		} else {
 			AbilityBar.SetActive (true);
 		}
-
+		disconnect_text.color = new Color(1,1,1,0);
 	}
 	
 	// Update is called once per frame
@@ -167,6 +171,30 @@ public class InterfaceManager : MonoBehaviour {
 			influenceFeed.text = influenceText;
 		}
 
+
+		//disconnect
+		if(player.isAlive){
+			if(Input.GetKeyDown(KeyCode.Escape)){
+				disconnecting = true;
+			}
+			if(Input.GetKeyUp(KeyCode.Escape)){
+				disconnecting = false;
+			}
+			if(disconnecting){
+				disconnecttimer -= Time.deltaTime;
+				disconnect_text.color = new Color(1,1,1,Mathf.Max(0,(1.0f-(disconnecttimer / disconnectHoldTime))));
+			}
+			else{
+				disconnecttimer = disconnectHoldTime;
+				disconnect_text.color = new Color(1,1,1,0);
+			}
+			if(disconnecttimer < 0){
+				player.Die("");
+			}
+		}
+		else{
+			disconnect_text.color = new Color(1,1,1,0);
+		}
 	}
 
 	/// <summary>
