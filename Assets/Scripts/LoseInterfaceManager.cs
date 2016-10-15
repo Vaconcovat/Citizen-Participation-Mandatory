@@ -7,6 +7,8 @@ public class LoseInterfaceManager : MonoBehaviour {
 	public AutoType at;
 	NoiseAndScratches ns;
 	bool fin = false;
+	public int NumSecondsTillStaticStart;
+	bool done;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,14 @@ public class LoseInterfaceManager : MonoBehaviour {
 			ns.grainIntensityMin += Time.deltaTime;
 			ns.grainIntensityMax += Time.deltaTime;
 		}
+		if (done) {
+			if (Input.GetKeyDown (KeyCode.Alpha1) || (Input.GetKeyDown (KeyCode.Keypad1))) {
+				FindObjectOfType<MenuCamera> ().MainMenu ();
+			}
+			if (Input.GetKeyDown (KeyCode.Alpha2) || (Input.GetKeyDown (KeyCode.Keypad2))) {
+				FindObjectOfType<MenuCamera> ().Shutdown ();
+			}
+		}
 	}
 
 	public void Lose(){
@@ -29,6 +39,12 @@ public class LoseInterfaceManager : MonoBehaviour {
 	}
 
 	public void Finished(){
+		done = true;
+		StartCoroutine ("StaticWait");
+	}
+
+	IEnumerator StaticWait(){
+		yield return new WaitForSeconds (NumSecondsTillStaticStart);
 		fin = true;
 	}
 }
