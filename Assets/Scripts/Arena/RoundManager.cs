@@ -14,7 +14,7 @@ public class RoundManager : MonoBehaviour {
 	public GameObject guardPrefab;
 	public GameObject guardWeapon;
     public bool autoSpawn;
-    public GameObject outerBayDoors;
+	public List<Door> outerDoors;
     public GameObject medicPrefab;
 	public bool noGuardDamage;
 	public int preRoundTime;
@@ -67,7 +67,9 @@ public class RoundManager : MonoBehaviour {
 
 		if(roundOver){
 			
-			outerBayDoors.SetActive(false);
+			foreach (Door d in outerDoors) {
+				d.OuterDoor.GetComponent<NavMeshObstacle> ().enabled = false;
+			}
 			bool noGuards = true;
 			foreach(AI_GuardController a in FindObjectsOfType<AI_GuardController>()){
 				if(a.GetComponent<Contestant>().isAlive){
@@ -85,10 +87,14 @@ public class RoundManager : MonoBehaviour {
 		}
 		else{
 			if(FindObjectsOfType<AI_MedicController>().Length > 0){
-				outerBayDoors.SetActive(false);
+				foreach (Door d in outerDoors) {
+					d.OuterDoor.GetComponent<NavMeshObstacle> ().enabled = false;
+				}
 			}
 			else{
-				outerBayDoors.SetActive(true);
+				foreach (Door d in outerDoors) {
+					d.OuterDoor.GetComponent<NavMeshObstacle> ().enabled = true;
+				}
 			}
 		}
 	}
@@ -118,7 +124,9 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	void SpawnGuards(){
-		outerBayDoors.SetActive(false);
+		foreach (Door d in outerDoors) {
+			d.OuterDoor.GetComponent<NavMeshObstacle> ().enabled = false;
+		}
 		foreach(Transform t in outerSpawns){
 			GameObject spawnedGuard = (GameObject)Instantiate(guardPrefab, t.position, Quaternion.identity);
 			GameObject spawnedGun = (GameObject)Instantiate(guardWeapon, t.position,Quaternion.identity);
@@ -157,5 +165,11 @@ public class RoundManager : MonoBehaviour {
 
 	public int GetRound(){
 		return roundNumber;
+	}
+
+	[System.Serializable]
+	public class Door
+	{
+		public GameObject OuterDoor;
 	}
 }
