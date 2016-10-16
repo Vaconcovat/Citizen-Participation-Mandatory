@@ -459,6 +459,8 @@ public class Contestant : MonoBehaviour {
 		equipped = null;
 		corpseRenderer.material = hologram;
 		GetComponent<Animator>().enabled = false;
+		GetComponent<Collider>().enabled = false;
+		GetComponent<Rigidbody>().useGravity = false;
 		GameObject spawned = (GameObject)Instantiate(deathCard);
 		spawned.transform.SetParent(FindObjectOfType<Canvas>().transform,false);
 		UI_DeathCard tracker = spawned.GetComponent<UI_DeathCard>();

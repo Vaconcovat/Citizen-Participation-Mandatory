@@ -168,10 +168,11 @@ public class AIController : MonoBehaviour {
 			}
 			c.CameraInfluence(2, true);
 		}
+		gameObject.layer = 14;
 	}
 
 	void Evacuating(){
-		agent.speed = 5;
+		agent.speed = 7;
 		if (c.equipped != null){
 			c.equipped.Unequip();
 			c.equipped = null;

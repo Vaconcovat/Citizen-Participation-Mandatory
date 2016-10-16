@@ -42,18 +42,23 @@ public class AI_MedicController : MonoBehaviour {
 	}
 
 	void Evacuating(){
+		agent.speed = 7;
 		agent.destination = spawn;
-		if(agent.remainingDistance < 0.5f){
-			if(target.isAlive){
-				if (!StaticGameStats.instance.FirstRun) {
-					StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.SuccessfulExtraction, 0);
+		if(Vector3.Distance(transform.position, spawn)<3){
+			if(Vector3.Distance(transform.position, target.transform.position)<5){
+				if(target.isAlive){
+					if (!StaticGameStats.instance.FirstRun) {
+						StaticGameStats.instance.Influence (StaticGameStats.InfluenceTrigger.SuccessfulExtraction, 0);
+					}
+					target.Die("MERCIED");
 				}
-				target.Die("MERCIED");
 			}
-			if(tracker_card != null){
-				Destroy(tracker_card.gameObject);
+			if(!target.isAlive){
+				if(tracker_card != null){
+					Destroy(tracker_card.gameObject);
+				}
+				Destroy(gameObject);
 			}
-			Destroy(gameObject);
 		}
 	}
 }
