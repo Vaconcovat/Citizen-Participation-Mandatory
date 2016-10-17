@@ -64,31 +64,8 @@ public class StaticGameStats : MonoBehaviour {
 	public float NormalDamageBuff = 1.0f;
 	public float KaramGetSomeDamageBuff = 1.10f;
 
-	public int Upgrade1ItemUsageBuff = 2; //Ability 1 Doubles the number of item uses
-	public float Upgrade3ReputationGainBuff = 1.05f; //Ability 3 increases all rep gain by 5%
-	public float Upgrade4MaxAmmoBuff = 1.2f; //Ability 4 increases the ammo of all weapons by 20%
-
-	public float Upgrade5HealAmount = 10.0f;
-
-	public float Upgrade6FireRateNerf = 0.8f;
-	public int Upgrade6DamageBuff = 2; 
-
-	public bool Upgrade7AlreadyTriggered = false;
-	public int Upgrade7HealAmount = 20;
-
-	public int Upgrade8NormalSpeed = 10;
-	public int Upgrade8MovementSpeedBuff = 15;
-
-	public int Upgrade9NormalSpeed = 10;
-	public int Upgrade9MovementSpeedBuff = 15;
-	public int Upgrade9HealAmount = 20;
-
-
-
-	public int Upgrade11ThrownBuff = 4;
-	public bool Upgrade11AlreadyTriggered = false;
-
-	public float Upgrade12DurationBuff = 1.5f;
+	public float Upgrade3ReputationGainBuff = 1.05f;
+	public float Upgrade4MaxAmmoBuff = 1.5f;
 
 	public float Ability1MaxDistance = 10.0f;
 
@@ -194,9 +171,12 @@ public class StaticGameStats : MonoBehaviour {
 	}
 
 	public void UpdateInfluence(int faction, float amount){
+		if (StaticGameStats.instance.TierOneUpgrades [2]) {
+			amount = amount * StaticGameStats.instance.Upgrade3ReputationGainBuff;
+		}
 		switch (faction){
 		case 0:
-			govRep += (amount * StaticGameStats.instance.Upgrade3ReputationGainBuff);
+			govRep += amount;
 			if (govRep > 100.0f) {
 				govRep = 100.0f;
 			}
@@ -205,7 +185,7 @@ public class StaticGameStats : MonoBehaviour {
 			}
 			break;
 		case 1:
-			corRep += (amount * StaticGameStats.instance.Upgrade3ReputationGainBuff);
+			corRep += amount;
 			if (corRep > 100.0f) {
 				corRep = 100.0f;
 			}
@@ -214,7 +194,7 @@ public class StaticGameStats : MonoBehaviour {
 			}
 			break;
 		case 2:
-			rebRep += (amount * StaticGameStats.instance.Upgrade3ReputationGainBuff);
+			rebRep += amount;
 			if (rebRep > 100.0f) {
 				rebRep = 100.0f;
 			}

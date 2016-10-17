@@ -126,7 +126,6 @@ public class UpgradeInterface : MonoBehaviour {
 			if (StaticGameStats.instance.avaliableMoney >=upgrade3Cost) {
 				StaticGameStats.instance.avaliableMoney -=upgrade3Cost;
 				StaticGameStats.instance.TierOneUpgrades [2] = true;
-				StaticGameStats.instance.Upgrade3ReputationGainBuff = 1.05f;
 				ChangeColorToGreen(2);
 				buttonActive [2] = true;
 				ChangeColours ();
@@ -135,7 +134,6 @@ public class UpgradeInterface : MonoBehaviour {
 		} else {
 			StaticGameStats.instance.avaliableMoney +=upgrade3Cost;
 			StaticGameStats.instance.TierOneUpgrades [2] = false;
-			StaticGameStats.instance.Upgrade3ReputationGainBuff = 1.0f;
 			buttonActive [2] = false;
 			ChangeColorToGrey (2);
 			Deselect (2);
