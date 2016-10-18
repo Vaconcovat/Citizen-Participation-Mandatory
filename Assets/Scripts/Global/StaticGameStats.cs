@@ -69,6 +69,8 @@ public class StaticGameStats : MonoBehaviour {
 
 	public float Ability1MaxDistance = 10.0f;
 
+	public bool AbilitiesActive = false;
+
 	//Rep Gain Triggers
 	//1.0f = 1% Rep Gain
 

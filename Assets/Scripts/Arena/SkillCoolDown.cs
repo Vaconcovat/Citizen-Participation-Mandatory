@@ -58,77 +58,77 @@ public class SkillCoolDown : MonoBehaviour {
 		//ABILITY ACTIVATION
 
 		//ABILITY 0 - BIOSCAN
-		if (Input.GetKeyDown (Ability0)) { //Press the BioScan Button
-			if (StaticGameStats.instance.Abilites [0]) { //Does the Player Own the BioScan Ability
-				if (skills [0].isUseable == true) { //Is The Ability Fully Cooled Down
-					if (skills [0].currentCooldown == skills [0].MaxCooldown) { //Is The Ability Useable
-						StartCoroutine ("BioScanWait"); //Waits the active time of the Ability
+		if (StaticGameStats.instance.AbilitiesActive == true) {
+			if (Input.GetKeyDown (Ability0)) { //Press the BioScan Button
+				if (StaticGameStats.instance.Abilites [0]) { //Does the Player Own the BioScan Ability
+					if (skills [0].isUseable == true) { //Is The Ability Fully Cooled Down
+						if (skills [0].currentCooldown == skills [0].MaxCooldown) { //Is The Ability Useable
+							StartCoroutine ("BioScanWait"); //Waits the active time of the Ability
+						} else {
+							return;
+						}
 					} else {
 						return;
 					}
 				} else {
-					return;
+					return;	
 				}
-			} else {
-				return;	
 			}
-		}
 
-		//ABILITY 1 - BLACKOUT
-		if (Input.GetKeyDown (Ability1)) { //Press the BioScan Button
-			if (StaticGameStats.instance.Abilites [1]) { //Does the Player Own the BioScan Ability
-				if (skills [1].isUseable == true) { //Is The Ability Fully Cooled Down
-					if (skills [1].currentCooldown == skills [1].MaxCooldown) { //Is The Ability Useable
-						StartCoroutine ("BlackoutWait"); 
+			//ABILITY 1 - BLACKOUT
+			if (Input.GetKeyDown (Ability1)) { //Press the BioScan Button
+				if (StaticGameStats.instance.Abilites [1]) { //Does the Player Own the BioScan Ability
+					if (skills [1].isUseable == true) { //Is The Ability Fully Cooled Down
+						if (skills [1].currentCooldown == skills [1].MaxCooldown) { //Is The Ability Useable
+							StartCoroutine ("BlackoutWait"); 
+						} else {
+							return;
+						}
 					} else {
 						return;
 					}
 				} else {
-					return;
+					return;	
 				}
-			} else {
-				return;	
 			}
-		}
-			
-		//ABILITY 2 - OVERLOAD
-		if (Input.GetKeyDown (Ability2)) { //Press the BioScan Button
-			if (StaticGameStats.instance.Abilites [2]) { //Does the Player Own the BioScan Ability
-				if (skills [2].isUseable == true) { //Is The Ability Fully Cooled Down
-					if (skills [2].currentCooldown == skills [2].MaxCooldown) { //Is The Ability Useable
-						StartCoroutine ("OverloadWait");
+
+			//ABILITY 2 - OVERLOAD
+			if (Input.GetKeyDown (Ability2)) { //Press the BioScan Button
+				if (StaticGameStats.instance.Abilites [2]) { //Does the Player Own the BioScan Ability
+					if (skills [2].isUseable == true) { //Is The Ability Fully Cooled Down
+						if (skills [2].currentCooldown == skills [2].MaxCooldown) { //Is The Ability Useable
+							StartCoroutine ("OverloadWait");
+						} else {
+							return;
+						}
 					} else {
 						return;
 					}
 				} else {
-					return;
+					return;	
 				}
-			} else {
-				return;	
 			}
-		}
 
 
 
 
-		//ABILITY 4 - SHOCK COLLAR
-		if (Input.GetKeyDown (Ability3)) { //Press the BioScan Button
-			if (StaticGameStats.instance.Abilites [3]) { //Does the Player Own the BioScan Ability
-				if (skills [3].isUseable == true) { //Is The Ability Fully Cooled Down
-					if (skills [3].currentCooldown == skills [3].MaxCooldown) {//Is The Ability Useable
-						StartCoroutine ("ShockCollarWait");
+			//ABILITY 4 - SHOCK COLLAR
+			if (Input.GetKeyDown (Ability3)) { //Press the BioScan Button
+				if (StaticGameStats.instance.Abilites [3]) { //Does the Player Own the BioScan Ability
+					if (skills [3].isUseable == true) { //Is The Ability Fully Cooled Down
+						if (skills [3].currentCooldown == skills [3].MaxCooldown) {//Is The Ability Useable
+							StartCoroutine ("ShockCollarWait");
+						} else {
+							return;
+						}
 					} else {
 						return;
 					}
 				} else {
-					return;
+					return;	
 				}
-			} else {
-				return;	
 			}
 		}
-
-
 	}
 		
 	//ABILITIES

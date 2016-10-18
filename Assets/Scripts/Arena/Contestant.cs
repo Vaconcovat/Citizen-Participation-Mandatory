@@ -348,6 +348,7 @@ public class Contestant : MonoBehaviour {
 
 		switch(type){
 			case ContestantType.Player:
+				StaticGameStats.instance.AbilitiesActive = false;
 				if(equipped != null){
 					if (equipped.isSponsored) {
 						if(onCameras.Count > 0){

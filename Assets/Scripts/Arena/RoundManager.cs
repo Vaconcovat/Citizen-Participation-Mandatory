@@ -107,6 +107,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	public void endRound(){
+		StaticGameStats.instance.AbilitiesActive = false;
 		if (roundNumber < 3){
 			roundNumber++;
 			if (Player.isAlive) {
@@ -161,6 +162,7 @@ public class RoundManager : MonoBehaviour {
 		EnableContestants(true);
 		im.Announce("FIGHT!", 2, 100);
 		GetComponent<AudioSource>().Play();
+		StaticGameStats.instance.AbilitiesActive = true;
 	}
 
 	public int GetRound(){
