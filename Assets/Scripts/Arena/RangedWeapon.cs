@@ -59,7 +59,7 @@ public class RangedWeapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(StaticGameStats.instance.TierOneUpgrades[1]){
+		if(StaticGameStats.instance.TierOneUpgrades[1] && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Arena"){
 			if (!GetComponent<Item> ().isSponsored) {
 				ammo = Mathf.RoundToInt(ammo * StaticGameStats.instance.Upgrade4MaxAmmoBuff);
 				Maxammo = ammo;
