@@ -60,6 +60,12 @@ public class MenuCamera : MonoBehaviour {
 			if(state == 9 && Input.GetKeyDown(KeyCode.Delete)){
 				StaticGameStats.instance.avaliableMoney++;
 			}
+			if(state == 2 && Input.GetKeyDown(KeyCode.Delete)){
+				StaticGameStats.instance.govRep++;
+			}
+			if(state == 2 && Input.GetKeyDown(KeyCode.End)){
+				StaticGameStats.instance.rebRep--;
+			}
 		}
 
 

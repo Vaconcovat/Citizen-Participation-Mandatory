@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class UpgradeSponsorInterface : MonoBehaviour {
 
-	public Text moneyText, sponsorText, directory;
+	public Text moneyText, sponsorText, directory, welcome;
 	public Image gunIcon, gunIcon2;
 	public Button signMegaCity1, signExplodena, commitButton;
 	public Button[] upgradebuttons;
@@ -23,6 +23,7 @@ public class UpgradeSponsorInterface : MonoBehaviour {
 		availableMoney = StaticGameStats.instance.avaliableMoney;
 		greyColor = Color.grey;
 		whiteColor = Color.white;
+		welcome.text = "Please make a selection, " + StaticGameStats.instance.PlayerName + ".";
 	}
 
 	// Update is called once per frame
