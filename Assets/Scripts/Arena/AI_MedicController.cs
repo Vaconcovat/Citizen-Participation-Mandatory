@@ -9,7 +9,7 @@ public class AI_MedicController : MonoBehaviour {
 
 	NavMeshAgent agent;
 	public GameObject tracker;
-	UI_GenericCard tracker_card;
+	public UI_GenericCard tracker_card;
 
 	// Use this for initialization
 	void Start () {

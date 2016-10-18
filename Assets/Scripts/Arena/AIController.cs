@@ -188,6 +188,10 @@ public class AIController : MonoBehaviour {
 		if(medicVisited){
 			destination = medic.transform.position;
 		}
+
+		if(!medic.GetComponent<Contestant>().isAlive){
+			StartBeacon();
+		}
 	}
 
 	void StartBeacon(){

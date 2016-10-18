@@ -136,7 +136,7 @@ public class Contestant : MonoBehaviour {
 
         //----------------------------------------------------
         //GENERATE TRAITS
-		if (!isPlayer && !IsDummy) {
+		if (type == ContestantType.AI) {
 			if (StaticGameStats.instance.TierTwoUpgrades [2]) {
 				//20% chance to be sick, 20% chance to be strong
 				float random = Random.value;
@@ -445,6 +445,9 @@ public class Contestant : MonoBehaviour {
 			case ContestantType.Medic:
 				FindObjectOfType<SoundManager>().PlayEffect(FindObjectOfType<SoundManager>().death, transform.position, 0.7f, true);
 				GetComponent<AI_MedicController>().enabled = false;
+				if(GetComponent<AI_MedicController>().tracker_card != null){
+					Destroy(GetComponent<AI_MedicController>().tracker_card.gameObject);
+				}
 				GetComponent<NavMeshAgent>().enabled = false;
 				break;
 
