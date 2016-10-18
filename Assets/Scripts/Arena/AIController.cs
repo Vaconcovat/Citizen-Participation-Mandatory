@@ -142,13 +142,14 @@ public class AIController : MonoBehaviour {
 		DirectionalLight.intensity = 0.0f;
 		ContestantLight.intensity = 8.0f;
 		PlayerLight.intensity = 8.0f;
+		StartHunt ();
 		yield return new WaitForSeconds (blindActiveTime);
 		viewAngle = 120.0f;
 		viewRadius = 12.0f;
 		DirectionalLight.intensity = 0.5f;
 		ContestantLight.intensity = 0.0f;
 		PlayerLight.intensity = 0.0f;
-		StartHunt ();
+
 	}
 
 	public void StartEvac(){
