@@ -15,7 +15,7 @@ public class MenuCamera : MonoBehaviour {
 
 	void Start(){
 		Debug.Log("Save location: " + Application.persistentDataPath);
-		audioP.volume = PlayerPrefs.GetFloat("MusicVolume");
+
 		if(StaticGameStats.instance.toPost){
 			StaticGameStats.instance.TierOneUpgrades[0] = false;
 			StaticGameStats.instance.TierOneUpgrades[1] = false;
@@ -53,13 +53,18 @@ public class MenuCamera : MonoBehaviour {
 			transform.position = Vector3.MoveTowards(transform.position, new Vector3(waypoints[state].position.x,waypoints[state].position.y,-10),speed);
 		}
 
-		if (state == 1 && Input.GetKeyDown(KeyCode.Delete)){
-			StaticGameStats.instance.committed = !StaticGameStats.instance.committed;
+		if(StaticGameStats.instance.dev){
+			if (state == 1 && Input.GetKeyDown(KeyCode.Delete)){
+				StaticGameStats.instance.committed = !StaticGameStats.instance.committed;
+			}
+			if(state == 9 && Input.GetKeyDown(KeyCode.Delete)){
+				StaticGameStats.instance.avaliableMoney++;
+			}
 		}
 
-		if(state == 9 && Input.GetKeyDown(KeyCode.Delete)){
-			StaticGameStats.instance.avaliableMoney++;
-		}
+
+
+		audioP.volume = PlayerPrefs.GetFloat("MusicVolume");
 	}
 
 	public void MainMenu(){

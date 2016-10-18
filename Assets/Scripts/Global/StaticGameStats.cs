@@ -107,7 +107,7 @@ public class StaticGameStats : MonoBehaviour {
 
 	public string RebelName;
 
-
+	public bool dev = false;
 
 	void Awake () {
 

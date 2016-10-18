@@ -32,6 +32,7 @@ public class BootInterfaceManager : MonoBehaviour {
 			displayed = false;
 			skipped = true;
 			logoWaitTime = 3;
+			StaticGameStats.instance.dev = true;
 		}
 	}
 
