@@ -251,6 +251,8 @@ public class AIController : MonoBehaviour {
 	}
 
 	void StartHunt(){
+		StopCoroutine ("Shocked");
+		StopCoroutine ("Blinded");
 		state = AIState.Hunting;
 		agent.speed = c.movespeed * 0.66f;
 		Wander();
