@@ -28,7 +28,7 @@ public class Contestant : MonoBehaviour {
 	/// The maximum health of the contestant.
 	/// </summary>
 	public int maxHealth;
-	[Tooltip("Ture if they are a player, false if they are an AI. PLEASE make sure the correct controller is attached :)")]
+	[Tooltip("True if they are a player, false if they are an AI. PLEASE make sure the correct controller is attached :)")]
 	/// <summary>
 	/// True if the contestant is the player, false if they're the AI.
 	/// </summary>
