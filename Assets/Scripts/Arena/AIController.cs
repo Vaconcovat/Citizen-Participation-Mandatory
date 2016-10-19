@@ -142,14 +142,19 @@ public class AIController : MonoBehaviour {
 		DirectionalLight.intensity = 0.0f;
 		ContestantLight.intensity = 8.0f;
 		PlayerLight.intensity = 8.0f;
-		StartHunt ();
+		Debug.Log ("AI HUNTING 1");
+		state = AIState.Hunting;
+		Debug.Log ("AI HUNTING 2");
 		yield return new WaitForSeconds (blindActiveTime);
+		Debug.Log ("AI WAITED");
 		viewAngle = 120.0f;
 		viewRadius = 12.0f;
 		DirectionalLight.intensity = 0.5f;
 		ContestantLight.intensity = 0.0f;
+		Debug.Log ("Turned contestant light off");
 		PlayerLight.intensity = 0.0f;
-
+		StopAbilityCoroutines();
+		Debug.Log ("AI END");
 	}
 
 	public void StartEvac(){
@@ -251,8 +256,6 @@ public class AIController : MonoBehaviour {
 	}
 
 	void StartHunt(){
-		StopCoroutine ("Shocked");
-		StopCoroutine ("Blinded");
 		state = AIState.Hunting;
 		agent.speed = c.movespeed * 0.66f;
 		Wander();
@@ -656,5 +659,9 @@ public class AIController : MonoBehaviour {
 		}
 	}
 
+	public void StopAbilityCoroutines(){
+		StopCoroutine ("Shocked");
+		StopCoroutine ("Blinded");
+	}
 
 }
