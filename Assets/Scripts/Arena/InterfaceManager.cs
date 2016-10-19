@@ -66,9 +66,13 @@ public class InterfaceManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		rm = FindObjectOfType<RoundManager>();
 		floor.material.color = Color.gray;
 		influences = new List<StaticGameStats.InfluenceTrigger>();
-		rm = FindObjectOfType<RoundManager>();
+		if(rm.GetRound() == 1){
+			influences.Clear();
+			influenceText = "";
+		}
 		abortButton.enabled = false;
 		abortText.enabled = false;
 		abortImage.enabled = false;
