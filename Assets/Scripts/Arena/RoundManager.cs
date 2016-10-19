@@ -61,6 +61,7 @@ public class RoundManager : MonoBehaviour {
 	void Update () {
 		if (aliveContestants == 1){
 			if (!roundOver){
+				RebakeNavMesh ();
 				SpawnGuards();
 				roundOver = true;
 			}
@@ -174,5 +175,11 @@ public class RoundManager : MonoBehaviour {
 	public class Door
 	{
 		public GameObject OuterDoor;
+	}
+
+	public void RebakeNavMesh (){
+		foreach (Door d in outerDoors) {
+			d.OuterDoor.GetComponent<NavMeshObstacle> ().enabled = false;
+		}
 	}
 }
