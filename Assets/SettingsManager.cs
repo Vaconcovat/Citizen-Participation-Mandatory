@@ -6,7 +6,7 @@ public class SettingsManager : MonoBehaviour {
 
 	float sfxVolume, musicVolume;
 	public Slider sfxSlider, musicSlider, analyticsSlider;
-	public Text sfxNum, musicNum, analyticsOn, analyticsOff, deleteText, saveText;
+	public Text sfxNum, musicNum, analyticsOn, analyticsOff, deleteText, saveText, directory;
 	public AudioSource sfx, music;
 	int analytics;
 	bool prompt = false;
@@ -46,6 +46,11 @@ public class SettingsManager : MonoBehaviour {
 
 		deleteText.text = "DELETE SAVE";
 		saveText.text = string.Format("{0}\nTournaments: {1}\nMoney: {2}\nRep: [ GOV {3:F0} | COR {4:F0} | REB {5:F0} ]", StaticGameStats.instance.PlayerName, StaticGameStats.instance.arenasPlayed, StaticGameStats.instance.avaliableMoney, StaticGameStats.instance.govRep, StaticGameStats.instance.corRep, StaticGameStats.instance.rebRep);
+
+	}
+
+	void Update(){
+		directory.text = @"G:\GovorNet\" + StaticGameStats.instance.PlayerName + @"\SETTINGS.gov";
 	}
 		
 	public void UpdatePrefs(int a){
