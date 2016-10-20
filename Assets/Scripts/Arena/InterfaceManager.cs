@@ -124,7 +124,7 @@ public class InterfaceManager : MonoBehaviour {
 			noise.grainIntensityMax -= Time.deltaTime * 1.0f;
 		}
 		noise.grainIntensityMin = noise.grainIntensityMax - 0.2f;
-		roundText.text = "ROUND: " + RoundManager.roundNumber.ToString();
+		roundText.text = "ROUND: " + RoundManager.roundNumber.ToString () + " / 3";
 		aliveText.text = rm.aliveContestants.ToString() + " / " + rm.totalContestants.ToString() + " REMAIN.";
 
 		if(!player.isAlive){

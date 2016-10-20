@@ -61,7 +61,6 @@ public class RoundManager : MonoBehaviour {
 	void Update () {
 		if (aliveContestants == 1){
 			if (!roundOver){
-				RebakeNavMesh ();
 				SpawnGuards();
 				roundOver = true;
 			}
@@ -162,9 +161,10 @@ public class RoundManager : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 		EnableContestants(true);
-		im.Announce("FIGHT!", 2, 100);
+		im.Announce("Round " + roundNumber + " \n\nFIGHT!", 2, 100);
 		GetComponent<AudioSource>().Play();
 		StaticGameStats.instance.AbilitiesActive = true;
+
 	}
 
 	public int GetRound(){
@@ -175,11 +175,5 @@ public class RoundManager : MonoBehaviour {
 	public class Door
 	{
 		public GameObject OuterDoor;
-	}
-
-	public void RebakeNavMesh (){
-		foreach (Door d in outerDoors) {
-			d.OuterDoor.GetComponent<NavMeshObstacle> ().enabled = false;
-		}
 	}
 }
