@@ -68,7 +68,7 @@ public class TutorialManager : MonoBehaviour {
 		}
 		if (player.equipped != null){
 			if (player.equipped.type == Item.ItemType.Ranged){
-				ammo.text = player.equipped.GetComponent<RangedWeapon>().ammo.ToString();
+				ammo.text = player.equipped.GetComponent<RangedWeapon> ().ammo.ToString () + " / " + player.equipped.GetComponent<RangedWeapon> ().Maxammo.ToString ();
 			}
 			else{
 				ammo.text = "--";
