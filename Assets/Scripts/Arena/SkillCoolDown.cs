@@ -16,6 +16,9 @@ public class SkillCoolDown : MonoBehaviour {
 	public float shockActiveTime;
 	public float blindActiveTime;
 	public float bioscanActiveTime;
+	public float OverloadActiveTime;
+	public Sprite Ability1Fancy, Ability2Fancy, Ability3Fancy, Ability4Fancy;
+	public Sprite Ability1Normal, Ability2Normal, Ability3Normal, Ability4Normal;
 
 	void Start()
 	{
@@ -212,8 +215,10 @@ public class SkillCoolDown : MonoBehaviour {
 
 	IEnumerator BioScanWait(){
 		skills [0].isUseable = false;
+		skills [0].skillIcon.sprite = Ability1Fancy;
 		BioScan (); 
 		yield return new WaitForSeconds (bioscanActiveTime);
+		skills [0].skillIcon.sprite = Ability1Normal;
 		skills [0].currentCooldown = 0;
 		yield return new WaitForSeconds (skills [0].MaxCooldown);
 		skills [0].isUseable = true;
@@ -221,8 +226,10 @@ public class SkillCoolDown : MonoBehaviour {
 		
 	IEnumerator BlackoutWait(){
 		skills [1].isUseable = false;
+		skills [1].skillIcon.sprite = Ability2Fancy;
 		Blackout (); 
 		yield return new WaitForSeconds (blindActiveTime);
+		skills [1].skillIcon.sprite = Ability2Normal;
 		Arena_Camera[] cameras = FindObjectsOfType<Arena_Camera>();
 		foreach(Arena_Camera a in cameras){
 			a.active = true;
@@ -235,7 +242,10 @@ public class SkillCoolDown : MonoBehaviour {
 
 	IEnumerator OverloadWait(){
 		skills [2].isUseable = false;
+		skills [2].skillIcon.sprite = Ability3Fancy;
 		Overload (); //Activates the Ability
+		yield return new WaitForSeconds (OverloadActiveTime);
+		skills [2].skillIcon.sprite = Ability3Normal;
 		skills [2].currentCooldown = 0;
 		yield return new WaitForSeconds (skills [2].MaxCooldown);
 		skills [2].isUseable = true;	
@@ -243,8 +253,10 @@ public class SkillCoolDown : MonoBehaviour {
 
 	IEnumerator ShockCollarWait(){
 		skills [3].isUseable = false;
+		skills [3].skillIcon.sprite = Ability4Fancy;
 		Stun ();
 		yield return new WaitForSeconds (shockActiveTime);
+		skills [3].skillIcon.sprite = Ability4Normal;
 		skills [3].currentCooldown = 0;
 		yield return new WaitForSeconds (skills [3].MaxCooldown);
 		skills [3].isUseable = true;
