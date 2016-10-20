@@ -81,7 +81,7 @@ public class RoundManager : MonoBehaviour {
 				im.Announce ("GUARDS EXHAUSTED\nPLEASE WAIT FOR FURTHER INSTRUCTIONS", 1);
 				Invoke ("Triumph", 5);
 			} else if ((!noGuards) && (noGuardDamage)) { //if there are guards alive and none are damaged
-				im.Announce ("ROUND OVER\nPRESS [Q] TO SURRENDER", 1);
+				im.Announce ("ROUND OVER: GUARDS INBOUND\nPRESS [Q] TO SURRENDER", 1);
 			} else { //if there are guards alive and they have been damaged
 				im.Announce ("CONTESTANT RESISTING DETAINMENT\nALL UNITS OPEN FIRE!", 1);
 			}
