@@ -67,10 +67,11 @@ public class TutorialManager : MonoBehaviour {
 			ExitDoor.gameObject.SetActive (false);
 		}
 		if (player.equipped != null){
-			if (player.equipped.type == Item.ItemType.Ranged){
+			if (player.equipped.type == Item.ItemType.Ranged) {
 				ammo.text = player.equipped.GetComponent<RangedWeapon> ().ammo.ToString () + " / " + player.equipped.GetComponent<RangedWeapon> ().Maxammo.ToString ();
-			}
-			else{
+			} else if (player.equipped.type == Item.ItemType.Other) {
+				ammo.text = player.equipped.GetComponent<OtherItem> ().ammo.ToString () + " / " + player.equipped.GetComponent<OtherItem> ().Maxammo.ToString ();
+			} else {
 				ammo.text = "--";
 			}
 			gunLogo.enabled = true;

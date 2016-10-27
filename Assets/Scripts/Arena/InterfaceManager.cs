@@ -96,10 +96,11 @@ public class InterfaceManager : MonoBehaviour {
 		}
 		healthbar.fillAmount = (player.health * 1.0f) / (player.maxHealth * 1.0f);
 		if (player.equipped != null){
-			if (player.equipped.type == Item.ItemType.Ranged){
+			if (player.equipped.type == Item.ItemType.Ranged) {
 				ammo.text = player.equipped.GetComponent<RangedWeapon> ().ammo.ToString () + " / " + player.equipped.GetComponent<RangedWeapon> ().Maxammo.ToString ();
-			}
-			else{
+			} else if (player.equipped.type == Item.ItemType.Other) {
+				ammo.text = player.equipped.GetComponent<OtherItem> ().ammo.ToString () + " / " + player.equipped.GetComponent<OtherItem> ().Maxammo.ToString ();
+			} else {
 				ammo.text = "--";
 			}
 			gunLogo.enabled = true;

@@ -14,11 +14,13 @@ public class OtherItem : MonoBehaviour {
 	/// The ammo.
 	/// </summary>
 	public int ammo;
+	public int Maxammo;
 	public GameObject flare;
 
 	public void Use(bool held){
 		if (!held){
-			if (ammo != 0){
+			if (ammo > 0){
+				ammo-=1;
 				FindObjectOfType<SoundManager>().PlayEffect(_audio, transform.position, 1.0f, true);
 				effector = GetComponent<Item>().equipper;
 				switch (effect) {
@@ -35,7 +37,6 @@ public class OtherItem : MonoBehaviour {
 					StartCoroutine("CameraSightRepGains", effectAmount);
 					break;
 				}
-				ammo-=1;
 			}
 			else{
 				if(GetComponent<Item>().equipper.type == Contestant.ContestantType.Player){
@@ -46,68 +47,59 @@ public class OtherItem : MonoBehaviour {
 	}
 
 	IEnumerator Heal(float amount){
-		if (ammo >= 1) {
-			if (StaticGameStats.instance.TierThreeUpgrades [0]) { //Heals 4% of max health 12 times over 12 seconds, total health restored 36
-				for (int i = 0; i <= StaticGameStats.instance.FirstAidHereHealDuration; i++) {
-					GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.instance.FirstAidHereHealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
-					yield return new WaitForSeconds (1.0f);
-				}
-			} else { //heals a flat 25 health in a second
-				GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+		if (StaticGameStats.instance.TierThreeUpgrades [0]) { //Heals 4% of max health 12 times over 12 seconds, total health restored 36
+			for (int i = 0; i <= StaticGameStats.instance.FirstAidHereHealDuration; i++) {
+				GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.instance.FirstAidHereHealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+				yield return new WaitForSeconds (1.0f);
 			}
-			if ((consume) && (ammo <= 0)){
-				GetComponent<Item>().Throw();
-			}
+		} else { //heals a flat 25 health in a second
+			GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+		}
+		if ((consume) && (ammo <= 0)){
+			GetComponent<Item>().Throw();
 		}
 		Explosion ();
 	}
 
 	IEnumerator Speed(float amount){
 		effector = GetComponent<Item>().equipper;
-		if (ammo >= 1) {
-			Explosion ();
-			effector.movespeed = effector.movespeed + amount;
-			if ((consume) && (ammo <= 0)) {
-				GetComponent<Item> ().Throw ();
-			}
-			yield return new WaitForSeconds (StaticGameStats.instance.VelocitechItemDuration);
-			effector.movespeed = effector.movespeed - amount;
-			if (effector.movespeed < 10) {
-				effector.movespeed = 10;
-			}
+		Explosion ();
+		effector.movespeed = effector.movespeed + amount;
+		if ((consume) && (ammo <= 0)) {
+			GetComponent<Item> ().Throw ();
 		}
+		yield return new WaitForSeconds (StaticGameStats.instance.VelocitechItemDuration);
+		effector.movespeed = effector.movespeed - amount;
+		if (effector.movespeed < 10) {
+			effector.movespeed = 10;
+		}	
 	}
 
 	IEnumerator Damage(float amount){
 		effector = GetComponent<Item>().equipper;
-		if (ammo >= 1) {;
-			Explosion ();
-			effector.ContestantDamageModifier = effector.ContestantDamageModifier + amount;
-			if ((consume) && (ammo <= 0)) {
-				GetComponent<Item> ().Throw ();
-			}
-			yield return new WaitForSeconds (StaticGameStats.instance.ExplodenaItemDuration);
-			effector.ContestantDamageModifier = effector.ContestantDamageModifier - amount;
-			if (effector.ContestantDamageModifier < 1) {
-				effector.ContestantDamageModifier = 1;
-			}
-
+		Explosion ();
+		effector.ContestantDamageModifier = effector.ContestantDamageModifier + amount;
+		if ((consume) && (ammo <= 0)) {
+			GetComponent<Item> ().Throw ();
+		}
+		yield return new WaitForSeconds (StaticGameStats.instance.ExplodenaItemDuration);
+		effector.ContestantDamageModifier = effector.ContestantDamageModifier - amount;
+		if (effector.ContestantDamageModifier < 1) {
+			effector.ContestantDamageModifier = 1;
 		}
 	}
 
 	IEnumerator CameraSightRepGains(float amount){
 		effector = GetComponent<Item>().equipper;
-		if (ammo >= 1) {
-			Explosion ();
-			effector.ContestantRepModifier = effector.ContestantRepModifier + amount;
-			if ((consume) && (ammo <= 0)) {
-				GetComponent<Item> ().Throw ();
-			}
-			yield return new WaitForSeconds (StaticGameStats.instance.PrismexItemDuration);
-			effector.ContestantRepModifier = effector.ContestantRepModifier - amount;
-			if (effector.ContestantRepModifier < 1) {
-				effector.ContestantRepModifier = 1;
-			}
+		Explosion ();
+		effector.ContestantRepModifier = effector.ContestantRepModifier + amount;
+		if ((consume) && (ammo <= 0)) {
+			GetComponent<Item> ().Throw ();
+		}
+		yield return new WaitForSeconds (StaticGameStats.instance.PrismexItemDuration);
+		effector.ContestantRepModifier = effector.ContestantRepModifier - amount;
+		if (effector.ContestantRepModifier < 1) {
+			effector.ContestantRepModifier = 1;
 		}
 	}
 
