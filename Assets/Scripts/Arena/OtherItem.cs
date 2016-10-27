@@ -47,13 +47,14 @@ public class OtherItem : MonoBehaviour {
 	}
 
 	IEnumerator Heal(float amount){
+		effector = GetComponent<Item> ().equipper;
 		if (StaticGameStats.instance.TierThreeUpgrades [0]) { //Heals 4% of max health 12 times over 12 seconds, total health restored 36
 			for (int i = 0; i <= StaticGameStats.instance.FirstAidHereHealDuration; i++) {
-				GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.instance.FirstAidHereHealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+				effector.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-StaticGameStats.instance.FirstAidHereHealAmount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 				yield return new WaitForSeconds (1.0f);
 			}
 		} else { //heals a flat 25 health in a second
-			GetComponent<Item>().equipper.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
+			effector.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 		}
 		if ((consume) && (ammo <= 0)){
 			GetComponent<Item>().Throw();
