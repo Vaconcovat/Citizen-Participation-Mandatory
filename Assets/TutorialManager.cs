@@ -192,7 +192,7 @@ public class TutorialManager : MonoBehaviour {
 		fading = true;
 		log_autoType.displayedText[0] = "FULL NEURAL CONTROL READY!\n                     \n[   ";
 		log_autoType.displayedText[1] = plantName;
-		log_autoType.displayedText[2] = "   ]\nALL CONTESTANTS MUST COMPLETE\nORIENTATION IN ORDER TO COMPETE \nIN THE ARENA.\n\nCONTESTANTS MUST FIRE A WEAPON\nAT A LIVE TARGET, THEN DISPENSE\nOF THE WEAPON TO PASS.\n\nUSE [ W A S D ] TO MOVE PLANT\nUSE [ MOUSE ] TO AIM\nUSE [ LMB ] TO FIRE WEAPONS/USE ITEMS\nUSE [ RMB ] TO THROW\n\n";
+		log_autoType.displayedText[2] = "   ]\nALL CONTESTANTS MUST COMPLETE\nORIENTATION IN ORDER TO COMPETE \nIN THE ARENA.\n\nCONTESTANTS MUST FIRE A WEAPON\nAT A LIVE TARGET, THEN DISPENSE\nOF THE WEAPON TO PASS.\n\nUSE [ W A S D ] TO MOVE PLANT\nUSE [ MOUSE ] TO AIM\nUSE [ LMB ] TO FIRE WEAPONS/USE ITEMS\nUSE [ RMB ] TO THROW\nHOLD [ ESC ] TO DISCONNECT FROM PLANT\n\n";
 		log_autoType.finishedCallString = "ControlsDone";
 		log_autoType.StartType(); 
 	}
