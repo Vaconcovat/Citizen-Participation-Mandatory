@@ -44,6 +44,11 @@ public class TutorialManager : MonoBehaviour {
 
 	public MeshRenderer floor;
 
+	bool disconnecting;
+	float disconnecttimer;
+	public float disconnectHoldTime;
+	public Text disconnect_text;
+
 	// Use this for initialization
 	void Start () {
 		escort_AI = escort.GetComponent<AI_GuardController>();
@@ -168,6 +173,29 @@ public class TutorialManager : MonoBehaviour {
 		if(escort_AI.endStatus == AI_GuardController.endRoundStatus.Fight && state != TutorialState.Disobey){
 			state = TutorialState.Disobey;
 			tutorialLine.enabled = false;
+		}
+
+		if(player.isAlive){
+			if(Input.GetKeyDown(KeyCode.Escape)){
+				disconnecting = true;
+			}
+			if(Input.GetKeyUp(KeyCode.Escape)){
+				disconnecting = false;
+			}
+			if(disconnecting){
+				disconnecttimer -= Time.deltaTime;
+				disconnect_text.color = new Color(1,1,1,Mathf.Max(0,(1.0f-(disconnecttimer / disconnectHoldTime))));
+			}
+			else{
+				disconnecttimer = disconnectHoldTime;
+				disconnect_text.color = new Color(1,1,1,0);
+			}
+			if(disconnecttimer < 0){
+				player.Die("");
+			}
+		}
+		else{
+			disconnect_text.color = new Color(1,1,1,0);
 		}
 	}
 
