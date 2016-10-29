@@ -19,6 +19,7 @@ public class UI_GenericCard : MonoBehaviour {
 	Canvas c;
 	Vector2 size;
 	Text cardText;
+	Contestant player;
 
 	// Use this for initialization
 	void Start () {
@@ -32,7 +33,7 @@ public class UI_GenericCard : MonoBehaviour {
 		else{
 			limited = true;
 		}
-
+		player = FindObjectOfType<PlayerController>().GetComponent<Contestant>();
 	}
 
 	// Update is called once per frame
@@ -59,7 +60,7 @@ public class UI_GenericCard : MonoBehaviour {
 			}
 			rTrans.position = new Vector3(x,y);
 	
-			if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
+			if(!player.isAlive){
 				Destroy(gameObject);
 			}
 			cardText.fontSize = textSize;

@@ -11,6 +11,8 @@ public class UI_WeaponTracker : MonoBehaviour {
 	Canvas c;
 	Vector2 size;
 	Text ammoText;
+	RangedWeapon wep;
+	Contestant player;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +20,10 @@ public class UI_WeaponTracker : MonoBehaviour {
 		c = FindObjectOfType<Canvas>();
 		size = c.GetComponent<RectTransform>().sizeDelta;
 		ammoText = GetComponentInChildren<Text>();
+		if(item.type == Item.ItemType.Ranged){
+			wep = item.GetComponent<RangedWeapon>();
+		}
+		player = FindObjectOfType<PlayerController>().GetComponent<Contestant>();
 	}
 
 	// Update is called once per frame
@@ -27,21 +33,21 @@ public class UI_WeaponTracker : MonoBehaviour {
 		float y = (pos.y / Screen.height) * size.y * c.transform.localScale.y;
 		rTrans.position = new Vector3(x,y);
 
-		RangedWeapon wep = item.GetComponent<RangedWeapon>();
+
 		if(item.GetAmmo() <= 0){
 			Destroy(gameObject);
 		}
 
 
 		if(displayAmmo){
-			if(wep != null){
+			if(item.type == Item.ItemType.Ranged){
 				ammoText.text = item.itemName + "\n" + wep.ammo.ToString() + " / " + wep.Maxammo.ToString();
 			}else{
 				ammoText.text = item.itemName + "\n--";
 			}
 		}
 
-		if(!FindObjectOfType<PlayerController>().GetComponent<Contestant>().isAlive){
+		if(!player.isAlive){
 			Destroy(gameObject);
 		}
 	}
