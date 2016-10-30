@@ -56,9 +56,6 @@ public class OtherItem : MonoBehaviour {
 		} else { //heals a flat 25 health in a second
 			effector.TakeDamage(new Contestant.DamageParams(Mathf.FloorToInt(-amount),GetComponent<Item>().equipper,Vector2.zero,Vector2.zero));
 		}
-		if ((consume) && (ammo <= 0)){
-			GetComponent<Item>().Throw();
-		}
 		Explosion ();
 	}
 
@@ -66,9 +63,6 @@ public class OtherItem : MonoBehaviour {
 		effector = GetComponent<Item>().equipper;
 		Explosion ();
 		effector.movespeed = effector.movespeed + amount;
-		if ((consume) && (ammo <= 0)) {
-			GetComponent<Item> ().Throw ();
-		}
 		yield return new WaitForSeconds (StaticGameStats.instance.VelocitechItemDuration);
 		effector.movespeed = effector.movespeed - amount;
 		if (effector.movespeed < 10) {
@@ -80,9 +74,6 @@ public class OtherItem : MonoBehaviour {
 		effector = GetComponent<Item>().equipper;
 		Explosion ();
 		effector.ContestantDamageModifier = effector.ContestantDamageModifier + amount;
-		if ((consume) && (ammo <= 0)) {
-			GetComponent<Item> ().Throw ();
-		}
 		yield return new WaitForSeconds (StaticGameStats.instance.ExplodenaItemDuration);
 		effector.ContestantDamageModifier = effector.ContestantDamageModifier - amount;
 		if (effector.ContestantDamageModifier < 1) {
@@ -94,9 +85,6 @@ public class OtherItem : MonoBehaviour {
 		effector = GetComponent<Item>().equipper;
 		Explosion ();
 		effector.ContestantRepModifier = effector.ContestantRepModifier + amount;
-		if ((consume) && (ammo <= 0)) {
-			GetComponent<Item> ().Throw ();
-		}
 		yield return new WaitForSeconds (StaticGameStats.instance.PrismexItemDuration);
 		effector.ContestantRepModifier = effector.ContestantRepModifier - amount;
 		if (effector.ContestantRepModifier < 1) {
