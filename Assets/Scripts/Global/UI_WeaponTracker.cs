@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class UI_WeaponTracker : MonoBehaviour {
-	
+
 	public Item item;
 	public bool displayAmmo;
 
@@ -12,6 +12,7 @@ public class UI_WeaponTracker : MonoBehaviour {
 	Vector2 size;
 	Text ammoText;
 	RangedWeapon wep;
+	OtherItem wep2;
 	Contestant player;
 
 	// Use this for initialization
@@ -22,6 +23,9 @@ public class UI_WeaponTracker : MonoBehaviour {
 		ammoText = GetComponentInChildren<Text>();
 		if(item.type == Item.ItemType.Ranged){
 			wep = item.GetComponent<RangedWeapon>();
+		}
+		if(item.type == Item.ItemType.Other){
+			wep2 = item.GetComponent<OtherItem>();
 		}
 		player = FindObjectOfType<PlayerController>().GetComponent<Contestant>();
 	}
@@ -42,7 +46,9 @@ public class UI_WeaponTracker : MonoBehaviour {
 		if(displayAmmo){
 			if(item.type == Item.ItemType.Ranged){
 				ammoText.text = item.itemName + "\n" + wep.ammo.ToString() + " / " + wep.Maxammo.ToString();
-			}else{
+			}else if(item.type == Item.ItemType.Other){
+				ammoText.text = item.itemName + "\n" + wep2.ammo.ToString() + " / " + wep2.Maxammo.ToString();
+			}else {
 				ammoText.text = item.itemName + "\n--";
 			}
 		}
