@@ -51,6 +51,9 @@ public class SettingsManager : MonoBehaviour {
 
 	void Update(){
 		directory.text = @"G:\GovorNet\" + StaticGameStats.instance.PlayerName + @"\SETTINGS.gov";
+		if (StaticGameStats.instance.PlayerName == "") {
+			directory.text = @"G:\GovorNet\Manager01\SETTINGS.gov";
+		}
 	}
 		
 	public void UpdatePrefs(int a){
