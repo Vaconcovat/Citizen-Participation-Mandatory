@@ -60,6 +60,7 @@ public class TutorialManager : MonoBehaviour {
 		activeannounce = false;
 		player.GetComponent<PlayerController>().enabled = false;
 		music.volume = music.volume * PlayerPrefs.GetFloat("MusicVolume");
+		BinTrigger.ThrownWeapon = false;
 	}
 
 	// Update is called once per frame
