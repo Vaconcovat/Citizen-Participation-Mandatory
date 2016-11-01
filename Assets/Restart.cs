@@ -7,8 +7,10 @@ public class Restart : MonoBehaviour {
 	void Awake(){
 		StaticGameStats stats = FindObjectOfType<StaticGameStats>();
 		if(stats != null){
-			Destroy(FindObjectOfType<StaticGameStats>().gameObject);
+			Destroy(stats.gameObject);
+			Debug.Log("Reset singleton!");
 		}
+		TutorialTrigger.FromTutorial = false;
 	}
 
 	void Start(){
