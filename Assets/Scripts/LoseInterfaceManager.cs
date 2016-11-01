@@ -23,6 +23,11 @@ public class LoseInterfaceManager : MonoBehaviour {
 		}
 		if (done) {
 			if (Input.GetKeyDown (KeyCode.Alpha1) || (Input.GetKeyDown (KeyCode.Keypad1))) {
+				FindObjectOfType<MenuCamera> ().MainMenu ();
+				ns.grainIntensityMin = 0.0f;
+				ns.grainIntensityMax = 0.0f;
+			}
+			if (Input.GetKeyDown (KeyCode.Alpha2) || (Input.GetKeyDown (KeyCode.Keypad2))) {
 				FindObjectOfType<MenuCamera> ().Shutdown ();
 			}
 		}
